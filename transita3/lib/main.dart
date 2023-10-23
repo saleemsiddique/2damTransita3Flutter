@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+<<<<<<< Updated upstream
+=======
+import 'package:transita3/screens/login_page.dart';
+import 'package:transita3/screens/new_login.dart';
+import 'screens/splash_page.dart';
+import 'screens/new_splash.dart';
+>>>>>>> Stashed changes
 
 void main() {
   runApp(const MyApp());
@@ -11,6 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+<<<<<<< Updated upstream
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -121,5 +129,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+=======
+        title: 'Transita App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: IniciarSesionPage(),
+        debugShowCheckedModeBanner: false);
+>>>>>>> Stashed changes
   }
 }

@@ -1,0 +1,74 @@
+[
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xxxhdpi_aux.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xxxhdpi\\aux.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-hdpi_aux.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-hdpi\\aux.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xhdpi_aux.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xhdpi\\aux.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\drawable_splashscreen.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\drawable\\splashscreen.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\drawable-v21_launch_background.xml.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\drawable-v21\\launch_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\drawable_launch_background.xml.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\drawable\\launch_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-mdpi_aux.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-mdpi\\aux.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "com.example.transita3.app-merged_res-11:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.transita3.app-main-5:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.transita3.app-merged_res-11:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.transita3.app-main-5:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.transita3.app-merged_res-11:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.transita3.app-main-5:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "com.example.transita3.app-merged_res-11:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.transita3.app-main-5:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "com.example.transita3.app-merged_res-11:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.transita3.app-main-5:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-merged_res-11:\\mipmap-xxhdpi_aux.png.flat",
+        "source": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-main-5:\\mipmap-xxhdpi\\aux.png"
+    }
+]
