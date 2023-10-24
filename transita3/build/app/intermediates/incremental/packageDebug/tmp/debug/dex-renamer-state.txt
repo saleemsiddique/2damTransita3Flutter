@@ -1,4 +1,4 @@
-#Mon Oct 23 10:31:47 CEST 2023
-base.0=C\:\\Users\\dam_mra\\Desktop\\flutterProjects\\2damTransita3Flutter\\transita3\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-renamed.0=classes.dex
+#Tue Oct 24 18:23:12 CEST 2023
+base.0=F\:\\clase\\2damTransita3Flutter\\transita3\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
+renamed.0=classes.dex

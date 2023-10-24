@@ -4,7 +4,7 @@
             "outputFile": "com.example.transita3.app-mergeDebugResources-9:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dam_mra\\Desktop\\flutterProjects\\2damTransita3Flutter\\transita3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "F:\\clase\\2damTransita3Flutter\\transita3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -20,30 +20,6 @@
                         "endLines": "5,8",
                         "endColumns": "12,12",
                         "endOffsets": "226,393"
-                    }
-                }
-            ]
-        },
-        {
-            "outputFile": "C:\\Users\\dam_mra\\.gradle\\daemon\\7.5\\com.example.transita3.app-mergeDebugResources-9:\\values-night-v8\\values-night-v8.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\dam_mra\\Desktop\\flutterProjects\\2damTransita3Flutter\\transita3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "175,831",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "482,997"
-                    },
-                    "to": {
-                        "startLines": "2,6",
-                        "startColumns": "4,4",
-                        "startOffsets": "55,236",
-                        "endLines": "5,8",
-                        "endColumns": "12,12",
-                        "endOffsets": "231,400"
                     }
                 }
             ]
