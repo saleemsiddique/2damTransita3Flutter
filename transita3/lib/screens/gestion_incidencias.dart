@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transita3/screens/creacion_incidencias.dart';
 
 class GestionIncidenciasPage extends StatefulWidget {
   @override
@@ -46,7 +47,12 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           Icons.add,
           size: 50,
         ),
-        onPressed: () {});
+        onPressed: () {
+           Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => creacion_incidencias()),
+      );
+        });
   }
 
   /*List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
