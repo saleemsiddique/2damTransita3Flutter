@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/incidencias.dart';
+import 'package:transita3/screens/creacion_incidencias.dart';
+import 'package:transita3/screens/detalle_incidencias.dart';
 import 'package:transita3/screens/inicio_sesion.dart';
 
 class GestionIncidenciasPage extends StatefulWidget {
@@ -41,11 +43,13 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
         backgroundColor: Color.fromRGBO(14, 100, 209, 1),
         foregroundColor: Color.fromRGBO(41, 39, 39, 0.68),
         shape: CircleBorder(),
-        child: Icon(
+        child: const Icon(
           Icons.add,
           size: 50,
         ),
-        onPressed: () {});
+        onPressed: () {
+          CreacionIncIncidenciasPage();
+        });
   }
 
   List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
@@ -68,7 +72,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => IniciarSesionPage()),
+              MaterialPageRoute(builder: (context) => detalle_incidencias()),
             );
           });
       incidencias
