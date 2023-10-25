@@ -34,7 +34,8 @@
 *.iml
 *.iws
 *.ipr
-
+*.jar
+*.bin
 # macOS specific
 .DS_Store
 

@@ -40,16 +40,18 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
 
   Widget _botonAgregar() {
     return FloatingActionButton(
-        backgroundColor: Color.fromRGBO(14, 100, 209, 1),
-        foregroundColor: Color.fromRGBO(41, 39, 39, 0.68),
-        shape: CircleBorder(),
-        child: const Icon(
-          Icons.add,
-          size: 50,
-        ),
-        onPressed: () {
-          CreacionIncIncidenciasPage();
-        });
+      backgroundColor: Color.fromRGBO(14, 100, 209, 1),
+      foregroundColor: Color.fromRGBO(41, 39, 39, 0.68),
+      shape: CircleBorder(),
+      child: const Icon(
+        Icons.add,
+        size: 50,
+      ),
+      onPressed: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => CreacionIncidenciasPage()));
+      },
+    );
   }
 
   List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {

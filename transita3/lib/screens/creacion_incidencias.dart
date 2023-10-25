@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:transita3/screens/inicio_sesion.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // Para seleccionar imágenes
-import 'dart:io'; // Para trabajar con archivos
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class CreacionIncIncidenciasPage extends StatefulWidget {
   @override
@@ -13,8 +13,8 @@ class CreacionIncIncidenciasPage extends StatefulWidget {
 class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
   String _tituloIncidencia = '', _descripcion = '';
   double _duracion = 0;
-  File ? _selectedImage;
-String _selectedDuration = '1 hora';
+  File? _selectedImage;
+  String _selectedDuration = '1 hora';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,10 +63,10 @@ String _selectedDuration = '1 hora';
                 //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
                 child: _botonCrear(),
               ),
-               Container(
+              Container(
                 height: 20,
               ),
-               Container(
+              Container(
                 width: 325,
                 //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
                 child: _botonCancelar(),
@@ -123,52 +123,48 @@ String _selectedDuration = '1 hora';
     );
   }
 
-Widget _seleccionarFoto() {
-  return Column(
-    children: [
-      MaterialButton(
-          color: Colors.blue,
-          child: const Text(
-            "Seleccionar Imagen",
-            style:  TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16
-            )
-          ),
-          onPressed: (){_pickImageFromGalery();
-          }
-      )
-    ],
-  );
+  Widget _seleccionarFoto() {
+    return Column(
+      children: [
+        MaterialButton(
+            color: Colors.blue,
+            child: const Text("Seleccionar Imagen",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16)),
+            onPressed: () {
+              _pickImageFromGalery();
+            })
+      ],
+    );
   }
+
   Future _pickImageFromGalery() async {
-    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final returnedImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       _selectedImage = File(returnedImage!.name);
     });
-}
+  }
 
-
-Widget _seleccionarDuracion() {
-  return DropdownButton<String>(
-    value: _selectedDuration,
-    items: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas', '6 horas']
-        .map((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        })
-        .toList(),
-    onChanged: (String? newValue) { 
-      setState(() {
-        _selectedDuration = newValue ?? ''; 
-      });
-    },
-  );
-}
-
+  Widget _seleccionarDuracion() {
+    return DropdownButton<String>(
+      value: _selectedDuration,
+      items: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas', '6 horas']
+          .map((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          _selectedDuration = newValue ?? '';
+        });
+      },
+    );
+  }
 
   Widget _botonCrear() {
     return StreamBuilder(
@@ -176,7 +172,8 @@ Widget _seleccionarDuracion() {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return MaterialButton(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             elevation: 0,
             color: Color.fromRGBO(14, 100, 209, 1),
             onPressed: () {},
@@ -184,29 +181,30 @@ Widget _seleccionarDuracion() {
       },
     );
   }
+
   Widget _botonCancelar() {
     return StreamBuilder(
       stream: null,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return MaterialButton(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             elevation: 0,
             color: Color.fromRGBO(255, 255, 255, 1),
             onPressed: () {
               setState(() {
-              _descripcion = "";
-              _tituloIncidencia = "";
-              _selectedDuration = '1 hora';
-              _selectedImage = null;
-          });
+                _descripcion = "";
+                _tituloIncidencia = "";
+                _selectedDuration = '1 hora';
+                _selectedImage = null;
+              });
             },
-            child: Text('Cancel',
-            style: TextStyle(color: Color.fromRGBO(14, 100, 209, 1)),
-            ) 
-          );
+            child: Text(
+              'Cancel',
+              style: TextStyle(color: Color.fromRGBO(14, 100, 209, 1)),
+            ));
       },
     );
   }
-  
 }
