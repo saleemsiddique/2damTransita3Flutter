@@ -32,37 +32,20 @@ class _Registro extends State<RegistroPage> {
             Container(
               height: 20,
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: _escribeNombre(),
-            ),
-            Container(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: _escribeApellidos(),
-            ),
-            Container(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: _escribirEmail(),
-            ),
-            Container(
-              height: 20,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              child: _escribirContrasenya(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Column(
+                children: [_escribeNombre(), SizedBox(height: 20), _escribeApellidos(), SizedBox(height: 20), _escribirEmail(), SizedBox(height: 20), _escribirContrasenya()],
+              ),
             ),
             Container(
               height: 50,
             ),
-            Container(
-              margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
-              child: _botonRegistro(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+              child: Column(
+                children: [_botonRegistro()],
+              ),
             ),
             Container(
               height: 30,
@@ -72,7 +55,6 @@ class _Registro extends State<RegistroPage> {
         ),
       ),
     );
-    ;
   }
 
   Widget _logo() {
@@ -80,7 +62,7 @@ class _Registro extends State<RegistroPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/transitaPng.png', height: 70, width: 70),
+          Image.asset('assets/logo2SinFondo.png', height: 70, width: 70),
           SizedBox(width: 25),
           Text(
             'Transita',
@@ -98,7 +80,7 @@ class _Registro extends State<RegistroPage> {
         hintText: 'Nombre',
         labelText: 'Nombre',
         suffixIcon: Icon(Icons.person),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onChanged: (valor) => setState(() {
         _nombre = valor;
@@ -113,7 +95,7 @@ class _Registro extends State<RegistroPage> {
         hintText: 'Apellidos',
         labelText: 'Apellidos',
         suffixIcon: Icon(Icons.person),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onChanged: (valor) => setState(() {
         _apellidos = valor;
@@ -129,7 +111,7 @@ class _Registro extends State<RegistroPage> {
         labelText: 'Email',
         suffixIcon: Icon(Icons.alternate_email),
         //icon: Icon(Icons.email),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onChanged: (valor) => setState(() {
         _email = valor;
@@ -148,11 +130,10 @@ class _Registro extends State<RegistroPage> {
               _mostrarContrasenya = !_mostrarContrasenya;
             });
           },
-          child: Icon(
-              _mostrarContrasenya ? Icons.visibility : Icons.visibility_off),
+          child: Icon(_mostrarContrasenya ? Icons.visibility : Icons.visibility_off),
         ),
         //icon: Icon(Icons.lock),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       obscureText: !_mostrarContrasenya,
       onChanged: (valor) => setState(() {
@@ -162,43 +143,36 @@ class _Registro extends State<RegistroPage> {
   }
 
   Widget _botonRegistro() {
-    return StreamBuilder(
-      stream: null,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return MaterialButton(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            elevation: 0,
-            color: Color.fromRGBO(14, 100, 209, 1),
-            onPressed: () {},
-            child: Text('Registrarse'));
-      },
+    return Container(
+      width: double.infinity,
+      height: 50, // Ancho igual al ancho completo disponible
+      child: MaterialButton(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        elevation: 0,
+        color: Color.fromRGBO(14, 100, 209, 1),
+        onPressed: () {},
+        child: Text('Registrarse', style: TextStyle(color: Colors.white)),
+      ),
     );
   }
 
   Widget _iniciarSesion() {
     return Center(
       child: RichText(
-          text: TextSpan(
-              text: '¿Ya tienes cuenta? Inicia sesión ',
-              children: <TextSpan>[
-            TextSpan(
-                text: 'AQUÍ',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.bold,
-                ),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => IniciarSesionPage()),
-                    );
-                  }),
-          ])),
+          text: TextSpan(text: '¿Ya tienes cuenta? Inicia sesión ', children: <TextSpan>[
+        TextSpan(
+            text: 'AQUÍ',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
+            ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.pop(context);
+              }),
+      ])),
     );
   }
 }

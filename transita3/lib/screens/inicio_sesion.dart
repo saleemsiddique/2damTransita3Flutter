@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:transita3/screens/gestion_incidencias.dart';
 import 'package:transita3/screens/registro.dart';
 
@@ -15,40 +16,41 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
         children: [
           Image.asset(
-            'assets/logo2SinFondo.png',
+            'assets/transitaLogoBN.png',
             width: 250,
             height: 250,
           ),
           Container(
             height: 70,
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-            child: _escribirEmail(),
+          Padding(
+            padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+            child: Column(
+              children: [
+                _escribirEmail(),
+                SizedBox(height: 20),
+                _escribirContrasenya(),
+              ],
+            ),
           ),
           Container(
             height: 20,
           ),
-          Container(
-            margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-            child: _escribirContrasenya(),
+          Padding(
+            padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+            child: Column(
+              children: [_botonLogin(), SizedBox(height: 10), _botonGoogle()],
+            ),
           ),
-          Container(
-            height: 20,
-          ),
-          Container(
-            margin: EdgeInsets.fromLTRB(50, 0, 50, 0),
-            child: _botonLogin(),
-          ),
-          Container(
-            height: 10,
-          ),
-          _loginExtra(),
           Container(
             height: 50,
           ),
@@ -98,50 +100,55 @@ class _InicioSesion extends State<IniciarSesionPage> {
   }
 
   Widget _botonLogin() {
-    return StreamBuilder(
-      stream: null,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return MaterialButton(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            elevation: 0,
-            color: Color.fromRGBO(14, 100, 209, 1),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => GestionIncidenciasPage()));
-            },
-            child: Text('Iniciar Sesión'));
-      },
-    );
-  }
-
-  Widget _loginExtra() {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[_botonGoogle()],
+    return Container(
+      width: double.infinity,
+      height: 50, // Ancho igual al ancho completo disponible
+      child: MaterialButton(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        elevation: 0,
+        color: Color.fromRGBO(14, 100, 209, 1),
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => GestionIncidenciasPage()));
+        },
+        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
       ),
     );
   }
 
   Widget _botonGoogle() {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
+    return Container(
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: const Color.fromARGB(255, 124, 122, 122),
+            width: 2,
+            strokeAlign: BorderSide.strokeAlignOutside,
           ),
-          side: BorderSide(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5)),
+      width: double.infinity,
+      height: 50, // Ancho igual al ancho completo disponible
+      child: MaterialButton(
+        // padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        elevation: 0,
+        color: Colors.white,
+        onPressed: () {},
+        child: Row(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/googleLogo.png',
+              width: 30,
+            ),
+            SizedBox(
+              width: 48.79,
+            ),
+            Text(
+              'Iniciar sesión con Google',
+              style: TextStyle(color: const Color.fromARGB(255, 124, 122, 122)),
+            )
+          ],
         ),
-      ),
-      icon: Image.asset(
-        'assets/googleLogo.png',
-        height: 20,
-      ),
-      label: Text(
-        'Iniciar Sesión con Google',
-        style: TextStyle(color: Colors.grey),
       ),
     );
   }
@@ -167,10 +174,6 @@ class _InicioSesion extends State<IniciarSesionPage> {
         TextSpan(text: ' para crearla')
       ])),
     );
-  }
-
-  Widget _logo() {
-    return Center();
   }
 
   //TODO: TAL VEZ NUEVOS BOTONES DE INICIO DE SESION COMO FB, IG O TWITTER

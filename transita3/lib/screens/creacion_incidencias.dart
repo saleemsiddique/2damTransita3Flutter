@@ -83,7 +83,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/transitaPng.png', height: 70, width: 70),
+          Image.asset('assets/logo2SinFondo.png', height: 70, width: 70),
           SizedBox(width: 25),
           Text(
             'Transita',
@@ -128,11 +128,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
       children: [
         MaterialButton(
             color: Colors.blue,
-            child: const Text("Seleccionar Imagen",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16)),
+            child: const Text("Seleccionar Imagen", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
             onPressed: () {
               _pickImageFromGalery();
             })
@@ -141,8 +137,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
   }
 
   Future _pickImageFromGalery() async {
-    final returnedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
       _selectedImage = File(returnedImage!.name);
     });
@@ -151,8 +146,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
   Widget _seleccionarDuracion() {
     return DropdownButton<String>(
       value: _selectedDuration,
-      items: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas', '6 horas']
-          .map((String value) {
+      items: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas', '6 horas'].map((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -172,8 +166,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return MaterialButton(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             elevation: 0,
             color: Color.fromRGBO(14, 100, 209, 1),
             onPressed: () {},
@@ -188,8 +181,7 @@ class _creacionIncidencia extends State<CreacionIncIncidenciasPage> {
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return MaterialButton(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             elevation: 0,
             color: Color.fromRGBO(255, 255, 255, 1),
             onPressed: () {

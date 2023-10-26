@@ -9,6 +9,8 @@ class GestionIncidenciasPage extends StatefulWidget {
   _GestionIncidencias createState() => _GestionIncidencias();
 }
 
+final TextStyle _estiloLetra = TextStyle(fontSize: 15);
+
 class _GestionIncidencias extends State<GestionIncidenciasPage> {
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/transitaPng.png', height: 70, width: 70),
+          Image.asset('assets/logo2SinFondo.png', height: 70, width: 70),
           SizedBox(width: 25),
           Text(
             'Transita',
@@ -41,15 +43,14 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   Widget _botonAgregar() {
     return FloatingActionButton(
       backgroundColor: Color.fromRGBO(14, 100, 209, 1),
-      foregroundColor: Color.fromRGBO(41, 39, 39, 0.68),
+      foregroundColor: Colors.transparent,
       shape: CircleBorder(),
       child: const Icon(
         Icons.add,
         size: 50,
       ),
       onPressed: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => CreacionIncidenciasPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CreacionIncIncidenciasPage()));
       },
     );
   }
@@ -59,17 +60,12 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     int _cont = 1;
     data.forEach((incidencia) {
       final widgetTemp = GestureDetector(
-          child: Container(
-            width: 500,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _columnaIzquierda(incidencia['titulo'], incidencia['imagen'],
-                    incidencia['direccion'], _cont),
-                Container(width: 25),
-                _columnaDerecha()
-              ],
-            ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _columnaIzquierda(incidencia['titulo'], incidencia['imagen'], incidencia['direccion'], _cont),
+              _columnaDerecha(),
+            ],
           ),
           onTap: () {
             Navigator.push(
@@ -80,7 +76,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       incidencias
         ..add(Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 80,
+          height: 100,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(25),
             child: Container(
@@ -109,8 +105,9 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-  Widget _columnaIzquierda(
-      String nombre, String imagen, String direccion, int id) {
+  Widget _columnaIzquierda(String nombre, String imagen, String direccion, int id) {
+    if (direccion.length >= 19) direccion = direccion.substring(0, 19);
+    if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(
       children: [
         CircleAvatar(
@@ -122,14 +119,15 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('id: $id'),
+            Text('id: $id', style: _estiloLetra),
             Container(height: 2),
-            Text(nombre),
+            Text(nombre, style: _estiloLetra),
             Container(height: 5),
             Text(
               direccion,
-              style: TextStyle(fontSize: 10),
+              style: _estiloLetra,
             )
           ],
         )
@@ -143,16 +141,13 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Container(width: 25),
+            SizedBox(width: 25),
             _botonInspeccionar(),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text('24-10-2023', style: TextStyle(fontSize: 10)),
-            Text('18:10', style: TextStyle(fontSize: 10))
-          ],
+          children: [Text('24-10-2023', style: _estiloLetra), Text('18:10', style: _estiloLetra)],
         )
       ],
     );
