@@ -41,17 +41,17 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   }
 
   Widget _botonAgregar() {
-    return FloatingActionButton(
-      backgroundColor: Color.fromRGBO(14, 100, 209, 1),
-      foregroundColor: Colors.transparent,
-      shape: CircleBorder(),
-      child: const Icon(
-        Icons.add,
-        size: 50,
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/boton.png'),
+            ),
+            borderRadius: BorderRadius.circular(0.50)),
+        width: 80,
+        height: 80,
       ),
-      onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CreacionIncIncidenciasPage()));
-      },
     );
   }
 
@@ -110,9 +110,16 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(
       children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage(imagen),
-          radius: 30,
+        ClipRRect(
+          borderRadius: BorderRadius.circular(40),
+          child: FadeInImage(
+            fit: BoxFit.cover,
+            width: 60,
+            height: 80,
+            placeholder: AssetImage('assets/loading.gif'),
+            image: NetworkImage(imagen),
+            fadeInDuration: Duration(milliseconds: 200),
+          ),
         ),
         Container(
           width: 8,
