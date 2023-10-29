@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:transita3/navigation_bar.dart';
-import 'package:transita3/screens/inicio_sesion.dart';
+import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.dark,
-      home: BottomNavigationBarProvider(), //IniciarSesionPage(),
+      home: IniciarSesionPage(),
       debugShowCheckedModeBanner: false,
     );
   }
