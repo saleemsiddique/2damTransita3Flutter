@@ -4,7 +4,7 @@
             "outputFile": "com.example.transita3.app-mergeDebugResources-45:/values-v17/values-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\lalex\\.gradle\\caches\\transforms-3\\0136a5fdeb2397e63bdcd835df1f9f47\\transformed\\appcompat-1.7.0-alpha02\\res\\values-v17\\values-v17.xml",
+                    "source": "C:\\Users\\dam_ss\\.gradle\\caches\\transforms-3\\0136a5fdeb2397e63bdcd835df1f9f47\\transformed\\appcompat-1.7.0-alpha02\\res\\values-v17\\values-v17.xml",
                     "from": {
                         "startLines": "2,5,9,12,15,18,22,25,29,33,37,40,43,46,50,53,57",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

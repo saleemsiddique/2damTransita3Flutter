@@ -4,7 +4,24 @@
             "outputFile": "com.example.transita3.app-mergeDebugResources-45:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "F:\\clase\\flutter\\2damTransita3Flutter\\transita3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "C:\\Users\\dam_ss\\.gradle\\caches\\transforms-3\\0136a5fdeb2397e63bdcd835df1f9f47\\transformed\\appcompat-1.7.0-alpha02\\res\\values-night-v8\\values-night-v8.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,125,209,293,389,491,593,687",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "120,204,288,384,486,588,682,771"
+                    },
+                    "to": {
+                        "startLines": "9,10,11,12,13,14,15,41",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "398,468,552,636,732,834,936,3791",
+                        "endColumns": "69,83,83,95,101,101,93,88",
+                        "endOffsets": "463,547,631,727,829,931,1025,3875"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\dam_ss\\Documents\\GitHub\\transita3\\2damTransita3Flutter\\transita3\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -23,24 +40,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lalex\\.gradle\\caches\\transforms-3\\0136a5fdeb2397e63bdcd835df1f9f47\\transformed\\appcompat-1.7.0-alpha02\\res\\values-night-v8\\values-night-v8.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,125,209,293,389,491,593,687",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "120,204,288,384,486,588,682,771"
-                    },
-                    "to": {
-                        "startLines": "9,10,11,12,13,14,15,41",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "398,468,552,636,732,834,936,3791",
-                        "endColumns": "69,83,83,95,101,101,93,88",
-                        "endOffsets": "463,547,631,727,829,931,1025,3875"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\lalex\\.gradle\\caches\\transforms-3\\72aa518a372ff1d83aad7496322aeba2\\transformed\\material-1.9.0\\res\\values-night-v8\\values-night-v8.xml",
+                    "source": "C:\\Users\\dam_ss\\.gradle\\caches\\transforms-3\\72aa518a372ff1d83aad7496322aeba2\\transformed\\material-1.9.0\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

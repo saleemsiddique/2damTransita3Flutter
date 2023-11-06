@@ -13,71 +13,71 @@
 13         to allow setting breakpoints, to provide hot reload, etc.
 14    -->
 15    <uses-permission android:name="android.permission.INTERNET" />
-15-->F:\clase\flutter\2damTransita3Flutter\transita3\android\app\src\main\AndroidManifest.xml:3:1-62
-15-->F:\clase\flutter\2damTransita3Flutter\transita3\android\app\src\main\AndroidManifest.xml:3:18-60
+15-->C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\android\app\src\main\AndroidManifest.xml:3:1-62
+15-->C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\android\app\src\main\AndroidManifest.xml:3:18-60
 16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-16-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-81
-16-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-78
+16-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-81
+16-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-78
 17    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-17-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-79
-17-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-76
+17-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-79
+17-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-76
 18    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-18-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
-18-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
+18-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:12:5-79
+18-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:12:22-76
 19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-19-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-81
-19-->[:flutter_osm_plugin] F:\clase\flutter\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-78
+19-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:13:5-81
+19-->[:flutter_osm_plugin] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\flutter_osm_plugin\intermediates\merged_manifest\debug\AndroidManifest.xml:13:22-78
 20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 21
 22    <permission
-22-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+22-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
 23        android:name="com.example.transita3.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-23-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+23-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
 24        android:protectionLevel="signature" />
-24-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+24-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
 25
 26    <uses-permission android:name="com.example.transita3.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-26-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
-26-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+26-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+26-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
 27
 28    <supports-screens
-28-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:9:5-12:40
+28-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:9:5-12:40
 29        android:anyDensity="true"
-29-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:10:9-34
+29-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:10:9-34
 30        android:largeScreens="true"
-30-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:11:9-36
+30-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:11:9-36
 31        android:normalScreens="true" />
-31-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:12:9-37
+31-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:12:9-37
 32
 33    <uses-feature
-33-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:14:5-16:36
+33-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:14:5-16:36
 34        android:name="android.hardware.location.network"
-34-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:15:9-57
+34-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:15:9-57
 35        android:required="false" />
-35-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:16:9-33
+35-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:16:9-33
 36    <uses-feature
-36-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:17:5-19:36
+36-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:17:5-19:36
 37        android:name="android.hardware.location.gps"
-37-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:18:9-53
+37-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:18:9-53
 38        android:required="false" />
-38-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:19:9-33
+38-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:19:9-33
 39    <uses-feature
-39-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:20:5-22:36
+39-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:20:5-22:36
 40        android:name="android.hardware.telephony"
-40-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:21:9-50
+40-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:21:9-50
 41        android:required="false" />
-41-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:22:9-33
+41-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:22:9-33
 42    <uses-feature
-42-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:23:5-25:36
+42-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:23:5-25:36
 43        android:name="android.hardware.wifi"
-43-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:24:9-45
+43-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:24:9-45
 44        android:required="false" />
-44-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\lalex\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:25:9-33
+44-->[org.osmdroid:osmdroid-android:6.1.13] C:\Users\dam_ss\.gradle\caches\transforms-3\a3e64ea64ef94080d8d6e84d06ae437c\transformed\jetified-osmdroid-android-6.1.13\AndroidManifest.xml:25:9-33
 45
 46    <application
 47        android:name="io.flutter.app.FlutterMultiDexApplication"
 48        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-48-->[androidx.core:core:1.10.1] C:\Users\lalex\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+48-->[androidx.core:core:1.10.1] C:\Users\dam_ss\.gradle\caches\transforms-3\c4988ff80110f75080a936fc6f044848\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
 49        android:debuggable="true"
 50        android:icon="@mipmap/ic_launcher"
 51        android:label="transita3" >
@@ -116,117 +116,117 @@
 84            android:value="2" />
 85
 86        <provider
-86-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+86-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
 87            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-87-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
+87-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-82
 88            android:authorities="com.example.transita3.flutter.image_provider"
-88-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
+88-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-74
 89            android:exported="false"
-89-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+89-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
 90            android:grantUriPermissions="true" >
-90-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+90-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
 91            <meta-data
-91-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
+91-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:75
 92                android:name="android.support.FILE_PROVIDER_PATHS"
-92-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+92-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
 93                android:resource="@xml/flutter_image_picker_file_paths" />
-93-->[:image_picker_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
+93-->[:image_picker_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-72
 94        </provider>
 95
 96        <activity
-96-->[:url_launcher_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
+96-->[:url_launcher_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-13:74
 97            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-97-->[:url_launcher_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
+97-->[:url_launcher_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-74
 98            android:exported="false"
-98-->[:url_launcher_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
+98-->[:url_launcher_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-37
 99            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-99-->[:url_launcher_android] F:\clase\flutter\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
+99-->[:url_launcher_android] C:\Users\dam_ss\Documents\GitHub\transita3\2damTransita3Flutter\transita3\build\url_launcher_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-71
 100
 101        <provider
-101-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+101-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
 102            android:name="androidx.startup.InitializationProvider"
-102-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+102-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
 103            android:authorities="com.example.transita3.androidx-startup"
-103-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+103-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
 104            android:exported="false" >
-104-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+104-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
 105            <meta-data
-105-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+105-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
 106                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+106-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
 107                android:value="androidx.startup" />
-107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\lalex\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+107-->[androidx.emoji2:emoji2:1.2.0] C:\Users\dam_ss\.gradle\caches\transforms-3\e04bc3769bedd8dd6f8ca688986b0355\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
 108            <meta-data
-108-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\lalex\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+108-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\dam_ss\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
 109                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-109-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\lalex\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+109-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\dam_ss\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
 110                android:value="androidx.startup" />
-110-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\lalex\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+110-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\dam_ss\.gradle\caches\transforms-3\34e3313412f6bb2343705c93422b49a8\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
 111            <meta-data
-111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
 112                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+112-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
 113                android:value="androidx.startup" />
-113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
 114        </provider>
 115
 116        <uses-library
-116-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
+116-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:25:9-27:40
 117            android:name="androidx.window.extensions"
-117-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
+117-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:26:13-54
 118            android:required="false" />
-118-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
+118-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:27:13-37
 119        <uses-library
-119-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
+119-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:28:9-30:40
 120            android:name="androidx.window.sidecar"
-120-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
+120-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:29:13-51
 121            android:required="false" />
-121-->[androidx.window:window:1.0.0] C:\Users\lalex\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
+121-->[androidx.window:window:1.0.0] C:\Users\dam_ss\.gradle\caches\transforms-3\44815cc86bcd8aa55f9a45c8a20ff3ae\transformed\jetified-window-1.0.0\AndroidManifest.xml:30:13-37
 122
 123        <provider
-123-->[com.squareup.picasso:picasso:2.71828] C:\Users\lalex\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
+123-->[com.squareup.picasso:picasso:2.71828] C:\Users\dam_ss\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:8:9-11:40
 124            android:name="com.squareup.picasso.PicassoProvider"
-124-->[com.squareup.picasso:picasso:2.71828] C:\Users\lalex\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
+124-->[com.squareup.picasso:picasso:2.71828] C:\Users\dam_ss\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:9:13-64
 125            android:authorities="com.example.transita3.com.squareup.picasso"
-125-->[com.squareup.picasso:picasso:2.71828] C:\Users\lalex\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
+125-->[com.squareup.picasso:picasso:2.71828] C:\Users\dam_ss\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:10:13-72
 126            android:exported="false" />
-126-->[com.squareup.picasso:picasso:2.71828] C:\Users\lalex\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
+126-->[com.squareup.picasso:picasso:2.71828] C:\Users\dam_ss\.gradle\caches\transforms-3\2356891c903083da864f587bddea8304\transformed\jetified-picasso-2.71828\AndroidManifest.xml:11:13-37
 127
 128        <receiver
-128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+128-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
 129            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-129-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+129-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
 130            android:directBootAware="false"
-130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+130-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
 131            android:enabled="true"
-131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+131-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
 132            android:exported="true"
-132-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+132-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
 133            android:permission="android.permission.DUMP" >
-133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+133-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
 134            <intent-filter>
-134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+134-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
 135                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+135-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
 136            </intent-filter>
 137            <intent-filter>
-137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+137-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
 138                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+138-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
 139            </intent-filter>
 140            <intent-filter>
-140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
 141                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
 142            </intent-filter>
 143            <intent-filter>
-143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+143-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
 144                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\lalex\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\dam_ss\.gradle\caches\transforms-3\635b1770925726da461e843c0a3c6641\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
 145            </intent-filter>
 146        </receiver>
 147    </application>

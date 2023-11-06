@@ -1,13 +1,14 @@
 import 'dart:convert';
+import 'package:transita3/models/models.dart';
 
 class Punto {
     String descripcion;
     String tipoPunto;
     String foto;
-    double latitud;
-    double longitud;
+    int latitud;
+    int longitud;
     String accesibilidadPunto;
-    dynamic zona;
+    Zona zona;
     int id;
 
     Punto({
@@ -29,10 +30,10 @@ class Punto {
         descripcion: json["descripcion"],
         tipoPunto: json["tipoPunto"],
         foto: json["foto"],
-        latitud: json["latitud"]?.toDouble(),
-        longitud: json["longitud"]?.toDouble(),
+        latitud: json["latitud"],
+        longitud: json["longitud"],
         accesibilidadPunto: json["accesibilidadPunto"],
-        zona: json["zona"],
+        zona: Zona.fromJson(json["zona"]),
         id: json["id"],
     );
 
@@ -43,7 +44,7 @@ class Punto {
         "latitud": latitud,
         "longitud": longitud,
         "accesibilidadPunto": accesibilidadPunto,
-        "zona": zona,
+        "zona": zona.toJson(),
         "id": id,
     };
 }
