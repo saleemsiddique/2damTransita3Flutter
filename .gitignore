@@ -6,7 +6,7 @@
 .packages
 
 # Android specific
-/build/
+build/
 # For ignoring the .iml file that should be created in the root of your project
 *.iml
 # For ignoring the .gradle directory
