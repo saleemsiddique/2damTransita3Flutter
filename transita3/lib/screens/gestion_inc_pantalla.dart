@@ -42,7 +42,12 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
 
   Widget _botonAgregar() {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CreacionIncidenciasPage()),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(

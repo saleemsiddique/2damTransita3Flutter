@@ -48,7 +48,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
           Padding(
             padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
             child: Column(
-              children: [_botonLogin(), SizedBox(height: 10), _botonGoogle()],
+              children: [_botonLogin(context), SizedBox(height: 10), _botonGoogle()],
             ),
           ),
           Container(
@@ -100,25 +100,21 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }
 
-  Widget _botonLogin() {
-    return Container(
-      width: double.infinity,
-      height: 50, // Ancho igual al ancho completo disponible
-      child: MaterialButton(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        elevation: 0,
-        color: Color.fromRGBO(14, 100, 209, 1),
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => (BottomNavigationBarProvider())));
-        },
-        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
-      ),
-    );
-  }
+Widget _botonLogin(BuildContext context) {
+  return Container(
+    width: double.infinity,
+    height: 50,
+    child: MaterialButton(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      elevation: 0,
+      color: Color.fromRGBO(14, 100, 209, 1),
+      onPressed: () => Navigator.pushNamed(context, 'home'),
+      child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
+    ),
+  );
+}
+
 
   Widget _botonGoogle() {
     return Container(
@@ -136,7 +132,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         elevation: 0,
         color: Colors.white,
-        onPressed: () {},
+        onPressed: () => Navigator.pushNamed(context, 'home'),
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transita3/rutas/rutas.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 
 void main() {
@@ -23,8 +24,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       themeMode: ThemeMode.dark,
-      home: IniciarSesionPage(),
+      
       debugShowCheckedModeBanner: false,
+      routes: getApplicationRoutes(),
+      initialRoute: "/",
     );
   }
 }

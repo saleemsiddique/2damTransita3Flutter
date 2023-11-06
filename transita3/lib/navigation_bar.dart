@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
-import 'package:transita3/screens/home_pantalla.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 
 class BottomNavigationBarProvider extends StatefulWidget {
@@ -17,7 +16,6 @@ class _BottomNavigationBarProviderState
     extends State<BottomNavigationBarProvider> {
   int _selectedIndex = 0;
   final screens = [
-    PantallaPrincipal(),
     Mapa_pantalla(),
     GestionIncidenciasPage(),
   ];
@@ -71,10 +69,6 @@ class _BottomNavigationBarProviderState
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map_outlined),
             label: 'GPS',
