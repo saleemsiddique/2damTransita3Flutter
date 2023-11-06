@@ -43,10 +43,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   Widget _botonAgregar() {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => CreacionIncidenciasPage()),
-        );
+        Navigator.pushNamed(context, 'creacionincidencia');
       },
       child: Container(
         decoration: BoxDecoration(
@@ -60,27 +57,24 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-  List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
-    final List<Widget> incidencias = [];
-    int _cont = 1;
-    data.forEach((incidencia) {
-      final widgetTemp = GestureDetector(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _columnaIzquierda(incidencia['titulo'], incidencia['imagen'],
-                  incidencia['direccion'], _cont),
-              _columnaDerecha(),
-            ],
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => detalle_incidencias()),
-            );
-          });
-      incidencias
-        ..add(Container(
+List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
+  final List<Widget> incidencias = [];
+  int _cont = 1;
+  data.forEach((incidencia) {
+    final widgetTemp = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        _columnaIzquierda(incidencia['titulo'], incidencia['imagen'],
+            incidencia['direccion'], _cont),
+        _columnaDerecha(),
+      ],
+    );
+    incidencias.add(
+      GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, 'detalleincidencia');
+        },
+        child: Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           height: 100,
           child: ClipRRect(
@@ -92,12 +86,16 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
               child: widgetTemp,
             ),
           ),
-        ))
-        ..add(Container(height: 40));
-      _cont++;
-    });
-    return incidencias;
-  }
+        ),
+      ),
+    );
+    incidencias.add(Container(height: 40));
+    _cont++;
+  });
+  return incidencias;
+}
+
+
 
   Widget _lista() {
     return FutureBuilder(

@@ -193,12 +193,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             elevation: 0,
             color: Color.fromRGBO(255, 255, 255, 1),
             onPressed: () {
-              setState(() {
-                _descripcion = "";
-                _tituloIncidencia = "";
-                _selectedDuration = '1 hora';
-                _selectedImage = null;
-              });
+              Navigator.pop(context);
             },
             child: Text(
               'Cancel',

@@ -43,4 +43,8 @@ class Incidencia {
         "punto": punto.toJson(),
         "cliente": cliente.toJson(),
     };
+
+        static List<Incidencia> fromJsonList(List<dynamic> jsonList) {
+      return jsonList.map((json) => Incidencia.fromJson(json)).toList();
+    }
 }

@@ -106,7 +106,7 @@ class _BottomNavigationBarProviderState
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, '/');
                       },
                       child: Text('Aceptar'),
                     ),
