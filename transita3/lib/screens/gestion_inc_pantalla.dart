@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:transita3/incidencias.dart';
-import 'package:transita3/screens/creacion_inc_pantalla.dart';
-import 'package:transita3/screens/detalle_inc_pantalla.dart';
-import 'package:transita3/screens/inicio_sesion_pantalla.dart';
+import 'package:provider/provider.dart';
+import 'package:transita3/provider/TransitaProvider.dart';
+
+import '../models/models.dart';
 
 class GestionIncidenciasPage extends StatefulWidget {
   @override
@@ -57,15 +57,15 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
+List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
   final List<Widget> incidencias = [];
   int _cont = 1;
   data.forEach((incidencia) {
     final widgetTemp = Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _columnaIzquierda(incidencia['titulo'], incidencia['imagen'],
-            incidencia['direccion'], _cont),
+        _columnaIzquierda(incidencia.descripcion, incidencia.punto.foto,
+            incidencia.punto.descripcion, incidencia.id),
         _columnaDerecha(),
       ],
     );
@@ -97,17 +97,15 @@ List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
 
 
 
-  Widget _lista() {
-    return FutureBuilder(
-      future: menuIncidencias.cargarData(),
-      initialData: [],
-      builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-        return Column(
-          children: _listaIncidencias(snapshot.data!, context),
-        );
-      },
-    );
-  }
+Widget _lista() {
+  List<Incidencia> incidencias = TransitaProvider.incidenciasDeUsuario;
+  print("Estas son las incidencias: ${incidencias.toString()}");
+  return Column(
+    children: _listaIncidencias(incidencias, context),
+  );
+}
+
+
 
   Widget _columnaIzquierda(
       String nombre, String imagen, String direccion, int id) {
@@ -122,6 +120,7 @@ List<Widget> _listaIncidencias(List<dynamic> data, BuildContext context) {
             width: 60,
             height: 80,
             placeholder: AssetImage('assets/loading.gif'),
+            imageErrorBuilder: (context, error, stackTrace) => Image(image: AssetImage('assets/loading.gif'), width: 60, height: 80,),
             image: NetworkImage(imagen),
             fadeInDuration: Duration(milliseconds: 200),
           ),

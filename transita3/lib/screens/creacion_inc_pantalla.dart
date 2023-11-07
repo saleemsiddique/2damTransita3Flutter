@@ -32,21 +32,14 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: _escribeDescripcion(),
+              ),
+              Container(
+                height: 20,
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: _escribeTitulo(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _seleccionarDuracion(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _seleccionarFoto(),
               ),
               Container(
                 height: 20,
@@ -98,8 +91,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     return TextField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Titulo',
-        labelText: 'Titulo de la incidencia',
+        hintText: 'No disponible',
+        labelText: 'Duracion estimada:',
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onChanged: (valor) => setState(() {

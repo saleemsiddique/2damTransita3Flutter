@@ -47,4 +47,9 @@ class Incidencia {
         static List<Incidencia> fromJsonList(List<dynamic> jsonList) {
       return jsonList.map((json) => Incidencia.fromJson(json)).toList();
     }
+
+      @override
+  String toString() {
+    return 'Incidencia{id: $id, descripcion: $descripcion, estado: $estado, duracion: $duracion, fechaHora: $fechaHora, punto: $punto, cliente: $cliente}';
+  }
 }

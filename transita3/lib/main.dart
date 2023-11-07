@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:transita3/provider/TransitaProvider.dart';
 import 'package:transita3/rutas/rutas.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 
 void main() {
   runApp(const MyApp());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => TransitaProvider(),
+          lazy: false,
+        )
+      ],
+      child: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

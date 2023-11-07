@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/navigation_bar.dart';
+import 'package:transita3/provider/TransitaProvider.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 
 class IniciarSesionPage extends StatefulWidget {
@@ -48,7 +50,11 @@ class _InicioSesion extends State<IniciarSesionPage> {
           Padding(
             padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
             child: Column(
-              children: [_botonLogin(context), SizedBox(height: 10), _botonGoogle()],
+              children: [
+                _botonLogin(context),
+                SizedBox(height: 10),
+                _botonGoogle()
+              ],
             ),
           ),
           Container(
@@ -100,21 +106,23 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }
 
-Widget _botonLogin(BuildContext context) {
-  return Container(
-    width: double.infinity,
-    height: 50,
-    child: MaterialButton(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-      elevation: 0,
-      color: Color.fromRGBO(14, 100, 209, 1),
-      onPressed: () => Navigator.pushNamed(context, 'home'),
-      child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
-    ),
-  );
-}
-
+  Widget _botonLogin(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 50,
+      child: MaterialButton(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+        elevation: 0,
+        color: Color.fromRGBO(14, 100, 209, 1),
+        onPressed: () {
+          Navigator.pushNamed(context, 'home');
+          TransitaProvider();
+        },
+        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
+      ),
+    );
+  }
 
   Widget _botonGoogle() {
     return Container(

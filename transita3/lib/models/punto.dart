@@ -5,8 +5,8 @@ class Punto {
     String descripcion;
     String tipoPunto;
     String foto;
-    int latitud;
-    int longitud;
+    double latitud;
+    double longitud;
     String accesibilidadPunto;
     Zona zona;
     int id;
