@@ -26,15 +26,13 @@ class _InicioSesion extends State<IniciarSesionPage> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
         children: [
-          
           FadeInImage(
             placeholder: AssetImage('assets/loading.gif'),
-            image: AssetImage('assets/transitaLogoBN.png'), 
+            image: AssetImage('assets/transitaLogoBN.png'),
             width: 250,
             height: 250,
-            fadeInDuration: Duration(milliseconds: 200),  
+            fadeInDuration: Duration(milliseconds: 200),
           ),
-          
           Container(
             height: 70,
           ),
@@ -120,8 +118,12 @@ class _InicioSesion extends State<IniciarSesionPage> {
         elevation: 0,
         color: Color.fromRGBO(14, 100, 209, 1),
         onPressed: () {
+          Map<String, dynamic> credenciales = {
+            'nombreUsuario': _email,
+            'contrasenya': _contrasenya,
+          };
+          TransitaProvider(credenciales);
           Navigator.pushNamed(context, 'home');
-          TransitaProvider();
         },
         child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
       ),
@@ -148,12 +150,9 @@ class _InicioSesion extends State<IniciarSesionPage> {
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
-             FadeInImage(
+            FadeInImage(
               placeholder: AssetImage('assets/loading.gif'),
               image: AssetImage('assets/googleLogo.png'),
-               
-              
               width: 30,
             ),
             SizedBox(
