@@ -26,11 +26,15 @@ class _InicioSesion extends State<IniciarSesionPage> {
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
         children: [
-          Image.asset(
-            'assets/transitaLogoBN.png',
+          
+          FadeInImage(
+            placeholder: AssetImage('assets/loading.gif'),
+            image: AssetImage('assets/transitaLogoBN.png'), 
             width: 250,
             height: 250,
+            fadeInDuration: Duration(milliseconds: 200),  
           ),
+          
           Container(
             height: 70,
           ),
@@ -144,8 +148,12 @@ class _InicioSesion extends State<IniciarSesionPage> {
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/googleLogo.png',
+            
+             FadeInImage(
+              placeholder: AssetImage('assets/loading.gif'),
+              image: AssetImage('assets/googleLogo.png'),
+               
+              
               width: 30,
             ),
             SizedBox(

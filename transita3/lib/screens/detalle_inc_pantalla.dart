@@ -57,8 +57,11 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
-                      child: Image.asset(
-                        'assets/obras.png',
+                      child: FadeInImage(
+                        placeholder:AssetImage('assets/loading.gif'),
+                        image:AssetImage( 'assets/obras.png'),
+                        fadeInDuration: Duration(milliseconds: 200),
+                       
                         width: 500,
                         height: 500,
                         fit: BoxFit.cover,
@@ -182,7 +185,11 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/transitaPng.png', height: 70, width: 70),
+          
+          FadeInImage(
+            placeholder: AssetImage('assets/loading.gif'),
+            image: AssetImage('assets/transitaPng.png'), 
+            fadeInDuration: Duration(milliseconds: 200),height: 70, width: 70),
           SizedBox(width: 25),
           const Text(
             'Transita',
