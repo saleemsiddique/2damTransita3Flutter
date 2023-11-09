@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:transita3/provider/TransitaProvider.dart';
+import 'package:transita3/provider/IncidenciaProvider.dart';
 
 import '../models/models.dart';
 
@@ -106,7 +106,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
 
 
 Widget _lista() {
-  List<Incidencia> incidencias = TransitaProvider.incidenciasDeUsuario;
+  List<Incidencia> incidencias = IncidenciaProvider.incidenciasDeUsuario;
   print("Estas son las incidencias: ${incidencias.toString()}");
   return Column(
     children: _listaIncidencias(incidencias, context),

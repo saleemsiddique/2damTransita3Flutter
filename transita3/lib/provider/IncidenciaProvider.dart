@@ -7,16 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/helpers/debouncer.dart';
+import 'package:transita3/provider/LoginFormProvider.dart';
 
-class TransitaProvider extends ChangeNotifier {
-  //Preguntar si la ApiKey es el token.
-  String _apiKey = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwcnVlYmEwQGVtYWlsLmNvbSIsImlhdCI6MTY5OTM0Mjc3OCwiZXhwIjoxNjk5NDI5MTc4fQ.FXp5XYVa49X5uxQ3CwW7Xuwtso9C_qDuYNqHZzaPEjhblTzsekZ1yE0mnEMWhb2mYODRDvmL_TvxOAu18MX4Dw';
+import '../models/LoggedCliente.dart';
+
+class IncidenciaProvider extends ChangeNotifier {
+  String _apiKey = '';
   String _baseUrl = '10.0.2.2:8083';
   String _language = 'es-ES';
 
   static List<Incidencia> incidenciasDeUsuario = [];
 
-  int _popularPage = 0;
+
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
 
   final StreamController<List<Incidencia>> _suggestionStreamController =
@@ -25,32 +27,36 @@ class TransitaProvider extends ChangeNotifier {
   Stream<List<Incidencia>> get suggesionStream =>
       this._suggestionStreamController.stream;
 
-  TransitaProvider() {
-    print('TransitaProvider inicializando');
+  IncidenciaProvider() {
+    print('IncidenciaProvider inicializando');
+    print(_apiKey);
+
     this.getIncidencias();
   }
 
   Future<String> _getJsonData(String endpoint) async {
-    final url = Uri.http(
-      _baseUrl,
-      endpoint
-    );
-    Map<String,String> headers = {
+    final url = Uri.http(_baseUrl, endpoint);
+    Map<String, String> headers = {
       'Authorization': _apiKey,
-      };
+    };
     final response = await http.get(url, headers: headers);
     print(response.body);
     return response.body;
   }
 
-// Falta el loggin funcionando para devolver el id del cliente
-  getIncidencias() async {
-    final jsonData = await this._getJsonData('incidencias/clienteid/1');
-    
+getIncidencias() async {
+  final cliente = LoginFormProvider.cliente;
+  _apiKey = '${cliente.type} ${cliente.token}';
+  print('id de clienteIncidencia: ${cliente.id}');
+  if (cliente != null) {
+    final jsonData = await _getJsonData('incidencias/clienteid/${cliente.id}');
+
     final List<dynamic> jsonList = json.decode(jsonData);
 
     incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
     print("Estas son las incidencias: ${incidenciasDeUsuario.toString()}");
     notifyListeners();
   }
+}
+
 }
