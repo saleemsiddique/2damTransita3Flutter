@@ -72,7 +72,9 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   }
 
   Widget _logo() {
-    return Center(
+  return Hero(  //Linea 50 de Gestion_inc_pantalla
+    tag: 'botontag',
+    child: Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -84,8 +86,9 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
           )
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _escribeTitulo() {
     return TextField(
@@ -140,6 +143,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       _selectedImage = File(returnedImage!.name);
     });
   }
+  
 
   Widget _seleccionarDuracion() {
     return DropdownButton<String>(

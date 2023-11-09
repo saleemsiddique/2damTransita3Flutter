@@ -10,7 +10,9 @@ class BottomNavigationBarProvider extends StatefulWidget {
       _BottomNavigationBarProviderState();
 }
 
+
 final _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
 class _BottomNavigationBarProviderState
     extends State<BottomNavigationBarProvider> {
@@ -69,12 +71,18 @@ class _BottomNavigationBarProviderState
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
+          
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
+            icon:Hero(tag:'gpsTag',
+             child: Icon(Icons.map_outlined),
+            ),
+           
             label: 'GPS',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.report_problem_outlined),
+            icon:Hero(tag:'incidenciasTag',
+            child: Icon(Icons.report_problem_outlined),),
+            
             label: 'Incidencias',
           ),
         ],

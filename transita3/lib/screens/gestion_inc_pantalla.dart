@@ -9,12 +9,14 @@ class GestionIncidenciasPage extends StatefulWidget {
   _GestionIncidencias createState() => _GestionIncidencias();
 }
 
+
 final TextStyle _estiloLetra = TextStyle(fontSize: 13);
 
 class _GestionIncidencias extends State<GestionIncidenciasPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       floatingActionButton: _botonAgregar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
@@ -26,6 +28,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
 
   Widget _logo() {
     return Center(
+      
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -45,15 +48,20 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       onTap: () {
         Navigator.pushNamed(context, 'creacionincidencia');
       },
+      child:Hero(
+        tag:'botontag',
+       
+      
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
+              
               image: AssetImage('assets/boton.png'),
             ),
             borderRadius: BorderRadius.circular(0.50)),
         width: 80,
         height: 80,
-      ),
+      ),)
     );
   }
 
@@ -83,7 +91,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
               decoration: BoxDecoration(
                 color: Color.fromRGBO(66, 64, 64, 1),
               ),
-              child: widgetTemp,
+              child: widgetTemp, 
             ),
           ),
         ),
