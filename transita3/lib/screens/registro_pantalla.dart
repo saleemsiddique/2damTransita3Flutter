@@ -18,7 +18,7 @@ class _Registro extends State<RegistroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SingleChildScrollView(
         child: _registroForm(),
       ),
     );
@@ -26,6 +26,7 @@ class _Registro extends State<RegistroPage> {
 
   Widget _registroForm() {
     return Form(
+      key: _formKey,
       child: Padding(
         padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
         child: Column(
@@ -194,33 +195,33 @@ class _Registro extends State<RegistroPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         elevation: 0,
         color: Color.fromRGBO(14, 100, 209, 1),
-        onPressed: () {
-          print("Empezo");
+        onPressed: () async {
+          print("Empezó");
           if (_formKey.currentState?.validate() == true) {
             Map<String, dynamic> credenciales = {
-              'nombre': clienteProvider.nombre,
-              'apellidos': clienteProvider.apellidos,
-              'nombreUsuario': clienteProvider.email,
-              'contrasenya': clienteProvider.password,
-              'roles': ["ROLE_CLIENTE"],
+              'nombre': _nombre,
+              'apellidos': _apellidos,
+              'nombreUsuario': _email,
+              'contrasenya': _contrasenya,
+              'rol': ["ROLE_CLIENTE"],
             };
 
-            clienteProvider.signUpCliente(credenciales).then((_) {
+            try {
+              await clienteProvider.signUpCliente(credenciales);
               Map<String, dynamic> credencialesLogIn = {
-                'nombreUsuario': clienteProvider.email,
-                'contrasenya': clienteProvider.password,
+                'nombreUsuario': _email,
+                'contrasenya': _contrasenya,
               };
-              return LoginFormProvider().signInCliente(credencialesLogIn);
-            }).then((_) {
+              await LoginFormProvider().signInCliente(credencialesLogIn);
               Navigator.pushNamed(context, 'home');
-            }).catchError((error) {
+            } catch (error) {
               showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Error de inicio de sesión'),
+                    title: Text('Error de registro'),
                     content: Text(
-                        'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.'),
+                        'Una cuenta con este email ya está creada. Por favor, inicia sesión.'),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -232,9 +233,9 @@ class _Registro extends State<RegistroPage> {
                   );
                 },
               );
-            });
+            }
           }
-          print("acabo");
+          print("Acabó");
         },
         child: Text('Registrarse', style: TextStyle(color: Colors.white)),
       ),

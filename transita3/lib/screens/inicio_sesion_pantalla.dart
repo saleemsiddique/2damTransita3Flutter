@@ -139,16 +139,18 @@ class _InicioSesion extends State<IniciarSesionPage> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         elevation: 0,
         color: Color.fromRGBO(14, 100, 209, 1),
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState?.validate() == true) {
             Map<String, dynamic> credenciales = {
               'nombreUsuario': loginForm.email,
               'contrasenya': loginForm.password,
             };
-            loginForm.signInCliente(credenciales).then((_) {
+
+            try {
+              await loginForm.signInCliente(credenciales);
               IncidenciaProvider();
               Navigator.pushNamed(context, 'home');
-            }).catchError((error) {
+            } catch (error) {
               showDialog(
                 context: context,
                 builder: (context) {
@@ -167,7 +169,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
                   );
                 },
               );
-            });
+            }
           }
         },
         child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
