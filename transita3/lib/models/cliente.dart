@@ -17,6 +17,14 @@ class Cliente {
         required this.id,
     });
 
+     Cliente.empty()
+      : nombre = '',
+        apellidos = '',
+        nombreUsuario = '',
+        contrasenya = '',
+        estadoCuenta = '',
+        id = 0;
+
     factory Cliente.fromRawJson(String str) => Cliente.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());

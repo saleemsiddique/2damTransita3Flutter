@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:transita3/provider/ClienteProvider.dart';
+import 'package:transita3/provider/LoginFormProvider.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 
 class RegistroPage extends StatefulWidget {
@@ -8,8 +10,10 @@ class RegistroPage extends StatefulWidget {
 }
 
 class _Registro extends State<RegistroPage> {
+  final _formKey = GlobalKey<FormState>();
   String _nombre = '', _apellidos = '', _email = '', _contrasenya = '';
   bool _mostrarContrasenya = false;
+  ClienteProvider clienteProvider = new ClienteProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class _Registro extends State<RegistroPage> {
   }
 
   Widget _registroForm() {
-    return SingleChildScrollView(
+    return Form(
       child: Padding(
         padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
         child: Column(
@@ -80,7 +84,7 @@ class _Registro extends State<RegistroPage> {
   }
 
   Widget _escribeNombre() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Nombre',
@@ -91,11 +95,18 @@ class _Registro extends State<RegistroPage> {
       onChanged: (valor) => setState(() {
         _nombre = valor;
       }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 3) {
+          return 'El nombre debe contener al menos 2 caracteres';
+        }
+        return null;
+      },
     );
   }
 
   Widget _escribeApellidos() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Apellidos',
@@ -106,11 +117,18 @@ class _Registro extends State<RegistroPage> {
       onChanged: (valor) => setState(() {
         _apellidos = valor;
       }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 3) {
+          return 'El nombre debe contener al menos 2 caracteres';
+        }
+        return null;
+      },
     );
   }
 
   Widget _escribirEmail() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Email',
@@ -122,11 +140,22 @@ class _Registro extends State<RegistroPage> {
       onChanged: (valor) => setState(() {
         _email = valor;
       }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Por favor ingresa un correo electrónico';
+        }
+        String pattern =
+            r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+        RegExp regExp = new RegExp(pattern);
+
+        return regExp.hasMatch(value) ? null : 'Introduce un email válido';
+      },
     );
   }
 
   Widget _escribirContrasenya() {
-    return TextField(
+    return TextFormField(
       decoration: InputDecoration(
         hintText: 'Contraseña',
         labelText: 'Contraseña',
@@ -146,19 +175,67 @@ class _Registro extends State<RegistroPage> {
       onChanged: (valor) => setState(() {
         _contrasenya = valor;
       }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 6) {
+          return 'La contraseña debe contener al menos 6 caracteres';
+        }
+        return null;
+      },
     );
   }
 
   Widget _botonRegistro() {
     return Container(
       width: double.infinity,
-      height: 50, // Ancho igual al ancho completo disponible
+      height: 50,
       child: MaterialButton(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
         elevation: 0,
         color: Color.fromRGBO(14, 100, 209, 1),
-        onPressed: () {},
+        onPressed: () {
+          print("Empezo");
+          if (_formKey.currentState?.validate() == true) {
+            Map<String, dynamic> credenciales = {
+              'nombre': clienteProvider.nombre,
+              'apellidos': clienteProvider.apellidos,
+              'nombreUsuario': clienteProvider.email,
+              'contrasenya': clienteProvider.password,
+              'roles': ["ROLE_CLIENTE"],
+            };
+
+            clienteProvider.signUpCliente(credenciales).then((_) {
+              Map<String, dynamic> credencialesLogIn = {
+                'nombreUsuario': clienteProvider.email,
+                'contrasenya': clienteProvider.password,
+              };
+              return LoginFormProvider().signInCliente(credencialesLogIn);
+            }).then((_) {
+              Navigator.pushNamed(context, 'home');
+            }).catchError((error) {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text('Error de inicio de sesión'),
+                    content: Text(
+                        'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('Aceptar'),
+                      ),
+                    ],
+                  );
+                },
+              );
+            });
+          }
+          print("acabo");
+        },
         child: Text('Registrarse', style: TextStyle(color: Colors.white)),
       ),
     );
