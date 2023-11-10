@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:transita3/provider/ClienteProvider.dart';
+import 'package:transita3/provider/IncidenciaProvider.dart';
 import 'package:transita3/provider/LoginFormProvider.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 
@@ -203,7 +204,7 @@ class _Registro extends State<RegistroPage> {
               'apellidos': _apellidos,
               'nombreUsuario': _email,
               'contrasenya': _contrasenya,
-              'rol': ["ROLE_CLIENTE"],
+              'rol': ["ROLE_USUARIO"],
             };
 
             try {
@@ -213,6 +214,7 @@ class _Registro extends State<RegistroPage> {
                 'contrasenya': _contrasenya,
               };
               await LoginFormProvider().signInCliente(credencialesLogIn);
+              IncidenciaProvider();
               Navigator.pushNamed(context, 'home');
             } catch (error) {
               showDialog(
