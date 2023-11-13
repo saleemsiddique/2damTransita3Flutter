@@ -214,6 +214,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
   Widget _crearCuenta() {
     return Center(
+      child:Hero(tag:'registrarDash',
       child: RichText(
         text: TextSpan(
           text: '¿No tienes cuenta? Pulsa ',
@@ -236,7 +237,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
             TextSpan(text: ' para crearla')
           ],
         ),
-      ),
+      ),)
     );
   }
 }

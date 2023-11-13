@@ -72,9 +72,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   }
 
   Widget _logo() {
-  return Hero(  //Linea 50 de Gestion_inc_pantalla
-    tag: 'botontag',
-    child: Center(
+  return Center(  //Linea 50 de Gestion_inc_pantalla
+    
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -86,7 +85,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
           )
         ],
       ),
-    ),
+    
   );
 }
 
@@ -164,7 +163,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   }
 
   Widget _botonCrear() {
-    return StreamBuilder(
+    return Hero( tag: 'botontag',
+      child:StreamBuilder(
       stream: null,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return MaterialButton(
@@ -175,7 +175,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             color: Color.fromRGBO(14, 100, 209, 1),
             onPressed: () {},
             child: Text('Crear'));
-      },
+      },)
     );
   }
 

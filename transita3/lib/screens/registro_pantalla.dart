@@ -166,6 +166,7 @@ class _Registro extends State<RegistroPage> {
 
   Widget _iniciarSesion() {
     return Center(
+      child:Hero(tag:'registrarDash',
       child: RichText(
           text: TextSpan(
               text: '¿Ya tienes cuenta? Inicia sesión ',
@@ -181,7 +182,7 @@ class _Registro extends State<RegistroPage> {
                   ..onTap = () {
                     Navigator.pop(context);
                   }),
-          ])),
+          ])),)
     );
   }
 }

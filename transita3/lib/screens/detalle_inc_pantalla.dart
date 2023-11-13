@@ -39,7 +39,10 @@ class _detalleIincidencias extends State<detalle_incidencias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      
+      body: Hero(
+        tag: 'incidenciasZoom',
+        child:Container(
         child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Column(
@@ -176,7 +179,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
             ],
           ),
         ),
-      ),
+      ),)
     );
   }
 

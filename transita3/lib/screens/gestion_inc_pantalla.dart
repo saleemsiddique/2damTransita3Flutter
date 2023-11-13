@@ -82,6 +82,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
         onTap: () {
           Navigator.pushNamed(context, 'detalleincidencia');
         },
+        child: Hero(tag:'incidenciasZoom',
         child: Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           height: 100,
@@ -96,6 +97,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
           ),
         ),
       ),
+      )
     );
     incidencias.add(Container(height: 40));
     _cont++;
