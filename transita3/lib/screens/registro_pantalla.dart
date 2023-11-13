@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:transita3/provider/ClienteProvider.dart';
-import 'package:transita3/provider/IncidenciaProvider.dart';
-import 'package:transita3/provider/LoginFormProvider.dart';
-import 'package:transita3/screens/inicio_sesion_pantalla.dart';
+import 'package:transita3/services/ClienteService.dart';
+import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/services/LoginService.dart';
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -14,7 +13,7 @@ class _Registro extends State<RegistroPage> {
   final _formKey = GlobalKey<FormState>();
   String _nombre = '', _apellidos = '', _email = '', _contrasenya = '';
   bool _mostrarContrasenya = false;
-  ClienteProvider clienteProvider = new ClienteProvider();
+  ClienteService clienteProvider = new ClienteService();
 
   @override
   Widget build(BuildContext context) {
@@ -213,8 +212,8 @@ class _Registro extends State<RegistroPage> {
                 'nombreUsuario': _email,
                 'contrasenya': _contrasenya,
               };
-              await LoginFormProvider().signInCliente(credencialesLogIn);
-              IncidenciaProvider();
+              await LoginService().signInCliente(credencialesLogIn);
+              IncidenciaService();
               Navigator.pushNamed(context, 'home');
             } catch (error) {
               showDialog(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:transita3/provider/LoginFormProvider.dart';
 import 'package:transita3/rutas/rutas.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
+import 'package:transita3/services/LoginService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => LoginFormProvider(),
+          create: (_) => LoginService(),
           lazy: false,
         ),
       ],

@@ -5,20 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:transita3/helpers/debouncer.dart';
 import '../models/Cliente.dart';
 
-class ClienteProvider extends ChangeNotifier {
-      GlobalKey<FormState> formKey = new GlobalKey<FormState>();
-  String _baseUrl = '10.0.2.2:8083';
+class TransitaProvider extends ChangeNotifier {  
+  static String _baseUrl = '10.0.2.2:8083';
   String _language = 'es-ES';
-  String nombre = '';
-  String apellidos = '';
-  String email = '';
-  String password = '';
+  static String apiKey = '';
 
-  static Cliente cliente = new Cliente.empty();
 
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
 
-  Future<String> postJsonData(String endpoint, Map<String, dynamic> data) async {
+  static Future<String> postJsonData(String endpoint, Map<String, dynamic> data) async {
     final url = Uri.http(_baseUrl, endpoint);
     Map<String, String> headers = {
       'Content-Type': 'application/json',
@@ -38,16 +33,13 @@ class ClienteProvider extends ChangeNotifier {
     }
   }
 
-  signUpCliente(Map<String, dynamic> data) async {
-    final jsonData = await postJsonData('api/auth/signup/cliente', data);
-    cliente = Cliente.fromJson(json.decode(jsonData));
-    print("Este es el usuario creado: $cliente");
-    notifyListeners();
+  static Future<String> getJsonData(String endpoint) async {
+    final url = Uri.http(_baseUrl, endpoint);
+    Map<String, String> headers = {
+      'Authorization': apiKey,
+    };
+    final response = await http.get(url, headers: headers);
+    print(response.body);
+    return response.body;
   }
-
-  bool isValidForm(){
-  print('$email - $password');
-  print(formKey.currentState?.validate());
-  return formKey.currentState?.validate() ?? false;
-}
 }

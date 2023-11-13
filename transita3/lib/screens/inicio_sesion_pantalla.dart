@@ -1,13 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:transita3/models/models.dart';
-import 'package:transita3/navigation_bar.dart';
-import 'package:transita3/provider/IncidenciaProvider.dart';
-import 'package:transita3/provider/LoginFormProvider.dart';
-import 'package:transita3/provider/IncidenciaProvider.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
+import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/services/LoginService.dart';
 
 class IniciarSesionPage extends StatefulWidget {
   @override
@@ -19,7 +15,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
   String _email = '';
   String _contrasenya = '';
   bool _mostrarContrasenya = false;
-  LoginFormProvider loginForm = new LoginFormProvider();
+  LoginService loginForm = new LoginService();
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +144,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
             try {
               await loginForm.signInCliente(credenciales);
-              IncidenciaProvider();
+              IncidenciaService();
               Navigator.pushNamed(context, 'home');
             } catch (error) {
               showDialog(
