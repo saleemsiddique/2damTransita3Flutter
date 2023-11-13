@@ -99,11 +99,21 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
 
 Widget _lista() {
   List<Incidencia> incidencias = IncidenciaProvider.incidenciasDeUsuario;
-  print("Estas son las incidencias: ${incidencias.toString()}");
-  return Column(
-    children: _listaIncidencias(incidencias, context),
-  );
+  
+  if (incidencias.isEmpty) {
+    return Column(
+      children: [
+        Text("No hay Incidencias"),
+      ],
+    );
+  } else {
+    print("Estas son las incidencias: ${incidencias.toString()}");
+    return Column(
+      children: _listaIncidencias(incidencias, context),
+    );
+  }
 }
+
 
 
 
