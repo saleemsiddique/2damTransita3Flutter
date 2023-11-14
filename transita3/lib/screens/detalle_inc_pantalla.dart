@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
+import 'package:transita3/models/incidencia.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+
+import 'package:transita3/services/IncidenciaService.dart';
 
 class detalle_incidencias extends StatefulWidget {
   @override
@@ -12,6 +15,7 @@ class detalle_incidencias extends StatefulWidget {
 }
 
 class _detalleIincidencias extends State<detalle_incidencias> {
+  IncidenciaService incidenciaService = new IncidenciaService();
   String tituloIncidencia = '',
       descripcion =
           ' choque de coches en la via san martin, calle no accesibl,hoque de coches encoches en la via san martin, calle no accesiblee',

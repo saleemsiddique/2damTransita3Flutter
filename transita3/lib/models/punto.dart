@@ -22,6 +22,19 @@ class Punto {
         required this.id,
     });
 
+    factory Punto.empty() {
+    return Punto(
+      descripcion: '',
+      tipoPunto: '',
+      foto: '',
+      latitud: 0.0,
+      longitud: 0.0,
+      accesibilidadPunto: '',
+      zona: Zona.empty(), // Si Zona tiene un constructor empty
+      id: 0,
+    );
+  }
+
     factory Punto.fromRawJson(String str) => Punto.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());

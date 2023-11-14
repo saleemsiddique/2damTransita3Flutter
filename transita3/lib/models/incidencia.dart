@@ -20,6 +20,19 @@ class Incidencia {
         required this.cliente,
     });
 
+    factory Incidencia.empty() {
+    return Incidencia(
+      id: 0,
+      descripcion: '',
+      estado: '',
+      duracion: '',
+      fechaHora: DateTime.now(),
+      punto: Punto.empty(),
+      cliente: Cliente.empty(),
+    );
+  }
+
+
     factory Incidencia.fromRawJson(String str) => Incidencia.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());

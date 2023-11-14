@@ -9,6 +9,13 @@ class Zona {
         required this.id,
     });
 
+    factory Zona.empty() {
+    return Zona(
+      nombre: '',
+      id: 0,
+    );
+  }
+
     factory Zona.fromRawJson(String str) => Zona.fromJson(json.decode(str));
 
     String toRawJson() => json.encode(toJson());
