@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
-import 'package:transita3/models/incidencia.dart';
-import 'package:transita3/screens/inicio_sesion_pantalla.dart';
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
-
+import 'package:transita3/models/models.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 
 class detalle_incidencias extends StatefulWidget {
@@ -16,32 +9,30 @@ class detalle_incidencias extends StatefulWidget {
 
 class _detalleIincidencias extends State<detalle_incidencias> {
   IncidenciaService incidenciaService = new IncidenciaService();
-  String tituloIncidencia = '',
-      descripcion =
-          ' choque de coches en la via san martin, calle no accesibl,hoque de coches encoches en la via san martin, calle no accesiblee',
-      calle = "X",
-      estado = "En progreso",
-      fechaIncidenciaString = '11/02/2002',
-      razonIncidencia = "Obras calle x";
+  int id = 0;
+  String descripcion = '';
+  String duracion = '';
+  String estado = '';
+  DateTime fecha = DateTime.now(); 
+  String cliente = '';
+  String punto = ''; 
   FileImage? imagenIncidencia = null;
   DateTime? fechaIncidencia = null;
 
   @override
-  void initState() {
-    super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
-        overlays: [SystemUiOverlay.bottom]);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
-        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom]);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Incidencia incidencia =
+        ModalRoute.of(context)?.settings.arguments as Incidencia;
+ setState(() {
+      id = incidencia.id;
+      descripcion = incidencia.descripcion;
+      duracion = incidencia.duracion;
+      estado = incidencia.estado;
+      fecha = incidencia.fechaHora;
+      cliente = incidencia.cliente.toString();
+      punto = incidencia.punto.toString();
+    });
+    print('Incidencia Recibida: $incidencia');
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -78,7 +69,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                     child: Container(
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        'Indicencia calle $calle',
+                        'Indicencia calle',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -104,7 +95,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Razon: $razonIncidencia',
+                            'Razon:',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -120,7 +111,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Fecha: $fechaIncidenciaString',
+                            'Fecha:',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -136,7 +127,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Estado: $estado',
+                            'Estado',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

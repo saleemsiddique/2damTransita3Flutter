@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:transita3/models/models.dart';
+import 'package:transita3/models/punto.dart';
+import 'package:transita3/models/cliente.dart';
 
 class Incidencia {
     int id;
