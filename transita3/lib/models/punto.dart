@@ -2,27 +2,27 @@ import 'dart:convert';
 import 'package:transita3/models/models.dart';
 
 class Punto {
-    String descripcion;
-    String tipoPunto;
-    String foto;
-    double latitud;
-    double longitud;
-    String accesibilidadPunto;
-    Zona zona;
-    int id;
+  String descripcion;
+  String tipoPunto;
+  String foto;
+  double latitud;
+  double longitud;
+  String accesibilidadPunto;
+  Zona zona;
+  int id;
 
-    Punto({
-        required this.descripcion,
-        required this.tipoPunto,
-        required this.foto,
-        required this.latitud,
-        required this.longitud,
-        required this.accesibilidadPunto,
-        required this.zona,
-        required this.id,
-    });
+  Punto({
+    required this.descripcion,
+    required this.tipoPunto,
+    required this.foto,
+    required this.latitud,
+    required this.longitud,
+    required this.accesibilidadPunto,
+    required this.zona,
+    required this.id,
+  });
 
-    factory Punto.empty() {
+  factory Punto.empty() {
     return Punto(
       descripcion: '',
       tipoPunto: '',
@@ -35,11 +35,11 @@ class Punto {
     );
   }
 
-    factory Punto.fromRawJson(String str) => Punto.fromJson(json.decode(str));
+  factory Punto.fromRawJson(String str) => Punto.fromJson(json.decode(str));
 
-    String toRawJson() => json.encode(toJson());
+  String toRawJson() => json.encode(toJson());
 
-    factory Punto.fromJson(Map<String, dynamic> json) => Punto(
+  factory Punto.fromJson(Map<String, dynamic> json) => Punto(
         descripcion: json["descripcion"],
         tipoPunto: json["tipoPunto"],
         foto: json["foto"],
@@ -48,9 +48,9 @@ class Punto {
         accesibilidadPunto: json["accesibilidadPunto"],
         zona: Zona.fromJson(json["zona"]),
         id: json["id"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "descripcion": descripcion,
         "tipoPunto": tipoPunto,
         "foto": foto,
@@ -59,5 +59,14 @@ class Punto {
         "accesibilidadPunto": accesibilidadPunto,
         "zona": zona.toJson(),
         "id": id,
-    };
+      };
+  /*@override
+  String toString() {
+    return 'Punto{id: $id, descripcion: $descripcion, tipoPunto: $tipoPunto, foto: $foto, '
+        'latitud: $latitud, longitud: $longitud, accesibilidadPunto: $accesibilidadPunto, zona: $zona}';
+  }*/
+  @override
+  String toString() {
+    return '$descripcion';
+  }
 }

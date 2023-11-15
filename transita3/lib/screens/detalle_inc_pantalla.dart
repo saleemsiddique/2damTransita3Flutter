@@ -13,9 +13,9 @@ class _detalleIincidencias extends State<detalle_incidencias> {
   String descripcion = '';
   String duracion = '';
   String estado = '';
-  DateTime fecha = DateTime.now(); 
+  DateTime fecha = DateTime.now();
   String cliente = '';
-  String punto = ''; 
+  String punto = '';
   FileImage? imagenIncidencia = null;
   DateTime? fechaIncidencia = null;
 
@@ -23,7 +23,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
   Widget build(BuildContext context) {
     Incidencia incidencia =
         ModalRoute.of(context)?.settings.arguments as Incidencia;
- setState(() {
+    setState(() {
       id = incidencia.id;
       descripcion = incidencia.descripcion;
       duracion = incidencia.duracion;
@@ -34,7 +34,20 @@ class _detalleIincidencias extends State<detalle_incidencias> {
     });
     print('Incidencia Recibida: $incidencia');
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color.fromARGB(
+            255, 31, 25, 25), // Ajusta este color según tus necesidades
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Text('Incidencia numero $id'),
+      ),
       body: Container(
+        color: Color.fromARGB(
+            255, 31, 25, 25), // Ajusta este color según tus necesidades
         child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
           child: Column(
@@ -44,37 +57,21 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                   Container(
                     width: 500,
                     height: 500,
-                    margin: EdgeInsets.only(bottom: 10),
+                    margin: EdgeInsets.only(bottom: 10, top: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0),
-                        topRight: Radius.circular(0),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
                       child: FadeInImage(
-                        placeholder:AssetImage('assets/loading.gif'),
-                        image:AssetImage( 'assets/obras.png'),
+                        placeholder: AssetImage('assets/loading.gif'),
+                        image: AssetImage('assets/obras.png'),
                         fadeInDuration: Duration(milliseconds: 200),
-                       
                         width: 500,
                         height: 500,
                         fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'Indicencia calle',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
                       ),
                     ),
                   ),
@@ -90,12 +87,12 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                 child: Column(
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: EdgeInsets.only(left: 20),
                       padding: EdgeInsets.all(10),
                       child: Row(
                         children: [
                           Text(
-                            'Razon:',
+                            'Descripcion: $descripcion',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -111,7 +108,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Fecha:',
+                            'Fecha: $fecha',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -127,7 +124,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Estado',
+                            'Estado: $estado',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -143,7 +140,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Descripción: ',
+                            'Duracion: $duracion ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -155,14 +152,34 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 20),
-                      padding: EdgeInsets.all(9),
-                      child: Flexible(
-                        child: Text(
-                          descripcion,
-                          style: TextStyle(
-                            color: Colors.white,
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Cliente: ${cliente.toString()} ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
+                          SizedBox(width: 10),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 20),
+                      padding: EdgeInsets.all(10),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Punto: ${punto.toString()} ',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                        ],
                       ),
                     ),
                   ],
@@ -180,11 +197,12 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          
           FadeInImage(
-            placeholder: AssetImage('assets/loading.gif'),
-            image: AssetImage('assets/transitaPng.png'), 
-            fadeInDuration: Duration(milliseconds: 200),height: 70, width: 70),
+              placeholder: AssetImage('assets/loading.gif'),
+              image: AssetImage('assets/transitaPng.png'),
+              fadeInDuration: Duration(milliseconds: 200),
+              height: 70,
+              width: 70),
           SizedBox(width: 25),
           const Text(
             'Transita',
