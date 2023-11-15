@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
+import 'package:transita3/services/LoginService.dart';
 import '../models/models.dart';
 import 'package:transita3/screens/perfil_pantalla.dart';
 
@@ -27,8 +28,7 @@ class ClienteService extends ChangeNotifier {
 
  modifyCliente(Map<String, dynamic> data, id) async {
     final jsonData =
-        await TransitaProvider.putJsonData('cliente/modificar/${id}', data);
-    cliente = Cliente.fromJson(json.decode(jsonData));
+        await TransitaProvider.putJsonData('api/auth/cliente/modificar/${id}', data);
     print("Este es el usuario modificado: $cliente");
     notifyListeners();
   }

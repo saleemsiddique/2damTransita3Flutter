@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/models/cliente.dart';
+import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
 
 class PerfilPantalla extends StatefulWidget {
@@ -14,14 +15,17 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
   TextEditingController _nombreController = TextEditingController();
   TextEditingController _apellidoController = TextEditingController();
   TextEditingController _correoController = TextEditingController();
+  LoginService loginForm = new LoginService();
 
   @override
   void initState() {
     super.initState();
     // Aquí, obtén la instancia de ClienteService usando Consumer
     final clienteService = Provider.of<LoginService>(context, listen: false);
-print('Nombre: ${LoginService.cliente.nombre}');
+    print("${LoginService.cliente.id}");
+  print('Nombre: ${LoginService.cliente.nombre}');
   print('Apellido: ${LoginService.cliente.apellidos}');
+  print("Roles: ${LoginService.cliente.roles}");
   //print('Correo: ${LoginService.cliente.nombre}');
     // Configura los controladores con los datos del cliente
     _nombreController.text = LoginService.cliente.nombre;
@@ -89,20 +93,21 @@ print('Nombre: ${LoginService.cliente.nombre}');
                         ),
                         SizedBox(height: 20.0),
                         ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKey.currentState?.validate() ?? false) {
                               // Construir un objeto Cliente con los datos del formulario
                               Map<String, dynamic> updatedFields = {
                                 'nombre': _nombreController.text,
                                 'apellidos': _apellidoController.text,
                                 'nombreUsuario': _correoController.text,
-                                'rol':LoginService.cliente.roles
-                                // Agrega más campos según sea necesario
+                                'rol': ["${LoginService.cliente.roles}"]
                               };
 
                               // Llamar a la función modifyCliente del servicio
-                             clienteService.modifyCliente(updatedFields, LoginService.cliente.id);
-
+                             await clienteService.modifyCliente(updatedFields, LoginService.cliente.id);
+                              LoginService.cliente.nombre = _nombreController.text;
+                              LoginService.cliente.apellidos = _apellidoController.text;
+                              LoginService.cliente.nombreUsuario = _correoController.text;
                               // Mostrar el SnackBar
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
