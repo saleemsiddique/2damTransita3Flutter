@@ -3,30 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:transita3/rutas/rutas.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/services/ClienteService.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-/*class AppState extends StatelessWidget {
-  const AppState({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => TransitaProvider(),
-          lazy: false,
-        )
-      ],
-      child: MyApp(),
-    );
-  }
-}*/
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp();
 
   static final defaultDarkColorScheme = ColorScheme.fromSwatch(
     accentColor: Colors.blue,
@@ -39,7 +23,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (_) => LoginService(),
-          lazy: false,
+        ),
+
+        ChangeNotifierProvider.value(
+          value: ClienteService(), 
         ),
       ],
       child: MaterialApp(
@@ -57,4 +44,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
+import 'package:transita3/screens/perfil_pantalla.dart';
 
 class BottomNavigationBarProvider extends StatefulWidget {
   const BottomNavigationBarProvider({super.key});
@@ -54,7 +55,9 @@ class _BottomNavigationBarProviderState
             ListTile(
               leading: Icon(Icons.person),
               title: Text('Perfil'),
-              onTap: () {},
+              onTap: () { Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => PerfilPantalla()),
+                );},
             ),
             ListTile(
               leading: Icon(Icons.settings),

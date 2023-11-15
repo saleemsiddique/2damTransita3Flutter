@@ -42,4 +42,26 @@ class TransitaProvider extends ChangeNotifier {
     print(response.body);
     return response.body;
   }
+
+   static Future<String> putJsonData(
+      String endpoint, Map<String, dynamic> data) async {
+    final url = Uri.http(_baseUrl, endpoint);
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': apiKey,
+    };
+
+    String jsonData = json.encode(data);
+
+    final response = await http.put(url, headers: headers, body: jsonData);
+
+    if (response.statusCode == 200) {
+      print('Solicitud exitosa');
+      print(response.body);
+      return response.body;
+    } else {
+      print('Error en la solicitud: ${response.statusCode}');
+      throw Exception('Error en la solicitud: ${response.statusCode}');
+    }
+  } 
 }
