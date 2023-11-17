@@ -79,4 +79,33 @@ class TransitaProvider extends ChangeNotifier {
       throw Exception('Error durante la solicitud: $error');
     }
   }
+
+  static Future<String> deleteJsonData(String endpoint) async {
+    final url = Uri.http(_baseUrl, endpoint);
+    Map<String, String> headers = {
+      'Authorization': apiKey,
+    };
+
+    try {
+      final response = await http.delete(url, headers: headers);
+
+      if (response.statusCode == 200) {
+        print('Solicitud exitosa');
+        print(response.body);
+        return response.body;
+      } else {
+        print('Error en la solicitud: ${response.statusCode}');
+        throw Exception('Error en la solicitud: ${response.statusCode}');
+      }
+    } catch (error) {
+      if (error is SocketException) {
+        print('Error de red: $error');
+      } else if (error is http.ClientException) {
+        print('Error de cliente HTTP: $error');
+      } else {
+        print('Error desconocido: $error');
+      }
+      throw Exception('Error durante la solicitud: $error');
+    }
+  }
 }
