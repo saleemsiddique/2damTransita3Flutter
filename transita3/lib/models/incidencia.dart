@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:transita3/models/models.dart';
+import 'package:transita3/models/punto.dart';
+import 'package:transita3/models/cliente.dart';
 
 class Incidencia {
     int id;
@@ -19,6 +20,19 @@ class Incidencia {
         required this.punto,
         required this.cliente,
     });
+
+    factory Incidencia.empty() {
+    return Incidencia(
+      id: 0,
+      descripcion: '',
+      estado: '',
+      duracion: '',
+      fechaHora: DateTime.now(),
+      punto: Punto.empty(),
+      cliente: Cliente.empty(),
+    );
+  }
+
 
     factory Incidencia.fromRawJson(String str) => Incidencia.fromJson(json.decode(str));
 

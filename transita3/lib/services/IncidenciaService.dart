@@ -10,7 +10,7 @@ import 'package:transita3/provider/TransitaProvider.dart';
 
 class IncidenciaService extends ChangeNotifier {
   static List<Incidencia> incidenciasDeUsuario = [];
-
+  static Incidencia incidencia = Incidencia.empty();
 
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
 
@@ -28,17 +28,31 @@ class IncidenciaService extends ChangeNotifier {
   }
 
   getIncidencias() async {
-  final cliente = LoginService.cliente;
-  TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
-  print('id de clienteIncidencia: ${cliente.id}');
-  if (cliente != null) {
-    final jsonData = await TransitaProvider.getJsonData('incidencias/clienteid/${cliente.id}');
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clienteIncidencia: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData(
+          'incidencias/clienteid/${cliente.id}');
 
-    final List<dynamic> jsonList = json.decode(jsonData);
+      final List<dynamic> jsonList = json.decode(jsonData);
 
-    incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
-    print("Estas son las incidencias: ${incidenciasDeUsuario.toString()}");
-    notifyListeners();
+      incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
+      print("Estas son las incidencias: ${incidenciasDeUsuario.toString()}");
+      notifyListeners();
+    }
   }
-}
+
+  getIncidencia(int id) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clienteIncidencia: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData =
+          await TransitaProvider.getJsonData('incidencia/id/${id}');
+      incidencia = Incidencia.fromRawJson(jsonData);
+      print("Incidencia recibida: ${incidencia}");
+      notifyListeners();
+    }
+  }
 }

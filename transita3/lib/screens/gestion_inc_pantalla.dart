@@ -71,8 +71,8 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
     incidencias.add(
       GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, 'detalleincidencia');
-        },
+          Navigator.pushNamed(context, 'detalleincidencia', arguments: incidencia); 
+       },
         child: Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           height: 100,

@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:transita3/helpers/debouncer.dart';
-import '../models/Cliente.dart';
 
 class TransitaProvider extends ChangeNotifier {
   static String _baseUrl = '10.0.2.2:8083';
