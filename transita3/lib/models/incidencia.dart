@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:transita3/models/punto.dart';
-import 'package:transita3/models/cliente.dart';
+
+import 'package:transita3/models/models.dart';
 
 class Incidencia {
     int id;
@@ -8,6 +8,7 @@ class Incidencia {
     String estado;
     String duracion;
     DateTime fechaHora;
+    String fotos;
     Punto punto;
     Cliente cliente;
 
@@ -17,22 +18,20 @@ class Incidencia {
         required this.estado,
         required this.duracion,
         required this.fechaHora,
+        required this.fotos,
         required this.punto,
         required this.cliente,
     });
 
-    factory Incidencia.empty() {
-    return Incidencia(
-      id: 0,
-      descripcion: '',
-      estado: '',
-      duracion: '',
-      fechaHora: DateTime.now(),
-      punto: Punto.empty(),
-      cliente: Cliente.empty(),
-    );
-  }
-
+    Incidencia.empty()
+      : id = 0,
+        descripcion = '',
+        estado = '',
+        duracion = '',
+        fechaHora = DateTime.now(),
+        fotos = '',
+        punto = Punto.empty(),
+        cliente = Cliente.empty();
 
     factory Incidencia.fromRawJson(String str) => Incidencia.fromJson(json.decode(str));
 
@@ -44,6 +43,7 @@ class Incidencia {
         estado: json["estado"],
         duracion: json["duracion"],
         fechaHora: DateTime.parse(json["fechaHora"]),
+        fotos: json["fotos"],
         punto: Punto.fromJson(json["punto"]),
         cliente: Cliente.fromJson(json["cliente"]),
     );
@@ -54,16 +54,12 @@ class Incidencia {
         "estado": estado,
         "duracion": duracion,
         "fechaHora": "${fechaHora.year.toString().padLeft(4, '0')}-${fechaHora.month.toString().padLeft(2, '0')}-${fechaHora.day.toString().padLeft(2, '0')}",
+        "fotos": fotos,
         "punto": punto.toJson(),
         "cliente": cliente.toJson(),
     };
 
-        static List<Incidencia> fromJsonList(List<dynamic> jsonList) {
-      return jsonList.map((json) => Incidencia.fromJson(json)).toList();
-    }
-
-      @override
-  String toString() {
-    return 'Incidencia{id: $id, descripcion: $descripcion, estado: $estado, duracion: $duracion, fechaHora: $fechaHora, punto: $punto, cliente: $cliente}';
+     static List<Incidencia> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((json) => Incidencia.fromJson(json)).toList();
   }
 }

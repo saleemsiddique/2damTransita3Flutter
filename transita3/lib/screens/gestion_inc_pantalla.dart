@@ -65,7 +65,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
       children: [
         _columnaIzquierda(incidencia.descripcion, incidencia.punto.foto,
             incidencia.punto.descripcion, incidencia.id),
-        _columnaDerecha(),
+        _columnaDerecha(incidencia.id),
       ],
     );
     incidencias.add(
@@ -97,8 +97,8 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
 
 
 Widget _lista() {
+  IncidenciaService();
   List<Incidencia> incidencias = IncidenciaService.incidenciasDeUsuario;
-  
   if (incidencias.isEmpty) {
     return Column(
       children: [
@@ -106,7 +106,7 @@ Widget _lista() {
       ],
     );
   } else {
-    print("Estas son las incidencias: ${incidencias.toString()}");
+    print("Estas son las incidencias de la lista: ${incidencias.toString()}");
     return Column(
       children: _listaIncidencias(incidencias, context),
     );
@@ -155,14 +155,14 @@ Widget _lista() {
     );
   }
 
-  Widget _columnaDerecha() {
+  Widget _columnaDerecha(int id) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(width: 25),
-            _botonInspeccionar(),
+            _botonInspeccionar(id),
           ],
         ),
         Column(
@@ -176,7 +176,7 @@ Widget _lista() {
     );
   }
 
-  Widget _botonInspeccionar() {
+ Widget _botonInspeccionar(int id) {
     return PopupMenuButton<String>(
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
@@ -188,9 +188,16 @@ Widget _lista() {
           child: Text('Eliminar'),
         ),
       ],
-      onSelected: (String choice) {
+      onSelected: (String choice) async {
         if (choice == 'editar') {
-        } else if (choice == 'eliminar') {}
+          // Lógica para la opción 'Editar'
+        } else if (choice == 'eliminar') {
+          await IncidenciaService.deleteIncidencia(id);
+          // Recargar la lista de incidencias después de eliminar
+          setState(() {
+            IncidenciaService();
+          });
+        }
       },
       icon: Icon(Icons.more_vert),
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
-import 'package:transita3/screens/inicio_sesion_pantalla.dart';
-import 'package:flutter/material.dart';
+import 'package:transita3/models/models.dart';
+import 'package:transita3/navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:transita3/services/IncidenciaService.dart';
 import 'dart:io';
+
+import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/services/PuntoService.dart';
 
 class CreacionIncidenciasPage extends StatefulWidget {
   @override
@@ -11,67 +14,76 @@ class CreacionIncidenciasPage extends StatefulWidget {
 }
 
 class _creacionIncidencia extends State<CreacionIncidenciasPage> {
-  String _tituloIncidencia = '', _descripcion = '';
-  double _duracion = 0;
-  File? _selectedImage;
+  final _formKey = GlobalKey<FormState>();
+  String _descripcion = '';
+  String _duracion = '';
+  String _estado = 'ENVIADO';
+  String _idCliente = LoginService.cliente.id.toString();
+  String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
+  late Punto? _selectedPunto = null;
+  late File? _selectedImage = null;
   String _selectedDuration = '1 hora';
+
   @override
   Widget build(BuildContext context) {
+    PuntoService();
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(5, 40, 5, 0),
-          child: Column(
-            children: [
-              _logo(),
-              Container(
-                height: 70,
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _escribeTitulo(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _seleccionarDuracion(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _seleccionarFoto(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                child: _escribeDescripcion(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                width: 325,
-                //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-                child: _botonCrear(),
-              ),
-              Container(
-                height: 20,
-              ),
-              Container(
-                width: 325,
-                //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
-                child: _botonCancelar(),
-              ),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _logo(),
+                Container(
+                  height: 70,
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: _escribeDescripcion(),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: _seleccionarDuracion(),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: _seleccionarPunto(),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: _sacarFoto(),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  width: 325,
+                  child: _botonCrear(),
+                ),
+                Container(
+                  height: 20,
+                ),
+                Container(
+                  width: 325,
+                  //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                  child: _botonCancelar(),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -83,33 +95,77 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/transitaPng.png', height: 70, width: 70),
-          SizedBox(width: 25),
-          Text(
-            'Transita',
-            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-          )
+          SizedBox(height: 5),
+          Image.asset('assets/transitaLogoBN.png', height: 120, width: 120),
         ],
       ),
     );
   }
 
-  Widget _escribeTitulo() {
-    return TextField(
-      keyboardType: TextInputType.emailAddress,
-      decoration: InputDecoration(
-        hintText: 'Titulo',
-        labelText: 'Titulo de la incidencia',
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-      ),
-      onChanged: (valor) => setState(() {
-        _tituloIncidencia = valor;
-      }),
+  Widget _sacarFoto() {
+    return Column(
+      children: [
+        _mostrarImagen(),
+        IconButton(
+          icon: Icon(Icons.camera_alt),
+          onPressed: () async {
+            await _tomarFoto();
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _mostrarImagen() {
+    return _selectedImage != null
+        ? Image.file(_selectedImage!, height: 100, width: 100)
+        : Container();
+  }
+
+  Future<void> _tomarFoto() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? pickedFile =
+        await _picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile != null) {
+      setState(() {
+        _selectedImage = File(pickedFile.path);
+      });
+    }
+  }
+
+  Widget _seleccionarPunto() {
+    return Row(
+      children: [
+        Text('Seleccionar Punto', style: TextStyle(color: Colors.grey)),
+        SizedBox(
+          width: 20,
+        ),
+        DropdownButton<int>(
+          value: _selectedPunto?.id,
+          items: PuntoService.puntos.map((punto) {
+            return DropdownMenuItem<int>(
+              value: punto.id,
+              child: Text('${punto.id}'),
+            );
+          }).toList(),
+          onChanged: (int? newValue) async {
+            if (newValue != null) {
+              await PuntoService.getPunto(newValue);
+              setState(() {
+                _selectedPunto = PuntoService.puntos
+                    .firstWhere((punto) => punto.id == newValue);
+              });
+              print("Este es el punto que acabas de escoger $_selectedPunto");
+            }
+          },
+        ),
+      ],
     );
   }
 
   Widget _escribeDescripcion() {
-    return TextField(
+    return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Descripcion',
@@ -120,65 +176,70 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       onChanged: (valor) => setState(() {
         _descripcion = valor;
       }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 10) {
+          return 'La descripcion debe contener mas informacion';
+        }
+        return null;
+      },
     );
-  }
-
-  Widget _seleccionarFoto() {
-    return Column(
-      children: [
-        MaterialButton(
-            color: Colors.blue,
-            child: const Text("Seleccionar Imagen",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16)),
-            onPressed: () {
-              _pickImageFromGalery();
-            })
-      ],
-    );
-  }
-
-  Future _pickImageFromGalery() async {
-    final returnedImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      _selectedImage = File(returnedImage!.name);
-    });
   }
 
   Widget _seleccionarDuracion() {
-    return DropdownButton<String>(
-      value: _selectedDuration,
-      items: ['1 hora', '2 horas', '3 horas', '4 horas', '5 horas', '6 horas']
-          .map((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      onChanged: (String? newValue) {
+    return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Duración estimada',
+        hintText: 'Ingrese la duración',
+        fillColor: Colors.white,
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+      ),
+      onChanged: (String value) {
         setState(() {
-          _selectedDuration = newValue ?? '';
+          _duracion = value;
         });
+      },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 10) {
+          return 'Indique una duracion';
+        }
+        return null;
       },
     );
   }
 
   Widget _botonCrear() {
-    return StreamBuilder(
-      stream: null,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return MaterialButton(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-            elevation: 0,
-            color: Color.fromRGBO(14, 100, 209, 1),
-            onPressed: () {},
-            child: Text('Crear'));
+    return MaterialButton(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+      elevation: 0,
+      color: Color.fromRGBO(14, 100, 209, 1),
+      onPressed: () async {
+        if (_formKey.currentState?.validate() ?? false) {
+          Map<String, dynamic> incidenciaData = {
+            'descripcion': _descripcion,
+            'estado': _estado,
+            'duracion': _duracion,
+            'fechaHora': _fecha,
+            "fotos": "$_selectedImage",
+            'punto': _selectedPunto?.toJson(),
+            'cliente': LoginService.cliente.toJson(),
+          };
+          await IncidenciaService.postIncidencia(incidenciaData);
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Incidencia creada exitosamente'),
+            ),
+          );
+          await IncidenciaService();
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => BottomNavigationBarProvider()),
+          );
+        }
       },
+      child: Text('Crear'),
     );
   }
 
@@ -193,12 +254,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             elevation: 0,
             color: Color.fromRGBO(255, 255, 255, 1),
             onPressed: () {
-              setState(() {
-                _descripcion = "";
-                _tituloIncidencia = "";
-                _selectedDuration = '1 hora';
-                _selectedImage = null;
-              });
+              Navigator.pop(context);
             },
             child: Text(
               'Cancel',

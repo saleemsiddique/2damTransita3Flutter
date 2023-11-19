@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/navigation_bar.dart';
-import 'package:transita3/screens/creacion_inc_pantalla.dart';
+import 'package:transita3/screens/creacion_incidencias.dart';
 import 'package:transita3/screens/detalle_inc_pantalla.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';

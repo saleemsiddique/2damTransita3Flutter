@@ -38,7 +38,7 @@ class IncidenciaService extends ChangeNotifier {
       final List<dynamic> jsonList = json.decode(jsonData);
 
       incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
-      print("Estas son las incidencias: ${incidenciasDeUsuario.toString()}");
+      print("Estas son las incidencias: ${incidenciasDeUsuario}");
       notifyListeners();
     }
   }
@@ -53,6 +53,28 @@ class IncidenciaService extends ChangeNotifier {
       incidencia = Incidencia.fromRawJson(jsonData);
       print("Incidencia recibida: ${incidencia}");
       notifyListeners();
+    }
+  }
+
+  static postIncidencia(Map<String, dynamic> data) async {
+      final jsonData = await TransitaProvider.postJsonData('incidencia', data);
+      print("INCIDENCIA CREADA");
+  }
+
+  static deleteIncidencia(int id) async {
+    try {
+      final response = await TransitaProvider.deleteJsonData('incidencia/eliminar/$id');
+
+      if (response.isNotEmpty) {
+        print('Incidencia eliminada exitosamente');
+        return response;
+      } else {
+        print('Error al eliminar la incidencia');
+        throw Exception('Error al eliminar la incidencia');
+      }
+    } catch (error) {
+      print('Error durante la solicitud: $error');
+      throw Exception('Error durante la solicitud: $error');
     }
   }
 }
