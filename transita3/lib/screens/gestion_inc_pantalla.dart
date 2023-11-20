@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/services/IncidenciaService.dart';
+import 'package:provider/provider.dart';
+
 
 import '../models/models.dart';
 
@@ -13,12 +15,14 @@ final TextStyle _estiloLetra = TextStyle(fontSize: 13);
 class _GestionIncidencias extends State<GestionIncidenciasPage> {
   @override
   Widget build(BuildContext context) {
+    final incidenciasService = Provider.of<IncidenciaService>(context, listen: true);
+    incidenciasService.getIncidencias();
     return Scaffold(
       floatingActionButton: _botonAgregar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),
-        children: <Widget>[_logo(), Container(height: 80), _lista()],
+        children: <Widget>[_logo(), Container(height: 80), _lista(incidenciasService.incidenciasDeUsuario)],
       ),
     );
   }
@@ -96,19 +100,17 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
 
 
 
-Widget _lista() {
-  IncidenciaService();
-  List<Incidencia> incidencias = IncidenciaService.incidenciasDeUsuario;
-  if (incidencias.isEmpty) {
+Widget _lista(List<Incidencia> listaIncidencias) {
+    if (listaIncidencias.isEmpty) {
     return Column(
       children: [
         Text("No hay Incidencias"),
       ],
     );
   } else {
-    print("Estas son las incidencias de la lista: ${incidencias.toString()}");
+    print("Estas son las incidencias de la lista: ${listaIncidencias.toString()}");
     return Column(
-      children: _listaIncidencias(incidencias, context),
+      children: _listaIncidencias(listaIncidencias, context),
     );
   }
 }
@@ -192,11 +194,11 @@ Widget _lista() {
         if (choice == 'editar') {
           // Lógica para la opción 'Editar'
         } else if (choice == 'eliminar') {
-          await IncidenciaService.deleteIncidencia(id);
-          // Recargar la lista de incidencias después de eliminar
-          setState(() {
-            IncidenciaService();
+           IncidenciaService.deleteIncidencia(id).then((value) {
+             setState(() {
           });
+           });
+          // Recargar la lista de incidencias después de eliminar
         }
       },
       icon: Icon(Icons.more_vert),

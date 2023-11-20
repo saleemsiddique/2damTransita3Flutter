@@ -9,7 +9,7 @@ import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
 
 class IncidenciaService extends ChangeNotifier {
-  static List<Incidencia> incidenciasDeUsuario = [];
+  List<Incidencia> incidenciasDeUsuario = [];
   static Incidencia incidencia = Incidencia.empty();
 
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
@@ -61,7 +61,7 @@ class IncidenciaService extends ChangeNotifier {
       print("INCIDENCIA CREADA");
   }
 
-  static deleteIncidencia(int id) async {
+  static Future<dynamic> deleteIncidencia(int id) async {
     try {
       final response = await TransitaProvider.deleteJsonData('incidencia/eliminar/$id');
 
