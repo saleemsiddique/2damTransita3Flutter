@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
+import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 
 class detalle_incidencias extends StatefulWidget {
@@ -16,7 +17,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
   DateTime fecha = DateTime.now();
   String cliente = '';
   String punto = '';
-  FileImage? imagenIncidencia = null;
+  String imagenIncidencia = '';
   DateTime? fechaIncidencia = null;
 
   @override
@@ -31,6 +32,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       fecha = incidencia.fechaHora;
       cliente = incidencia.cliente.toString();
       punto = incidencia.punto.toString();
+      imagenIncidencia = incidencia.fotos;
     });
     print('Incidencia Recibida: $incidencia');
     return Scaffold(
@@ -67,7 +69,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       ),
                       child: FadeInImage(
                         placeholder: AssetImage('assets/loading.gif'),
-                        image: AssetImage('assets/obras.png'),
+                        image: MemoryImage(Utils.dataFromBase64String(imagenIncidencia)),
                         fadeInDuration: Duration(milliseconds: 200),
                         width: 500,
                         height: 500,

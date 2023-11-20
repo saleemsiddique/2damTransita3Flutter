@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/navigation_bar.dart';
@@ -21,7 +23,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String _idCliente = LoginService.cliente.id.toString();
   String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
   late Punto? _selectedPunto = null;
-  late File? _selectedImage = null;
+  late String _selectedImage;
   String _selectedDuration = '1 hora';
 
   @override
@@ -105,7 +107,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   Widget _sacarFoto() {
     return Column(
       children: [
-        _mostrarImagen(),
+        //_mostrarImagen(),
         IconButton(
           icon: Icon(Icons.camera_alt),
           onPressed: () async {
@@ -116,11 +118,11 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     );
   }
 
-  Widget _mostrarImagen() {
+  /*Widget _mostrarImagen() {
     return _selectedImage != null
         ? Image.file(_selectedImage!, height: 100, width: 100)
         : Container();
-  }
+  }*/
 
   Future<void> _tomarFoto() async {
     final ImagePicker _picker = ImagePicker();
@@ -129,9 +131,17 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
     if (pickedFile != null) {
       setState(() {
-        _selectedImage = File(pickedFile.path);
+        _selectedImage = getBase64FormateFile(pickedFile.path);
       });
     }
+  }
+
+   static String getBase64FormateFile(String path) {
+    File file = File(path);
+    print('File is = ' + file.toString());
+    List<int> fileInByte = file.readAsBytesSync();
+    String fileInBase64 = base64Encode(fileInByte);
+    return fileInBase64;
   }
 
   Widget _seleccionarPunto() {

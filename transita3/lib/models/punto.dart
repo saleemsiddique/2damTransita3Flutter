@@ -66,15 +66,8 @@ class Punto {
 
       @override
   String toString() {
-    return 'Punto{'
-        'descripcion: $descripcion, '
-        'tipoPunto: $tipoPunto, '
-        'foto: $foto, '
-        'latitud: $latitud, '
-        'longitud: $longitud, '
-        'accesibilidadPunto: $accesibilidadPunto, '
-        'visibilidadPunto: $visibilidadPunto, '
-        'zona: $zona, '
-        'id: $id}';
-  }
+    return 
+        'latitud: $latitud - '
+        'longitud: $longitud ';
+          }
 }

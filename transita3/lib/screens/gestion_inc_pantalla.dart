@@ -1,6 +1,9 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/provider/Utils.dart';
 
 
 import '../models/models.dart';
@@ -67,7 +70,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
     final widgetTemp = Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _columnaIzquierda(incidencia.descripcion, incidencia.punto.foto,
+        _columnaIzquierda(incidencia.descripcion, incidencia.fotos,
             incidencia.punto.descripcion, incidencia.id),
         _columnaDerecha(incidencia.id),
       ],
@@ -132,7 +135,7 @@ Widget _lista(List<Incidencia> listaIncidencias) {
             height: 80,
             placeholder: AssetImage('assets/loading.gif'),
             imageErrorBuilder: (context, error, stackTrace) => Image(image: AssetImage('assets/loading.gif'), width: 60, height: 80,),
-            image: NetworkImage(imagen),
+            image: MemoryImage(Utils.dataFromBase64String(imagen)),
             fadeInDuration: Duration(milliseconds: 200),
           ),
         ),
