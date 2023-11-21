@@ -144,8 +144,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
             try {
               await loginForm.signInCliente(credenciales);
-              IncidenciaService();
               Navigator.pushNamed(context, 'home');
+              print("Ha llegado aqui");
             } catch (error) {
               showDialog(
                 context: context,

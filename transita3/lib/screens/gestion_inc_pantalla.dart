@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/provider/Utils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transita3/widgets/Show_Image.dart';
 
 
 import '../models/models.dart';
@@ -71,7 +73,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         _columnaIzquierda(incidencia.descripcion, incidencia.fotos,
-            incidencia.punto.descripcion, incidencia.id),
+            incidencia.punto.descripcion, incidencia.id, incidencia),
         _columnaDerecha(incidencia.id),
       ],
     );
@@ -121,23 +123,14 @@ Widget _lista(List<Incidencia> listaIncidencias) {
 
 
 
-  Widget _columnaIzquierda(
-      String nombre, String imagen, String direccion, int id) {
+  Widget _columnaIzquierda(String nombre, String imagen, String direccion, int id, Incidencia incidencia) {
     if (direccion.length >= 19) direccion = direccion.substring(0, 19);
     if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(40),
-          child: FadeInImage(
-            fit: BoxFit.cover,
-            width: 60,
-            height: 80,
-            placeholder: AssetImage('assets/loading.gif'),
-            imageErrorBuilder: (context, error, stackTrace) => Image(image: AssetImage('assets/loading.gif'), width: 60, height: 80,),
-            image: MemoryImage(Utils.dataFromBase64String(imagen)),
-            fadeInDuration: Duration(milliseconds: 200),
-          ),
+          child: showImage(incidencia)
         ),
         Container(
           width: 8,

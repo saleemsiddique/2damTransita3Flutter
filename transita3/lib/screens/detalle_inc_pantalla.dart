@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/widgets/Show_Image.dart';
 
 class detalle_incidencias extends StatefulWidget {
   @override
@@ -67,14 +68,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                         bottomLeft: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
-                      child: FadeInImage(
-                        placeholder: AssetImage('assets/loading.gif'),
-                        image: MemoryImage(Utils.dataFromBase64String(imagenIncidencia)),
-                        fadeInDuration: Duration(milliseconds: 200),
-                        width: 500,
-                        height: 500,
-                        fit: BoxFit.cover,
-                      ),
+                      child: showImage(incidencia)
                     ),
                   ),
                 ],
