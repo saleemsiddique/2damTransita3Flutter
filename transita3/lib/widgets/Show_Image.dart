@@ -5,6 +5,7 @@ import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 
 Widget showImage(Incidencia incidence) {
+  print(incidence.fotos.length);
   print(incidence.fotos);
     final Widget fromFTP = FadeInImage(
       fit: BoxFit.cover,
