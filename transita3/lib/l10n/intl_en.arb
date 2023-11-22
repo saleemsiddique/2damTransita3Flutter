@@ -1,0 +1,33 @@
+{
+    "@@locale": "en",
+    "_comments": {
+        "info": "This file contains translations for the user interface.",
+        "lastUpdated": "2023-11-22",
+        "author": "Isaac Abarca"
+    },
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "showPassword": "Show Password",
+    "loginErrorTitle": "Login Error",
+    "loginErrorMessage": "Incorrect username or password. Please try again.",
+    "createAccountText": "Don't have an account? Tap ",
+    "createAccountLink": "HERE",
+    "createAccountLinkText": " to create one.",
+    "loginButton": "Sign In",
+    "loginWithGoogleButton": "Sign In with Google",
+    "acceptIncorrectLoginData": "Accept",
+    "validatorPassword": "Password must have at least 6 characters",
+    "validatorEmail": "Enter a valid email",
+    "enterEmailPlease": "Enter an email please",
+ 
+    
+    "registerName": "Name",
+    "registerSecondName": "Second Name",
+    "registerEmail": "Email",
+    "registerPassword": "Password",
+    "registerButon": "Sign Up",
+    "registerAlreadyAccount": "¿Already have an account?",
+    "registerLoginAcc" : "sign In"
+}
+  
