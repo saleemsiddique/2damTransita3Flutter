@@ -199,6 +199,15 @@ class S {
       args: [],
     );
   }
+  /// `Por favor ingresa un correo electrónico`
+  String get registerButton {
+    return Intl.message(
+      'Registrarse',
+      name: 'registerButton',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

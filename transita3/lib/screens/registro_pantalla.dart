@@ -37,7 +37,7 @@ class _Registro extends State<RegistroPage> {
             _logo(),
             SizedBox(height: 20),
             Text(
-               'Regístrate',
+               S.of(context).registerButton,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
