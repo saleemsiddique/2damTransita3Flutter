@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
+
+
 
 class RegistroPage extends StatefulWidget {
   @override
@@ -34,7 +37,7 @@ class _Registro extends State<RegistroPage> {
             _logo(),
             SizedBox(height: 20),
             Text(
-              'Regístrate',
+               'Regístrate',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),

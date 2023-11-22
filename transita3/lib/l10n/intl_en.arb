@@ -1,10 +1,5 @@
 {
     "@@locale": "en",
-    "_comments": {
-        "info": "This file contains translations for the user interface.",
-        "lastUpdated": "2023-11-22",
-        "author": "Isaac Abarca"
-    },
     "email": "Email",
     "password": "Password",
     "signIn": "Sign In",
@@ -20,13 +15,11 @@
     "validatorPassword": "Password must have at least 6 characters",
     "validatorEmail": "Enter a valid email",
     "enterEmailPlease": "Enter an email please",
- 
-    
     "registerName": "Name",
     "registerSecondName": "Second Name",
     "registerEmail": "Email",
     "registerPassword": "Password",
-    "registerButon": "Sign Up",
+    "registerButton": "Sign Up",
     "registerAlreadyAccount": "¿Already have an account?",
     "registerLoginAcc" : "sign In"
 }

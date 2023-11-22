@@ -1,12 +1,5 @@
 {
-    
-
     "@@locale": "es",
-    "_comments": {
-        "info": "Este archivo contiene las traducciones para la interfaz de usuario.",
-        "ultimaActualizacion": "2023-11-22",
-        "autor": "Isaac Abarca"
-    },
     "email": "Correo Electrónico",
     "password": "Contraseña",
     "signIn": "Iniciar Sesión",
@@ -22,15 +15,12 @@
     "validatorPassword": "La contraseña debe contener al menos 6 caracteres",
     "validatorEmail": "Introduce un email válido",
     "enterEmailPlease": "Por favor ingresa un correo electrónico",
-
-
     "registerName": "Nombre",
     "registerSecondName": "Segundo Nombre",
     "registerEmail": "Correo Electrónico",
     "registerPassword": "Contraseña",
-    "registerButon": "Registrarse",
+    "registerButton": "Registrarse",
     "registerAlreadyAccount": "¿Ya tienes una cuenta?",
-    "registerLoginAcc": "Iniciar Sesión"
-    
+    "registerLoginAcc": "Iniciar Sesión"   
 }
   
