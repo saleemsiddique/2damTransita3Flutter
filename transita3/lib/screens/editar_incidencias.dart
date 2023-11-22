@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
-class CreacionIncidenciasPage extends StatefulWidget {
+class CreacionIncidenciaPage extends StatefulWidget {
   @override
   _creacionIncidencia createState() => _creacionIncidencia();
 }
 
-class _creacionIncidencia extends State<CreacionIncidenciasPage> {
+class _creacionIncidencia extends State<CreacionIncidenciaPage> {
   String _tituloIncidencia = '', _descripcion = '';
   double _duracion = 0;
   File? _selectedImage;

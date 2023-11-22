@@ -18,10 +18,11 @@ class TransitaProvider extends ChangeNotifier {
     final url = Uri.http(_baseUrl, endpoint);
     Map<String, String> headers = {
       'Content-Type': 'application/json',
+      'Authorization': apiKey,
     };
 
     String jsonData = json.encode(data);
-
+    print(jsonData);
     final response = await http.post(url, headers: headers, body: jsonData);
 
     if (response.statusCode == 200) {
@@ -54,7 +55,6 @@ class TransitaProvider extends ChangeNotifier {
 
     String jsonData = json.encode(data);
     print("this is JsonData: $jsonData");
-    print('URL: $url');
     print('Headers: $headers');
 
     try {

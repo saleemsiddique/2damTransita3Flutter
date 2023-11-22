@@ -9,8 +9,8 @@ import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
 
 class IncidenciaService extends ChangeNotifier {
-  static List<Incidencia> incidenciasDeUsuario = [];
-
+  List<Incidencia> incidenciasDeUsuario = [];
+  static Incidencia incidencia = Incidencia.empty();
 
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
 
@@ -28,17 +28,53 @@ class IncidenciaService extends ChangeNotifier {
   }
 
   getIncidencias() async {
-  final cliente = LoginService.cliente;
-  TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
-  print('id de clienteIncidencia: ${cliente.id}');
-  if (cliente != null) {
-    final jsonData = await TransitaProvider.getJsonData('incidencias/clienteid/${cliente.id}');
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clienteIncidencia: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData(
+          'incidencias/clienteid/${cliente.id}');
 
-    final List<dynamic> jsonList = json.decode(jsonData);
+      final List<dynamic> jsonList = json.decode(jsonData);
 
-    incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
-    print("Estas son las incidencias: ${incidenciasDeUsuario.toString()}");
-    notifyListeners();
+      incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
+      print("Estas son las incidencias: ${incidenciasDeUsuario}");
+      notifyListeners();
+    }
   }
-}
+
+  getIncidencia(int id) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clienteIncidencia: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData =
+          await TransitaProvider.getJsonData('incidencia/id/${id}');
+      incidencia = Incidencia.fromRawJson(jsonData);
+      print("Incidencia recibida: ${incidencia}");
+      notifyListeners();
+    }
+  }
+
+  static postIncidencia(Map<String, dynamic> data) async {
+      final jsonData = await TransitaProvider.postJsonData('incidencia', data);
+      print("INCIDENCIA CREADA");
+  }
+
+  static Future<dynamic> deleteIncidencia(int id) async {
+    try {
+      final response = await TransitaProvider.deleteJsonData('incidencia/eliminar/$id');
+
+      if (response.isNotEmpty) {
+        print('Incidencia eliminada exitosamente');
+        return response;
+      } else {
+        print('Error al eliminar la incidencia');
+        throw Exception('Error al eliminar la incidencia');
+      }
+    } catch (error) {
+      print('Error durante la solicitud: $error');
+      throw Exception('Error durante la solicitud: $error');
+    }
+  }
 }

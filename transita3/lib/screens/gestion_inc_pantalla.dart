@@ -1,5 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:transita3/services/IncidenciaService.dart';
+import 'package:provider/provider.dart';
+import 'package:transita3/provider/Utils.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transita3/widgets/Show_Image.dart';
+
 
 import '../models/models.dart';
 
@@ -13,12 +20,14 @@ final TextStyle _estiloLetra = TextStyle(fontSize: 13);
 class _GestionIncidencias extends State<GestionIncidenciasPage> {
   @override
   Widget build(BuildContext context) {
+    final incidenciasService = Provider.of<IncidenciaService>(context, listen: true);
+    incidenciasService.getIncidencias();
     return Scaffold(
       floatingActionButton: _botonAgregar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),
-        children: <Widget>[_logo(), Container(height: 80), _lista()],
+        children: <Widget>[_logo(), Container(height: 80), _lista(incidenciasService.incidenciasDeUsuario)],
       ),
     );
   }
@@ -63,16 +72,15 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
     final widgetTemp = Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _columnaIzquierda(incidencia.descripcion, incidencia.punto.foto,
-            incidencia.punto.descripcion, incidencia.id),
-        _columnaDerecha(),
+        _columnaIzquierda(incidencia.descripcion, incidencia.descripcion, incidencia.id, incidencia),
+        _columnaDerecha(incidencia.id),
       ],
     );
     incidencias.add(
       GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, 'detalleincidencia');
-        },
+          Navigator.pushNamed(context, 'detalleincidencia', arguments: incidencia); 
+       },
         child: Container(
           margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
           height: 100,
@@ -96,19 +104,16 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
 
 
 
-Widget _lista() {
-  List<Incidencia> incidencias = IncidenciaService.incidenciasDeUsuario;
-  
-  if (incidencias.isEmpty) {
+Widget _lista(List<Incidencia> listaIncidencias) {
+    if (listaIncidencias.isEmpty) {
     return Column(
       children: [
         Text("No hay Incidencias"),
       ],
     );
   } else {
-    print("Estas son las incidencias: ${incidencias.toString()}");
     return Column(
-      children: _listaIncidencias(incidencias, context),
+      children: _listaIncidencias(listaIncidencias, context),
     );
   }
 }
@@ -116,23 +121,14 @@ Widget _lista() {
 
 
 
-  Widget _columnaIzquierda(
-      String nombre, String imagen, String direccion, int id) {
+  Widget _columnaIzquierda(String nombre, String direccion, int id, Incidencia incidencia) {
     if (direccion.length >= 19) direccion = direccion.substring(0, 19);
     if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(40),
-          child: FadeInImage(
-            fit: BoxFit.cover,
-            width: 60,
-            height: 80,
-            placeholder: AssetImage('assets/loading.gif'),
-            imageErrorBuilder: (context, error, stackTrace) => Image(image: AssetImage('assets/loading.gif'), width: 60, height: 80,),
-            image: NetworkImage(imagen),
-            fadeInDuration: Duration(milliseconds: 200),
-          ),
+          child: showImage(incidencia)
         ),
         Container(
           width: 8,
@@ -155,14 +151,14 @@ Widget _lista() {
     );
   }
 
-  Widget _columnaDerecha() {
+  Widget _columnaDerecha(int id) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(width: 25),
-            _botonInspeccionar(),
+            _botonInspeccionar(id),
           ],
         ),
         Column(
@@ -176,7 +172,7 @@ Widget _lista() {
     );
   }
 
-  Widget _botonInspeccionar() {
+ Widget _botonInspeccionar(int id) {
     return PopupMenuButton<String>(
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
@@ -188,9 +184,16 @@ Widget _lista() {
           child: Text('Eliminar'),
         ),
       ],
-      onSelected: (String choice) {
+      onSelected: (String choice) async {
         if (choice == 'editar') {
-        } else if (choice == 'eliminar') {}
+          // Lógica para la opción 'Editar'
+        } else if (choice == 'eliminar') {
+           IncidenciaService.deleteIncidencia(id).then((value) {
+             setState(() {
+          });
+           });
+          // Recargar la lista de incidencias después de eliminar
+        }
       },
       icon: Icon(Icons.more_vert),
     );
