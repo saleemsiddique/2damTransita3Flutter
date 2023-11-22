@@ -72,8 +72,7 @@ List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
     final widgetTemp = Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        _columnaIzquierda(incidencia.descripcion, incidencia.fotos,
-            incidencia.punto.descripcion, incidencia.id, incidencia),
+        _columnaIzquierda(incidencia.descripcion, incidencia.descripcion, incidencia.id, incidencia),
         _columnaDerecha(incidencia.id),
       ],
     );
@@ -113,7 +112,6 @@ Widget _lista(List<Incidencia> listaIncidencias) {
       ],
     );
   } else {
-    print("Estas son las incidencias de la lista: ${listaIncidencias.toString()}");
     return Column(
       children: _listaIncidencias(listaIncidencias, context),
     );
@@ -123,7 +121,7 @@ Widget _lista(List<Incidencia> listaIncidencias) {
 
 
 
-  Widget _columnaIzquierda(String nombre, String imagen, String direccion, int id, Incidencia incidencia) {
+  Widget _columnaIzquierda(String nombre, String direccion, int id, Incidencia incidencia) {
     if (direccion.length >= 19) direccion = direccion.substring(0, 19);
     if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(

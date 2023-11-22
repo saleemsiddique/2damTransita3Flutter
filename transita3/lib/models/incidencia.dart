@@ -8,7 +8,7 @@ class Incidencia {
     String estado;
     String duracion;
     DateTime fechaHora;
-    String fotos;
+    String? fotos;
     Punto punto;
     Cliente cliente;
 
@@ -18,7 +18,7 @@ class Incidencia {
         required this.estado,
         required this.duracion,
         required this.fechaHora,
-        required this.fotos,
+        this.fotos,
         required this.punto,
         required this.cliente,
     });
