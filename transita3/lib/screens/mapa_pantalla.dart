@@ -1,148 +1,72 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_osm_plugin/flutter_osm_plugin.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:location/location.dart';
 
 class Mapa_pantalla extends StatefulWidget {
-  _mapaPantalla createState() => _mapaPantalla();
+  _MapaPantalla createState() => _MapaPantalla();
 }
 
-final MapController _mapController = MapController(
-  initMapWithUserPosition:
-      UserTrackingOption(enableTracking: true, unFollowUser: true),
-);
+class _MapaPantalla extends State<Mapa_pantalla> {
+  Location location = Location();
+  LatLng _currentLocation = LatLng(0.0, 0.0);
 
-final OSMOption _osmOption = OSMOption(
-  showZoomController: true,
-  userTrackingOption: UserTrackingOption(
-    enableTracking: true,
-    unFollowUser: false,
-  ),
-  zoomOption: ZoomOption(
-    initZoom: 17,
-    minZoomLevel: 3,
-    maxZoomLevel: 19,
-    stepZoom: 1.0,
-  ),
-  userLocationMarker: UserLocationMaker(
-    personMarker: MarkerIcon(
-      icon: Icon(
-        Icons.location_history,
-        color: Colors.red,
-        size: 150,
-      ),
-    ),
-    directionArrowMarker: MarkerIcon(
-      icon: Icon(
-        Icons.location_history,
-        color: Colors.red,
-        size: 150,
-      ),
-    ),
-  ),
-  roadConfiguration: RoadOption(
-    roadColor: Colors.yellowAccent,
-  ),
-  markerOption: MarkerOption(
-    defaultMarker: MarkerIcon(
-      icon: Icon(
-        Icons.person_pin_circle,
-        color: Colors.blue,
-        size: 48,
-      ),
-    ),
-  ),
-);
-
-class _mapaPantalla extends State<Mapa_pantalla> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: OSMFlutter(
-        controller: _mapController,
-        osmOption: _osmOption,
-        mapIsLoading: const Center(
-          child: Image(
-            image: AssetImage('assets/loading.gif'),
-          ),
-        ),
-        onMapIsReady: (isReady) async {
-          if (isReady) {
-            await Future.delayed(const Duration(seconds: 1), () async {
-              await _mapController.currentLocation();
-            });
-          }
-        },
-        onGeoPointClicked: (geoPoint) {
-          var key = '${geoPoint.latitude}_${geoPoint.longitude}';
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Position ${markerMap[key]}',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              const Divider(),
-                              Text(
-                                key,
-                              ),
-                            ],
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.clear),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              });
-        },
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _mapController.dispose();
-    super.dispose();
-  }
-
-  var markerMap = <String, String>{};
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _mapController.listenerMapSingleTapping.addListener(() async {
-        var position = _mapController.listenerMapSingleTapping.value;
-        if (position != null) {
-          await _mapController.addMarker(position,
-              markerIcon: const MarkerIcon(
-                icon: Icon(
-                  Icons.pin_drop,
-                  color: Colors.blue,
-                  size: 48,
-                ),
-              ));
-          var key = '${position.latitude}_${position.longitude}';
-          markerMap[key] = markerMap.length.toString();
-        }
+    _getCurrentLocation();
+  }
+
+  void _getCurrentLocation() async {
+    try {
+      var userLocation = await location.getLocation();
+      setState(() {
+        _currentLocation =
+            LatLng(userLocation.latitude!, userLocation.longitude!);
       });
-    });
+    } catch (e) {
+      print("Error getting location: $e");
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FlutterMap(
+      options: MapOptions(
+        initialCenter: LatLng(38.5064, -0.2297),
+        initialZoom: 15,
+        maxZoom: 18,
+        minZoom: 10
+      ),
+      children: [
+        TileLayer(
+          urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+          userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+        ),
+        MarkerLayer(
+          markers: [
+            Marker(
+              width: 40.0,
+              height: 40.0,
+              point: _currentLocation,
+              child: Icon(
+                Icons.location_pin,
+                color: Colors.red,
+              ),
+            ),
+          ],
+        ),
+        RichAttributionWidget(
+          attributions: [
+            TextSourceAttribution(
+              'OpenStreetMap contributors',
+              onTap: () =>
+                  launchUrl(Uri.parse('https://openstreetmap.org/copyright')),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

@@ -39,6 +39,8 @@ dependencies:
   flutter_osm_plugin: ^0.60.5
   camera: ^0.10.5+5
   cached_network_image: ^3.3.0
+  flutter_map: ^6.0.1
+  location: ^5.0.3
 
 dev_dependencies:
   flutter_test:
