@@ -25,12 +25,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LoginService(),
         ),
-
         ChangeNotifierProvider.value(
-          value: ClienteService(), 
+          value: ClienteService(),
         ),
         ChangeNotifierProvider.value(
-          value: IncidenciaService(), 
+          value: IncidenciaService(),
         ),
       ],
       child: MaterialApp(

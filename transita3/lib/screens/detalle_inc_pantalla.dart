@@ -10,7 +10,6 @@ class detalle_incidencias extends StatefulWidget {
 }
 
 class _detalleIincidencias extends State<detalle_incidencias> {
-  IncidenciaService incidenciaService = new IncidenciaService();
   int id = 0;
   String descripcion = '';
   String duracion = '';
