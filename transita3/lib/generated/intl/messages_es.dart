@@ -40,6 +40,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginWithGoogleButton":
             MessageLookupByLibrary.simpleMessage("Iniciar Sesión con Google"),
         "password": MessageLookupByLibrary.simpleMessage("Contraseña"),
+        "registerAlreadyAccount": MessageLookupByLibrary.simpleMessage(
+            "¿Ya tienes una cuenta? Iniciar Sesión"),
+        "registerButton": MessageLookupByLibrary.simpleMessage("Registrarse"),
+        "registerEmail":
+            MessageLookupByLibrary.simpleMessage("Correo Electrónico"),
+        "registerName": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "registerPassword": MessageLookupByLibrary.simpleMessage("Contraseña"),
+        "registerSecondName":
+            MessageLookupByLibrary.simpleMessage("Segundo Nombre"),
         "showPassword":
             MessageLookupByLibrary.simpleMessage("Mostrar Contraseña"),
         "signIn": MessageLookupByLibrary.simpleMessage("Iniciar Sesión"),

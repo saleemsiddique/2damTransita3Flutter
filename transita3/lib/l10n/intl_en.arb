@@ -20,7 +20,7 @@
     "registerEmail": "Email",
     "registerPassword": "Password",
     "registerButton": "Sign Up",
-    "registerAlreadyAccount": "¿Already have an account?",
-    "registerLoginAcc" : "sign In"
+    "registerAlreadyAccount": "¿Already have an account? sign In"
+   
 }
   

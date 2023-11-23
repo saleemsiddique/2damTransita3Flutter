@@ -27,22 +27,21 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => LoginService(),
         ),
-
         ChangeNotifierProvider.value(
-          value: ClienteService(), 
+          value: ClienteService(),
         ),
         ChangeNotifierProvider.value(
-          value: IncidenciaService(), 
+          value: IncidenciaService(),
         ),
       ],
       child: MaterialApp(
         localizationsDelegates: [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         title: 'Transita App',
         darkTheme: ThemeData(
           colorScheme: defaultDarkColorScheme,

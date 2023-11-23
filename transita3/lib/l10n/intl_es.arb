@@ -20,7 +20,9 @@
     "registerEmail": "Correo Electrónico",
     "registerPassword": "Contraseña",
     "registerButton": "Registrarse",
-    "registerAlreadyAccount": "¿Ya tienes una cuenta?",
-    "registerLoginAcc": "Iniciar Sesión"
+    "registerAlreadyAccount": "¿Ya tienes una cuenta? Iniciar Sesión"
+   
+
+    
 }
   

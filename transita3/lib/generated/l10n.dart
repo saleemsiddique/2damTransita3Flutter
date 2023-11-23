@@ -50,160 +50,211 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Correo Electrónico`
+  /// `Email`
   String get email {
     return Intl.message(
-      'Correo Electrónico',
+      'Email',
       name: 'email',
       desc: '',
       args: [],
     );
   }
 
-  /// `Contraseña`
+  /// `Password`
   String get password {
     return Intl.message(
-      'Contraseña',
+      'Password',
       name: 'password',
       desc: '',
       args: [],
     );
   }
 
-  /// `Iniciar Sesión`
+  /// `Sign In`
   String get signIn {
     return Intl.message(
-      'Iniciar Sesión',
+      'Sign In',
       name: 'signIn',
       desc: '',
       args: [],
     );
   }
 
-  /// `Mostrar Contraseña`
+  /// `Show Password`
   String get showPassword {
     return Intl.message(
-      'Mostrar Contraseña',
+      'Show Password',
       name: 'showPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Error de Inicio de Sesión`
+  /// `Login Error`
   String get loginErrorTitle {
     return Intl.message(
-      'Error de Inicio de Sesión',
+      'Login Error',
       name: 'loginErrorTitle',
       desc: '',
       args: [],
     );
   }
 
-  /// `Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.`
+  /// `Incorrect username or password. Please try again.`
   String get loginErrorMessage {
     return Intl.message(
-      'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.',
+      'Incorrect username or password. Please try again.',
       name: 'loginErrorMessage',
       desc: '',
       args: [],
     );
   }
 
-  /// `¿No tienes cuenta? Pulsa`
+  /// `Don't have an account? Tap `
   String get createAccountText {
     return Intl.message(
-      '¿No tienes cuenta? Pulsa',
+      'Don\'t have an account? Tap ',
       name: 'createAccountText',
       desc: '',
       args: [],
     );
   }
 
-  /// `AQUÍ`
+  /// `HERE`
   String get createAccountLink {
     return Intl.message(
-      'AQUÍ',
+      'HERE',
       name: 'createAccountLink',
       desc: '',
       args: [],
     );
   }
 
-  /// ` para crearla.`
+  /// ` to create one.`
   String get createAccountLinkText {
     return Intl.message(
-      ' para crearla.',
+      ' to create one.',
       name: 'createAccountLinkText',
       desc: '',
       args: [],
     );
   }
 
-  /// `Iniciar Sesión`
+  /// `Sign In`
   String get loginButton {
     return Intl.message(
-      'Iniciar Sesión',
+      'Sign In',
       name: 'loginButton',
       desc: '',
       args: [],
     );
   }
 
-  /// `Iniciar Sesión con Google`
+  /// `Sign In with Google`
   String get loginWithGoogleButton {
     return Intl.message(
-      'Iniciar Sesión con Google',
+      'Sign In with Google',
       name: 'loginWithGoogleButton',
       desc: '',
       args: [],
     );
   }
 
-  /// `Aceptar`
+  /// `Accept`
   String get acceptIncorrectLoginData {
     return Intl.message(
-      'Aceptar',
+      'Accept',
       name: 'acceptIncorrectLoginData',
       desc: '',
       args: [],
     );
   }
 
-  /// `La contraseña debe contener al menos 6 caracteres`
+  /// `Password must have at least 6 characters`
   String get validatorPassword {
     return Intl.message(
-      'La contraseña debe contener al menos 6 caracteres',
+      'Password must have at least 6 characters',
       name: 'validatorPassword',
       desc: '',
       args: [],
     );
   }
 
-  /// `Introduce un email válido`
+  /// `Enter a valid email`
   String get validatorEmail {
     return Intl.message(
-      'Introduce un email válido',
+      'Enter a valid email',
       name: 'validatorEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Por favor ingresa un correo electrónico`
+  /// `Enter an email please`
   String get enterEmailPlease {
     return Intl.message(
-      'Por favor ingresa un correo electrónico',
+      'Enter an email please',
       name: 'enterEmailPlease',
       desc: '',
       args: [],
     );
   }
-  /// `Por favor ingresa un correo electrónico`
+
+  /// `Name`
+  String get registerName {
+    return Intl.message(
+      'Name',
+      name: 'registerName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Second Name`
+  String get registerSecondName {
+    return Intl.message(
+      'Second Name',
+      name: 'registerSecondName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email`
+  String get registerEmail {
+    return Intl.message(
+      'Email',
+      name: 'registerEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get registerPassword {
+    return Intl.message(
+      'Password',
+      name: 'registerPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
   String get registerButton {
     return Intl.message(
-      'Registrarse',
+      'Sign Up',
       name: 'registerButton',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get registerAlreadyAccount {
+    return Intl.message(
+      '¿Already have an account? sign In',
+      name: 'registerAlreadyAccount',
       desc: '',
       args: [],
     );
@@ -215,8 +266,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'es'),
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'es'),
     ];
   }
 

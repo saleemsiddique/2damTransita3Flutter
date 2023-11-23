@@ -87,16 +87,41 @@ class _InicioSesion extends State<IniciarSesionPage> {
       ),
     );
   }
-void _cambiarIdioma(BuildContext context) {
-  final currentLocale = Localizations.localeOf(context);
-  final newLocale = currentLocale.languageCode == 'es' ? Locale('en', 'US') : Locale('es', 'ES');
 
-  // Cambiar el idioma
-  S.load(newLocale);
-  
-  // Forzar una reconstrucción de la pantalla
-  setState(() {});
-}
+  void _cambiarIdioma(BuildContext context) {
+    print("Cambiando idioma...");
+
+    final currentLocale = Localizations.localeOf(context);
+
+    print("Idioma actual: ${currentLocale.languageCode}");
+
+    Locale idiom = currentLocale;
+    Locale newLocaleIdiom;
+    if (currentLocale.languageCode == 'es') {
+      newLocaleIdiom = Locale('en', 'US');
+      print('hola bien');
+      Localizations.override(
+        context: context,
+        locale: newLocaleIdiom,
+      );
+    } else {
+      newLocaleIdiom = Locale('es', 'ES');
+      Localizations.override(
+        context: context,
+        locale: newLocaleIdiom,
+      );
+      print('hola mal');
+    }
+
+    print("Nuevo idioma: $newLocaleIdiom");
+
+    S.load(newLocaleIdiom);
+    Localizations.override(context: context, locale: newLocaleIdiom);
+    print("Idioma cambiado: ${S.current}");
+
+    // Forzar una reconstrucción de la pantalla
+    setState(() {});
+  }
 
   TextFormField _escribirEmail() {
     return TextFormField(
@@ -177,7 +202,7 @@ void _cambiarIdioma(BuildContext context) {
                 builder: (context) {
                   return AlertDialog(
                     title: Text(S.of(context).loginErrorTitle),
-                  content: Text(S.of(context).loginErrorMessage),
+                    content: Text(S.of(context).loginErrorMessage),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -192,7 +217,8 @@ void _cambiarIdioma(BuildContext context) {
             }
           }
         },
-        child: Text(S.of(context).loginButton, style: TextStyle(color: Colors.white)),
+        child: Text(S.of(context).loginButton,
+            style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -224,8 +250,9 @@ void _cambiarIdioma(BuildContext context) {
             SizedBox(
               width: 48.79,
             ),
-            Text(S.of(context).loginWithGoogleButton, style: TextStyle(color: const Color.fromARGB(255, 124, 122, 122))),
-          
+            Text(S.of(context).loginWithGoogleButton,
+                style:
+                    TextStyle(color: const Color.fromARGB(255, 124, 122, 122))),
           ],
         ),
       ),
