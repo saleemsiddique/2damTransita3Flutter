@@ -11,7 +11,7 @@ Widget showImage(Incidencia incidence) {
       height: 80,
       placeholder: AssetImage('assets/loading.gif'),
       image:
-          CachedNetworkImageProvider('http://10.0.2.2/img/puntos/18compresoncompresion.jpg'));
+          CachedNetworkImageProvider('http://10.0.2.2/img/puntos/${incidence.punto.foto}'));
 
   if (incidence.fotos != null && incidence.estado == 'ENVIADO') {
     return FadeInImage(

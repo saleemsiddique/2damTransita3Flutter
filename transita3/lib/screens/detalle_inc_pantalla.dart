@@ -33,7 +33,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       fecha = incidencia.fechaHora;
       cliente = incidencia.cliente.toString();
       punto = incidencia.punto.toString();
-      imagenIncidencia = incidencia.fotos!;
+      imagenIncidencia = incidencia.punto.foto!;
     });
     print('Incidencia Recibida: $incidencia');
     return Scaffold(
