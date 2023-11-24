@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/screens/perfil_pantalla.dart';
+import 'package:transita3/screens/ajustes_pantalla.dart';
 
 class BottomNavigationBarProvider extends StatefulWidget {
   const BottomNavigationBarProvider({super.key});
@@ -62,7 +63,9 @@ class _BottomNavigationBarProviderState
             ListTile(
               leading: Icon(Icons.settings),
               title: Text('Ajustes'),
-              onTap: () {},
+              onTap: () { Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => AjustesPantalla()),
+    );},
             ),
           ],
         ),
