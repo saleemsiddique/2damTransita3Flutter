@@ -33,11 +33,10 @@ class ClienteService extends ChangeNotifier {
     notifyListeners();
   }
 
-
-
-  bool isValidForm(){
-    print('$email - $password');
-    print(formKey.currentState?.validate());
-    return formKey.currentState?.validate() ?? false;
-  }
+modifyContrasenya(Map<String, dynamic> data, int id) async {
+  final jsonData = await TransitaProvider.putJsonData('api/auth/cliente/modificarContrasenya/$id', data);
+  
+  print("Contraseña modificada: ${data['newPassword']}");
+  notifyListeners();
+}
 }
