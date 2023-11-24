@@ -21,15 +21,6 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
   void initState() {
     super.initState();
     final clienteService = Provider.of<LoginService>(context, listen: false);
-<<<<<<< Updated upstream
-    print("${LoginService.cliente.id}");
-  print('Nombre: ${LoginService.cliente.nombre}');
-  print('Apellido: ${LoginService.cliente.apellidos}');
-  print("Roles: ${LoginService.cliente.roles}");
-  //print('Correo: ${LoginService.cliente.nombre}');
-    // Configura los controladores con los datos del cliente
-=======
->>>>>>> Stashed changes
     _nombreController.text = LoginService.cliente.nombre;
     _correoController.text = LoginService.cliente.nombreUsuario;
     _apellidoController.text = LoginService.cliente.apellidos;
@@ -73,52 +64,6 @@ Widget build(BuildContext context) {
                           height: 140.0,
                           fit: BoxFit.cover,
                         ),
-<<<<<<< Updated upstream
-                        SizedBox(height: 10.0),
-                        TextFormField(
-                          controller: _apellidoController,
-                          decoration: InputDecoration(labelText: 'Apellido'),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor, ingresa tu apellido';
-                            }
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 10.0),
-                        TextFormField(
-                          controller: _correoController,
-                          decoration: InputDecoration(labelText: 'Correo'),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor, ingresa tu correo';
-                            }
-                            // Puedes agregar validaciones de formato de correo electrónico aquí
-                            return null;
-                          },
-                        ),
-                        SizedBox(height: 20.0),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              // Construir un objeto Cliente con los datos del formulario
-                              Map<String, dynamic> updatedFields = {
-                                'nombre': _nombreController.text,
-                                'apellidos': _apellidoController.text,
-                                'nombreUsuario': _correoController.text,
-                                'rol': ["${LoginService.cliente.roles}"]
-                              };
-
-                              // Llamar a la función modifyCliente del servicio
-                             await clienteService.modifyCliente(updatedFields, LoginService.cliente.id);
-                              LoginService.cliente.nombre = _nombreController.text;
-                              LoginService.cliente.apellidos = _apellidoController.text;
-                              LoginService.cliente.nombreUsuario = _correoController.text;
-                              // Mostrar el SnackBar
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Cambios guardados con éxito'),
-=======
                         SizedBox(height: 60.0),
                         Form(
                           key: _formKey,
@@ -130,7 +75,6 @@ Widget build(BuildContext context) {
                                   labelText: 'Nombre',
                                   border: OutlineInputBorder(),
                                   icon: Icon(Icons.person),
->>>>>>> Stashed changes
                                 ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
