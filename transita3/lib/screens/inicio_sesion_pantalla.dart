@@ -17,7 +17,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
   String _contrasenya = '';
   bool _mostrarContrasenya = false;
   LoginService loginForm = new LoginService();
-
+  late String _selectedLanguage = 'ES';
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -27,15 +27,24 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Iniciar Sesión'),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              onPressed: () {
-                _cambiarIdioma(context);
-              },
-              child: Text('Cambiar Idioma'),
+            child: Row(
+              children: [
+                DropdownButton<String>(
+                  value: _selectedLanguage,
+                  onChanged: (String? newValue) {
+                    _cambiarIdioma(context, newValue!);
+                  },
+                  items: ['EN', 'ES', 'VAL'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ],
             ),
           ),
         ],
@@ -88,39 +97,21 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }
 
-  void _cambiarIdioma(BuildContext context) {
-    print("Cambiando idioma...");
-
-    final currentLocale = Localizations.localeOf(context);
-
-    print("Idioma actual: ${currentLocale.languageCode}");
-
-    Locale idiom = currentLocale;
-    Locale newLocaleIdiom;
-    if (currentLocale.languageCode == 'es') {
-      newLocaleIdiom = Locale('en', 'US');
-      print('hola bien');
-      Localizations.override(
-        context: context,
-        locale: newLocaleIdiom,
-      );
+  void _cambiarIdioma(BuildContext context, String idioma) {
+    Locale idiomaLoad;
+    if (idioma == 'ES') {
+      idiomaLoad = Locale('es', 'ES');
+    } else if (idioma == 'EN') {
+      idiomaLoad = Locale('en', 'US');
     } else {
-      newLocaleIdiom = Locale('es', 'ES');
-      Localizations.override(
-        context: context,
-        locale: newLocaleIdiom,
-      );
-      print('hola mal');
+      idiomaLoad = Locale('val', 'VAl');
     }
 
-    print("Nuevo idioma: $newLocaleIdiom");
+    S.load(idiomaLoad);
 
-    S.load(newLocaleIdiom);
-    Localizations.override(context: context, locale: newLocaleIdiom);
-    print("Idioma cambiado: ${S.current}");
-
-    // Forzar una reconstrucción de la pantalla
-    setState(() {});
+    setState(() {
+      _selectedLanguage = idioma;
+    });
   }
 
   TextFormField _escribirEmail() {
