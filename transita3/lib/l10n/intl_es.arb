@@ -1,0 +1,28 @@
+{
+    "@@locale": "es",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "signIn": "Iniciar Sesión",
+    "showPassword": "Mostrar Contraseña",
+    "loginErrorTitle": "Error de Inicio de Sesión",
+    "loginErrorMessage": "Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.",
+    "createAccountText": "¿No tienes cuenta? Pulsa",
+    "createAccountLink": "AQUÍ",
+    "createAccountLinkText": " para crearla.",
+    "loginButton": "Iniciar Sesión",
+    "loginWithGoogleButton": "Iniciar Sesión con Google",
+    "acceptIncorrectLoginData": "Aceptar",
+    "validatorPassword": "La contraseña debe contener al menos 6 caracteres",
+    "validatorEmail": "Introduce un email válido",
+    "enterEmailPlease": "Por favor ingresa un correo electrónico",
+    "registerName": "Nombre",
+    "registerSecondName": "Segundo Nombre",
+    "registerEmail": "Correo Electrónico",
+    "registerPassword": "Contraseña",
+    "registerButton": "Registrarse",
+    "registerAlreadyAccount": "¿Ya tienes una cuenta? Iniciar Sesión"
+   
+
+    
+}
+  

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
@@ -34,7 +35,7 @@ class _Registro extends State<RegistroPage> {
             _logo(),
             SizedBox(height: 20),
             Text(
-              'Regístrate',
+              S.of(context).registerButton,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
@@ -88,8 +89,8 @@ class _Registro extends State<RegistroPage> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Nombre',
-        labelText: 'Nombre',
+        hintText: S.of(context).registerName,
+        labelText: S.of(context).registerName,
         suffixIcon: Icon(Icons.person),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
@@ -110,8 +111,8 @@ class _Registro extends State<RegistroPage> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Apellidos',
-        labelText: 'Apellidos',
+        hintText: S.of(context).registerSecondName,
+        labelText: S.of(context).registerSecondName,
         suffixIcon: Icon(Icons.person),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
@@ -132,8 +133,8 @@ class _Registro extends State<RegistroPage> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Email',
-        labelText: 'Email',
+        hintText: S.of(context).registerEmail,
+        labelText: S.of(context).registerEmail,
         suffixIcon: Icon(Icons.alternate_email),
         //icon: Icon(Icons.email),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
@@ -158,8 +159,8 @@ class _Registro extends State<RegistroPage> {
   Widget _escribirContrasenya() {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: 'Contraseña',
-        labelText: 'Contraseña',
+        hintText: S.of(context).registerPassword,
+        labelText: S.of(context).registerPassword,
         suffixIcon: GestureDetector(
           onTap: () {
             setState(() {
@@ -228,7 +229,7 @@ class _Registro extends State<RegistroPage> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Aceptar'),
+                        child: Text(S.of(context).acceptIncorrectLoginData),
                       ),
                     ],
                   );
@@ -238,7 +239,8 @@ class _Registro extends State<RegistroPage> {
           }
           print("Acabó");
         },
-        child: Text('Registrarse', style: TextStyle(color: Colors.white)),
+        child: Text(S.of(context).registerButton,
+            style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -247,10 +249,10 @@ class _Registro extends State<RegistroPage> {
     return Center(
       child: RichText(
           text: TextSpan(
-              text: '¿Ya tienes cuenta? Inicia sesión ',
+              text: S.of(context).registerAlreadyAccount,
               children: <TextSpan>[
             TextSpan(
-                text: 'AQUÍ',
+                text: (S.of(context).createAccountLink),
                 style: TextStyle(
                   decoration: TextDecoration.underline,
                   color: Colors.blue,

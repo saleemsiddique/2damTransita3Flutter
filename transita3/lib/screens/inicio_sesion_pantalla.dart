@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
@@ -16,7 +17,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
   String _contrasenya = '';
   bool _mostrarContrasenya = false;
   LoginService loginForm = new LoginService();
-
+  late String _selectedLanguage = 'ES';
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -25,6 +26,29 @@ class _InicioSesion extends State<IniciarSesionPage> {
     ]);
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                DropdownButton<String>(
+                  value: _selectedLanguage,
+                  onChanged: (String? newValue) {
+                    _cambiarIdioma(context, newValue!);
+                  },
+                  items: ['EN', 'ES', 'VAL'].map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -73,12 +97,29 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }
 
+  void _cambiarIdioma(BuildContext context, String idioma) {
+    Locale idiomaLoad;
+    if (idioma == 'ES') {
+      idiomaLoad = Locale('es', 'ES');
+    } else if (idioma == 'EN') {
+      idiomaLoad = Locale('en', 'US');
+    } else {
+      idiomaLoad = Locale('val', 'VAl');
+    }
+
+    S.load(idiomaLoad);
+
+    setState(() {
+      _selectedLanguage = idioma;
+    });
+  }
+
   TextFormField _escribirEmail() {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Email',
-        labelText: 'Email',
+        hintText: S.of(context).email,
+        labelText: S.of(context).email,
         suffixIcon: Icon(Icons.alternate_email),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
@@ -86,13 +127,13 @@ class _InicioSesion extends State<IniciarSesionPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Por favor ingresa un correo electrónico';
+          return S.of(context).enterEmailPlease;
         }
         String pattern =
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
         RegExp regExp = new RegExp(pattern);
 
-        return regExp.hasMatch(value) ? null : 'Introduce un email válido';
+        return regExp.hasMatch(value) ? null : S.of(context).validatorEmail;
       },
     );
   }
@@ -100,8 +141,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
   TextFormField _escribirContrasenya() {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: 'Contraseña',
-        labelText: 'Contraseña',
+        hintText: S.of(context).password,
+        labelText: S.of(context).password,
         suffixIcon: GestureDetector(
           onTap: () {
             setState(() {
@@ -119,7 +160,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 6) {
-          return 'La contraseña debe contener al menos 6 caracteres';
+          return S.of(context).validatorPassword;
         }
         return null;
       },
@@ -151,15 +192,14 @@ class _InicioSesion extends State<IniciarSesionPage> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Error de inicio de sesión'),
-                    content: Text(
-                        'Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.'),
+                    title: Text(S.of(context).loginErrorTitle),
+                    content: Text(S.of(context).loginErrorMessage),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('Aceptar'),
+                        child: Text(S.of(context).acceptIncorrectLoginData),
                       ),
                     ],
                   );
@@ -168,7 +208,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
             }
           }
         },
-        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
+        child: Text(S.of(context).loginButton,
+            style: TextStyle(color: Colors.white)),
       ),
     );
   }
@@ -200,10 +241,9 @@ class _InicioSesion extends State<IniciarSesionPage> {
             SizedBox(
               width: 48.79,
             ),
-            Text(
-              'Iniciar sesión con Google',
-              style: TextStyle(color: const Color.fromARGB(255, 124, 122, 122)),
-            )
+            Text(S.of(context).loginWithGoogleButton,
+                style:
+                    TextStyle(color: const Color.fromARGB(255, 124, 122, 122))),
           ],
         ),
       ),
@@ -214,10 +254,10 @@ class _InicioSesion extends State<IniciarSesionPage> {
     return Center(
       child: RichText(
         text: TextSpan(
-          text: '¿No tienes cuenta? Pulsa ',
+          text: ((S.of(context).createAccountText)),
           children: <TextSpan>[
             TextSpan(
-              text: 'AQUÍ',
+              text: ((S.of(context).createAccountLink)),
               style: TextStyle(
                 decoration: TextDecoration.underline,
                 color: Colors.blue,
@@ -231,7 +271,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
                   );
                 },
             ),
-            TextSpan(text: ' para crearla')
+            TextSpan(text: ((S.of(context).createAccountLinkText)))
           ],
         ),
       ),
