@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/navigation_bar.dart';
@@ -23,7 +24,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String _idCliente = LoginService.cliente.id.toString();
   String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
   late Punto? _selectedPunto = null;
-  late String _selectedImage;
+  String? _selectedImage;
+  String? _imageDisplay;
   String _selectedDuration = '1 hora';
 
   @override
@@ -39,7 +41,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               children: [
                 _logo(),
                 Container(
-                  height: 70,
+                  height: 20,
                 ),
                 Container(
                   height: 20,
@@ -67,7 +69,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: _sacarFoto(),
+                  child: _buildImageOrButton(),
                 ),
                 Container(
                   height: 20,
@@ -242,7 +244,6 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               content: Text('Incidencia creada exitosamente'),
             ),
           );
-          await IncidenciaService();
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => BottomNavigationBarProvider()),
@@ -272,5 +273,163 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             ));
       },
     );
+  }
+
+  Future<void> _getImage() async {
+  final picker = ImagePicker();
+  final pickedFile = await showModalBottomSheet<XFile?>(
+    context: context,
+    builder: (BuildContext context) {
+      return GestureDetector(
+        // Evitar que el toque en el fondo cierre el modal
+        onTap: () {
+          Navigator.pop(context, null);
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Seleccionar de la galería'),
+              onTap: () async {
+                Navigator.pop(context,
+                    await picker.pickImage(source: ImageSource.gallery));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Sacar una foto'),
+              onTap: () async {
+                Navigator.pop(context,
+                    await picker.pickImage(source: ImageSource.camera));
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
+
+  // Solo actualiza la imagen si el usuario selecciona una nueva
+  if (pickedFile != null) {
+    setState(() {
+      _imageDisplay = pickedFile!.path;
+      _selectedImage = getBase64FormateFile(pickedFile!.path);
+    });
+  }
+}
+
+  Widget _buildImageOrButton() {
+    if (_selectedImage != null) {
+      return GestureDetector(
+      onTap: () {
+        _changeImage();
+      },
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.file(
+              File(_imageDisplay!),
+              fit: BoxFit.cover,
+              width: 300,
+              height: 200,
+            ),
+          ),
+          Opacity(
+            opacity: 0.5,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.camera,
+                  size: 48.0,
+                  color: Colors.white,
+                ),
+                SizedBox(height: 8.0),
+                Text(
+                  'Cambiar Imagen',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+    } else {
+      return Container(
+        alignment: Alignment.center, // Para centrar el botón en la columna
+        child: DottedBorder(
+          borderType: BorderType.RRect,
+          radius: Radius.circular(18.0),
+          color: Color(0x8069a2f2),
+          strokeWidth: 2.0,
+          dashPattern: [8, 8],
+          child: ElevatedButton.icon(
+            onPressed: () {
+              _getImage();
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.transparent),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18.0),
+                ),
+              ),
+              padding: MaterialStateProperty.all(EdgeInsets.symmetric(
+                  vertical: 60.0,
+                  horizontal: 116.0)), // Ajusta la altura del botón
+            ),
+            icon: Icon(
+              Icons.camera_alt,
+              color: Color(0x8069a2f2),
+            ),
+            label: Text(
+              'Subir Foto',
+              style: TextStyle(color: Color(0x8069a2f2)),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  void _changeImage() async {
+    final picker = ImagePicker();
+    final pickedFile = await showModalBottomSheet<XFile?>(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: Icon(Icons.photo_library),
+              title: Text('Seleccionar de la galería'),
+              onTap: () async {
+                Navigator.pop(context,
+                    await picker.pickImage(source: ImageSource.gallery));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.camera_alt),
+              title: Text('Sacar una foto'),
+              onTap: () async {
+                Navigator.pop(context,
+                    await picker.pickImage(source: ImageSource.camera));
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    setState(() {
+      _selectedImage = getBase64FormateFile(pickedFile!.path);
+    });
   }
 }

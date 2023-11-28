@@ -20,13 +20,6 @@ class IncidenciaService extends ChangeNotifier {
   Stream<List<Incidencia>> get suggesionStream =>
       this._suggestionStreamController.stream;
 
-  IncidenciaService() {
-    debugPrint('IncidenciaProvider inicializando');
-    debugPrint(TransitaProvider.apiKey);
-
-    getIncidencias();
-  }
-
   getIncidencias() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';

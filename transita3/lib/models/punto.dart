@@ -10,7 +10,6 @@ class Punto {
     double longitud;
     String accesibilidadPunto;
     String visibilidadPunto;
-    Zona zona;
     int id;
 
     Punto({
@@ -21,7 +20,6 @@ class Punto {
         required this.longitud,
         required this.accesibilidadPunto,
         required this.visibilidadPunto,
-        required this.zona,
         required this.id,
     });
 
@@ -33,7 +31,6 @@ class Punto {
         longitud = 0.0,
         accesibilidadPunto = '',
         visibilidadPunto = '',
-        zona = Zona.empty(),
         id = 0;
 
     factory Punto.fromRawJson(String str) => Punto.fromJson(json.decode(str));
@@ -48,7 +45,6 @@ class Punto {
         longitud: json["longitud"]?.toDouble(),
         accesibilidadPunto: json["accesibilidadPunto"],
         visibilidadPunto: json["visibilidadPunto"],
-        zona: Zona.fromJson(json["zona"]),
         id: json["id"],
     );
 
@@ -60,7 +56,6 @@ class Punto {
         "longitud": longitud,
         "accesibilidadPunto": accesibilidadPunto,
         "visibilidadPunto": visibilidadPunto,
-        "zona": zona.toJson(),
         "id": id,
     };
 

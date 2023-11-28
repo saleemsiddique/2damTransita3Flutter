@@ -214,7 +214,6 @@ class _Registro extends State<RegistroPage> {
                 'contrasenya': _contrasenya,
               };
               await LoginService().signInCliente(credencialesLogIn);
-              IncidenciaService();
               Navigator.pushNamed(context, 'home');
             } catch (error) {
               showDialog(
