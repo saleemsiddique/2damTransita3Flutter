@@ -8,12 +8,6 @@ class PuntoService extends ChangeNotifier {
   static List<Punto> puntos = [];
   static Punto punto = Punto.empty();
 
-  PuntoService() {
-    debugPrint('PuntoService inicializando');
-    getPuntos();
-    print(puntos);
-  }
-
   getPuntos() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';

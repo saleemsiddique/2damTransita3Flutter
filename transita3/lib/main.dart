@@ -5,6 +5,7 @@ import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/services/ClienteService.dart';
+import 'package:transita3/services/PuntoService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: IncidenciaService(),
+        ),
+        ChangeNotifierProvider.value(
+          value: PuntoService(),
         ),
       ],
       child: MaterialApp(
