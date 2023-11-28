@@ -5,6 +5,7 @@ import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/screens/olvidar_contrasenya.dart';
 
 class IniciarSesionPage extends StatefulWidget {
   @override
@@ -83,7 +84,9 @@ class _InicioSesion extends State<IniciarSesionPage> {
                 children: [
                   _botonLogin(context),
                   SizedBox(height: 10),
-                  _botonGoogle()
+                  _botonGoogle(),
+                   SizedBox(height: 10),
+                  _botonOlvidarContrasena(),
                 ],
               ),
             ),
@@ -247,6 +250,61 @@ class _InicioSesion extends State<IniciarSesionPage> {
           ],
         ),
       ),
+    );
+  }
+
+     Widget _botonOlvidarContrasena() {
+    return TextButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text("Olvidar Contraseña"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Ingrese su correo electrónico:"),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      // Puedes guardar el valor del correo electrónico aquí
+                    },
+                    decoration: InputDecoration(
+                      hintText: "Correo electrónico",
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cancelar"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Lógica para enviar el correo de recuperación aquí
+                    // Puedes utilizar el valor del correo electrónico ingresado
+                    Navigator.of(context).pop();
+
+                    // Navegar a la pantalla para escribir la nueva contraseña
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OlvidarContrasenya(),
+                      ),
+                    );
+                  },
+                  child: Text("Enviar"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      child: Text("¿Olvidaste tu contraseña?"),
     );
   }
 
