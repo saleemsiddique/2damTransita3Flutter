@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/rutas/rutas.dart';
 import 'package:transita3/screens/inicio_sesion_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
@@ -37,6 +39,13 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+                   localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
         title: 'Transita App',
         darkTheme: ThemeData(
           colorScheme: defaultDarkColorScheme,

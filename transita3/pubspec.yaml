@@ -48,6 +48,9 @@ dependencies:
   google_maps_flutter: ^2.5.0
   flutter_riverpod: ^1.0.3
   animated_text_kit: ^4.2.2
+  sliding_up_panel: ^2.0.0+1
+  draggable_bottom_sheet: ^1.0.2
+  flutter_sliding_up_panel: ^2.1.1
 
 
 

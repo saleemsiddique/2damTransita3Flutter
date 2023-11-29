@@ -253,7 +253,7 @@ class S {
   /// `¿Already have an account? sign In`
   String get registerAlreadyAccount {
     return Intl.message(
-      '¿Already have an account? sign In',
+      '¿Already have an account? sign In ',
       name: 'registerAlreadyAccount',
       desc: '',
       args: [],
