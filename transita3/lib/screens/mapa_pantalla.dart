@@ -61,20 +61,24 @@ class _MapaPantalla extends State<Mapa_pantalla> {
               width: 40.0,
               height: 40.0,
               point: LatLng(punto.latitud, punto.longitud),
-              child: GestureDetector(
-                onTap: () {
-                  // Show a popup with information
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return PuntoDetailsOverlay(punto: punto);
+              child: Stack(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      puntoService.setSelectedPunto(punto);
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PuntoDetailsOverlay(punto: punto);
+                        },
+                      );
                     },
-                  );
-                },
-                child: Icon(
-                  Icons.location_pin,
-                  color: Colors.red,
-                ),
+                    child: Icon(
+                      Icons.location_pin,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
               ),
             );
           }).toList(),
@@ -90,7 +94,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
         ),
       ],
     );
-    return mapa;
+return mapa;
   }
 }
 
@@ -101,15 +105,11 @@ class PuntoDetailsOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16.0),
-      ),
-      child: Container(
+    return Container(
+      height: 300,
+        color: Colors.black,
         padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               height: 200,
@@ -123,11 +123,11 @@ class PuntoDetailsOverlay extends StatelessWidget {
               child: showImagePunto(punto),
             ),
             SizedBox(height: 16.0),
-            Text(punto.descripcion, style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
+            Text(punto.descripcion,
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)),
             Text('Tipo de Punto: ${punto.tipoPunto}'),
             Text('Accesibilidad: ${punto.accesibilidadPunto}'),
             Text('Visibilidad: ${punto.visibilidadPunto}'),
-            SizedBox(height: 16.0),
             Align(
               alignment: Alignment.center,
               child: TextButton(
@@ -139,8 +139,6 @@ class PuntoDetailsOverlay extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
-

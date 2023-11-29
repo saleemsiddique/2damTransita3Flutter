@@ -38,6 +38,7 @@ class Punto {
     String toRawJson() => json.encode(toJson());
 
     factory Punto.fromJson(Map<String, dynamic> json) => Punto(
+        //descripcion: json["descripcion"] != null ? utf8.decode(json["descripcion"].codeUnits) : "",
         descripcion: json["descripcion"],
         tipoPunto: json["tipoPunto"],
         foto: json["foto"],

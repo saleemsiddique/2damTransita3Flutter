@@ -38,7 +38,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
               fadeInDuration: Duration(milliseconds: 200),
             ),
             Container(
-              height: 70,
+              height: 30,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
@@ -59,12 +59,16 @@ class _InicioSesion extends State<IniciarSesionPage> {
                 children: [
                   _botonLogin(context),
                   SizedBox(height: 10),
+<<<<<<< Updated upstream
                   _botonGoogle()
+=======
+                  _botonOlvidarContrasena(),
+>>>>>>> Stashed changes
                 ],
               ),
             ),
             Container(
-              height: 50,
+              height: 20,
             ),
             _crearCuenta()
           ],

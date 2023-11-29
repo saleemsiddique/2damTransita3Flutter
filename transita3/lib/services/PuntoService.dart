@@ -7,6 +7,14 @@ import 'package:transita3/services/LoginService.dart';
 class PuntoService extends ChangeNotifier {
   static List<Punto> puntos = [];
   static Punto punto = Punto.empty();
+  Punto _selectedPunto = Punto.empty();
+
+  Punto get selectedPunto => _selectedPunto;
+
+  void setSelectedPunto(Punto punto) {
+    _selectedPunto = punto;
+    notifyListeners();
+  }
 
   getPuntos() async {
     final cliente = LoginService.cliente;
@@ -16,7 +24,7 @@ class PuntoService extends ChangeNotifier {
       final jsonData = await TransitaProvider.getJsonData('puntos');
 
       final List<dynamic> jsonList = json.decode(jsonData);
-
+      print("HOLA HOLA:  + $jsonList");
       puntos = jsonList.map((json) => Punto.fromJson(json)).toList();
       print("Estos son los puntos: ${puntos.toString()}");
       notifyListeners();
