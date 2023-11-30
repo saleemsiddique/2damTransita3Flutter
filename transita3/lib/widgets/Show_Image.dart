@@ -38,8 +38,8 @@ Widget showImagePunto(Punto punto) {
   print(punto.foto);
   final Widget fromFTP = FadeInImage(
       fit: BoxFit.cover,
-      width: 60,
-      height: 80,
+      height: 200,
+      width: 150,
       placeholder: AssetImage('assets/loading.gif'),
       image: CachedNetworkImageProvider('http://10.0.2.2/img/puntos/${punto.foto}'));
   
@@ -47,8 +47,8 @@ Widget showImagePunto(Punto punto) {
   else {
     return FadeInImage(
         fit: BoxFit.cover,
-        width: 60,
-        height: 80,
+        height: 200,
+        width: 150,
         placeholder: AssetImage('assets/loading.gif'),
         image: AssetImage('assets/no-image.jpg'));
   }

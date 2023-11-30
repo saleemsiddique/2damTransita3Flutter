@@ -6,6 +6,7 @@ import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/PuntoService.dart';
+import 'package:transita3/widgets/Boton_Agregar.dart';
 import 'package:transita3/widgets/Show_Image.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
@@ -94,21 +95,43 @@ class _MapaPantalla extends State<Mapa_pantalla> {
 }
 
 void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
-  showModalBottomSheet(
-    isScrollControlled: true,
+  showBottomSheet(
     context: context,
     builder: (BuildContext context) {
       return SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
             children: [
-              showImagePunto(punto),
-              Text('Descripción: ${punto.descripcion}'),
-              Text('Tipo: ${punto.tipoPunto}'),
-              Text('Latitud: ${punto.latitud}'),
-              Text('Longitud: ${punto.longitud}'),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  showImagePunto(punto),
+                  SizedBox(
+                      width:
+                          16.0), // Agrega un espacio entre la imagen y el texto
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Descripción: ${punto.descripcion}',
+                          maxLines: 2, // Establece el número máximo de líneas
+                          overflow: TextOverflow
+                              .ellipsis, // Trunca el texto y muestra puntos suspensivos
+                        ),
+                        Text('Tipo: ${punto.tipoPunto}'),
+                        Text('Latitud: ${punto.latitud}'),
+                        Text('Longitud: ${punto.longitud}'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: botonAgregar(context, 'creacionincidencia', 60, 60)),
             ],
           ),
         ),

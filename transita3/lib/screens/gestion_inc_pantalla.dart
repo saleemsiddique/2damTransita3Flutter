@@ -5,6 +5,7 @@ import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:transita3/widgets/Boton_Agregar.dart';
 import 'package:transita3/widgets/Show_Image.dart';
 
 
@@ -23,7 +24,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     final incidenciasService = Provider.of<IncidenciaService>(context, listen: true);
     incidenciasService.getIncidencias();
     return Scaffold(
-      floatingActionButton: _botonAgregar(),
+      floatingActionButton: botonAgregar(context, 'home', 80, 80),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),
@@ -44,23 +45,6 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
             style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
           )
         ],
-      ),
-    );
-  }
-
-  Widget _botonAgregar() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, 'creacionincidencia');
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/boton.png'),
-            ),
-            borderRadius: BorderRadius.circular(0.50)),
-        width: 80,
-        height: 80,
       ),
     );
   }
