@@ -23,10 +23,11 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String _estado = 'ENVIADO';
   String _idCliente = LoginService.cliente.id.toString();
   String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
-  late Punto? _selectedPunto = null;
+  late Punto? _selectedPunto = ModalRoute.of(context)?.settings.arguments as Punto?;
   String? _selectedImage;
   String? _imageDisplay;
   String _selectedDuration = '1 hora';
+    
 
   @override
   Widget build(BuildContext context) {
@@ -146,35 +147,27 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     return fileInBase64;
   }
 
-  Widget _seleccionarPunto() {
-    return Row(
-      children: [
-        Text('Seleccionar Punto', style: TextStyle(color: Colors.grey)),
-        SizedBox(
-          width: 20,
-        ),
-        DropdownButton<int>(
-          value: _selectedPunto?.id,
-          items: PuntoService.puntos.map((punto) {
-            return DropdownMenuItem<int>(
-              value: punto.id,
-              child: Text('${punto.id}'),
-            );
-          }).toList(),
-          onChanged: (int? newValue) async {
-            if (newValue != null) {
-              await PuntoService.getPunto(newValue);
-              setState(() {
-                _selectedPunto = PuntoService.puntos
-                    .firstWhere((punto) => punto.id == newValue);
-              });
-              print("Este es el punto que acabas de escoger $_selectedPunto");
-            }
-          },
-        ),
-      ],
-    );
-  }
+Widget _seleccionarPunto() {
+  return Row(
+    children: [
+      Text('Seleccionar Punto', style: TextStyle(color: Colors.grey)),
+      SizedBox(
+        width: 20,
+      ),
+      DropdownButton<int>(
+        value: _selectedPunto?.id,
+        items: PuntoService.puntos.map((punto) {
+          return DropdownMenuItem<int>(
+            value: punto.id,
+            child: Text('${punto.id}'),
+          );
+        }).toList(),
+        onChanged: null,
+      ),
+    ],
+  );
+}
+
 
   Widget _escribeDescripcion() {
     return TextFormField(

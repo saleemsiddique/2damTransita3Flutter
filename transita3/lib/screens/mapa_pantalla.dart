@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
 
 class Mapa_pantalla extends StatefulWidget {
+  static bool isBottomSheetOpen = false;
   _MapaPantalla createState() => _MapaPantalla();
 }
 
@@ -95,6 +96,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
 }
 
 void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
+  Mapa_pantalla.isBottomSheetOpen = true;
   showBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -109,16 +111,16 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
                   showImagePunto(punto),
                   SizedBox(
                       width:
-                          16.0), // Agrega un espacio entre la imagen y el texto
+                          16.0),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Descripción: ${punto.descripcion}',
-                          maxLines: 2, // Establece el número máximo de líneas
+                          maxLines: 2,
                           overflow: TextOverflow
-                              .ellipsis, // Trunca el texto y muestra puntos suspensivos
+                              .ellipsis,
                         ),
                         Text('Tipo: ${punto.tipoPunto}'),
                         Text('Latitud: ${punto.latitud}'),
@@ -129,13 +131,18 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
                 ],
               ),
               Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: botonAgregar(context, 'creacionincidencia', 60, 60)),
+                bottom: 0,
+                right: 0,
+                child:
+                    botonAgregar(context, 'creacionincidencia', punto, 60, 60),
+              ),
             ],
           ),
         ),
       );
     },
-  );
+  ).closed.whenComplete(() {
+    Mapa_pantalla.isBottomSheetOpen =
+        false;
+  });
 }

@@ -26,6 +26,10 @@ class _BottomNavigationBarProviderState
     setState(() {
       _selectedIndex = index;
     });
+
+    if (_selectedIndex == 1 && Mapa_pantalla.isBottomSheetOpen) {
+      Navigator.pop(context);
+    }
   }
 
   @override
