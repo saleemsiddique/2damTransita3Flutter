@@ -20,6 +20,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   static List<Punto> puntos = [];
   Location location = Location();
   LatLng _currentLocation = LatLng(38.5064, -0.2297);
+  bool showMarkers = false;
 
   @override
   void initState() {
@@ -42,9 +43,9 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   @override
   Widget build(BuildContext context) {
     final puntoService = Provider.of<PuntoService>(context, listen: true);
-
-    puntoService.getPuntos();
-
+    if (PuntoService.puntos.isEmpty) {
+      puntoService.getPuntos();
+    }
     Widget mapa = GestureDetector(
       behavior: HitTestBehavior.opaque,
       child: FlutterMap(
@@ -53,31 +54,42 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           initialZoom: 15,
           maxZoom: 18,
           minZoom: 10,
+          onPositionChanged: (MapPosition position, bool hasGesture) {
+            setState(() {
+              print(showMarkers);
+              showMarkers = position.zoom! >= 16;
+            });
+          },
+          onTap: (TapPosition position, LatLng latLng) {
+            showLatLngBottomSheet(context, latLng);
+          },
         ),
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'dev.fleaflet.flutter_map.example',
           ),
-          MarkerLayer(
-            markers: PuntoService.puntos.map((punto) {
-              return Marker(
-                width: 40.0,
-                height: 40.0,
-                point: LatLng(punto.latitud, punto.longitud),
-                child: GestureDetector(
-                  onTap: () {
-                    // Show details in a bottom sheet
-                    showPointDetailsBottomSheet(context, punto);
-                  },
-                  child: Icon(
-                    Icons.location_pin,
-                    color: Colors.red,
+          if (showMarkers)
+            MarkerLayer(
+              markers: PuntoService.puntos.map((punto) {
+                print(punto);
+                return Marker(
+                  width: 40.0,
+                  height: 40.0,
+                  point: LatLng(punto.latitud, punto.longitud),
+                  child: GestureDetector(
+                    onTap: () {
+                      // Show details in a bottom sheet
+                      showPointDetailsBottomSheet(context, punto);
+                    },
+                    child: Icon(
+                      Icons.location_pin,
+                      color: Colors.red,
+                    ),
                   ),
-                ),
-              );
-            }).toList(),
-          ),
+                );
+              }).toList(),
+            ),
           RichAttributionWidget(
             attributions: [
               TextSourceAttribution(
@@ -109,9 +121,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   showImagePunto(punto),
-                  SizedBox(
-                      width:
-                          16.0),
+                  SizedBox(width: 16.0),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,8 +129,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
                         Text(
                           'Descripción: ${punto.descripcion}',
                           maxLines: 2,
-                          overflow: TextOverflow
-                              .ellipsis,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text('Tipo: ${punto.tipoPunto}'),
                         Text('Latitud: ${punto.latitud}'),
@@ -142,7 +151,32 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
       );
     },
   ).closed.whenComplete(() {
-    Mapa_pantalla.isBottomSheetOpen =
-        false;
+    Mapa_pantalla.isBottomSheetOpen = false;
   });
+}
+
+void showLatLngBottomSheet(BuildContext context, LatLng latLng) {
+  showBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        height: 80,
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 20,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Lat: ${latLng.latitude}'),
+                Text('Lon: ${latLng.longitude}'),
+              ],
+            ),
+            botonAgregar(context, 'creacionincidencia', null, 70, 70),
+          ],
+        ),
+      );
+    },
+  );
 }

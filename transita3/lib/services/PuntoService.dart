@@ -7,6 +7,7 @@ import 'package:transita3/services/LoginService.dart';
 class PuntoService extends ChangeNotifier {
   static List<Punto> puntos = [];
   static Punto punto = Punto.empty();
+  static Punto puntoSelected = Punto.empty();
 
   getPuntos() async {
     final cliente = LoginService.cliente;
@@ -35,6 +36,21 @@ class PuntoService extends ChangeNotifier {
 
       punto = Punto.fromJson(jsonPunto);
       print("Este es el punto: ${punto.toString()}");
+    }
+  }
+
+    static getPuntoByCoordenadas(double latitud, double longitud) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clientePunto: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData =
+          await TransitaProvider.getJsonData('punto/coordenadas/$latitud/$longitud');
+
+      final dynamic jsonPunto = json.decode(jsonData);
+
+      puntoSelected = Punto.fromJson(jsonPunto);
+      print("Este es el punto selecionado: ${punto.toString()}");
     }
   }
 }

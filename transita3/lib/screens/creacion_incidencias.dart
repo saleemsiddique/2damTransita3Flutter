@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -232,15 +233,14 @@ Widget _seleccionarPunto() {
             'cliente': LoginService.cliente.toJson(),
           };
           await IncidenciaService.postIncidencia(incidenciaData);
+         final incidenciaService = Provider.of<IncidenciaService>(context, listen: false);
+          incidenciaService.getIncidencias();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Incidencia creada exitosamente'),
             ),
           );
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => BottomNavigationBarProvider()),
-          );
+          Navigator.pop(context);
         }
       },
       child: Text('Crear'),

@@ -8,7 +8,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:transita3/widgets/Boton_Agregar.dart';
 import 'package:transita3/widgets/Show_Image.dart';
 
-
 import '../models/models.dart';
 
 class GestionIncidenciasPage extends StatefulWidget {
@@ -21,14 +20,21 @@ final TextStyle _estiloLetra = TextStyle(fontSize: 13);
 class _GestionIncidencias extends State<GestionIncidenciasPage> {
   @override
   Widget build(BuildContext context) {
-    final incidenciasService = Provider.of<IncidenciaService>(context, listen: true);
-    incidenciasService.getIncidencias();
+    final incidenciasService =
+        Provider.of<IncidenciaService>(context, listen: true);
+    if (incidenciasService.incidenciasDeUsuario.isEmpty) {
+      incidenciasService.getIncidencias();
+    }
     return Scaffold(
       floatingActionButton: botonAgregar(context, 'home', null, 80, 80),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),
-        children: <Widget>[_logo(), Container(height: 80), _lista(incidenciasService.incidenciasDeUsuario)],
+        children: <Widget>[
+          _logo(),
+          Container(height: 80),
+          _lista(incidenciasService.incidenciasDeUsuario)
+        ],
       ),
     );
   }
@@ -49,71 +55,68 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
-  final List<Widget> incidencias = [];
-  int _cont = 1;
-  data.forEach((incidencia) {
-    final widgetTemp = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        _columnaIzquierda(incidencia.descripcion, incidencia.descripcion, incidencia.id, incidencia),
-        _columnaDerecha(incidencia.id),
-      ],
-    );
-    incidencias.add(
-      GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, 'detalleincidencia', arguments: incidencia); 
-       },
-        child: Container(
-          margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-          height: 100,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(25),
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(66, 64, 64, 1),
+  List<Widget> _listaIncidencias(List<Incidencia> data, BuildContext context) {
+    final List<Widget> incidencias = [];
+    int _cont = 1;
+    data.forEach((incidencia) {
+      final widgetTemp = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _columnaIzquierda(incidencia.descripcion, incidencia.descripcion,
+              incidencia.id, incidencia),
+          _columnaDerecha(incidencia.id),
+        ],
+      );
+      incidencias.add(
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, 'detalleincidencia',
+                arguments: incidencia);
+          },
+          child: Container(
+            margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            height: 100,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(25),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(66, 64, 64, 1),
+                ),
+                child: widgetTemp,
               ),
-              child: widgetTemp,
             ),
           ),
         ),
-      ),
-    );
-    incidencias.add(Container(height: 40));
-    _cont++;
-  });
-  return incidencias;
-}
-
-
-
-Widget _lista(List<Incidencia> listaIncidencias) {
-    if (listaIncidencias.isEmpty) {
-    return Column(
-      children: [
-        Text("No hay Incidencias"),
-      ],
-    );
-  } else {
-    return Column(
-      children: _listaIncidencias(listaIncidencias, context),
-    );
+      );
+      incidencias.add(Container(height: 40));
+      _cont++;
+    });
+    return incidencias;
   }
-}
 
+  Widget _lista(List<Incidencia> listaIncidencias) {
+    if (listaIncidencias.isEmpty) {
+      return Column(
+        children: [
+          Text("No hay Incidencias"),
+        ],
+      );
+    } else {
+      return Column(
+        children: _listaIncidencias(listaIncidencias, context),
+      );
+    }
+  }
 
-
-
-  Widget _columnaIzquierda(String nombre, String direccion, int id, Incidencia incidencia) {
+  Widget _columnaIzquierda(
+      String nombre, String direccion, int id, Incidencia incidencia) {
     if (direccion.length >= 19) direccion = direccion.substring(0, 19);
     if (nombre.length >= 16) nombre = nombre.substring(0, 16);
     return Row(
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(40),
-          child: showImage(incidencia)
-        ),
+            borderRadius: BorderRadius.circular(40),
+            child: showImage(incidencia)),
         Container(
           width: 8,
         ),
@@ -156,7 +159,7 @@ Widget _lista(List<Incidencia> listaIncidencias) {
     );
   }
 
- Widget _botonInspeccionar(int id) {
+  Widget _botonInspeccionar(int id) {
     return PopupMenuButton<String>(
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         PopupMenuItem<String>(
@@ -172,10 +175,13 @@ Widget _lista(List<Incidencia> listaIncidencias) {
         if (choice == 'editar') {
           // Lógica para la opción 'Editar'
         } else if (choice == 'eliminar') {
-           IncidenciaService.deleteIncidencia(id).then((value) {
-             setState(() {
+          IncidenciaService.deleteIncidencia(id).then((value) {
+            setState(() {
+              final incidenciasService =
+                  Provider.of<IncidenciaService>(context, listen: false);
+              incidenciasService.getIncidencias();
+            });
           });
-           });
           // Recargar la lista de incidencias después de eliminar
         }
       },
