@@ -26,7 +26,7 @@ class _BottomNavigationBarProviderState
     setState(() {
       _selectedIndex = index;
     });
-
+    print('Is open ${Mapa_pantalla.isBottomSheetOpen}');
     if (_selectedIndex == 1 && Mapa_pantalla.isBottomSheetOpen) {
       Navigator.pop(context);
     }

@@ -26,7 +26,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       incidenciasService.getIncidencias();
     }
     return Scaffold(
-      floatingActionButton: botonAgregar(context, 'home', null, 80, 80),
+      floatingActionButton: botonAgregar(context, 'home', null, 80, 80, null, null),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),

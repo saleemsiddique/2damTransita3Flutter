@@ -32,7 +32,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
   @override
   Widget build(BuildContext context) {
-    PuntoService();
+    PuntoService.puntoSelected = Punto.empty();
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(

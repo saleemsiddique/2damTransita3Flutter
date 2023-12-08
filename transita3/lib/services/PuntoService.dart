@@ -9,7 +9,7 @@ class PuntoService extends ChangeNotifier {
   static Punto punto = Punto.empty();
   static Punto puntoSelected = Punto.empty();
 
-  getPuntos() async {
+  static getPuntos() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
     print('id de clientePunto: ${cliente.id}');
@@ -20,7 +20,6 @@ class PuntoService extends ChangeNotifier {
 
       puntos = jsonList.map((json) => Punto.fromJson(json)).toList();
       print("Estos son los puntos: ${puntos.toString()}");
-      notifyListeners();
     }
   }
 
@@ -52,5 +51,10 @@ class PuntoService extends ChangeNotifier {
       puntoSelected = Punto.fromJson(jsonPunto);
       print("Este es el punto selecionado: ${punto.toString()}");
     }
+  }
+
+    static postPunto(Map<String, dynamic> data) async {
+      final jsonData = await TransitaProvider.postJsonData('puntos', data);
+      print("PUNTO CREADO");
   }
 }

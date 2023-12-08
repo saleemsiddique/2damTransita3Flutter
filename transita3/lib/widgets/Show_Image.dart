@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:transita3/AppConfig.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
+import 'package:http/http.dart' as http;
 
 Widget showImage(Incidencia incidence) {
   print(incidence.punto.foto);
@@ -11,20 +12,20 @@ Widget showImage(Incidencia incidence) {
       width: 60,
       height: 80,
       placeholder: AssetImage('assets/loading.gif'),
-      image:
-          CachedNetworkImageProvider('${AppConfig.FTPHost}${AppConfig.FTPRoute}${incidence.punto.foto}'));
+      image: CachedNetworkImageProvider(
+          '${AppConfig.FTPHost}${AppConfig.FTPRoute}${incidence.punto.foto}'));
 
   if (incidence.fotos != null && incidence.estado == 'ENVIADO') {
     return FadeInImage(
-    fit: BoxFit.cover,
-    width: 60,
-    height: 80,
-    placeholder: AssetImage('assets/loading.gif'),
-    //Le pasamos la imagen en base 64
-    image: MemoryImage(Utils.dataFromBase64String(incidence.fotos!)),
-  );
-  }
-  else if (incidence.fotos == null && incidence.estado != 'ENVIADO') return fromFTP;
+      fit: BoxFit.cover,
+      width: 60,
+      height: 80,
+      placeholder: AssetImage('assets/loading.gif'),
+      //Le pasamos la imagen en base 64
+      image: MemoryImage(Utils.dataFromBase64String(incidence.fotos!)),
+    );
+  } else if (incidence.fotos == null && incidence.estado != 'ENVIADO')
+    return fromFTP;
   else {
     return FadeInImage(
         fit: BoxFit.cover,
@@ -36,21 +37,28 @@ Widget showImage(Incidencia incidence) {
 }
 
 Widget showImagePunto(Punto punto) {
-  print(punto.foto);
-  final Widget fromFTP = FadeInImage(
-      fit: BoxFit.cover,
-      height: 200,
-      width: 150,
-      placeholder: AssetImage('assets/loading.gif'),
-      image: CachedNetworkImageProvider('${AppConfig.FTPHost}${AppConfig.FTPRoute}${punto.foto}'));
-  
-  if (punto.foto != null) return fromFTP;
-  else {
-    return FadeInImage(
+  return Image.network(
+    '${AppConfig.FTPHost}${AppConfig.FTPRoute}${punto.foto}',
+    fit: BoxFit.cover,
+    height: 200,
+    width: 150,
+    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      if (loadingProgress == null) {
+        return child;
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    },
+    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+      print('Failed to load image: $error');
+      return FadeInImage(
         fit: BoxFit.cover,
         height: 200,
         width: 150,
         placeholder: AssetImage('assets/loading.gif'),
-        image: AssetImage('assets/no-image.jpg'));
-  }
+        image: AssetImage('assets/no-image.jpg'),
+      );
+    },
+  );
 }
+

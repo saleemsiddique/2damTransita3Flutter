@@ -44,7 +44,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   Widget build(BuildContext context) {
     final puntoService = Provider.of<PuntoService>(context, listen: true);
     if (PuntoService.puntos.isEmpty) {
-      puntoService.getPuntos();
+      PuntoService.getPuntos();
     }
     Widget mapa = GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -143,7 +143,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
                 bottom: 0,
                 right: 0,
                 child:
-                    botonAgregar(context, 'creacionincidencia', punto, 60, 60),
+                    botonAgregar(context, 'creacionincidencia', punto, 60, 60, null, null),
               ),
             ],
           ),
@@ -156,6 +156,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
 }
 
 void showLatLngBottomSheet(BuildContext context, LatLng latLng) {
+  Mapa_pantalla.isBottomSheetOpen = true;
   showBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -173,10 +174,12 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) {
                 Text('Lon: ${latLng.longitude}'),
               ],
             ),
-            botonAgregar(context, 'creacionincidencia', null, 70, 70),
+            botonAgregar(context, 'creacionincidencia', null, 70, 70, latLng.latitude, latLng.longitude),
           ],
         ),
       );
     },
-  );
+  ).closed.whenComplete(() {
+    Mapa_pantalla.isBottomSheetOpen = false;
+  });
 }
