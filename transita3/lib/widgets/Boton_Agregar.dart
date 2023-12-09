@@ -6,8 +6,9 @@ import 'package:transita3/services/PuntoService.dart';
 
 Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     double width, double height, double? lat, double? lon) {
-  if (punto == null ||
-      (punto == Punto.empty() && routeName == 'gestionincidencia')) {
+  print(routeName);
+  if ((punto == null || punto == Punto.empty()) &&
+      routeName == 'creacionincidencia') {
     print("Entro en punto null y gestion incidencias");
 
     if (lat != null && lon != null) {
@@ -53,8 +54,7 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
           await PuntoService.getPuntos();
           await PuntoService.getPuntoByCoordenadas(lat!, lon!);
           punto = PuntoService.puntoSelected;
-          Navigator.pushNamed(context, routeName,
-              arguments: punto);
+          Navigator.pushNamed(context, routeName, arguments: punto);
         });
       },
       child: Container(

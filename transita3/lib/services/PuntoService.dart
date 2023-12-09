@@ -6,8 +6,23 @@ import 'package:transita3/services/LoginService.dart';
 
 class PuntoService extends ChangeNotifier {
   static List<Punto> puntos = [];
+  static List<Punto> puntosForMap = [];
   static Punto punto = Punto.empty();
   static Punto puntoSelected = Punto.empty();
+
+  static getPuntosForMap() async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clientePunto: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData('/global-con-incidencias-aceptadas');
+
+      final List<dynamic> jsonList = json.decode(jsonData);
+
+      puntosForMap = jsonList.map((json) => Punto.fromJson(json)).toList();
+      print("Estos son los puntos: ${puntos.toString()}");
+    }
+  }
 
   static getPuntos() async {
     final cliente = LoginService.cliente;
