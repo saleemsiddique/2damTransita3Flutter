@@ -121,22 +121,27 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     );
 
     return Stack(
-    children: [
-      mapa, // Your existing map widget
-      Positioned(
-        top: 16.0,
-        left: 16.0,
-        child: FloatingActionButton(
-          onPressed: () async {
-            await PuntoService.getPuntosForMap();
-            setState(() {});
-          },
-          child: Icon(Icons.refresh),
-          backgroundColor: Colors.blue, // Customize the button color
+      children: [
+        mapa, // Your existing map widget
+        Positioned(
+          top: 16.0,
+          child: RawMaterialButton(
+            onPressed: () async {
+              await PuntoService.getPuntosForMap();
+              setState(() {});
+            },
+            elevation: 2.0,
+            fillColor: Color.fromRGBO(0, 99, 209, 1), // Customize the button color
+            padding: EdgeInsets.all(15.0),
+            shape: CircleBorder(), // Set the shape to a circle
+            child: Icon(
+              Icons.refresh,
+              color: Colors.white,
+            ),
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
   }
 
   void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
