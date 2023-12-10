@@ -7,14 +7,30 @@ import 'package:http/http.dart' as http;
 
 Widget showImage(Incidencia incidence) {
   print(incidence.punto.foto);
-  final Widget fromFTP = FadeInImage(
-      fit: BoxFit.cover,
-      width: 60,
-      height: 80,
-      placeholder: AssetImage('assets/loading.gif'),
-      image: CachedNetworkImageProvider(
-          '${AppConfig.FTPHost}${AppConfig.FTPRoute}${incidence.punto.foto}'));
-
+  final Widget fromFTP = Image.network(
+    '${AppConfig.FTPHost}${AppConfig.FTPRoute}${incidence.punto.foto}',
+    fit: BoxFit.cover,
+    height: 200,
+    width: 150,
+    loadingBuilder:
+        (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+      if (loadingProgress == null) {
+        return child;
+      } else {
+        return Center(child: CircularProgressIndicator());
+      }
+    },
+    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+      print('Failed to load image: $error');
+      return FadeInImage(
+        fit: BoxFit.cover,
+        height: 80,
+        width: 60,
+        placeholder: AssetImage('assets/loading.gif'),
+        image: AssetImage('assets/no-image.jpg'),
+      );
+    },
+  );
   if (incidence.fotos != null && incidence.estado == 'ENVIADO') {
     return FadeInImage(
       fit: BoxFit.cover,
@@ -42,7 +58,8 @@ Widget showImagePunto(Punto punto) {
     fit: BoxFit.cover,
     height: 200,
     width: 150,
-    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+    loadingBuilder:
+        (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
       if (loadingProgress == null) {
         return child;
       } else {
@@ -61,4 +78,3 @@ Widget showImagePunto(Punto punto) {
     },
   );
 }
-

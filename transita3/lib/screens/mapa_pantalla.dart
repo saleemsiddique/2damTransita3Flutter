@@ -120,7 +120,23 @@ class _MapaPantalla extends State<Mapa_pantalla> {
       ),
     );
 
-    return mapa;
+    return Stack(
+    children: [
+      mapa, // Your existing map widget
+      Positioned(
+        top: 16.0,
+        left: 16.0,
+        child: FloatingActionButton(
+          onPressed: () async {
+            await PuntoService.getPuntosForMap();
+            setState(() {});
+          },
+          child: Icon(Icons.refresh),
+          backgroundColor: Colors.blue, // Customize the button color
+        ),
+      ),
+    ],
+  );
   }
 
   void showPointDetailsBottomSheet(BuildContext context, Punto punto) {

@@ -18,7 +18,7 @@ class PuntoService extends ChangeNotifier {
       final jsonData = await TransitaProvider.getJsonData('/global-con-incidencias-aceptadas');
 
       final List<dynamic> jsonList = json.decode(jsonData);
-
+      puntosForMap = [];
       puntosForMap = jsonList.map((json) => Punto.fromJson(json)).toList();
       print("Estos son los puntos: ${puntos.toString()}");
     }
@@ -32,7 +32,7 @@ class PuntoService extends ChangeNotifier {
       final jsonData = await TransitaProvider.getJsonData('puntos');
 
       final List<dynamic> jsonList = json.decode(jsonData);
-
+      puntos = [];
       puntos = jsonList.map((json) => Punto.fromJson(json)).toList();
       print("Estos son los puntos: ${puntos.toString()}");
     }

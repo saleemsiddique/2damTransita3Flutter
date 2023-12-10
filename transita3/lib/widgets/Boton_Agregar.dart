@@ -13,13 +13,13 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
 
     if (lat != null && lon != null) {
       PuntoService.getPuntoByCoordenadas(lat, lon);
-
       if (PuntoService.puntoSelected != null &&
           PuntoService.puntoSelected!.latitud != 0.0 &&
           PuntoService.puntoSelected!.longitud != 0) {
         print("Entro en puntoselected not null");
         return GestureDetector(
-          onTap: () {
+          onTap: () async {
+            await PuntoService.getPuntos();
             Navigator.pushNamed(context, routeName,
                 arguments: PuntoService.puntoSelected);
           },
@@ -71,7 +71,8 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
   } else {
     print("No entro en punto null y gestion incidencias");
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await PuntoService.getPuntos();
         Navigator.pushNamed(context, routeName, arguments: punto);
       },
       child: Container(
