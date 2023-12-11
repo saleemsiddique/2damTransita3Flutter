@@ -82,6 +82,8 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                     point: LatLng(punto.latitud, punto.longitud),
                     child: GestureDetector(
                       onTap: () {
+                        latLngSelec = LatLng(0, 0);
+                        setState(() {});
                         showPointDetailsBottomSheet(context, punto);
                       },
                       child: Icon(

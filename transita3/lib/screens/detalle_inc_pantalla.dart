@@ -167,7 +167,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Punto: ${punto.toString()} ',
+                            punto.toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
