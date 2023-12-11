@@ -10,8 +10,8 @@ Widget showImage(Incidencia incidence) {
   final Widget fromFTP = Image.network(
     '${AppConfig.FTPHost}${AppConfig.FTPRoute}${incidence.punto.foto}',
     fit: BoxFit.cover,
-    height: 200,
-    width: 150,
+    height: 80,
+    width: 60,
     loadingBuilder:
         (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
       if (loadingProgress == null) {
