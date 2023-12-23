@@ -26,7 +26,8 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       incidenciasService.getIncidencias();
     }
     return Scaffold(
-      floatingActionButton: botonAgregar(context, 'home', null, 80, 80, null, null),
+      floatingActionButton:
+          botonAgregar(context, 'home', null, 80, 80, null, null),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: ListView(
         padding: EdgeInsets.fromLTRB(5, 40, 5, 40),
@@ -145,7 +146,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(width: 25),
-            _botonInspeccionar(id),
+            _botonEliminar(context, id),
           ],
         ),
         Column(
@@ -159,33 +160,42 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-  Widget _botonInspeccionar(int id) {
-    return PopupMenuButton<String>(
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        PopupMenuItem<String>(
-          value: 'editar',
-          child: Text('Editar'),
-        ),
-        PopupMenuItem<String>(
-          value: 'eliminar',
-          child: Text('Eliminar'),
-        ),
-      ],
-      onSelected: (String choice) async {
-        if (choice == 'editar') {
-          // Lógica para la opción 'Editar'
-        } else if (choice == 'eliminar') {
-          IncidenciaService.deleteIncidencia(id).then((value) {
-            setState(() {
-              final incidenciasService =
-                  Provider.of<IncidenciaService>(context, listen: false);
-              incidenciasService.getIncidencias();
-            });
-          });
-          // Recargar la lista de incidencias después de eliminar
-        }
-      },
-      icon: Icon(Icons.more_vert),
-    );
-  }
+Widget _botonEliminar(BuildContext context, int id) {
+  return IconButton(
+    icon: Icon(Icons.delete),
+    onPressed: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Confirmar eliminación'),
+            content: Text('¿Estás seguro de que quieres eliminar esta incidencia?'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Cerrar el cuadro de diálogo
+                },
+                child: Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  // Lógica para la opción 'Eliminar'
+                  await IncidenciaService.deleteIncidencia(id);
+                  setState(() {
+                    final incidenciasService = Provider.of<IncidenciaService>(context, listen: false);
+                    incidenciasService.getIncidencias();
+                  });
+                  // Recargar la lista de incidencias después de eliminar
+                  Navigator.of(context).pop(); // Cerrar el cuadro de diálogo
+                },
+                child: Text('Eliminar'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
 }

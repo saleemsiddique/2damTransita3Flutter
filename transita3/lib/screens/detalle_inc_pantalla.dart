@@ -34,7 +34,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       punto = incidencia.punto.toString();
       imagenIncidencia = incidencia.punto.foto!;
     });
-    print('Incidencia Recibida: $incidencia');
+    print('Incidencia Recibida:$incidencia');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(
@@ -45,7 +45,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
             Navigator.pop(context);
           },
         ),
-        title: Text('Incidencia numero $id'),
+        title: Text('Incidencia nº $id'),
       ),
       body: Container(
         color: Color.fromARGB(

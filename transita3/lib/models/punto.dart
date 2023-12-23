@@ -59,10 +59,17 @@ class Punto {
         "id": id,
     };
 
-      @override
-  String toString() {
-    return 
-        'latitud: $latitud - '
-        'longitud: $longitud ';
-          }
+@override
+String toString() {
+  String latSubstring = latitud.toString().length > 4
+      ? latitud.toString().substring(0, 6)
+      : latitud.toString();
+
+  String lonSubstring = longitud.toString().length > 4
+      ? longitud.toString().substring(0, 6)
+      : longitud.toString();
+
+  return 'latitud: $latSubstring - longitud: $lonSubstring';
+}
+
 }
