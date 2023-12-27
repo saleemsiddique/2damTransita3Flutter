@@ -13,6 +13,11 @@ import 'package:location/location.dart';
 
 class Mapa_pantalla extends StatefulWidget {
   static bool isBottomSheetOpen = false;
+  static bool primerPuntoSeleccionado = false;
+  static bool segundoPuntoSeleccionado = false;
+  static String selectedPoint1Text = 'Seleccionar un punto de origen';
+  static String selectedPoint2Text = 'Seleccionar un destino en el mapa';
+
   _MapaPantalla createState() => _MapaPantalla();
 }
 
@@ -22,6 +27,8 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   LatLng _currentLocation = LatLng(38.5064, -0.2297);
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
+  LatLng latLngOrigen = LatLng(0, 0);
+  LatLng latLngDestino = LatLng(0, 0);
 
   @override
   void initState() {
@@ -62,9 +69,20 @@ class _MapaPantalla extends State<Mapa_pantalla> {
             });
           },
           onTap: (TapPosition position, LatLng latLng) {
-            setState(() {});
-            latLngSelec = latLng;
-            showLatLngBottomSheet(context, latLng);
+            setState(() {
+              latLngSelec = latLng;
+              if (Mapa_pantalla.primerPuntoSeleccionado) {
+                latLngOrigen = latLng;
+                Mapa_pantalla.selectedPoint1Text =
+                    '${latLng.latitude}, ${latLng.longitude}';
+              } else if (Mapa_pantalla.segundoPuntoSeleccionado) {
+                latLngDestino = latLng;
+                Mapa_pantalla.selectedPoint2Text =
+                    '${latLng.latitude}, ${latLng.longitude}';
+              } else {
+                showLatLngBottomSheet(context, latLng);
+              }
+            });
           },
         ),
         children: [
@@ -93,20 +111,9 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                     ),
                   );
                 }).toList(),
-              Marker(
-                width: 40.0,
-                height: 40.0,
-                point: latLngSelec,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {});
-                  },
-                  child: Icon(
-                    Icons.location_pin,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
+              MarkerSelect(40, latLngSelec, Colors.blue),
+              MarkerSelect(60, latLngOrigen, Colors.black),
+              MarkerSelect(60, latLngDestino, Colors.black),
             ],
           ),
           RichAttributionWidget(
@@ -133,7 +140,8 @@ class _MapaPantalla extends State<Mapa_pantalla> {
               setState(() {});
             },
             elevation: 2.0,
-            fillColor: Color.fromRGBO(0, 99, 209, 1), // Customize the button color
+            fillColor:
+                Color.fromRGBO(0, 99, 209, 1), // Customize the button color
             padding: EdgeInsets.all(15.0),
             shape: CircleBorder(), // Set the shape to a circle
             child: Icon(
@@ -142,7 +150,45 @@ class _MapaPantalla extends State<Mapa_pantalla> {
             ),
           ),
         ),
+        Positioned(
+          bottom: 70.0,
+          right: 15.0,
+          child: GestureDetector(
+            onTap: () {
+              rutasDetailsSheet(context);
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color.fromRGBO(0, 99, 209, 1),
+              ),
+              child: Icon(
+                Icons.directions,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        )
       ],
+    );
+  }
+
+  Marker MarkerSelect(double size, LatLng latLng, Color color) {
+    return Marker(
+      width: size,
+      height: size,
+      point: latLng,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {});
+        },
+        child: Icon(
+          Icons.location_pin,
+          color: color,
+        ),
+      ),
     );
   }
 
@@ -225,4 +271,96 @@ class _MapaPantalla extends State<Mapa_pantalla> {
       Mapa_pantalla.isBottomSheetOpen = false;
     });
   }
+
+void rutasDetailsSheet(BuildContext context) {
+  Mapa_pantalla.isBottomSheetOpen = true;
+
+  showBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return StatefulBuilder(
+        builder: (BuildContext context, StateSetter setState) {
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Mapa_pantalla.primerPuntoSeleccionado = true;
+                      Mapa_pantalla.segundoPuntoSeleccionado = false;
+                      Mapa_pantalla.selectedPoint1Text =
+                          '${latLngSelec.latitude}, ${latLngSelec.longitude}';
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Mapa_pantalla.primerPuntoSeleccionado
+                            ? Colors.blue
+                            : Colors.black,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Text(Mapa_pantalla.selectedPoint1Text),
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      Mapa_pantalla.primerPuntoSeleccionado = false;
+                      Mapa_pantalla.segundoPuntoSeleccionado = true;
+                      Mapa_pantalla.selectedPoint2Text =
+                          '${latLngSelec.latitude}, ${latLngSelec.longitude}';
+                    });
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Mapa_pantalla.segundoPuntoSeleccionado
+                            ? Colors.blue
+                            : Colors.black,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Text(Mapa_pantalla.selectedPoint2Text),
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                GestureDetector(
+                  onTap: () {
+                    // Add functionality to accept selections here
+                    // For example, you can call a function to process the selected points
+                    // processSelectedPoints();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blue, // Example color for the button
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: Text(
+                      'Crear ruta',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    },
+  ).closed.whenComplete(() {
+    Mapa_pantalla.isBottomSheetOpen = false;
+    Mapa_pantalla.primerPuntoSeleccionado = false;
+    Mapa_pantalla.segundoPuntoSeleccionado = false;
+  });
+}
+
+
 }
