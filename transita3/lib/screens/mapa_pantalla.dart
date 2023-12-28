@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/services/OpenRouteService.dart';
 import 'package:transita3/services/PuntoService.dart';
 import 'package:transita3/widgets/Boton_Agregar.dart';
 import 'package:transita3/widgets/Show_Image.dart';
@@ -291,7 +292,7 @@ void rutasDetailsSheet(BuildContext context) {
                       Mapa_pantalla.primerPuntoSeleccionado = true;
                       Mapa_pantalla.segundoPuntoSeleccionado = false;
                       Mapa_pantalla.selectedPoint1Text =
-                          '${latLngSelec.latitude}, ${latLngSelec.longitude}';
+                          '${latLngOrigen.latitude},${latLngOrigen.longitude}';
                     });
                   },
                   child: Container(
@@ -314,7 +315,7 @@ void rutasDetailsSheet(BuildContext context) {
                       Mapa_pantalla.primerPuntoSeleccionado = false;
                       Mapa_pantalla.segundoPuntoSeleccionado = true;
                       Mapa_pantalla.selectedPoint2Text =
-                          '${latLngSelec.latitude}, ${latLngSelec.longitude}';
+                          '${latLngDestino.latitude},${latLngDestino.longitude}';
                     });
                   },
                   child: Container(
@@ -333,9 +334,8 @@ void rutasDetailsSheet(BuildContext context) {
                 SizedBox(height: 16.0),
                 GestureDetector(
                   onTap: () {
-                    // Add functionality to accept selections here
-                    // For example, you can call a function to process the selected points
-                    // processSelectedPoints();
+                    print("vale");
+                    OpenRouteService.getRuta(Mapa_pantalla.selectedPoint1Text, Mapa_pantalla.selectedPoint2Text);
                   },
                   child: Container(
                     padding: EdgeInsets.all(15.0),
