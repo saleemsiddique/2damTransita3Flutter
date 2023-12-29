@@ -8,6 +8,7 @@ import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/services/ClienteService.dart';
+import 'package:transita3/services/OpenRouteService.dart';
 import 'package:transita3/services/PuntoService.dart';
 
 void main() {
@@ -37,6 +38,12 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: PuntoService(),
+        ),
+        ChangeNotifierProvider.value(
+          value: OpenRouteService(),
+        ),
+        ChangeNotifierProvider.value(
+          value: MapaPantallaNotifier(),
         ),
       ],
       child: MaterialApp(
