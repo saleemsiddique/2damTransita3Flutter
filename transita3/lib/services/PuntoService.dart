@@ -64,12 +64,46 @@ class PuntoService extends ChangeNotifier {
       final dynamic jsonPunto = json.decode(jsonData);
 
       puntoSelected = Punto.fromJson(jsonPunto);
-      print("Este es el punto selecionado: ${punto.toString()}");
+      print("Este es el punto selecionado: ${puntoSelected.toString()}");
     }
   }
 
     static postPunto(Map<String, dynamic> data) async {
       final jsonData = await TransitaProvider.postJsonData('puntos', data);
       print("PUNTO CREADO");
+  }
+
+    static Future<Set<Punto>> getPuntoByIdCliente(int id) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clientePunto: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData('punto/favoritos/$id');
+      final List<dynamic> jsonList = json.decode(jsonData);
+      Set<Punto> puntos = jsonList.map((json) => Punto.fromJson(json)).toSet();
+      return puntos;
+    }
+    return Set<Punto>();
+  }
+
+  static Future<Punto> buscarPuntoPorCoordenadasYCliente(double latitud, double longitud, int idCliente) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clientePunto: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData('punto/buscar?latitud=$latitud&longitud=$longitud&idCliente=$idCliente');
+      final dynamic jsonPunto = json.decode(jsonData);
+      Punto punto = Punto.fromJson(jsonPunto);
+      return punto;
+    }
+    return Punto.empty();
+  }
+
+  static Future<Punto> agregarClienteAlPunto(int puntoId, int clienteId) async {
+    final jsonData = await TransitaProvider.putJsonData('favorito?puntoId=$puntoId&clienteId=$clienteId', {});
+    final dynamic jsonPunto = json.decode(jsonData);
+    Punto punto = Punto.fromJson(jsonPunto);
+    print("Añadido a favorito");
+    return punto;
   }
 }

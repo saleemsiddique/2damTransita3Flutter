@@ -48,7 +48,9 @@ class TransitaProvider extends ChangeNotifier {
 
   static Future<String> putJsonData(
       String endpoint, Map<String, dynamic> data) async {
+        print("Posteo");
     final url = Uri.http(_baseUrl, endpoint);
+    print("url : $url");
     Map<String, String> headers = {
       'Content-Type': 'application/json',
       'Authorization': apiKey,

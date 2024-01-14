@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/services/OpenRouteService.dart';
 import 'package:transita3/services/PuntoService.dart';
 import 'package:transita3/widgets/Boton_Agregar.dart';
@@ -73,7 +74,6 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
 
-    
     if (PuntoService.puntosForMap.isEmpty) {
       PuntoService.getPuntosForMap();
     }
@@ -192,7 +192,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           ),
         ),
         Positioned(
-          bottom: 70.0,
+          bottom: 90.0,
           right: 15.0,
           child: GestureDetector(
             onTap: () {
@@ -282,30 +282,62 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   }
 
   void showLatLngBottomSheet(BuildContext context, LatLng latLng) {
+    bool isStarFilled = PuntoService.buscarPuntoPorCoordenadasYCliente(
+            latLng.latitude, latLng.longitude, LoginService.cliente.id) ==
+        Punto.empty();
+    print('star is $isStarFilled');
     Mapa_pantalla.isBottomSheetOpen = true;
     showBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
-          height: 80,
-          padding: EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 20,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              height: 80,
+              padding: EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Lat: ${latLng.latitude}'),
-                  Text('Lon: ${latLng.longitude}'),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Lat: ${latLng.latitude}'),
+                      Text('Lon: ${latLng.longitude}'),
+                    ],
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      Map<String, dynamic> puntoData = {
+                        'descripcion': '',
+                        'tipoPunto': 'LUGAR',
+                        'foto': '',
+                        'latitud': latLng.latitude,
+                        'longitud': latLng.longitude,
+                        'accesibilidadPunto': 'ACCESIBLE',
+                        'visibilidadPunto': 'GLOBAL',
+                      };
+                      await PuntoService.postPunto(puntoData);
+                      await PuntoService.getPuntoByCoordenadas(
+                          latLng.latitude, latLng.longitude);
+                          print("Llego aqui");
+                      await PuntoService.agregarClienteAlPunto(
+                          PuntoService.puntoSelected.id, LoginService.cliente.id);
+                      await PuntoService.getPuntos();
+                    },
+                    child: Icon(
+                      isStarFilled ? Icons.star : Icons.star_border,
+                      color: Colors.yellow, // Cambia el color si lo deseas
+                    ),
+                  ),
+                  botonAgregar(context, 'creacionincidencia', null, 70, 70,
+                      latLng.latitude, latLng.longitude),
                 ],
               ),
-              botonAgregar(context, 'creacionincidencia', null, 70, 70,
-                  latLng.latitude, latLng.longitude),
-            ],
-          ),
+            );
+          },
         );
       },
     ).closed.whenComplete(() {
