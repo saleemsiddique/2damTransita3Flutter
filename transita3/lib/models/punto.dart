@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:transita3/models/cliente.dart';
 import 'package:transita3/models/zona.dart';
 
 class Punto {
@@ -11,6 +12,7 @@ class Punto {
     String accesibilidadPunto;
     String visibilidadPunto;
     int id;
+    List<Cliente>? clientes; 
 
     Punto({
         required this.descripcion,
@@ -21,6 +23,7 @@ class Punto {
         required this.accesibilidadPunto,
         required this.visibilidadPunto,
         required this.id,
+        this.clientes
     });
 
     Punto.empty()
@@ -45,6 +48,7 @@ class Punto {
         longitud: json["longitud"]?.toDouble(),
         accesibilidadPunto: json["accesibilidadPunto"],
         visibilidadPunto: json["visibilidadPunto"],
+        clientes: json["clientes"],
         id: json["id"],
     );
 
@@ -56,6 +60,7 @@ class Punto {
         "longitud": longitud,
         "accesibilidadPunto": accesibilidadPunto,
         "visibilidadPunto": visibilidadPunto,
+        "clientes": clientes,
         "id": id,
     };
 

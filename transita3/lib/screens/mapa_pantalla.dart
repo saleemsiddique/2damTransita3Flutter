@@ -285,7 +285,10 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     bool isStarFilled = PuntoService.buscarPuntoPorCoordenadasYCliente(
             latLng.latitude, latLng.longitude, LoginService.cliente.id) ==
         Punto.empty();
-    print('star is $isStarFilled');
+    print(
+        "sPunto service res: ${PuntoService.buscarPuntoPorCoordenadasYCliente(latLng.latitude, latLng.longitude, LoginService.cliente.id)}");
+
+    print("primer isstarfilled $isStarFilled");
     Mapa_pantalla.isBottomSheetOpen = true;
     showBottomSheet(
       context: context,
@@ -322,10 +325,18 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       await PuntoService.postPunto(puntoData);
                       await PuntoService.getPuntoByCoordenadas(
                           latLng.latitude, latLng.longitude);
-                          print("Llego aqui");
+                      print("Llego aqui");
                       await PuntoService.agregarClienteAlPunto(
-                          PuntoService.puntoSelected.id, LoginService.cliente.id);
-                      await PuntoService.getPuntos();
+                          PuntoService.puntoSelected.id,
+                          LoginService.cliente.id);
+                      isStarFilled =
+                          await PuntoService.buscarPuntoPorCoordenadasYCliente(
+                                  latLng.latitude,
+                                  latLng.longitude,
+                                  LoginService.cliente.id) !=
+                              Punto.empty();
+                      print("segundo isstarfilled $isStarFilled");
+                      setState(() {});
                     },
                     child: Icon(
                       isStarFilled ? Icons.star : Icons.star_border,

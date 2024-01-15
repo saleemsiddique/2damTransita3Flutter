@@ -53,20 +53,28 @@ class PuntoService extends ChangeNotifier {
     }
   }
 
-    static getPuntoByCoordenadas(double latitud, double longitud) async {
-    final cliente = LoginService.cliente;
-    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
-    print('id de clientePunto: ${cliente.id}');
-    if (cliente != null) {
-      final jsonData =
-          await TransitaProvider.getJsonData('punto/coordenadas/$latitud/$longitud');
+static getPuntoByCoordenadas(double latitud, double longitud) async {
+  final cliente = LoginService.cliente;
+  TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+  print('id de clientePunto: ${cliente.id}');
+  
+  if (cliente != null) {
+    try {
+      final jsonData = await TransitaProvider.getJsonData('punto/coordenadas/$latitud/$longitud');
 
       final dynamic jsonPunto = json.decode(jsonData);
 
       puntoSelected = Punto.fromJson(jsonPunto);
-      print("Este es el punto selecionado: ${puntoSelected.toString()}");
+      print("Este es el punto seleccionado: ${puntoSelected.toString()}");
+    } catch (error) {
+      print("No se ha encontrado este punto");
+      // You might want to handle the error or perform additional actions here.
     }
+  } else {
+    print("No se ha encontrado este punto");
   }
+}
+
 
     static postPunto(Map<String, dynamic> data) async {
       final jsonData = await TransitaProvider.postJsonData('puntos', data);
@@ -86,21 +94,36 @@ class PuntoService extends ChangeNotifier {
     return Set<Punto>();
   }
 
-  static Future<Punto> buscarPuntoPorCoordenadasYCliente(double latitud, double longitud, int idCliente) async {
-    final cliente = LoginService.cliente;
-    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
-    print('id de clientePunto: ${cliente.id}');
-    if (cliente != null) {
-      final jsonData = await TransitaProvider.getJsonData('punto/buscar?latitud=$latitud&longitud=$longitud&idCliente=$idCliente');
+static Future<Punto> buscarPuntoPorCoordenadasYCliente(double latitud, double longitud, int idCliente) async {
+  print("buscarPuntoPorCoordenadasYCliente");
+  final cliente = LoginService.cliente;
+
+  if (cliente != null) {
+    try {
+      TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+      print('lat: $latitud lon: $longitud');
+      
+      final jsonData = await TransitaProvider.getJsonData('favoritos/$latitud/$longitud/$idCliente');
       final dynamic jsonPunto = json.decode(jsonData);
+      
       Punto punto = Punto.fromJson(jsonPunto);
+      print("El punto favorito escogido es $punto");
+      
       return punto;
+    } catch (error) {
+      print("Error al buscar el punto: $error");
+      // You might want to handle the error or perform additional actions here.
     }
-    return Punto.empty();
+  } else {
+    print("No se ha encontrado este punto");
   }
+  
+  return Punto.empty();
+}
+
 
   static Future<Punto> agregarClienteAlPunto(int puntoId, int clienteId) async {
-    final jsonData = await TransitaProvider.putJsonData('favorito?puntoId=$puntoId&clienteId=$clienteId', {});
+    final jsonData = await TransitaProvider.putJsonData('favorito/$puntoId/$clienteId', {});
     final dynamic jsonPunto = json.decode(jsonData);
     Punto punto = Punto.fromJson(jsonPunto);
     print("Añadido a favorito");
