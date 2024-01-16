@@ -320,15 +320,9 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                         'latitud': latLng.latitude,
                         'longitud': latLng.longitude,
                         'accesibilidadPunto': 'ACCESIBLE',
-                        'visibilidadPunto': 'GLOBAL',
+                        'visibilidadPunto': 'GLOBAL'
                       };
-                      await PuntoService.postPunto(puntoData);
-                      await PuntoService.getPuntoByCoordenadas(
-                          latLng.latitude, latLng.longitude);
-                      print("Llego aqui");
-                      await PuntoService.agregarClienteAlPunto(
-                          PuntoService.puntoSelected.id,
-                          LoginService.cliente.id);
+                      await PuntoService.postPuntoConFavorito(puntoData);
                       isStarFilled =
                           await PuntoService.buscarPuntoPorCoordenadasYCliente(
                                   latLng.latitude,

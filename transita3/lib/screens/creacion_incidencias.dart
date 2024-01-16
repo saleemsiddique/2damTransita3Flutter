@@ -24,15 +24,16 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String _estado = 'ENVIADO';
   String _idCliente = LoginService.cliente.id.toString();
   String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
-  late Punto? _selectedPunto = ModalRoute.of(context)?.settings.arguments as Punto?;
   String? _selectedImage;
   String? _imageDisplay;
   String _selectedDuration = '1 hora';
-    
 
   @override
   Widget build(BuildContext context) {
-    PuntoService.puntoSelected = Punto.empty();
+    Map<String, dynamic>? args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    double lat = args?['lat'];
+    double lon = args?['lon'];
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -64,7 +65,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: _seleccionarPunto(),
+                  child: _seleccionarPunto(lat,
+                      lon),
                 ),
                 Container(
                   height: 20,
@@ -78,7 +80,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                 ),
                 Container(
                   width: 325,
-                  child: _botonCrear(),
+                  child: _botonCrear(lat,
+                      lon),
                 ),
                 Container(
                   height: 20,
@@ -140,7 +143,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     }
   }
 
-   static String getBase64FormateFile(String path) {
+  static String getBase64FormateFile(String path) {
     File file = File(path);
     print('File is = ' + file.toString());
     List<int> fileInByte = file.readAsBytesSync();
@@ -148,27 +151,20 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     return fileInBase64;
   }
 
-Widget _seleccionarPunto() {
-  return Row(
-    children: [
-      Text('Seleccionar Punto', style: TextStyle(color: Colors.grey)),
-      SizedBox(
-        width: 20,
-      ),
-      DropdownButton<int>(
-        value: _selectedPunto?.id,
-        items: PuntoService.puntos.map((punto) {
-          return DropdownMenuItem<int>(
-            value: punto.id,
-            child: Text('${punto.id}'),
-          );
-        }).toList(),
-        onChanged: null,
-      ),
-    ],
-  );
-}
+  Widget _seleccionarPunto(double lat, double lon) {
+    String formattedLat = lat.toStringAsFixed(4);
+    String formattedLon = lon.toStringAsFixed(4);
 
+    return Row(
+      children: [
+        Text('Punto - lat: $formattedLat, lon: $formattedLon',
+            style: TextStyle(color: Colors.grey)),
+        SizedBox(
+          width: 20,
+        ),
+      ],
+    );
+  }
 
   Widget _escribeDescripcion() {
     return TextFormField(
@@ -215,7 +211,7 @@ Widget _seleccionarPunto() {
     );
   }
 
-  Widget _botonCrear() {
+  Widget _botonCrear(double lat, double lon) {
     return MaterialButton(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -223,17 +219,28 @@ Widget _seleccionarPunto() {
       color: Color.fromRGBO(14, 100, 209, 1),
       onPressed: () async {
         if (_formKey.currentState?.validate() ?? false) {
+          Map<String, dynamic> puntoData = {
+            'descripcion': '',
+            'tipoPunto': 'LUGAR',
+            'foto': '',
+            'latitud': lat,
+            'longitud': lon,
+            'accesibilidadPunto': 'NO_ACCESIBLE',
+            'visibilidadPunto': 'GLOBAL'
+          };
+          await PuntoService.postPunto(puntoData);
           Map<String, dynamic> incidenciaData = {
             'descripcion': _descripcion,
             'estado': _estado,
             'duracion': _duracion,
             'fechaHora': _fecha,
             "fotos": "$_selectedImage",
-            'punto': _selectedPunto?.toJson(),
+            'punto': PuntoService.puntoNuevo.toJson(),
             'cliente': LoginService.cliente.toJson(),
           };
           await IncidenciaService.postIncidencia(incidenciaData);
-         final incidenciaService = Provider.of<IncidenciaService>(context, listen: false);
+          final incidenciaService =
+              Provider.of<IncidenciaService>(context, listen: false);
           incidenciaService.getIncidencias();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -269,91 +276,91 @@ Widget _seleccionarPunto() {
   }
 
   Future<void> _getImage() async {
-  final picker = ImagePicker();
-  final pickedFile = await showModalBottomSheet<XFile?>(
-    context: context,
-    builder: (BuildContext context) {
-      return GestureDetector(
-        // Evitar que el toque en el fondo cierre el modal
-        onTap: () {
-          Navigator.pop(context, null);
-        },
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: Icon(Icons.photo_library),
-              title: Text('Seleccionar de la galería'),
-              onTap: () async {
-                Navigator.pop(context,
-                    await picker.pickImage(source: ImageSource.gallery));
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.camera_alt),
-              title: Text('Sacar una foto'),
-              onTap: () async {
-                Navigator.pop(context,
-                    await picker.pickImage(source: ImageSource.camera));
-              },
-            ),
-          ],
-        ),
-      );
-    },
-  );
+    final picker = ImagePicker();
+    final pickedFile = await showModalBottomSheet<XFile?>(
+      context: context,
+      builder: (BuildContext context) {
+        return GestureDetector(
+          // Evitar que el toque en el fondo cierre el modal
+          onTap: () {
+            Navigator.pop(context, null);
+          },
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: Text('Seleccionar de la galería'),
+                onTap: () async {
+                  Navigator.pop(context,
+                      await picker.pickImage(source: ImageSource.gallery));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.camera_alt),
+                title: Text('Sacar una foto'),
+                onTap: () async {
+                  Navigator.pop(context,
+                      await picker.pickImage(source: ImageSource.camera));
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
 
-  // Solo actualiza la imagen si el usuario selecciona una nueva
-  if (pickedFile != null) {
-    setState(() {
-      _imageDisplay = pickedFile!.path;
-      _selectedImage = getBase64FormateFile(pickedFile!.path);
-    });
+    // Solo actualiza la imagen si el usuario selecciona una nueva
+    if (pickedFile != null) {
+      setState(() {
+        _imageDisplay = pickedFile!.path;
+        _selectedImage = getBase64FormateFile(pickedFile!.path);
+      });
+    }
   }
-}
 
   Widget _buildImageOrButton() {
     if (_selectedImage != null) {
       return GestureDetector(
-      onTap: () {
-        _changeImage();
-      },
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10.0),
-            child: Image.file(
-              File(_imageDisplay!),
-              fit: BoxFit.cover,
-              width: 300,
-              height: 200,
+        onTap: () {
+          _changeImage();
+        },
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(10.0),
+              child: Image.file(
+                File(_imageDisplay!),
+                fit: BoxFit.cover,
+                width: 300,
+                height: 200,
+              ),
             ),
-          ),
-          Opacity(
-            opacity: 0.5,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.camera,
-                  size: 48.0,
-                  color: Colors.white,
-                ),
-                SizedBox(height: 8.0),
-                Text(
-                  'Cambiar Imagen',
-                  style: TextStyle(
+            Opacity(
+              opacity: 0.5,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.camera,
+                    size: 48.0,
                     color: Colors.white,
-                    fontSize: 16.0,
                   ),
-                ),
-              ],
+                  SizedBox(height: 8.0),
+                  Text(
+                    'Cambiar Imagen',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
     } else {
       return Container(
         alignment: Alignment.center, // Para centrar el botón en la columna
