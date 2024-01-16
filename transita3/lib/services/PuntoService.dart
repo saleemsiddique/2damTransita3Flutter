@@ -7,6 +7,7 @@ import 'package:transita3/services/LoginService.dart';
 class PuntoService extends ChangeNotifier {
   static List<Punto> puntos = [];
   static List<Punto> puntosForMap = [];
+  static List<Punto> favsForMap = [];
   static Punto punto = Punto.empty();
   static Punto puntoSelected = Punto.empty();
   static Punto puntoNuevo = Punto.empty();
@@ -84,25 +85,24 @@ class PuntoService extends ChangeNotifier {
     print("PUNTO CREADO");
   }
 
-    static postPuntoConFavorito(Map<String, dynamic> data) async {
-    final jsonData = await TransitaProvider.postJsonData('puntos/${LoginService.cliente.id}', data);
+  static postPuntoConFavorito(Map<String, dynamic> data) async {
+    final jsonData = await TransitaProvider.postJsonData(
+        'puntos/${LoginService.cliente.id}', data);
     puntoNuevo = Punto.fromRawJson(jsonData);
     print("puntoNuevo: $puntoNuevo");
-    print("PUNTO CREADO");
+    print("PUNTO CREADO CON FAVORITO");
   }
 
-  static Future<Set<Punto>> getPuntoByIdCliente(int id) async {
+  static getPuntosByIdCliente(int id) async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
     print('id de clientePunto: ${cliente.id}');
     if (cliente != null) {
       final jsonData =
-          await TransitaProvider.getJsonData('punto/favoritos/$id');
+          await TransitaProvider.getJsonData('favoritos/$id');
       final List<dynamic> jsonList = json.decode(jsonData);
-      Set<Punto> puntos = jsonList.map((json) => Punto.fromJson(json)).toSet();
-      return puntos;
+      favsForMap = jsonList.map((json) => Punto.fromJson(json)).toList();
     }
-    return Set<Punto>();
   }
 
   static Future<Punto> buscarPuntoPorCoordenadasYCliente(
@@ -123,10 +123,7 @@ class PuntoService extends ChangeNotifier {
         print("El punto favorito escogido es $punto");
 
         return punto;
-      } catch (error) {
-        print("Error al buscar el punto: $error");
-        // You might want to handle the error or perform additional actions here.
-      }
+      } catch (error) {}
     } else {
       print("No se ha encontrado este punto");
     }
@@ -141,5 +138,25 @@ class PuntoService extends ChangeNotifier {
     Punto punto = Punto.fromJson(jsonPunto);
     print("Añadido a favorito");
     return punto;
+  }
+
+    static Future<Punto> removeFavorito(int puntoId, int clienteId) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    
+    try {
+      final jsonData = await TransitaProvider.deleteJsonData(
+          'favorito/eliminar/$puntoId/$clienteId');
+      final dynamic jsonPunto = json.decode(jsonData);
+
+      Punto punto = Punto.fromJson(jsonPunto);
+      print("Cliente eliminado del punto: $punto");
+
+      return punto;
+    } catch (error) {
+      print("Error al eliminar el cliente del punto: $error");
+      // Puedes manejar el error de alguna manera aquí.
+      throw Exception("Error al eliminar el cliente del punto: $error");
+    }
   }
 }

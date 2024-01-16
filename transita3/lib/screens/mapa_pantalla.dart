@@ -17,6 +17,7 @@ class MapaPantallaNotifier extends ChangeNotifier {
   static LatLng _latLngOrigen = LatLng(0, 0);
   static LatLng _latLngDestino = LatLng(0, 0);
   static bool routeChange = true;
+  static bool recharge = false;
 
   LatLng get latLngOrigen => _latLngOrigen;
   LatLng get latLngDestino => _latLngDestino;
@@ -30,6 +31,11 @@ class MapaPantallaNotifier extends ChangeNotifier {
   void updateLatLngDestino(LatLng newLatLng) {
     _latLngDestino = newLatLng;
     routeChange = true;
+    notifyListeners();
+  }
+
+  void recarga() {
+    recharge = !recharge;
     notifyListeners();
   }
 }
@@ -77,6 +83,9 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     if (PuntoService.puntosForMap.isEmpty) {
       PuntoService.getPuntosForMap();
     }
+    if (PuntoService.favsForMap.isEmpty) {
+      PuntoService.getPuntosByIdCliente(LoginService.cliente.id);
+    }
     Widget mapa = Consumer2<MapaPantallaNotifier, OpenRouteService>(
       builder: (context, mapaPantallaNotifier, openRouteService, child) {
         return GestureDetector(
@@ -94,6 +103,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                 });
               },
               onTap: (TapPosition position, LatLng latLng) {
+                print("this is puntoSelected ${PuntoService.puntoSelected}");
                 setState(() {
                   latLngSelec = latLng;
                   if (Mapa_pantalla.primerPuntoSeleccionado) {
@@ -136,6 +146,24 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                         ),
                       );
                     }).toList(),
+                  ...PuntoService.favsForMap.map((punto) {
+                    return Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(punto.latitud, punto.longitud),
+                      child: GestureDetector(
+                        onTap: () {
+                          latLngSelec = LatLng(0, 0);
+                          setState(() {});
+                          showPointDetailsBottomSheet(context, punto);
+                        },
+                        child: Icon(
+                          Icons.location_pin,
+                          color: Colors.green,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                   MarkerSelect(40, latLngSelec, Colors.blue),
                   MarkerSelect(
                       60, MapaPantallaNotifier._latLngOrigen, Colors.black),
@@ -233,47 +261,85 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     );
   }
 
-  void showPointDetailsBottomSheet(BuildContext context, Punto punto) {
+  void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
     Mapa_pantalla.isBottomSheetOpen = true;
+    Punto puntoN = await PuntoService.buscarPuntoPorCoordenadasYCliente(
+        punto.latitud, punto.longitud, LoginService.cliente.id);
+
+    bool isStarFilled = puntoN != Punto.empty();
+
+    // ignore: use_build_context_synchronously
     showBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.all(16.0),
-            child: Stack(
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                child: Stack(
                   children: [
-                    showImagePunto(punto),
-                    SizedBox(width: 16.0),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Descripción: ${punto.descripcion}',
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        showImagePunto(punto),
+                        SizedBox(width: 16.0),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Descripción: ${punto.descripcion}',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text('Tipo: ${punto.tipoPunto}'),
+                              Text('Latitud: ${punto.latitud}'),
+                              Text('Longitud: ${punto.longitud}'),
+                            ],
                           ),
-                          Text('Tipo: ${punto.tipoPunto}'),
-                          Text('Latitud: ${punto.latitud}'),
-                          Text('Longitud: ${punto.longitud}'),
+                        ),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () async {
+                              if (isStarFilled) {
+                                // Aquí llamas a la función para quitar el punto de favoritos
+                                await PuntoService.removeFavorito(
+                                    punto.id, LoginService.cliente.id);
+                                isStarFilled = false;
+                              } else {
+                                await PuntoService.agregarClienteAlPunto(
+                                    punto.id, LoginService.cliente.id);
+                                isStarFilled = true;
+                              }
+                              await PuntoService.getPuntosByIdCliente(
+                                  LoginService.cliente.id);
+                              MapaPantallaNotifier().recarga;
+                              setState(() {});
+                            },
+                            child: Icon(
+                              size: 40,
+                              isStarFilled ? Icons.star : Icons.star_border,
+                              color:
+                                  Colors.yellow, // Cambia el color si lo deseas
+                            ),
+                          ),
+                          botonAgregar(context, 'creacionincidencia', punto, 60,
+                              60, null, null),
                         ],
                       ),
-                    ),
+                    )
                   ],
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: botonAgregar(
-                      context, 'creacionincidencia', punto, 60, 60, null, null),
-                ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     ).closed.whenComplete(() {
@@ -281,15 +347,15 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     });
   }
 
-  void showLatLngBottomSheet(BuildContext context, LatLng latLng) {
-    bool isStarFilled = PuntoService.buscarPuntoPorCoordenadasYCliente(
-            latLng.latitude, latLng.longitude, LoginService.cliente.id) ==
-        Punto.empty();
-    print(
-        "sPunto service res: ${PuntoService.buscarPuntoPorCoordenadasYCliente(latLng.latitude, latLng.longitude, LoginService.cliente.id)}");
+  void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
+    Punto punto = await PuntoService.buscarPuntoPorCoordenadasYCliente(
+        latLng.latitude, latLng.longitude, LoginService.cliente.id);
+
+    bool isStarFilled = punto != Punto.empty();
 
     print("primer isstarfilled $isStarFilled");
     Mapa_pantalla.isBottomSheetOpen = true;
+    // ignore: use_build_context_synchronously
     showBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -313,23 +379,29 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      Map<String, dynamic> puntoData = {
-                        'descripcion': '',
-                        'tipoPunto': 'LUGAR',
-                        'foto': '',
-                        'latitud': latLng.latitude,
-                        'longitud': latLng.longitude,
-                        'accesibilidadPunto': 'ACCESIBLE',
-                        'visibilidadPunto': 'GLOBAL'
-                      };
-                      await PuntoService.postPuntoConFavorito(puntoData);
-                      isStarFilled =
-                          await PuntoService.buscarPuntoPorCoordenadasYCliente(
-                                  latLng.latitude,
-                                  latLng.longitude,
-                                  LoginService.cliente.id) !=
-                              Punto.empty();
-                      print("segundo isstarfilled $isStarFilled");
+                      if (!isStarFilled) {
+                        Map<String, dynamic> puntoData = {
+                          'descripcion': '',
+                          'tipoPunto': 'LUGAR',
+                          'foto': '',
+                          'latitud': latLng.latitude,
+                          'longitud': latLng.longitude,
+                          'accesibilidadPunto': 'ACCESIBLE',
+                          'visibilidadPunto': 'GLOBAL'
+                        };
+                        await PuntoService.postPuntoConFavorito(puntoData);
+                        punto = await PuntoService
+                            .buscarPuntoPorCoordenadasYCliente(latLng.latitude,
+                                latLng.longitude, LoginService.cliente.id);
+                        isStarFilled = punto != Punto.empty();
+                      } else {
+                        await PuntoService.removeFavorito(
+                            punto.id, LoginService.cliente.id);
+                        isStarFilled = false;
+                      }
+                      await PuntoService.getPuntosByIdCliente(
+                          LoginService.cliente.id);
+                      MapaPantallaNotifier().recarga;
                       setState(() {});
                     },
                     child: Icon(

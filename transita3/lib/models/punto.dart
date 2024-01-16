@@ -58,6 +58,31 @@ class Punto {
       };
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Punto &&
+          runtimeType == other.runtimeType &&
+          descripcion == other.descripcion &&
+          tipoPunto == other.tipoPunto &&
+          foto == other.foto &&
+          latitud == other.latitud &&
+          longitud == other.longitud &&
+          accesibilidadPunto == other.accesibilidadPunto &&
+          visibilidadPunto == other.visibilidadPunto &&
+          id == other.id;
+
+  @override
+  int get hashCode =>
+      descripcion.hashCode ^
+      tipoPunto.hashCode ^
+      foto.hashCode ^
+      latitud.hashCode ^
+      longitud.hashCode ^
+      accesibilidadPunto.hashCode ^
+      visibilidadPunto.hashCode ^
+      id.hashCode;
+
+  @override
   String toString() {
     String latSubstring = latitud.toString().length > 4
         ? latitud.toString().substring(0, 6)
