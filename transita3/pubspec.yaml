@@ -51,6 +51,8 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   draggable_bottom_sheet: ^1.0.2
   flutter_sliding_up_panel: ^2.1.1
+  url_launcher: ^6.2.3
+  latlong2: ^0.9.0
 
 
 

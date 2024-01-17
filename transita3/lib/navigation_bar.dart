@@ -12,8 +12,6 @@ class BottomNavigationBarProvider extends StatefulWidget {
       _BottomNavigationBarProviderState();
 }
 
-final _scaffoldKey = GlobalKey<ScaffoldState>();
-
 class _BottomNavigationBarProviderState
     extends State<BottomNavigationBarProvider> {
   int _selectedIndex = 0;
@@ -36,44 +34,8 @@ class _BottomNavigationBarProviderState
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawerEnableOpenDragGesture: false,
-      key: _scaffoldKey,
       appBar: _appBarr(),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Image.asset('assets/transitaLogo.png'),
-                  ),
-                  SizedBox(
-                    height: 10.0,
-                  )
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(41, 39, 39, 0.68),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Perfil'),
-              onTap: () { Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PerfilPantalla()),
-                );},
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Ajustes'),
-              onTap: () { Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => AjustesPantalla()),
-    );},
-            ),
-          ],
-        ),
-      ),
+      endDrawer: CustomEndDrawer(),
       body: Center(
         child: screens.elementAt(_selectedIndex),
       ),
@@ -96,43 +58,109 @@ class _BottomNavigationBarProviderState
   }
 
   PreferredSizeWidget _appBarr() {
+    return CustomAppBar(
+      onLogoutPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Cerrar sesión'),
+              content: Text('¿Estás seguro de que quieres cerrar sesión'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Cancelar'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/');
+                  },
+                  child: Text('Aceptar'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+}
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final VoidCallback onLogoutPressed;
+
+  const CustomAppBar({Key? key, required this.onLogoutPressed})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return AppBar(
       title: Text('Transita'),
       leading: IconButton(
         icon: Icon(Icons.logout_sharp),
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Cerrar sesión'),
-                  content: Text('¿Estás seguro de que quieres cerrar sesión'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('Cancelar'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/');
-                      },
-                      child: Text('Aceptar'),
-                    ),
-                  ],
-                );
-              });
-        },
+        onPressed: onLogoutPressed,
       ),
       actions: [
         IconButton(
           icon: CircleAvatar(
             foregroundImage: AssetImage('assets/perfil.png'),
           ),
-          onPressed: () => _scaffoldKey.currentState?.openEndDrawer(),
+          onPressed: () {
+            Scaffold.of(context).openEndDrawer();
+          },
         ),
       ],
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+}
+
+class CustomEndDrawer extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            child: Column(
+              children: [
+                Expanded(
+                  child: Image.asset('assets/transitaLogo.png'),
+                ),
+                SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Color.fromRGBO(41, 39, 39, 0.68),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text('Perfil'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => PerfilPantalla()),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Ajustes'),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => AjustesPantalla()),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }

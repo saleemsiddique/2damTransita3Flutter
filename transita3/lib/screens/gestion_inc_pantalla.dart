@@ -161,7 +161,8 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   }
 
   Widget _botonEliminar(BuildContext context, int id) {
-    final incidenciaService = Provider.of<IncidenciaService>(context, listen: false);
+    final incidenciasService =
+        Provider.of<IncidenciaService>(context, listen: false);
     return IconButton(
       icon: Icon(Icons.delete),
       onPressed: () {
@@ -182,11 +183,8 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
                 TextButton(
                   onPressed: () async {
                     // Lógica para la opción 'Eliminar'
-                    await incidenciaService.deleteIncidencia(id);
+                    await incidenciasService.deleteIncidencia(id);
                     setState(() {
-                      final incidenciasService = Provider.of<IncidenciaService>(
-                          context,
-                          listen: false);
                       incidenciasService.getIncidencias();
                     });
                     // Recargar la lista de incidencias después de eliminar

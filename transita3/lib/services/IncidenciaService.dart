@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:transita3/models/models.dart';
@@ -20,21 +21,27 @@ class IncidenciaService extends ChangeNotifier {
   Stream<List<Incidencia>> get suggesionStream =>
       _suggestionStreamController.stream;
 
-  Future<void> getIncidencias() async {
-    final cliente = LoginService.cliente;
-    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
-    print('id de clienteIncidencia: ${cliente.id}');
-    if (cliente != null) {
-      final jsonData = await TransitaProvider.getJsonData(
-          'incidencias/clienteid/${cliente.id}');
+Future<void> getIncidencias() async {
+  final cliente = LoginService.cliente;
+  TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+  print('id de clienteIncidencia: ${cliente.id}');
+  
+  if (cliente != null) {
+    final jsonData = await TransitaProvider.getJsonData(
+        'incidencias/clienteid/${cliente.id}');
 
-      final List<dynamic> jsonList = json.decode(jsonData);
+    final List<dynamic> jsonList = json.decode(jsonData);
 
-      incidenciasDeUsuario = Incidencia.fromJsonList(jsonList);
+    List<Incidencia> newIncidencias = Incidencia.fromJsonList(jsonList);
+
+    if (!listEquals(incidenciasDeUsuario, newIncidencias)) {
+      incidenciasDeUsuario = newIncidencias;
       print("Estas son las incidencias: $incidenciasDeUsuario");
       notifyListeners();
     }
   }
+}
+
 
   Future<void> getIncidencia(int id) async {
     final cliente = LoginService.cliente;

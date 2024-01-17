@@ -26,7 +26,6 @@ class PuntoService extends ChangeNotifier {
 
       if (!listEquals(puntosForMap, newPuntosForMap)) {
         puntosForMap = newPuntosForMap;
-        print("Estos son los puntos: ${puntos.toString()}");
         notifyListeners();
       }
     }
@@ -41,7 +40,6 @@ class PuntoService extends ChangeNotifier {
       final List<dynamic> jsonList = json.decode(jsonData);
       puntos = [];
       puntos = jsonList.map((json) => Punto.fromJson(json)).toList();
-      print("Estos son los puntos: ${puntos.toString()}");
       notifyListeners();
     }
   }
@@ -136,6 +134,7 @@ class PuntoService extends ChangeNotifier {
         print("El punto favorito escogido es $punto");
 
         notifyListeners();
+        print(punto.toString());
         return punto;
       } catch (error) {}
     } else {
