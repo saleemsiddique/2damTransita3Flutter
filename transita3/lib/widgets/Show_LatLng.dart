@@ -14,7 +14,6 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
 
     bool isStarFilled = punto != Punto.empty();
 
-    print("primer isstarfilled $isStarFilled");
     Mapa_pantalla.isBottomSheetOpen = true;
     // ignore: use_build_context_synchronously
     showBottomSheet(
@@ -42,12 +41,10 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
                     onTap: () async {
                       if (!isStarFilled) {
                         if (punto != Punto.empty()) {
-                          print("                            Es distinto");
                           await puntosService.agregarClienteAlPunto(
                               punto.id, LoginService.cliente.id);
                           isStarFilled = true;
                         } else {
-                          print("                             Es igual");
 
                           Map<String, dynamic> puntoData = {
                             'descripcion': '',

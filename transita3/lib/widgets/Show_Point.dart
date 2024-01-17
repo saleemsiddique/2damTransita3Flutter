@@ -76,7 +76,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                           ),
                         ),
                         botonAgregar(context, 'creacionincidencia', punto, 60,
-                            60, null, null),
+                            60, punto.latitud, punto.longitud),
                       ],
                     ),
                   )
