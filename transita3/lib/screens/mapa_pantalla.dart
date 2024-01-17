@@ -23,18 +23,23 @@ class MapaPantallaNotifier extends ChangeNotifier {
   LatLng get latLngDestino => _latLngDestino;
 
   void updateLatLngOrigen(LatLng newLatLng) {
+    print("MAPAPANTALLANOTIFIER");
     _latLngOrigen = newLatLng;
     routeChange = true;
     notifyListeners();
   }
 
   void updateLatLngDestino(LatLng newLatLng) {
+    print("MAPAPANTALLANOTIFIER");
+
     _latLngDestino = newLatLng;
     routeChange = true;
     notifyListeners();
   }
 
   void recarga() {
+    print("MAPAPANTALLANOTIFIER");
+
     recharge = !recharge;
     notifyListeners();
   }
@@ -77,15 +82,15 @@ class _MapaPantalla extends State<Mapa_pantalla> {
 
   @override
   Widget build(BuildContext context) {
+    final puntosService = Provider.of<PuntoService>(context, listen: true);
+
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
 
-    if (PuntoService.puntosForMap.isEmpty) {
-      PuntoService.getPuntosForMap();
-    }
-    if (PuntoService.favsForMap.isEmpty) {
-      PuntoService.getPuntosByIdCliente(LoginService.cliente.id);
-    }
+    puntosService.getPuntosForMap();
+
+    puntosService.getPuntosByIdCliente(LoginService.cliente.id);
+
     Widget mapa = Consumer2<MapaPantallaNotifier, OpenRouteService>(
       builder: (context, mapaPantallaNotifier, openRouteService, child) {
         return GestureDetector(
@@ -103,7 +108,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                 });
               },
               onTap: (TapPosition position, LatLng latLng) {
-                print("this is puntoSelected ${PuntoService.puntoSelected}");
+                print("this is puntoSelected ${puntosService.puntoSelected}");
                 setState(() {
                   latLngSelec = latLng;
                   if (Mapa_pantalla.primerPuntoSeleccionado) {
@@ -128,7 +133,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
               MarkerLayer(
                 markers: [
                   if (showMarkers)
-                    ...PuntoService.puntosForMap.map((punto) {
+                    ...puntosService.puntosForMap.map((punto) {
                       return Marker(
                         width: 40.0,
                         height: 40.0,
@@ -146,7 +151,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                         ),
                       );
                     }).toList(),
-                  ...PuntoService.favsForMap.map((punto) {
+                  ...puntosService.favsForMap.map((punto) {
                     return Marker(
                       width: 40.0,
                       height: 40.0,
@@ -206,7 +211,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           top: 16.0,
           child: RawMaterialButton(
             onPressed: () async {
-              await PuntoService.getPuntosForMap();
+              await puntosService.getPuntosForMap();
               setState(() {});
             },
             elevation: 2.0,
@@ -262,8 +267,10 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   }
 
   void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
+    final puntosService = Provider.of<PuntoService>(context, listen: false);
+
     Mapa_pantalla.isBottomSheetOpen = true;
-    Punto puntoN = await PuntoService.buscarPuntoPorCoordenadasYCliente(
+    Punto puntoN = await puntosService.buscarPuntoPorCoordenadasYCliente(
         punto.latitud, punto.longitud, LoginService.cliente.id);
 
     bool isStarFilled = puntoN != Punto.empty();
@@ -310,15 +317,15 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                             onTap: () async {
                               if (isStarFilled) {
                                 // Aquí llamas a la función para quitar el punto de favoritos
-                                await PuntoService.removeFavorito(
+                                await puntosService.removeFavorito(
                                     punto.id, LoginService.cliente.id);
                                 isStarFilled = false;
                               } else {
-                                await PuntoService.agregarClienteAlPunto(
+                                await puntosService.agregarClienteAlPunto(
                                     punto.id, LoginService.cliente.id);
                                 isStarFilled = true;
                               }
-                              await PuntoService.getPuntosByIdCliente(
+                              await puntosService.getPuntosByIdCliente(
                                   LoginService.cliente.id);
                               MapaPantallaNotifier().recarga;
                               setState(() {});
@@ -348,7 +355,9 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   }
 
   void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
-    Punto punto = await PuntoService.buscarPuntoPorCoordenadasYCliente(
+    final puntosService = Provider.of<PuntoService>(context, listen: false);
+
+    Punto punto = await puntosService.buscarPuntoPorCoordenadasYCliente(
         latLng.latitude, latLng.longitude, LoginService.cliente.id);
 
     bool isStarFilled = punto != Punto.empty();
@@ -389,18 +398,18 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                           'accesibilidadPunto': 'ACCESIBLE',
                           'visibilidadPunto': 'GLOBAL'
                         };
-                        await PuntoService.postPuntoConFavorito(puntoData);
-                        punto = await PuntoService
+                        await puntosService.postPuntoConFavorito(puntoData);
+                        punto = await puntosService
                             .buscarPuntoPorCoordenadasYCliente(latLng.latitude,
                                 latLng.longitude, LoginService.cliente.id);
                         isStarFilled = punto != Punto.empty();
                       } else {
-                        await PuntoService.removeFavorito(
+                        await puntosService.removeFavorito(
                             punto.id, LoginService.cliente.id);
                         isStarFilled = false;
                       }
-                      await PuntoService.getPuntosByIdCliente(
-                          LoginService.cliente.id);
+                      await puntosService
+                          .getPuntosByIdCliente(LoginService.cliente.id);
                       MapaPantallaNotifier().recarga;
                       setState(() {});
                     },

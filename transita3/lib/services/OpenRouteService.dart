@@ -14,6 +14,7 @@ class OpenRouteService extends ChangeNotifier {
   static List<List<double>> routeCoordinates = [];
 
   Future<void> getRuta(String latlng1, String latLng2) async {
+    print("OPENROUTESERVICE");
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
 

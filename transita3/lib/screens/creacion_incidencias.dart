@@ -65,8 +65,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                 ),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: _seleccionarPunto(lat,
-                      lon),
+                  child: _seleccionarPunto(lat, lon),
                 ),
                 Container(
                   height: 20,
@@ -80,8 +79,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                 ),
                 Container(
                   width: 325,
-                  child: _botonCrear(lat,
-                      lon),
+                  child: _botonCrear(lat, lon),
                 ),
                 Container(
                   height: 20,
@@ -212,6 +210,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   }
 
   Widget _botonCrear(double lat, double lon) {
+    final puntosService = Provider.of<PuntoService>(context, listen: true);
+    final incidenciaService = Provider.of<IncidenciaService>(context, listen: true);
     return MaterialButton(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
@@ -228,20 +228,18 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             'accesibilidadPunto': 'NO_ACCESIBLE',
             'visibilidadPunto': 'GLOBAL'
           };
-          await PuntoService.postPunto(puntoData);
+          await puntosService.postPunto(puntoData);
           Map<String, dynamic> incidenciaData = {
             'descripcion': _descripcion,
             'estado': _estado,
             'duracion': _duracion,
             'fechaHora': _fecha,
             "fotos": "$_selectedImage",
-            'punto': PuntoService.puntoNuevo.toJson(),
+            'punto': puntosService.puntoNuevo.toJson(),
             'cliente': LoginService.cliente.toJson(),
           };
-          await IncidenciaService.postIncidencia(incidenciaData);
-          final incidenciaService =
-              Provider.of<IncidenciaService>(context, listen: false);
-          incidenciaService.getIncidencias();
+          await incidenciaService.postIncidencia(incidenciaData);
+          await incidenciaService.getIncidencias();
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
               content: Text('Incidencia creada exitosamente'),

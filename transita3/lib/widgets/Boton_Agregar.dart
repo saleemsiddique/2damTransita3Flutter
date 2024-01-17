@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 
 import 'package:transita3/services/PuntoService.dart';
 
 Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     double width, double height, double? lat, double? lon) {
+  final puntosService = Provider.of<PuntoService>(context, listen: true);
+
   print(routeName);
   print(lat);
   print(lon);
@@ -14,16 +17,16 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     print("Entro en punto null y gestion incidencias");
 
     if (lat != null && lon != null) {
-      PuntoService.getPuntoByCoordenadas(lat, lon);
-      if (PuntoService.puntoSelected != null &&
-          PuntoService.puntoSelected!.latitud != 0.0 &&
-          PuntoService.puntoSelected!.longitud != 0) {
+      puntosService.getPuntoByCoordenadas(lat, lon);
+      if (puntosService.puntoSelected != null &&
+          puntosService.puntoSelected!.latitud != 0.0 &&
+          puntosService.puntoSelected!.longitud != 0) {
         print("Entro en puntoselected not null");
         return GestureDetector(
           onTap: () async {
-            await PuntoService.getPuntos();
+            await puntosService.getPuntos();
             Navigator.pushNamed(context, routeName,
-                arguments: PuntoService.puntoSelected);
+                arguments: puntosService.puntoSelected);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -43,7 +46,7 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     print("Entro en puntoselected null");
     return GestureDetector(
       onTap: () {
-        PuntoService.getPuntoByCoordenadas(lat!, lon!);
+        puntosService.getPuntoByCoordenadas(lat!, lon!);
         Navigator.pushNamed(context, routeName,
             arguments: {'lat': lat, 'lon': lon});
       },
@@ -62,7 +65,7 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     print("No entro en punto null y gestion incidencias");
     return GestureDetector(
       onTap: () async {
-        punto = PuntoService.puntoSelected;
+        punto = puntosService.puntoSelected;
         Navigator.pushNamed(context, routeName, arguments: punto);
       },
       child: Container(
