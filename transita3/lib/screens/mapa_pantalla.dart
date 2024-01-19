@@ -216,22 +216,25 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           bottom: 90.0,
           right: 15.0,
           child: GestureDetector(
-            onTap: () {
-              rutasDetailsSheet(context);
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromRGBO(0, 99, 209, 1),
-              ),
-              child: Icon(
-                Icons.directions,
-                color: Colors.white,
-              ),
-            ),
-          ),
+              onTap: () {
+                rutasDetailsSheet(context);
+              },
+              child: Column(children: [
+                BotonFiltro(),
+                SizedBox(height: 15),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(0, 99, 209, 1),
+                  ),
+                  child: Icon(
+                    Icons.directions,
+                    color: Colors.white,
+                  ),
+                ),
+              ])),
         )
       ],
     );
