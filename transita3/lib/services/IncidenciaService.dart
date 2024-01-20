@@ -56,6 +56,18 @@ Future<void> getIncidencias() async {
     }
   }
 
+    Future<Incidencia> getUltimaIncidencia(int id) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    print('id de clienteIncidencia: ${cliente.id}');
+    if (cliente != null) {
+      final jsonData =
+          await TransitaProvider.getJsonData('incidencia/punto/${id}');
+      return Incidencia.fromRawJson(jsonData);
+    }
+    return Incidencia.empty();
+  }
+
   Future<void> postIncidencia(Map<String, dynamic> data) async {
     final jsonData = await TransitaProvider.postJsonData('incidencia', data);
     print("INCIDENCIA CREADA");

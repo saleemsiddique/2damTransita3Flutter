@@ -1,11 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/screens/olvidar_contrasenya.dart';
+import 'package:transita3/services/Services.dart';
 
 class IniciarSesionPage extends StatefulWidget {
   @override
@@ -169,6 +171,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
   }
 
   Widget _botonLogin(BuildContext context) {
+    final puntosService = Provider.of<PuntoService>(context, listen: true);
+
     return Container(
       width: double.infinity,
       height: 50,
@@ -186,6 +190,9 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
             try {
               await loginForm.signInCliente(credenciales);
+              puntosService.getPuntosForMap();
+
+              puntosService.getPuntosByIdCliente(LoginService.cliente.id);
               Navigator.pushNamed(context, 'home');
               print("Ha llegado aqui");
             } catch (error) {
@@ -251,7 +258,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }*/
 
-     Widget _botonOlvidarContrasena() {
+  Widget _botonOlvidarContrasena() {
     return TextButton(
       onPressed: () {
         showDialog(

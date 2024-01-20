@@ -38,10 +38,24 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                               'Descripción: ${punto.descripcion}',
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
                             ),
-                            Text('Tipo: ${punto.tipoPunto}'),
-                            Text('Latitud: ${punto.latitud}'),
-                            Text('Longitud: ${punto.longitud}'),
+                            SizedBox(height: 8),
+                            Text(
+                              'Grado de accesibilidad: ${punto.accesibilidadPunto}',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'Latitud: ${punto.latitud.toStringAsFixed(5)}',
+                              style: TextStyle(fontSize: 14),
+                            ),
+                            SizedBox(height: 4),
+                            Text(
+                              'Longitud: ${punto.longitud.toStringAsFixed(5)}',
+                              style: TextStyle(fontSize: 14),
+                            ),
                           ],
                         ),
                       ),

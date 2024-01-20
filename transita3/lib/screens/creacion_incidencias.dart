@@ -27,6 +27,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String? _selectedImage;
   String? _imageDisplay;
   String _selectedDuration = '1 hora';
+  String _selectedAccesibilidad = "";
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,13 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     double lat = args?['lat'];
     double lon = args?['lon'];
+
+    // Lista de opciones para el ComboBox
+    List<String> opcionesAccesibilidad = [
+      'NO_ACCESIBLE',
+      'PARCIALMENTE_ACCESIBLE'
+    ];
+
     return Scaffold(
       body: Container(
         child: SingleChildScrollView(
@@ -43,50 +51,41 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             child: Column(
               children: [
                 _logo(),
-                Container(
-                  height: 20,
-                ),
-                Container(
-                  height: 20,
-                ),
+                Container(height: 20),
+                Container(height: 20),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                   child: _escribeDescripcion(),
                 ),
-                Container(
-                  height: 20,
-                ),
+                Container(height: 20),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                   child: _seleccionarDuracion(),
                 ),
-                Container(
-                  height: 20,
-                ),
+                Container(height: 20),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                   child: _seleccionarPunto(lat, lon),
                 ),
-                Container(
-                  height: 20,
-                ),
+                Container(height: 20),
                 Container(
                   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                   child: _buildImageOrButton(),
                 ),
+                Container(height: 20),
                 Container(
-                  height: 20,
+                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: _buildAccesibilidadDropdown(opcionesAccesibilidad),
                 ),
+                Container(height: 20),
                 Container(
                   width: 325,
                   child: _botonCrear(lat, lon),
                 ),
+                Container(height: 20),
                 Container(
-                  height: 20,
-                ),
-                Container(
+                  margin: EdgeInsets.only(bottom: 25),
                   width: 325,
-                  //margin: EdgeInsets.fromLTRB(100, 0, 100, 0),
                   child: _botonCancelar(),
                 ),
               ],
@@ -122,12 +121,6 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       ],
     );
   }
-
-  /*Widget _mostrarImagen() {
-    return _selectedImage != null
-        ? Image.file(_selectedImage!, height: 100, width: 100)
-        : Container();
-  }*/
 
   Future<void> _tomarFoto() async {
     final ImagePicker _picker = ImagePicker();
@@ -209,6 +202,33 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     );
   }
 
+  Widget _buildAccesibilidadDropdown(List<String> opcionesAccesibilidad) {
+    return DropdownButtonFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: InputDecoration(
+        labelText: 'Accesibilidad',
+        border: OutlineInputBorder(),
+      ),
+      items: opcionesAccesibilidad.map((String opcion) {
+        return DropdownMenuItem(
+          value: opcion,
+          child: Text(opcion),
+        );
+      }).toList(),
+      onChanged: (String? newValue) {
+        setState(() {
+          _selectedAccesibilidad = newValue!;
+        });
+      },
+      validator: (_selectedvalue) {
+        if (_selectedvalue == null || _selectedvalue.isEmpty) {
+          return 'Seleccione el grado de accesibilidad';
+        }
+        return null;
+      },
+    );
+  }
+
   Widget _botonCrear(double lat, double lon) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
     final incidenciaService = Provider.of<IncidenciaService>(context, listen: true);
@@ -218,6 +238,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       elevation: 0,
       color: Color.fromRGBO(14, 100, 209, 1),
       onPressed: () async {
+        print("This is Descripcion: $_descripcion");
         if (_formKey.currentState?.validate() ?? false) {
           Map<String, dynamic> puntoData = {
             'descripcion': '',
@@ -225,7 +246,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             'foto': '',
             'latitud': lat,
             'longitud': lon,
-            'accesibilidadPunto': 'NO_ACCESIBLE',
+            'accesibilidadPunto': _selectedAccesibilidad,
             'visibilidadPunto': 'GLOBAL'
           };
           await puntosService.postPunto(puntoData);

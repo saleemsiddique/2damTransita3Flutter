@@ -12,7 +12,6 @@ class MapaPantallaNotifier extends ChangeNotifier {
   static LatLng _latLngOrigen = LatLng(0, 0);
   static LatLng _latLngDestino = LatLng(0, 0);
   static bool routeChange = true;
-  static bool recharge = false;
 
   LatLng get latLngOrigen => _latLngOrigen;
   LatLng get latLngDestino => _latLngDestino;
@@ -75,10 +74,6 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
 
-    puntosService.getPuntosForMap();
-
-    puntosService.getPuntosByIdCliente(LoginService.cliente.id);
-
     Widget mapa = Consumer2<MapaPantallaNotifier, OpenRouteService>(
       builder: (context, mapaPantallaNotifier, openRouteService, child) {
         return GestureDetector(
@@ -121,24 +116,64 @@ class _MapaPantalla extends State<Mapa_pantalla> {
               MarkerLayer(
                 markers: [
                   if (showMarkers)
-                    ...puntosService.puntosForMap.map((punto) {
-                      return Marker(
-                        width: 40.0,
-                        height: 40.0,
-                        point: LatLng(punto.latitud, punto.longitud),
-                        child: GestureDetector(
-                          onTap: () {
-                            latLngSelec = LatLng(0, 0);
-                            setState(() {});
-                            showPointDetailsBottomSheet(context, punto);
-                          },
-                          child: Icon(
-                            Icons.location_pin,
-                            color: Colors.red,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    ...puntosService.puntosForMap
+                        .map((punto) {
+                          if (punto.accesibilidadPunto == 'NO_ACCESIBLE') {
+                            return Marker(
+                              width: 40.0,
+                              height: 40.0,
+                              point: LatLng(punto.latitud, punto.longitud),
+                              child: GestureDetector(
+                                onTap: () {
+                                  latLngSelec = LatLng(0, 0);
+                                  setState(() {});
+                                  showPointDetailsBottomSheet(context, punto);
+                                },
+                                child: Icon(
+                                  Icons.location_off_rounded,
+                                  color: Color.fromARGB(255, 255, 0, 0),
+                                ),
+                              ),
+                            );
+                          } else if (punto.accesibilidadPunto ==
+                              'PARCIALMENTE_ACCESIBLE') {
+                            return Marker(
+                              width: 40.0,
+                              height: 40.0,
+                              point: LatLng(punto.latitud, punto.longitud),
+                              child: GestureDetector(
+                                onTap: () {
+                                  latLngSelec = LatLng(0, 0);
+                                  setState(() {});
+                                  showPointDetailsBottomSheet(context, punto);
+                                },
+                                child: Icon(
+                                  Icons.not_listed_location,
+                                  color: Color.fromARGB(255, 255, 145, 0),
+                                ),
+                              ),
+                            );
+                          } else {
+                            return Marker(
+                              width: 40.0,
+                              height: 40.0,
+                              point: LatLng(punto.latitud, punto.longitud),
+                              child: GestureDetector(
+                                onTap: () {
+                                  latLngSelec = LatLng(0, 0);
+                                  setState(() {});
+                                  showPointDetailsBottomSheet(context, punto);
+                                },
+                                child: Icon(
+                                  Icons.location_pin,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            );
+                          }
+                        })
+                        .where((marker) => marker != null)
+                        .toList(),
                   ...puntosService.favsForMap.map((punto) {
                     return Marker(
                       width: 40.0,

@@ -31,6 +31,47 @@ class PuntoService extends ChangeNotifier {
     }
   }
 
+  clearMap() {
+    puntosForMap.clear();
+    notifyListeners();
+  }
+
+  clearAccesiblesMap() {
+    puntosForMap
+        .removeWhere((punto) => punto.accesibilidadPunto == 'ACCESIBLE');
+    notifyListeners();
+  }
+
+  clearIncidencesMap() {
+    puntosForMap.removeWhere((punto) =>
+        punto.accesibilidadPunto == 'NO_ACCESIBLE' ||
+        punto.accesibilidadPunto == 'PARCIALMENTE_ACCESIBLE');
+    notifyListeners();
+  }
+
+  clearFavsMap() {
+    favsForMap.clear();
+    notifyListeners();
+  }
+
+  Future<void> getPuntosForMapFiltered(int accesibilidad) async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData(
+          '/puntos/accesibilidad/$accesibilidad');
+
+      final List<dynamic> jsonList = json.decode(jsonData);
+      List<Punto> newPuntosForMap =
+          jsonList.map((json) => Punto.fromJson(json)).toList();
+
+      if (!listEquals(puntosForMap, newPuntosForMap)) {
+        puntosForMap = newPuntosForMap;
+        notifyListeners();
+      }
+    }
+  }
+
   Future<void> getPuntos() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
