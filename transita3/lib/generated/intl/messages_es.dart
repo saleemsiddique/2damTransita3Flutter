@@ -55,6 +55,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "validatorEmail":
             MessageLookupByLibrary.simpleMessage("Introduce un email válido"),
         "validatorPassword": MessageLookupByLibrary.simpleMessage(
-            "La contraseña debe contener al menos 6 caracteres")
+            "La contraseña debe contener al menos 6 caracteres"),
+            "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+            "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
+            "configurations": MessageLookupByLibrary.simpleMessage("Configuraciones"),
+            "changepass": MessageLookupByLibrary.simpleMessage("Cambiar Contraseña")
       };
 }

@@ -110,12 +110,13 @@ class _InicioSesion extends State<IniciarSesionPage> {
       idiomaLoad = Locale('val', 'VAl');
     }
 
-    S.load(idiomaLoad);
-
+   
+S.load(idiomaLoad);
     setState(() {
       _selectedLanguage = idioma;
     });
   }
+
 
   TextFormField _escribirEmail() {
     return TextFormField(

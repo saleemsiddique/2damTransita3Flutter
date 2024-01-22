@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/screens/perfil_pantalla.dart';
@@ -143,7 +144,7 @@ class CustomEndDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.person),
-            title: Text('Perfil'),
+            title: Text(S.of(context).profile),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => PerfilPantalla()),
@@ -152,7 +153,7 @@ class CustomEndDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text('Ajustes'),
+            title: Text(S.of(context).settings),
             onTap: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => AjustesPantalla()),

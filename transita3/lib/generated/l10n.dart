@@ -259,6 +259,39 @@ class S {
       args: [],
     );
   }
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+  String get changepass {
+    return Intl.message(
+      'Change Password',
+      name: 'changepass',
+      desc: '',
+      args: [],
+    );
+  }
+  String get configurations {
+    return Intl.message(
+      'Configurations',
+      name: 'configurations',
+      desc: '',
+      args: [],
+    );
+  }
+  
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
