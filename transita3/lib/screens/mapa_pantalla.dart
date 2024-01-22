@@ -36,7 +36,7 @@ class Mapa_pantalla extends StatefulWidget {
   static bool isBottomSheetOpen = false;
   static bool primerPuntoSeleccionado = false;
   static bool segundoPuntoSeleccionado = false;
-  static String selectedPoint1Text = 'Seleccionar un punto de origen';
+  static String selectedPoint1Text = 'Seleccionar un origen en el origen';
   static String selectedPoint2Text = 'Seleccionar un destino en el mapa';
 
   _MapaPantalla createState() => _MapaPantalla();
