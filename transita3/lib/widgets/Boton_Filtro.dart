@@ -46,38 +46,88 @@ class _MyButtonState extends State<BotonFiltro> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        buildExpandedButtonContainer(Icons.accessibility, isAccessibleActive,
-            () {
-          setState(() {
-            isAccessibleActive = !isAccessibleActive;
-            if (isIncidentActive) {
-              isIncidentActive = !isIncidentActive;
+        buildExpandedButtonContainer(
+          Icons.accessibility,
+          isAccessibleActive,
+          () async {
+            try {
+              setState(() {
+                isAccessibleActive = !isAccessibleActive;
+                if (isIncidentActive) {
+                  isIncidentActive = !isIncidentActive;
+                }
+              });
+              if (isAccessibleActive) {
+                // Llamar a la función getPuntosForMapFiltered del servicio
+                await puntosService.getPuntosForMapFiltered(0);
+              } else {
+                // Llamar a la función clearAccesiblesMap del servicio
+                puntosService.clearAccesiblesMap();
+              }
+            } catch (error) {
+              // Mostrar un aviso en caso de error
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Error, esta sesion ha expirado.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil('/', (route) => false);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
-          });
-          if (isAccessibleActive) {
-            puntosService.getPuntosForMapFiltered(0);
-          } else {
-            puntosService.clearAccesiblesMap();
-          }
-          ;
-        }),
+          },
+        ),
         SizedBox(
           height: 10,
         ),
         buildExpandedButtonContainer(
           Icons.accessible_outlined,
           isIncidentActive,
-          () {
-            setState(() {
-              isIncidentActive = !isIncidentActive;
-              if (isAccessibleActive) {
-                isAccessibleActive = !isAccessibleActive;
+          () async {
+            try {
+              setState(() {
+                isIncidentActive = !isIncidentActive;
+                if (isAccessibleActive) {
+                  isAccessibleActive = !isAccessibleActive;
+                }
+              });
+              if (isIncidentActive) {
+                // Llamar a la función getPuntosForMap del servicio
+                await puntosService.getPuntosForMap();
+              } else {
+                // Llamar a la función clearIncidencesMap del servicio
+                puntosService.clearIncidencesMap();
               }
-            });
-            if (isIncidentActive) {
-              puntosService.getPuntosForMap();
-            } else {
-              puntosService.clearIncidencesMap();
+            } catch (error) {
+              // Mostrar un aviso en caso de error
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Error, esta sesion ha expirado.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil('/', (route) => false);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
           },
         ),
@@ -87,14 +137,39 @@ class _MyButtonState extends State<BotonFiltro> {
         buildExpandedButtonContainer(
           Icons.favorite,
           isFavoriteActive,
-          () {
-            setState(() {
-              isFavoriteActive = !isFavoriteActive;
-            });
-            if (isFavoriteActive) {
-              puntosService.getPuntosByIdCliente(LoginService.cliente.id);
-            } else {
-              puntosService.clearFavsMap();
+          () async {
+            try {
+              setState(() {
+                isFavoriteActive = !isFavoriteActive;
+              });
+              if (isFavoriteActive) {
+                // Llamar a la función getPuntosByIdCliente del servicio
+                await puntosService
+                    .getPuntosByIdCliente(LoginService.cliente.id);
+              } else {
+                // Llamar a la función clearFavsMap del servicio
+                puntosService.clearFavsMap();
+              }
+            } catch (error) {
+              // Mostrar un aviso en caso de error
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text('Error'),
+                    content: Text('Error, esta sesion ha expirado.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamedAndRemoveUntil('/', (route) => false);
+                        },
+                        child: Text('OK'),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
           },
         ),

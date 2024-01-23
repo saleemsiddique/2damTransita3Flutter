@@ -231,42 +231,71 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
   Widget _botonCrear(double lat, double lon) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
-    final incidenciaService = Provider.of<IncidenciaService>(context, listen: true);
+    final incidenciaService =
+        Provider.of<IncidenciaService>(context, listen: true);
     return MaterialButton(
       padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       elevation: 0,
       color: Color.fromRGBO(14, 100, 209, 1),
       onPressed: () async {
-        print("This is Descripcion: $_descripcion");
-        if (_formKey.currentState?.validate() ?? false) {
-          Map<String, dynamic> puntoData = {
-            'descripcion': '',
-            'tipoPunto': 'LUGAR',
-            'foto': '',
-            'latitud': lat,
-            'longitud': lon,
-            'accesibilidadPunto': _selectedAccesibilidad,
-            'visibilidadPunto': 'GLOBAL'
-          };
-          await puntosService.postPunto(puntoData);
-          Map<String, dynamic> incidenciaData = {
-            'descripcion': _descripcion,
-            'estado': _estado,
-            'duracion': _duracion,
-            'fechaHora': _fecha,
-            "fotos": "$_selectedImage",
-            'punto': puntosService.puntoNuevo.toJson(),
-            'cliente': LoginService.cliente.toJson(),
-          };
-          await incidenciaService.postIncidencia(incidenciaData);
-          await incidenciaService.getIncidencias();
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Incidencia creada exitosamente'),
-            ),
+        try {
+          print("This is Descripcion: $_descripcion");
+          if (_formKey.currentState?.validate() ?? false) {
+            Map<String, dynamic> puntoData = {
+              'descripcion': '',
+              'tipoPunto': 'LUGAR',
+              'foto': '',
+              'latitud': lat,
+              'longitud': lon,
+              'accesibilidadPunto': _selectedAccesibilidad,
+              'visibilidadPunto': 'GLOBAL'
+            };
+            // Llamar a la función postPunto del servicio
+            await puntosService.postPunto(puntoData);
+
+            Map<String, dynamic> incidenciaData = {
+              'descripcion': _descripcion,
+              'estado': _estado,
+              'duracion': _duracion,
+              'fechaHora': _fecha,
+              "fotos": "$_selectedImage",
+              'punto': puntosService.puntoNuevo.toJson(),
+              'cliente': LoginService.cliente.toJson(),
+            };
+            // Llamar a la función postIncidencia del servicio
+            await incidenciaService.postIncidencia(incidenciaData);
+
+            // Llamar a la función getIncidencias del servicio
+            await incidenciaService.getIncidencias();
+
+            // Mostrar el SnackBar si la creación de la incidencia es exitosa
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Incidencia creada exitosamente'),
+              ),
+            );
+            Navigator.pop(context);
+          }
+        } catch (error) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text('Ha ocurrido un error al crear la incidencia.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamedAndRemoveUntil('/', (route) => false);
+                    },
+                    child: Text('OK'),
+                  ),
+                ],
+              );
+            },
           );
-          Navigator.pop(context);
         }
       },
       child: Text('Crear'),
