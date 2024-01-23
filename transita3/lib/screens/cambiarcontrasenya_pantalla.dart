@@ -9,19 +9,19 @@ class CambiarContrasenaPantalla extends StatefulWidget {
       _CambiarContrasenaPantallaState();
 }
 
-class _CambiarContrasenaPantallaState
-    extends State<CambiarContrasenaPantalla> {
+class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _contrasenaController = TextEditingController();
-  TextEditingController _confirmarContrasenaController = TextEditingController();
+  TextEditingController _confirmarContrasenaController =
+      TextEditingController();
 
-  LoginService loginService=new LoginService();
+  LoginService loginService = new LoginService();
 
   @override
-  void initState()
-  {
+  void initState() {
     super.initState();
   }
+
   Widget build(BuildContext context) {
     final clienteService = Provider.of<LoginService>(context, listen: false);
 
@@ -82,23 +82,46 @@ class _CambiarContrasenaPantallaState
                         ElevatedButton(
                           onPressed: () async {
                             if (_formKey.currentState?.validate() ?? false) {
-                              // Llamar a la función modifyContrasenya del servicio
-                              await clienteService.modifyContrasenya(
-                                {
-                                  'currentPassword':
-                                      clienteService.password, // Contraseña actual
-                                  'contrasenya': _contrasenaController.text, // Nueva contraseña
-                                },
-                                LoginService.cliente.id,
-                              );
+                              try {
+                                // Llamar a la función modifyContrasenya del servicio
+                                await clienteService.modifyContrasenya(
+                                  {
+                                    'currentPassword': clienteService
+                                        .password, // Contraseña actual
+                                    'contrasenya': _contrasenaController
+                                        .text, // Nueva contraseña
+                                  },
+                                  LoginService.cliente.id,
+                                );
 
-                              // Mostrar el SnackBar
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text('Contraseña modificada con éxito'),
-                                ),
-                              );
+                                // Mostrar el SnackBar si la modificación de la contraseña es exitosa
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('Contraseña modificada con éxito'),
+                                  ),
+                                );
+                              } catch (error) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Error'),
+                                      content: Text('Tu cuenta ha expirado.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pushNamedAndRemoveUntil(
+                                                    '/', (route) => false);
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }
                             }
                           },
                           child: Text('Cambiar Contraseña'),

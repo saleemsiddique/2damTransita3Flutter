@@ -234,8 +234,30 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           top: 16.0,
           child: RawMaterialButton(
             onPressed: () async {
-              await puntosService.getPuntosForMap();
-              setState(() {});
+              try {
+                await puntosService.getPuntosForMap();
+                setState(() {});
+              } catch (error) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Error'),
+                      content: Text(
+                          'Ha ocurrido un error al obtener los puntos para el mapa.'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/', (route) => false); // Cerrar el AlertDialog
+                          },
+                          child: Text('OK'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }
             },
             elevation: 2.0,
             fillColor: Color.fromRGBO(0, 99, 209, 1),

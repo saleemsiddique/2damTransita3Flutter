@@ -22,9 +22,32 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   Widget build(BuildContext context) {
     final incidenciasService =
         Provider.of<IncidenciaService>(context, listen: true);
+
     if (incidenciasService.incidenciasDeUsuario.isEmpty) {
-      incidenciasService.getIncidencias();
+      try {
+        incidenciasService.getIncidencias();
+      } catch (error) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Ha ocurrido un error al obtener las incidencias.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (route) => false);
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
+
     return Scaffold(
       floatingActionButton:
           botonAgregar(context, 'home', null, 80, 80, null, null),
@@ -163,6 +186,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   Widget _botonEliminar(BuildContext context, int id) {
     final incidenciasService =
         Provider.of<IncidenciaService>(context, listen: false);
+
     return IconButton(
       icon: Icon(Icons.delete),
       onPressed: () {
@@ -182,13 +206,37 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    // Lógica para la opción 'Eliminar'
-                    await incidenciasService.deleteIncidencia(id);
-                    setState(() {
-                      incidenciasService.getIncidencias();
-                    });
-                    // Recargar la lista de incidencias después de eliminar
-                    Navigator.of(context).pop(); // Cerrar el cuadro de diálogo
+                    try {
+                      // Lógica para la opción 'Eliminar'
+                      await incidenciasService.deleteIncidencia(id);
+                      setState(() {
+                        incidenciasService.getIncidencias();
+                      });
+                      // Recargar la lista de incidencias después de eliminar
+                      Navigator.of(context)
+                          .pop(); // Cerrar el cuadro de diálogo
+                    } catch (error) {
+                      // Mostrar un aviso en caso de error
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error'),
+                            content: Text(
+                                'Ha ocurrido un error al eliminar la incidencia.'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      '/', (route) => false);
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                   child: Text('Eliminar'),
                 ),
