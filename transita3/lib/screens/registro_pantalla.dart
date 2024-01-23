@@ -12,7 +12,7 @@ class RegistroPage extends StatefulWidget {
 
 class _Registro extends State<RegistroPage> {
   final _formKey = GlobalKey<FormState>();
-  String _nombre = '', _apellidos = '', _email = '', _contrasenya = '';
+  String _nombre = '', _apellidos = '', _email = '', _contrasenya = '',_confirmarContrasenya = '';
   bool _mostrarContrasenya = false;
   ClienteService clienteProvider = new ClienteService();
 
@@ -50,7 +50,10 @@ class _Registro extends State<RegistroPage> {
                   SizedBox(height: 20),
                   _escribirEmail(),
                   SizedBox(height: 20),
-                  _escribirContrasenya()
+                  _escribirContrasenya(),
+                  SizedBox(height: 20),
+                  _escribirConfirmarContrasenya()
+                  
                 ],
               ),
             ),
@@ -186,6 +189,39 @@ class _Registro extends State<RegistroPage> {
       },
     );
   }
+  Widget _escribirConfirmarContrasenya() {
+  return TextFormField(
+    decoration: InputDecoration(
+      hintText: "Confirmar contraseña",
+      labelText:"Confirmar contraseña",
+      suffixIcon: GestureDetector(
+        onTap: () {
+          setState(() {
+            _mostrarContrasenya = !_mostrarContrasenya;
+          });
+        },
+        child: Icon(
+          _mostrarContrasenya ? Icons.visibility : Icons.visibility_off,
+        ),
+      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+    ),
+    obscureText: !_mostrarContrasenya,
+    onChanged: (valor) => setState(() {
+      _confirmarContrasenya = valor;
+    }),
+    autovalidateMode: AutovalidateMode.onUserInteraction,
+    validator: (value) {
+      if (value == null || value.length < 6) {
+        return 'La contraseña debe contener al menos 6 caracteres';
+      } else if (value != _contrasenya) {
+        return 'Las contraseñas no coinciden';
+      }
+      return null;
+    },
+  );
+}
+
 
   Widget _botonRegistro() {
     return Container(
@@ -198,45 +234,50 @@ class _Registro extends State<RegistroPage> {
         color: Color.fromRGBO(14, 100, 209, 1),
         onPressed: () async {
           print("Empezó");
-          if (_formKey.currentState?.validate() == true) {
-            Map<String, dynamic> credenciales = {
-              'nombre': _nombre,
-              'apellidos': _apellidos,
+      if (_formKey.currentState?.validate() == true) {
+        if (_contrasenya != _confirmarContrasenya) {
+          // Muestra un mensaje de error si las contraseñas no coinciden
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                title: Text('Error de registro'),
+                content: Text('Las contraseñas no coinciden.'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(S.of(context).acceptIncorrectLoginData),
+                  ),
+                ],
+              );
+            },
+          );
+        } else {
+          // Continúa con el registro si las contraseñas coinciden
+          Map<String, dynamic> credenciales = {
+            'nombre': _nombre,
+            'apellidos': _apellidos,
+            'nombreUsuario': _email,
+            'contrasenya': _contrasenya,
+            'rol': ["ROLE_USUARIO"],
+          };
+
+          try {
+            await clienteProvider.signUpCliente(credenciales);
+            Map<String, dynamic> credencialesLogIn = {
               'nombreUsuario': _email,
               'contrasenya': _contrasenya,
-              'rol': ["ROLE_USUARIO"],
             };
-
-            try {
-              await clienteProvider.signUpCliente(credenciales);
-              Map<String, dynamic> credencialesLogIn = {
-                'nombreUsuario': _email,
-                'contrasenya': _contrasenya,
-              };
-              await LoginService().signInCliente(credencialesLogIn);
-              Navigator.pushNamed(context, 'home');
-            } catch (error) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text('Error de registro'),
-                    content: Text(
-                        'Una cuenta con este email ya está creada. Por favor, inicia sesión.'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(S.of(context).acceptIncorrectLoginData),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }
+            await LoginService().signInCliente(credencialesLogIn);
+            Navigator.pushNamed(context, 'home');
+          } catch (error) {
+            // Manejar el error de registro aquí
           }
-          print("Acabó");
+        }
+      }
+      print("Acabó");
         },
         child: Text(S.of(context).registerButton,
             style: TextStyle(color: Colors.white)),
