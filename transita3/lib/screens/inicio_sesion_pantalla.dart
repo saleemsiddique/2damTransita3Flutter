@@ -110,13 +110,11 @@ class _InicioSesion extends State<IniciarSesionPage> {
       idiomaLoad = Locale('val', 'VAl');
     }
 
-   
-S.load(idiomaLoad);
+    S.load(idiomaLoad);
     setState(() {
       _selectedLanguage = idioma;
     });
   }
-
 
   TextFormField _escribirEmail() {
     return TextFormField(
@@ -194,7 +192,8 @@ S.load(idiomaLoad);
               puntosService.getPuntosForMap();
 
               puntosService.getPuntosByIdCliente(LoginService.cliente.id);
-              Navigator.pushNamed(context, 'home');
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('home', (route) => false);
               print("Ha llegado aqui");
             } catch (error) {
               showDialog(
