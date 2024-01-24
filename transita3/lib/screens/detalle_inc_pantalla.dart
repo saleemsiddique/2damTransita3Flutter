@@ -61,14 +61,13 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                     height: 500,
                     margin: EdgeInsets.only(bottom: 10, top: 10),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                      ),
-                      child: showImage(incidencia)
-                    ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                        child: showImage(incidencia)),
                   ),
                 ],
               ),

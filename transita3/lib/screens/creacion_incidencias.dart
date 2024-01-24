@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
@@ -162,7 +163,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: 'Descripcion',
-        labelText: 'Descripcion de la incidencia',
+        labelText: S.of(context).incidencedesc,
         fillColor: Colors.white,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),

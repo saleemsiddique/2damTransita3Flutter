@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/navigation_bar.dart';
+import 'package:transita3/screens/ajustes_pantalla.dart';
 import 'package:transita3/screens/creacion_incidencias.dart';
 import 'package:transita3/screens/detalle_inc_pantalla.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
@@ -16,5 +17,6 @@ Map<String, WidgetBuilder> getApplicationRoutes() {
     'gestionincidencia': (BuildContext context) => GestionIncidenciasPage(),
     'creacionincidencia': (BuildContext context) => CreacionIncidenciasPage(),
     'detalleincidencia': (BuildContext context) => detalle_incidencias(),
+    'ajustes': (BuildContext context) => AjustesPantalla(),
   };
 }

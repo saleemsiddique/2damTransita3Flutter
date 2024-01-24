@@ -53,9 +53,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
         "validatorPassword": MessageLookupByLibrary.simpleMessage(
             "Password must have at least 6 characters"),
-            "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-            "profile": MessageLookupByLibrary.simpleMessage("Profile"),
-            "configurations": MessageLookupByLibrary.simpleMessage("Configurations"),
-            "changepass": MessageLookupByLibrary.simpleMessage("Change PassWord")
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "changepass": MessageLookupByLibrary.simpleMessage("Change Password"),
+        "changelen": MessageLookupByLibrary.simpleMessage("Change Language"),
+        "incidencedesc": MessageLookupByLibrary.simpleMessage(
+            "Description of the incidence"),
       };
 }

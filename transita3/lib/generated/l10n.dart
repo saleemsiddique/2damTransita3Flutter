@@ -253,12 +253,14 @@ class S {
   /// `¿Already have an account? sign In`
   String get registerAlreadyAccount {
     return Intl.message(
-      '¿Already have an account? sign In ',
+      '¿Already have an account? sign In',
       name: 'registerAlreadyAccount',
       desc: '',
       args: [],
     );
   }
+
+  /// `¿Already have an account? sign In`
   String get settings {
     return Intl.message(
       'Settings',
@@ -267,6 +269,8 @@ class S {
       args: [],
     );
   }
+
+  /// `¿Already have an account? sign In`
   String get profile {
     return Intl.message(
       'Profile',
@@ -275,6 +279,8 @@ class S {
       args: [],
     );
   }
+
+  /// `¿Already have an account? sign In`
   String get changepass {
     return Intl.message(
       'Change Password',
@@ -283,15 +289,46 @@ class S {
       args: [],
     );
   }
-  String get configurations {
+
+  /// `¿Already have an account? sign In`
+  String get changelen {
     return Intl.message(
-      'Configurations',
-      name: 'configurations',
+      'Change Lenguage',
+      name: 'changelen',
       desc: '',
       args: [],
     );
   }
-  
+
+  /// `¿Already have an account? sign In`
+  String get incidencedesc {
+    return Intl.message(
+      'Description of the incidence',
+      name: 'incidencedesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get name {
+    return Intl.message(
+      'Nombre',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get apellido {
+    return Intl.message(
+      'Second Name',
+      name: 'apellido',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
