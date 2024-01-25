@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/provider/Utils.dart';
 import 'package:transita3/services/IncidenciaService.dart';
@@ -86,7 +87,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Descripcion: $descripcion',
+                            S.of(context).description + ': $descripcion',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

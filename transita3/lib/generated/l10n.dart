@@ -261,10 +261,10 @@ class S {
   }
 
   /// `¿Already have an account? sign In`
-  String get settings {
+  String get changepass {
     return Intl.message(
-      'Settings',
-      name: 'settings',
+      'Change Password',
+      name: 'changepass',
       desc: '',
       args: [],
     );
@@ -281,10 +281,10 @@ class S {
   }
 
   /// `¿Already have an account? sign In`
-  String get changepass {
+  String get settings {
     return Intl.message(
-      'Change Password',
-      name: 'changepass',
+      'Settings',
+      name: 'settings',
       desc: '',
       args: [],
     );
@@ -293,7 +293,7 @@ class S {
   /// `¿Already have an account? sign In`
   String get changelen {
     return Intl.message(
-      'Change Lenguage',
+      'Change Language',
       name: 'changelen',
       desc: '',
       args: [],
@@ -303,28 +303,238 @@ class S {
   /// `¿Already have an account? sign In`
   String get incidencedesc {
     return Intl.message(
-      'Description of the incidence',
+      'Incidence Description',
       name: 'incidencedesc',
       desc: '',
       args: [],
     );
   }
 
-  /// `¿Already have an account? sign In`
-  String get name {
+  /// `No hay incidencias`
+  String get noIncidences {
     return Intl.message(
-      'Nombre',
-      name: 'name',
+      'No incidences',
+      name: 'noIncidences',
       desc: '',
       args: [],
     );
   }
 
-  /// `¿Already have an account? sign In`
-  String get apellido {
+  /// `Crear Ruta`
+  String get createRoute {
     return Intl.message(
-      'Second Name',
-      name: 'apellido',
+      'Create Route',
+      name: 'createRoute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Duracion Estimada`
+  String get estimatedDuration {
+    return Intl.message(
+      'Estimated Duration',
+      name: 'estimatedDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Accesibilidad`
+  String get accessibility {
+    return Intl.message(
+      'Accessibility',
+      name: 'accessibility',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crear`
+  String get create {
+    return Intl.message(
+      'Create',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ingrese la duracion`
+  String get enterDuration {
+    return Intl.message(
+      'Enter duration',
+      name: 'enterDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Indique una duracion`
+  String get specifyDuration {
+    return Intl.message(
+      'Specify duration',
+      name: 'specifyDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `La descripcion debe contener mas informacion`
+  String get descriptionInfo {
+    return Intl.message(
+      'Description must contain more information',
+      name: 'descriptionInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seleccione el grado de accesibilidad`
+  String get selectAccessibilityLevel {
+    return Intl.message(
+      'Select accessibility level',
+      name: 'selectAccessibilityLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Guardar Cambios`
+  String get saveChanges {
+    return Intl.message(
+      'Save Changes',
+      name: 'saveChanges',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nueva Contraseña`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Nueva Contraseña`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirmar Nueva contraseña`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm New Password',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Las contraseñas no coinciden`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Las contraseñas no coinciden',
+      name: 'passwordsDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por favor, ingresa la nueva contraseña`
+  String get enterNewPassword {
+    return Intl.message(
+      'Por favor, ingresa la nueva contraseña',
+      name: 'enterNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contraseña modificada con éxito`
+  String get passwordChangedSuccessfully {
+    return Intl.message(
+      'Contraseña modificada con éxito',
+      name: 'passwordChangedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tu cuenta ha expirado`
+  String get accountExpired {
+    return Intl.message(
+      'Tu cuenta ha expirado',
+      name: 'accountExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ha ocurrido un error al crear la incidencia.`
+  String get errorCreatingIncident {
+    return Intl.message(
+      'Ha ocurrido un error al crear la incidencia.',
+      name: 'errorCreatingIncident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incidencia creada exitosamente`
+  String get incidentCreatedSuccessfully {
+    return Intl.message(
+      'Incidencia creada exitosamente',
+      name: 'incidentCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seleccionar de la galería`
+  String get selectFromGallery {
+    return Intl.message(
+      'Seleccionar de la galería',
+      name: 'selectFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sacar una foto`
+  String get takeAPhoto {
+    return Intl.message(
+      'Sacar una foto',
+      name: 'takeAPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cambiar Imagen`
+  String get changeImage {
+    return Intl.message(
+      'Cambiar Imagen',
+      name: 'changeImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subir Foto`
+  String get uploadPhoto {
+    return Intl.message(
+      'Subir Foto',
+      name: 'uploadPhoto',
       desc: '',
       args: [],
     );

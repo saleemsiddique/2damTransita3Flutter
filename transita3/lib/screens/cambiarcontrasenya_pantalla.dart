@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/services/LoginService.dart';
 
@@ -27,7 +28,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cambiar Contraseña'),
+        title: Text(S.of(context).changepass),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -51,7 +52,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                         TextFormField(
                           controller: _contrasenaController,
                           decoration: InputDecoration(
-                            labelText: 'Nueva Contraseña',
+                            labelText: S.of(context).newPassword,
                           ),
                           obscureText: true,
                           validator: (value) {
@@ -66,7 +67,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                         TextFormField(
                           controller: _confirmarContrasenaController,
                           decoration: InputDecoration(
-                            labelText: 'Confirmar Nueva Contraseña',
+                            labelText: S.of(context).confirmNewPassword,
                           ),
                           obscureText: true,
                           validator: (value) {
@@ -124,7 +125,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                               }
                             }
                           },
-                          child: Text('Cambiar Contraseña'),
+                          child: Text(S.of(context).changepass),
                         ),
                       ],
                     ),

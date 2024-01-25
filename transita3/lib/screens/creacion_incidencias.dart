@@ -162,7 +162,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: 'Descripcion',
+        hintText: S.of(context).description,
         labelText: S.of(context).incidencedesc,
         fillColor: Colors.white,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
@@ -173,7 +173,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 10) {
-          return 'La descripcion debe contener mas informacion';
+          return S.of(context).descriptionInfo;
         }
         return null;
       },
@@ -183,8 +183,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   Widget _seleccionarDuracion() {
     return TextFormField(
       decoration: InputDecoration(
-        labelText: 'Duración estimada',
-        hintText: 'Ingrese la duración',
+        labelText: S.of(context).specifyDuration,
+        hintText: S.of(context).enterDuration,
         fillColor: Colors.white,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
@@ -196,7 +196,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 10) {
-          return 'Indique una duracion';
+          return S.of(context).specifyDuration;
         }
         return null;
       },
@@ -207,7 +207,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
     return DropdownButtonFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
-        labelText: 'Accesibilidad',
+        labelText: S.of(context).accessibility,
         border: OutlineInputBorder(),
       ),
       items: opcionesAccesibilidad.map((String opcion) {
@@ -223,7 +223,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       },
       validator: (_selectedvalue) {
         if (_selectedvalue == null || _selectedvalue.isEmpty) {
-          return 'Seleccione el grado de accesibilidad';
+          return S.of(context).selectAccessibilityLevel;
         }
         return null;
       },
@@ -273,7 +273,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             // Mostrar el SnackBar si la creación de la incidencia es exitosa
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Incidencia creada exitosamente'),
+                content: Text(S.of(context).incidentCreatedSuccessfully),
               ),
             );
             Navigator.pop(context);
@@ -284,7 +284,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text('Error'),
-                content: Text('Ha ocurrido un error al crear la incidencia.'),
+                content: Text(S.of(context).errorCreatingIncident),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {
@@ -299,7 +299,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
           );
         }
       },
-      child: Text('Crear'),
+      child: Text(S.of(context).create),
     );
   }
 
@@ -339,7 +339,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             children: <Widget>[
               ListTile(
                 leading: Icon(Icons.photo_library),
-                title: Text('Seleccionar de la galería'),
+                title: Text(S.of(context).selectFromGallery),
                 onTap: () async {
                   Navigator.pop(context,
                       await picker.pickImage(source: ImageSource.gallery));
@@ -347,7 +347,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               ),
               ListTile(
                 leading: Icon(Icons.camera_alt),
-                title: Text('Sacar una foto'),
+                title: Text(S.of(context).takeAPhoto),
                 onTap: () async {
                   Navigator.pop(context,
                       await picker.pickImage(source: ImageSource.camera));
@@ -398,7 +398,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Cambiar Imagen',
+                    S.of(context).changeImage,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
@@ -439,7 +439,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               color: Color(0x8069a2f2),
             ),
             label: Text(
-              'Subir Foto',
+              S.of(context).uploadPhoto,
               style: TextStyle(color: Color(0x8069a2f2)),
             ),
           ),
@@ -458,7 +458,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
           children: <Widget>[
             ListTile(
               leading: Icon(Icons.photo_library),
-              title: Text('Seleccionar de la galería'),
+              title: Text(S.of(context).selectFromGallery),
               onTap: () async {
                 Navigator.pop(context,
                     await picker.pickImage(source: ImageSource.gallery));
@@ -466,7 +466,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             ),
             ListTile(
               leading: Icon(Icons.camera_alt),
-              title: Text('Sacar una foto'),
+              title: Text(S.of(context).takeAPhoto),
               onTap: () async {
                 Navigator.pop(context,
                     await picker.pickImage(source: ImageSource.camera));

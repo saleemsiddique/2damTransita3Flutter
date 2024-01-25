@@ -55,9 +55,46 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password must have at least 6 characters"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-        "changepass": MessageLookupByLibrary.simpleMessage("Change Password"),
         "changelen": MessageLookupByLibrary.simpleMessage("Change Language"),
-        "incidencedesc": MessageLookupByLibrary.simpleMessage(
-            "Description of the incidence"),
+        "changepass": MessageLookupByLibrary.simpleMessage("Change Password"),
+        "incidencedesc":
+            MessageLookupByLibrary.simpleMessage("Incidence Description"),
+        "noIncidences": MessageLookupByLibrary.simpleMessage("No incidences"),
+        "createRoute": MessageLookupByLibrary.simpleMessage("Create Route"),
+        "estimatedDuration":
+            MessageLookupByLibrary.simpleMessage("Estimated Duration"),
+        "accessibility": MessageLookupByLibrary.simpleMessage("Accessibility"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "enterDuration": MessageLookupByLibrary.simpleMessage("Enter duration"),
+        "specifyDuration":
+            MessageLookupByLibrary.simpleMessage("Specify duration"),
+        "descriptionInfo": MessageLookupByLibrary.simpleMessage(
+            "Description must contain more information"),
+        "selectAccessibilityLevel":
+            MessageLookupByLibrary.simpleMessage("Select accessibility level"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirm New Password"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+            "Please enter the new password"),
+        "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully"),
+        "accountExpired":
+            MessageLookupByLibrary.simpleMessage("Your account has expired"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "errorCreatingIncident": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while creating the incident."),
+        "incidentCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Incident created successfully"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "selectFromGallery":
+            MessageLookupByLibrary.simpleMessage("Select from Gallery"),
+        "takeAPhoto": MessageLookupByLibrary.simpleMessage("Take a Photo"),
+        "changeImage": MessageLookupByLibrary.simpleMessage("Change Image"),
+        "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
       };
 }
