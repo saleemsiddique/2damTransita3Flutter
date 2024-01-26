@@ -54,12 +54,12 @@ class PuntoService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getPuntosForMapFiltered(int accesibilidad) async {
+  Future<void> getPuntosForMapFiltered() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
     if (cliente != null) {
       final jsonData = await TransitaProvider.getJsonData(
-          '/puntos/accesibilidad/$accesibilidad');
+          '/puntos/accesibilidad/ACCESIBLE/visibilidad/GLOBAL');
 
       final List<dynamic> jsonList = json.decode(jsonData);
       List<Punto> newPuntosForMap =

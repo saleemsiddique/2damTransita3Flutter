@@ -10,7 +10,7 @@ class BotonFiltro extends StatefulWidget {
 class _MyButtonState extends State<BotonFiltro> {
   bool isIncidentActive = true;
   bool isAccessibleActive = false;
-  bool isFavoriteActive = false;
+  bool isFavoriteActive = true;
   bool isExpanded = false;
 
   @override
@@ -59,7 +59,7 @@ class _MyButtonState extends State<BotonFiltro> {
               });
               if (isAccessibleActive) {
                 // Llamar a la función getPuntosForMapFiltered del servicio
-                await puntosService.getPuntosForMapFiltered(0);
+                await puntosService.getPuntosForMapFiltered();
               } else {
                 // Llamar a la función clearAccesiblesMap del servicio
                 puntosService.clearAccesiblesMap();

@@ -54,7 +54,7 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
                                   'latitud': latLng.latitude,
                                   'longitud': latLng.longitude,
                                   'accesibilidadPunto': 'ACCESIBLE',
-                                  'visibilidadPunto': 'GLOBAL'
+                                  'visibilidadPunto': 'FAVORITO'
                                 };
                                 await puntosService
                                     .postPuntoConFavorito(puntoData);
