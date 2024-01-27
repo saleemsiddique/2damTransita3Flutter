@@ -19,7 +19,6 @@ class _InicioSesion extends State<IniciarSesionPage> {
   String _email = '';
   String _contrasenya = '';
   bool _mostrarContrasenya = false;
-  LoginService loginForm = new LoginService();
   late String _selectedLanguage = 'ES';
   @override
   Widget build(BuildContext context) {
@@ -117,6 +116,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
   }
 
   TextFormField _escribirEmail() {
+    final loginForm = Provider.of<LoginService>(context, listen: false);
+
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
@@ -141,6 +142,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
   }
 
   TextFormField _escribirContrasenya() {
+    final loginForm = Provider.of<LoginService>(context, listen: false);
+
     return TextFormField(
       decoration: InputDecoration(
         hintText: S.of(context).password,
@@ -170,6 +173,8 @@ class _InicioSesion extends State<IniciarSesionPage> {
   }
 
   Widget _botonLogin(BuildContext context) {
+    final loginForm = Provider.of<LoginService>(context, listen: false);
+
     final puntosService = Provider.of<PuntoService>(context, listen: true);
 
     return Container(
@@ -189,12 +194,13 @@ class _InicioSesion extends State<IniciarSesionPage> {
 
             try {
               await loginForm.signInCliente(credenciales);
+              print("Pass: ${loginForm.password}");
+
               puntosService.getPuntosForMap();
 
               puntosService.getPuntosByIdCliente(LoginService.cliente.id);
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('home', (route) => false);
-              print("Ha llegado aqui");
             } catch (error) {
               showDialog(
                 context: context,

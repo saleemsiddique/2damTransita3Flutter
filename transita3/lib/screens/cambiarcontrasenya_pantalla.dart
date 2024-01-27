@@ -16,16 +16,13 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
   TextEditingController _confirmarContrasenaController =
       TextEditingController();
 
-  LoginService loginService = new LoginService();
-
   @override
   void initState() {
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    final clienteService = Provider.of<LoginService>(context, listen: false);
-
+    final loginService = Provider.of<LoginService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).changepass),
@@ -45,9 +42,24 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                   ),
                   SizedBox(height: 20.0),
                   Form(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
                     key: _formKey,
                     child: Column(
                       children: [
+                        SizedBox(height: 10.0),
+                        TextFormField(
+                          // Contraseña actual
+                          decoration: InputDecoration(
+                            labelText: "Current Password",
+                          ),
+                          obscureText: true,
+                          validator: (value) {
+                            if (value != loginService.password) {
+                              return 'Contraseña actual incorrecta';
+                            }
+                            return null;
+                          },
+                        ),
                         SizedBox(height: 10.0),
                         TextFormField(
                           controller: _contrasenaController,
@@ -87,8 +99,9 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                                 // Llamar a la función modifyContrasenya del servicio
                                 await clienteService.modifyContrasenya(
                                   {
-                                    'currentPassword': clienteService
-                                        .password, // Contraseña actual
+                                    'currentPassword':
+                                        _contrasenaController.text,
+
                                     'contrasenya': _contrasenaController
                                         .text, // Nueva contraseña
                                   },
@@ -102,6 +115,8 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                                         Text('Contraseña modificada con éxito'),
                                   ),
                                 );
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    'home', (route) => false);
                               } catch (error) {
                                 showDialog(
                                   context: context,

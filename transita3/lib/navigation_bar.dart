@@ -76,8 +76,8 @@ class _BottomNavigationBarProviderState
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/');
-                  },
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/', (route) => false);                  },
                   child: Text('Aceptar'),
                 ),
               ],
