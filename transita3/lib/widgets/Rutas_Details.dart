@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
@@ -15,11 +16,12 @@ void rutasDetailsSheet(BuildContext context) {
             return Consumer<MapaPantallaNotifier>(
               builder: (context, mapaPantallaNotifier, child) {
                 return Container(
-                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      GestureDetector(
+                      PuntoSeleccionadoWidget(
+                        isSelected: Mapa_pantalla.primerPuntoSeleccionado,
                         onTap: () {
                           setState(() {
                             Mapa_pantalla.primerPuntoSeleccionado = true;
@@ -28,21 +30,11 @@ void rutasDetailsSheet(BuildContext context) {
                                 '${mapaPantallaNotifier.latLngOrigen.latitude},${mapaPantallaNotifier.latLngOrigen.longitude}';
                           });
                         },
-                        child: Container(
-                          padding: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Mapa_pantalla.primerPuntoSeleccionado
-                                  ? Colors.blue
-                                  : Colors.black,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Text(Mapa_pantalla.selectedPoint1Text),
-                        ),
+                        selectedPointText: Mapa_pantalla.selectedPoint1Text,
                       ),
                       SizedBox(height: 16.0),
-                      GestureDetector(
+                      PuntoSeleccionadoWidget(
+                        isSelected: Mapa_pantalla.segundoPuntoSeleccionado,
                         onTap: () {
                           setState(() {
                             Mapa_pantalla.primerPuntoSeleccionado = false;
@@ -51,39 +43,23 @@ void rutasDetailsSheet(BuildContext context) {
                                 '${mapaPantallaNotifier.latLngDestino.latitude},${mapaPantallaNotifier.latLngDestino.longitude}';
                           });
                         },
-                        child: Container(
-                          padding: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Mapa_pantalla.segundoPuntoSeleccionado
-                                  ? Colors.blue
-                                  : Colors.black,
-                            ),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Text(Mapa_pantalla.selectedPoint2Text),
-                        ),
+                        selectedPointText: Mapa_pantalla.selectedPoint2Text,
                       ),
                       SizedBox(height: 16.0),
-                      GestureDetector(
-                        onTap: () {
-                          print("vale");
-                          openRouteService.getRuta(
-                              Mapa_pantalla.selectedPoint1Text,
-                              Mapa_pantalla.selectedPoint2Text);
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(15.0),
-                          decoration: BoxDecoration(
-                            color: Colors.blue, // Example color for the button
-                            borderRadius: BorderRadius.circular(10.0),
+                      Row(
+                        children: [
+                          limpiarRuta(
+                              openRouteService, mapaPantallaNotifier, setState),
+                          SizedBox(
+                            width: 20,
                           ),
-                          child: Text(
-                            'Crear ruta',
-                            style: TextStyle(color: Colors.white),
+                          crearRuta(openRouteService, mapaPantallaNotifier),
+                          SizedBox(
+                            width: 20,
                           ),
-                        ),
-                      ),
+                          fijarRuta(context)
+                        ],
+                      )
                     ],
                   ),
                 );
@@ -96,4 +72,107 @@ void rutasDetailsSheet(BuildContext context) {
     Mapa_pantalla.primerPuntoSeleccionado = false;
     Mapa_pantalla.segundoPuntoSeleccionado = false;
   });
+}
+
+GestureDetector fijarRuta(BuildContext context) {
+  return GestureDetector(
+    onTap: !MapaPantallaNotifier.routeChange
+        ? () {
+            Navigator.pop(context);
+          }
+        : null, // Si no está habilitado, onTap es null
+    child: Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: !MapaPantallaNotifier.routeChange ? Colors.blue : Colors.grey, // Color según estado
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Text(
+        'Fijar Ruta',
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  );
+}
+
+
+GestureDetector crearRuta(OpenRouteService openRouteService, MapaPantallaNotifier mapaPantallaNotifier) {
+  return GestureDetector(
+    onTap: () {
+      print("vale");
+      openRouteService.getRuta(
+          Mapa_pantalla.selectedPoint1Text, Mapa_pantalla.selectedPoint2Text);
+          mapaPantallaNotifier.updateRouteChange(false);
+    },
+    child: Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Colors.blue, // Example color for the button
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Text(
+        'Crear ruta',
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  );
+}
+
+GestureDetector limpiarRuta(OpenRouteService openRouteService,
+    MapaPantallaNotifier mapaPantallaNotifier, StateSetter setState) {
+  return GestureDetector(
+    onTap: () {
+      openRouteService.clearRuta();
+      mapaPantallaNotifier.updateLatLngOrigen(LatLng(0, 0));
+      mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
+      setState(
+        () {
+          Mapa_pantalla.selectedPoint1Text =
+              'Seleccionar un origen en el origen';
+          Mapa_pantalla.selectedPoint2Text =
+              'Seleccionar un destino en el mapa';
+        },
+      );
+    },
+    child: Container(
+      padding: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Colors.blue, // Example color for the button
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Text(
+        'Limpiar Ruta',
+        style: TextStyle(color: Colors.white),
+      ),
+    ),
+  );
+}
+
+class PuntoSeleccionadoWidget extends StatelessWidget {
+  final bool isSelected;
+  final Function onTap;
+  final String selectedPointText;
+
+  PuntoSeleccionadoWidget({
+    required this.isSelected,
+    required this.onTap,
+    required this.selectedPointText,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(),
+      child: Container(
+        padding: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: isSelected ? Colors.blue : Colors.black,
+          ),
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Text(selectedPointText),
+      ),
+    );
+  }
 }

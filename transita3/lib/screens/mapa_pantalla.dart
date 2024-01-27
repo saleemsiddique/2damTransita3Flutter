@@ -30,6 +30,12 @@ class MapaPantallaNotifier extends ChangeNotifier {
     routeChange = true;
     notifyListeners();
   }
+
+    void updateRouteChange(bool isOption) {
+    print("MAPAPANTALLANOTIFIER");
+    routeChange = isOption;
+    notifyListeners();
+  }
 }
 
 class Mapa_pantalla extends StatefulWidget {
@@ -52,25 +58,23 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
   }
 
-  void _getCurrentLocation() async {
+  Future<LatLng> _getCurrentLocation() async {
     try {
       var userLocation = await location.getLocation();
-      setState(() {
         _currentLocation =
             LatLng(userLocation.latitude!, userLocation.longitude!);
-      });
+            return _currentLocation;
     } catch (e) {
       print("Error getting location: $e");
     }
+    return LatLng(0, 0);
   }
 
   @override
   Widget build(BuildContext context) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
-
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
 
@@ -192,6 +196,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       ),
                     );
                   }).toList(),
+                  MarkerSelect(40, _currentLocation, Colors.tealAccent),
                   MarkerSelect(40, latLngSelec, Colors.blue),
                   MarkerSelect(
                       60, MapaPantallaNotifier._latLngOrigen, Colors.black),

@@ -19,7 +19,8 @@ class OpenRouteService extends ChangeNotifier {
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
 
     if (cliente != null) {
-      final jsonData = await TransitaProvider.getJsonData('rutas/start/$latlng1/end/$latLng2');
+      final jsonData = await TransitaProvider.getJsonData(
+          'rutas/start/$latlng1/end/$latLng2');
 
       // Check if the response is successful
       if (jsonData != null) {
@@ -41,5 +42,10 @@ class OpenRouteService extends ChangeNotifier {
       }
     }
   }
-}
 
+  clearRuta() {
+    routeCoordinates = [];
+    MapaPantallaNotifier.routeChange = true;
+    notifyListeners();
+  }
+}
