@@ -7,6 +7,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/services/TimerService.dart';
 import 'package:transita3/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
@@ -54,86 +55,19 @@ class Mapa_pantalla extends StatefulWidget {
 class _MapaPantalla extends State<Mapa_pantalla> {
   static List<Punto> puntos = [];
   Location location = Location();
-  LatLng currentLocation = LatLng(0, 0);
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
-  late double distance;
-  Timer? timer;
-  int cont = 0;
 
   @override
   void initState() {
     super.initState();
-    startTimer();
-  }
-
-  Future<void> _getLocation() async {
-    try {
-      var userLocation = await location.getLocation();
-      setState(() {
-        currentLocation =
-            LatLng(userLocation.latitude!, userLocation.longitude!);
-      });
-    } catch (e) {
-      print("Error getting location: $e");
-    }
-  }
-
-  void calculateDistance(LatLng point1, LatLng point2) {
-    double x1 = point1.latitude;
-    double y1 = point1.longitude;
-
-    double x2 = point2.latitude;
-    double y2 = point2.longitude;
-
-    distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-    print("la distancia es $distance");
-    if (distance < 0.0002) {
-      print("TIMER STOPPED");
-      stopTimer(context);
-    }
-  }
-
-  void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 2), (timer) {
-      _getLocation();
-      if (currentLocation != null) {
-        setState(() {
-          cont += 2;
-          calculateDistance(currentLocation, LatLng(38.509755506, -0.22886184));
-          print(cont);
-        });
-      }
-    });
-  }
-
-  void stopTimer(BuildContext context) {
-    if (timer != null && timer!.isActive) {
-      timer!.cancel();
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('¡Destino alcanzado!'),
-            content: Text('¡Has llegado a tu destino!'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Cierra el AlertDialog
-                },
-                child: Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
+    final timerService = Provider.of<TimerService>(context, listen: true);
+
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
     print(MapaPantallaNotifier.routeChange);
@@ -256,7 +190,8 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       ),
                     );
                   }).toList(),
-                  MarkerSelect(40, currentLocation, Colors.tealAccent),
+                  MarkerSelect(
+                      40, timerService.currentLocation, Colors.tealAccent),
                   MarkerSelect(40, latLngSelec, Colors.blue),
                   MarkerSelect(
                       60, MapaPantallaNotifier._latLngOrigen, Colors.black),

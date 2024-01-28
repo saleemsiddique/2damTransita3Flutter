@@ -3,11 +3,13 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/services/TimerService.dart';
 
 void rutasDetailsSheet(BuildContext context) {
   Mapa_pantalla.isBottomSheetOpen = true;
   final openRouteService =
       Provider.of<OpenRouteService>(context, listen: false);
+  final timerService = Provider.of<TimerService>(context, listen: false);
   showBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -48,12 +50,13 @@ void rutasDetailsSheet(BuildContext context) {
                       SizedBox(height: 16.0),
                       Row(
                         children: [
-                          limpiarRuta(
-                              openRouteService, mapaPantallaNotifier, setState),
+                          limpiarRuta(openRouteService, mapaPantallaNotifier,
+                              setState, timerService, context),
                           SizedBox(
                             width: 20,
                           ),
-                          crearRuta(openRouteService, mapaPantallaNotifier),
+                          crearRuta(openRouteService, mapaPantallaNotifier,
+                              timerService, context),
                           SizedBox(
                             width: 20,
                           ),
@@ -84,7 +87,9 @@ GestureDetector fijarRuta(BuildContext context) {
     child: Container(
       padding: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
-        color: !MapaPantallaNotifier.routeChange ? Colors.blue : Colors.grey, // Color según estado
+        color: !MapaPantallaNotifier.routeChange
+            ? Colors.blue
+            : Colors.grey, // Color según estado
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Text(
@@ -95,14 +100,20 @@ GestureDetector fijarRuta(BuildContext context) {
   );
 }
 
-
-GestureDetector crearRuta(OpenRouteService openRouteService, MapaPantallaNotifier mapaPantallaNotifier) {
+GestureDetector crearRuta(
+    OpenRouteService openRouteService,
+    MapaPantallaNotifier mapaPantallaNotifier,
+    TimerService timerService,
+    BuildContext context) {
   return GestureDetector(
     onTap: () {
       print("vale");
       openRouteService.getRuta(
           Mapa_pantalla.selectedPoint1Text, Mapa_pantalla.selectedPoint2Text);
-          mapaPantallaNotifier.updateRouteChange(false);
+      mapaPantallaNotifier.updateRouteChange(false);
+      if (!timerService.timer.isActive) {
+        timerService.startTimer(context, mapaPantallaNotifier.latLngDestino);
+      }
     },
     child: Container(
       padding: EdgeInsets.all(15.0),
@@ -118,13 +129,18 @@ GestureDetector crearRuta(OpenRouteService openRouteService, MapaPantallaNotifie
   );
 }
 
-GestureDetector limpiarRuta(OpenRouteService openRouteService,
-    MapaPantallaNotifier mapaPantallaNotifier, StateSetter setState) {
+GestureDetector limpiarRuta(
+    OpenRouteService openRouteService,
+    MapaPantallaNotifier mapaPantallaNotifier,
+    StateSetter setState,
+    TimerService timerService,
+    BuildContext context) {
   return GestureDetector(
     onTap: () {
       openRouteService.clearRuta();
       mapaPantallaNotifier.updateLatLngOrigen(LatLng(0, 0));
       mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
+      timerService.stopRuta(context);
       setState(
         () {
           Mapa_pantalla.selectedPoint1Text =

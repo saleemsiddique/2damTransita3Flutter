@@ -10,6 +10,7 @@ import 'package:transita3/services/LoginService.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/services/OpenRouteService.dart';
 import 'package:transita3/services/PuntoService.dart';
+import 'package:transita3/services/TimerService.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: MapaPantallaNotifier(),
+        ),
+        ChangeNotifierProvider.value(
+          value: TimerService(),
         ),
       ],
       child: MaterialApp(
