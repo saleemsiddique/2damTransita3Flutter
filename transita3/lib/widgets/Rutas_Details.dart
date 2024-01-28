@@ -111,6 +111,7 @@ GestureDetector crearRuta(
       openRouteService.getRuta(
           Mapa_pantalla.selectedPoint1Text, Mapa_pantalla.selectedPoint2Text);
       mapaPantallaNotifier.updateRouteChange(false);
+      timerService.startRuta();
       if (!timerService.timer.isActive) {
         timerService.startTimer(context, mapaPantallaNotifier.latLngDestino);
       }
