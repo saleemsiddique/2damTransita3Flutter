@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -31,7 +34,7 @@ class MapaPantallaNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-    void updateRouteChange(bool isOption) {
+  void updateRouteChange(bool isOption) {
     print("MAPAPANTALLANOTIFIER");
     routeChange = isOption;
     notifyListeners();
@@ -51,25 +54,81 @@ class Mapa_pantalla extends StatefulWidget {
 class _MapaPantalla extends State<Mapa_pantalla> {
   static List<Punto> puntos = [];
   Location location = Location();
-  LatLng _currentLocation = LatLng(38.5064, -0.2297);
+  LatLng currentLocation = LatLng(0, 0);
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
+  late double distance;
+  Timer? timer;
+  int cont = 0;
 
   @override
   void initState() {
     super.initState();
+    startTimer();
   }
 
-  Future<LatLng> _getCurrentLocation() async {
+  Future<void> _getLocation() async {
     try {
       var userLocation = await location.getLocation();
-        _currentLocation =
+      setState(() {
+        currentLocation =
             LatLng(userLocation.latitude!, userLocation.longitude!);
-            return _currentLocation;
+      });
     } catch (e) {
       print("Error getting location: $e");
     }
-    return LatLng(0, 0);
+  }
+
+  void calculateDistance(LatLng point1, LatLng point2) {
+    double x1 = point1.latitude;
+    double y1 = point1.longitude;
+
+    double x2 = point2.latitude;
+    double y2 = point2.longitude;
+
+    distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+    print("la distancia es $distance");
+    if (distance < 0.0002) {
+      print("TIMER STOPPED");
+      stopTimer(context);
+    }
+  }
+
+  void startTimer() {
+    timer = Timer.periodic(Duration(seconds: 2), (timer) {
+      _getLocation();
+      if (currentLocation != null) {
+        setState(() {
+          cont += 2;
+          calculateDistance(currentLocation, LatLng(38.509755506, -0.22886184));
+          print(cont);
+        });
+      }
+    });
+  }
+
+  void stopTimer(BuildContext context) {
+    if (timer != null && timer!.isActive) {
+      timer!.cancel();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('¡Destino alcanzado!'),
+            content: Text('¡Has llegado a tu destino!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Cierra el AlertDialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override
@@ -77,6 +136,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
+    print(MapaPantallaNotifier.routeChange);
 
     Widget mapa = Consumer2<MapaPantallaNotifier, OpenRouteService>(
       builder: (context, mapaPantallaNotifier, openRouteService, child) {
@@ -196,7 +256,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       ),
                     );
                   }).toList(),
-                  MarkerSelect(40, _currentLocation, Colors.tealAccent),
+                  MarkerSelect(40, currentLocation, Colors.tealAccent),
                   MarkerSelect(40, latLngSelec, Colors.blue),
                   MarkerSelect(
                       60, MapaPantallaNotifier._latLngOrigen, Colors.black),
