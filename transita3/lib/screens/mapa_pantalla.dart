@@ -46,7 +46,7 @@ class Mapa_pantalla extends StatefulWidget {
   static bool isBottomSheetOpen = false;
   static bool primerPuntoSeleccionado = false;
   static bool segundoPuntoSeleccionado = false;
-  static String selectedPoint1Text = 'Seleccionar un origen en el origen';
+  static String selectedPoint1Text = 'Ubicacion Actual';
   static String selectedPoint2Text = 'Seleccionar un destino en el mapa';
 
   _MapaPantalla createState() => _MapaPantalla();
@@ -58,9 +58,14 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
 
+
   @override
   void initState() {
     super.initState();
+    Future.microtask(() {
+     final timerService = Provider.of<TimerService>(context, listen: false);
+      timerService.startTimer(context);
+    });
   }
 
   @override
@@ -191,12 +196,12 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                     );
                   }).toList(),
                   MarkerSelect(
-                      40, timerService.currentLocation, Colors.tealAccent),
-                  MarkerSelect(40, latLngSelec, Colors.blue),
+                      40, timerService.currentLocation, Colors.blue, Icons.my_location),
+                  MarkerSelect(40, latLngSelec, Colors.blue, Icons.location_pin),
                   MarkerSelect(
-                      60, MapaPantallaNotifier._latLngOrigen, Colors.black),
+                      60, MapaPantallaNotifier._latLngOrigen, Colors.black, Icons.location_pin),
                   MarkerSelect(
-                      60, MapaPantallaNotifier._latLngDestino, Colors.black),
+                      60, MapaPantallaNotifier._latLngDestino, Colors.black, Icons.location_pin),
                 ],
               ),
               if (!MapaPantallaNotifier
@@ -297,7 +302,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
     );
   }
 
-  Marker MarkerSelect(double size, LatLng latLng, Color color) {
+  Marker MarkerSelect(double size, LatLng latLng, Color color, IconData icon) {
     return Marker(
       width: size,
       height: size,
@@ -307,7 +312,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
           setState(() {});
         },
         child: Icon(
-          Icons.location_pin,
+          icon,
           color: color,
         ),
       ),

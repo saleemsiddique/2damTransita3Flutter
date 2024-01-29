@@ -8,6 +8,7 @@ import 'package:location/location.dart';
 class TimerService extends ChangeNotifier {
   Location location = Location();
   LatLng currentLocation = LatLng(0, 0);
+  LatLng? destino;
   late double distance;
   Timer timer = Timer(Duration(seconds: 0), () {});
   int cont = 0;
@@ -34,12 +35,12 @@ class TimerService extends ChangeNotifier {
     print("la distancia es $distance");
     if (distance < 0.0002) {
       print("RUTA STOPPED");
-      stopRuta(context);
+      stopRuta(context, true);
     }
     notifyListeners();
   }
 
-  void startTimer(BuildContext context, LatLng? destino) {
+  void startTimer(BuildContext context) {
     timer = Timer.periodic(Duration(seconds: 2), (timer) {
       _getLocation();
       cont += 2;
@@ -56,30 +57,35 @@ class TimerService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void startRuta() {
+  void startRuta(LatLng proximoDestino) {
+    destino = proximoDestino;
     isRutaActive = true;
     notifyListeners();
   }
 
-  void stopRuta(BuildContext context) {
+  void stopRuta(BuildContext context, bool hasLlegado) {
     isRutaActive = false;
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('¡Destino alcanzado!'),
-          content: Text('¡Has llegado a tu destino!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Cierra el AlertDialog
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    destino = null;
+    if (hasLlegado) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('¡Destino alcanzado!'),
+            content: Text('¡Has llegado a tu destino!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Cierra el AlertDialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     notifyListeners();
   }
 

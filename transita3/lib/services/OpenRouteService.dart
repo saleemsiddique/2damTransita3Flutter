@@ -3,20 +3,31 @@ import 'dart:convert';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/services/TimerService.dart';
 import '../models/models.dart';
 import 'package:transita3/screens/perfil_pantalla.dart';
 
 class OpenRouteService extends ChangeNotifier {
   static List<List<double>> routeCoordinates = [];
 
-  Future<void> getRuta(String latlng1, String latLng2) async {
+  Future<void> getRuta(
+      String latlng1, String latLng2, BuildContext context) async {
+    final timerService = Provider.of<TimerService>(context, listen: false);
+
     print("OPENROUTESERVICE");
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+
+    if (latlng1 == 'Ubicacion Actual') {
+      latlng1 ="${timerService.currentLocation.latitude},${timerService.currentLocation.longitude}";
+    }
+
+    print(latlng1);
 
     if (cliente != null) {
       final jsonData = await TransitaProvider.getJsonData(

@@ -107,13 +107,22 @@ GestureDetector crearRuta(
     BuildContext context) {
   return GestureDetector(
     onTap: () {
-      print("vale");
-      openRouteService.getRuta(
-          Mapa_pantalla.selectedPoint1Text, Mapa_pantalla.selectedPoint2Text);
-      mapaPantallaNotifier.updateRouteChange(false);
-      timerService.startRuta();
-      if (!timerService.timer.isActive) {
-        timerService.startTimer(context, mapaPantallaNotifier.latLngDestino);
+      if (Mapa_pantalla.selectedPoint2Text ==
+          'Seleccionar un destino en el mapa') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Debe seleccionar un punto de destino válido'),
+          ),
+        );
+      } else {
+        print("vale");
+        openRouteService.getRuta(Mapa_pantalla.selectedPoint1Text,
+            Mapa_pantalla.selectedPoint2Text, context);
+        mapaPantallaNotifier.updateRouteChange(false);
+        timerService.startRuta(mapaPantallaNotifier.latLngDestino);
+        if (!timerService.timer.isActive) {
+          timerService.startTimer(context);
+        }
       }
     },
     child: Container(
@@ -141,11 +150,11 @@ GestureDetector limpiarRuta(
       openRouteService.clearRuta();
       mapaPantallaNotifier.updateLatLngOrigen(LatLng(0, 0));
       mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
-      timerService.stopRuta(context);
+      timerService.stopRuta(context, false);
       setState(
         () {
           Mapa_pantalla.selectedPoint1Text =
-              'Seleccionar un origen en el origen';
+              'Ubicacion Actual';
           Mapa_pantalla.selectedPoint2Text =
               'Seleccionar un destino en el mapa';
         },
