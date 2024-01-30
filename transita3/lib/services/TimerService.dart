@@ -4,6 +4,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:provider/provider.dart';
+import 'package:transita3/screens/mapa_pantalla.dart';
+import 'package:transita3/services/OpenRouteService.dart';
 
 class TimerService extends ChangeNotifier {
   Location location = Location();
@@ -25,6 +28,11 @@ class TimerService extends ChangeNotifier {
   }
 
   void calculateDistance(LatLng point1, LatLng point2, BuildContext context) {
+    final mapaPantallaNotifier =
+        Provider.of<MapaPantallaNotifier>(context, listen: false);
+    final openRouteService =
+        Provider.of<OpenRouteService>(context, listen: false);
+
     double x1 = point1.latitude;
     double y1 = point1.longitude;
 
@@ -35,7 +43,12 @@ class TimerService extends ChangeNotifier {
     print("la distancia es $distance");
     if (distance < 0.0002) {
       print("RUTA STOPPED");
+      openRouteService.clearRuta();
+      mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
       stopRuta(context, true);
+
+      Mapa_pantalla.selectedPoint1Text = 'Ubicacion Actual';
+      Mapa_pantalla.selectedPoint2Text = 'Seleccionar un destino en el mapa';
     }
     notifyListeners();
   }

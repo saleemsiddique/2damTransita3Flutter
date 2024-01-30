@@ -148,7 +148,6 @@ GestureDetector limpiarRuta(
   return GestureDetector(
     onTap: () {
       openRouteService.clearRuta();
-      mapaPantallaNotifier.updateLatLngOrigen(LatLng(0, 0));
       mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
       timerService.stopRuta(context, false);
       setState(
