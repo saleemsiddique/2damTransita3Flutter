@@ -1,19 +1,22 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
 import '../models/LoggedCliente.dart';
 
 class LoginService extends ChangeNotifier {
-      GlobalKey<FormState> formKey = new GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
 
-  static LoggedCliente cliente = new LoggedCliente.empty();
+  static LoggedCliente cliente = LoggedCliente.empty();
 
   final debouncer = Debouncer(duration: Duration(milliseconds: 500));
+
+  // Add loading state variable
+  bool isLoadingForgotPassword = false;
 
   signInCliente(Map<String, dynamic> data) async {
     final jsonData = await TransitaProvider.postJsonData('api/auth/signin/cliente', data);
@@ -24,9 +27,27 @@ class LoginService extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isValidForm(){
+  bool isValidForm() {
     print('$email - $password');
     print(formKey.currentState?.validate());
     return formKey.currentState?.validate() ?? false;
   }
+
+Future<String> forgotPassword(String email) async {
+  isLoadingForgotPassword = true;
+  notifyListeners();
+
+  final response = await TransitaProvider.getJsonData('api/auth/forgot-password/$email');
+
+  isLoadingForgotPassword = false;
+  notifyListeners();
+
+  if (response.contains('Internal Server Error')) {
+    throw Exception('Error interno del servidor');
+  }
+
+  return response;
+}
+
+
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
+import 'package:transita3/screens/recupera_contrasenya_pantalla.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:transita3/services/LoginService.dart';
@@ -228,91 +229,14 @@ class _InicioSesion extends State<IniciarSesionPage> {
     );
   }
 
-  /*Widget _botonGoogle() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: const Color.fromARGB(255, 124, 122, 122),
-          width: 2,
-          strokeAlign: BorderSide.strokeAlignOutside,
-        ),
-        borderRadius: BorderRadius.circular(5),
-      ),
-      width: double.infinity,
-      height: 50,
-      child: MaterialButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        elevation: 0,
-        color: Colors.white,
-        onPressed: () => Navigator.pushNamed(context, 'home'),
-        child: Row(
-          children: [
-            FadeInImage(
-              placeholder: AssetImage('assets/loading.gif'),
-              image: AssetImage('assets/googleLogo.png'),
-              width: 30,
-            ),
-            SizedBox(
-              width: 48.79,
-            ),
-            Text(S.of(context).loginWithGoogleButton,
-                style:
-                    TextStyle(color: const Color.fromARGB(255, 124, 122, 122))),
-          ],
-        ),
-      ),
-    );
-  }*/
-
   Widget _botonOlvidarContrasena() {
     return TextButton(
       onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text("Olvidar Contraseña"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text("Ingrese su correo electrónico:"),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) {
-                      // Puedes guardar el valor del correo electrónico aquí
-                    },
-                    decoration: InputDecoration(
-                      hintText: "Correo electrónico",
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text("Cancelar"),
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Lógica para enviar el correo de recuperación aquí
-                    // Puedes utilizar el valor del correo electrónico ingresado
-                    Navigator.of(context).pop();
-
-                    // Navegar a la pantalla para escribir la nueva contraseña
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OlvidarContrasenya(),
-                      ),
-                    );
-                  },
-                  child: Text("Enviar"),
-                ),
-              ],
-            );
-          },
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => OlvidarContrasenyaScreen(),
+          ),
         );
       },
       child: Text("¿Olvidaste tu contraseña?"),
