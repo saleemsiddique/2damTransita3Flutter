@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
 import 'package:transita3/services/TimerService.dart';
@@ -93,7 +94,7 @@ GestureDetector fijarRuta(BuildContext context) {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Text(
-        'Fijar Ruta',
+        S.of(context).Attachroute,
         style: TextStyle(color: Colors.white),
       ),
     ),
@@ -108,14 +109,13 @@ GestureDetector crearRuta(
   return GestureDetector(
     onTap: () {
       if (Mapa_pantalla.selectedPoint2Text ==
-          'Seleccionar un destino en el mapa') {
+          S.of(context).selectDestinationOnMapMessage) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Debe seleccionar un punto de destino válido'),
+            content: Text(S.of(context).invalidDestination),
           ),
         );
       } else {
-        print("vale");
         openRouteService.getRuta(Mapa_pantalla.selectedPoint1Text,
             Mapa_pantalla.selectedPoint2Text, context);
         mapaPantallaNotifier.updateRouteChange(false);
@@ -132,7 +132,7 @@ GestureDetector crearRuta(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Text(
-        'Crear ruta',
+        S.of(context).createRoute,
         style: TextStyle(color: Colors.white),
       ),
     ),
@@ -152,10 +152,9 @@ GestureDetector limpiarRuta(
       timerService.stopRuta(context, false);
       setState(
         () {
-          Mapa_pantalla.selectedPoint1Text =
-              'Ubicacion Actual';
+          Mapa_pantalla.selectedPoint1Text = S.of(context).currentLocation;
           Mapa_pantalla.selectedPoint2Text =
-              'Seleccionar un destino en el mapa';
+              S.of(context).selectDestinationOnMap;
         },
       );
     },
@@ -166,7 +165,7 @@ GestureDetector limpiarRuta(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Text(
-        'Limpiar Ruta',
+        S.of(context).clearRouteMessage,
         style: TextStyle(color: Colors.white),
       ),
     ),

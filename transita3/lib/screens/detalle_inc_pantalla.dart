@@ -35,7 +35,6 @@ class _detalleIincidencias extends State<detalle_incidencias> {
       punto = incidencia.punto.toString();
       imagenIncidencia = incidencia.punto.foto!;
     });
-    print('Incidencia Recibida:$incidencia');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(
@@ -46,7 +45,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
             Navigator.pop(context);
           },
         ),
-        title: Text('Incidencia nº $id'),
+        title: Text(S.of(context).incidentNumber + ' $id'),
       ),
       body: Container(
         color: Color.fromARGB(
@@ -103,7 +102,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Fecha: $fecha',
+                            S.of(context).date + ' $fecha',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -119,7 +118,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Estado: $estado',
+                            S.of(context).status + ' $estado',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -135,7 +134,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Duracion: $duracion ',
+                            S.of(context).duration + ' $duracion ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -151,7 +150,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            'Cliente: ${cliente.toString()} ',
+                            S.of(context).client + ' ${cliente.toString()} ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

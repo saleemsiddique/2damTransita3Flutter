@@ -50,12 +50,12 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                         TextFormField(
                           // Contraseña actual
                           decoration: InputDecoration(
-                            labelText: "Current Password",
+                            labelText: S.of(context).currentpassword,
                           ),
                           obscureText: true,
                           validator: (value) {
                             if (value != loginService.password) {
-                              return 'Contraseña actual incorrecta';
+                              return S.of(context).actualpassincorrect;
                             }
                             return null;
                           },
@@ -69,7 +69,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                           obscureText: true,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Por favor, ingresa la nueva contraseña';
+                              return S.of(context).enterEmailPlease;
                             }
                             // Puedes agregar validaciones adicionales aquí
                             return null;
@@ -86,7 +86,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                             if (value == null ||
                                 value.isEmpty ||
                                 value != _contrasenaController.text) {
-                              return 'Las contraseñas no coinciden';
+                              return S.of(context).passwordsDoNotMatch;
                             }
                             return null;
                           },
@@ -111,8 +111,9 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                                 // Mostrar el SnackBar si la modificación de la contraseña es exitosa
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content:
-                                        Text('Contraseña modificada con éxito'),
+                                    content: Text(S
+                                        .of(context)
+                                        .passwordChangedSuccessfully),
                                   ),
                                 );
                                 Navigator.of(context).pushNamedAndRemoveUntil(
@@ -123,7 +124,8 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Text('Error'),
-                                      content: Text('Tu cuenta ha expirado.'),
+                                      content:
+                                          Text(S.of(context).accountExpired),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {

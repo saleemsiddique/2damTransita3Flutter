@@ -190,6 +190,126 @@ class S {
     );
   }
 
+  /// `Las contraseñas no coinciden`
+  String get passwordsDoNotMatch {
+    return Intl.message(
+      'Las contraseñas no coinciden',
+      name: 'passwordsDoNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Por favor, ingresa la nueva contraseña`
+  String get enterNewPassword {
+    return Intl.message(
+      'Por favor, ingresa la nueva contraseña',
+      name: 'enterNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contraseña modificada con éxito`
+  String get passwordChangedSuccessfully {
+    return Intl.message(
+      'Contraseña modificada con éxito',
+      name: 'passwordChangedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tu cuenta ha expirado`
+  String get accountExpired {
+    return Intl.message(
+      'Tu cuenta ha expirado',
+      name: 'accountExpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Descripción`
+  String get description {
+    return Intl.message(
+      'Descripción',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ha ocurrido un error al crear la incidencia.`
+  String get errorCreatingIncident {
+    return Intl.message(
+      'Ha ocurrido un error al crear la incidencia.',
+      name: 'errorCreatingIncident',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incidencia creada exitosamente`
+  String get incidentCreatedSuccessfully {
+    return Intl.message(
+      'Incidencia creada exitosamente',
+      name: 'incidentCreatedSuccessfully',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Crear`
+  String get create {
+    return Intl.message(
+      'Crear',
+      name: 'create',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seleccionar de la galería`
+  String get selectFromGallery {
+    return Intl.message(
+      'Seleccionar de la galería',
+      name: 'selectFromGallery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sacar una foto`
+  String get takeAPhoto {
+    return Intl.message(
+      'Sacar una foto',
+      name: 'takeAPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cambiar Imagen`
+  String get changeImage {
+    return Intl.message(
+      'Cambiar Imagen',
+      name: 'changeImage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Subir Foto`
+  String get uploadPhoto {
+    return Intl.message(
+      'Subir Foto',
+      name: 'uploadPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Enter an email please`
   String get enterEmailPlease {
     return Intl.message(
@@ -271,6 +391,126 @@ class S {
   }
 
   /// `¿Already have an account? sign In`
+  String get confirmNewPassword {
+    return Intl.message(
+      'Confirm the new pasword',
+      name: 'confirmNewPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get newPassword {
+    return Intl.message(
+      'New Password',
+      name: 'newPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get changelen {
+    return Intl.message(
+      'Change lenguage',
+      name: 'changelen',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get accexpired {
+    return Intl.message(
+      'accexpired',
+      name: 'accexpired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get incidencedesc {
+    return Intl.message(
+      'Incidence description',
+      name: 'incidencedesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get actualpassincorrect {
+    return Intl.message(
+      'actual password incorrect',
+      name: 'actualpassincorrect',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get currentpassword {
+    return Intl.message(
+      'Current Password',
+      name: 'currentpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get descriptionInfo {
+    return Intl.message(
+      'Enter the incidence descrition',
+      name: 'descriptionInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get specifyDuration {
+    return Intl.message(
+      'specifyDuration',
+      name: 'specifyDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get enterDuration {
+    return Intl.message(
+      'Enter the Duration',
+      name: 'enterDuration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get accessibility {
+    return Intl.message(
+      'Enter the accessibility',
+      name: 'accessibility',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
+  String get selectAccessibilityLevel {
+    return Intl.message(
+      'Select the Accessibility Level',
+      name: 'selectAccessibilityLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `¿Already have an account? sign In`
   String get profile {
     return Intl.message(
       'Profile',
@@ -290,251 +530,185 @@ class S {
     );
   }
 
-  /// `¿Already have an account? sign In`
-  String get changelen {
+  /// `Incidencia Nº`
+  String get incidentNumber {
     return Intl.message(
-      'Change Language',
-      name: 'changelen',
+      'Incidencia Nº',
+      name: 'incidentNumber',
       desc: '',
       args: [],
     );
   }
 
-  /// `¿Already have an account? sign In`
-  String get incidencedesc {
+  /// `Fecha`
+  String get date {
     return Intl.message(
-      'Incidence Description',
-      name: 'incidencedesc',
+      'Fecha',
+      name: 'date',
       desc: '',
       args: [],
     );
   }
 
-  /// `No hay incidencias`
-  String get noIncidences {
+  /// `Estado`
+  String get status {
     return Intl.message(
-      'No incidences',
-      name: 'noIncidences',
+      'Estado',
+      name: 'status',
       desc: '',
       args: [],
     );
   }
 
-  /// `Crear Ruta`
+  /// `Duracion`
+  String get duration {
+    return Intl.message(
+      'Duracion',
+      name: 'duration',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cliente`
+  String get client {
+    return Intl.message(
+      'Cliente',
+      name: 'client',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Cerrar Sesión'
+  String get logout {
+    return Intl.message(
+      'Cerrar Sesión',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Aceptar'
+  String get accept {
+    return Intl.message(
+      'Aceptar',
+      name: 'accept',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Cancelar'
+  String get cancel {
+    return Intl.message(
+      'Cancelar',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// '¿Estás seguro de que quieres cerrar sesión?'
+  String get confirmLogout {
+    return Intl.message(
+      '¿Estás seguro de que quieres cerrar sesión?',
+      name: 'confirmLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'You have arrived at your destination!'
+  String get arrivalMessage {
+    return Intl.message(
+      'You have arrived at your destination!',
+      name: 'arrivalMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Destination reached!'
+  String get destinationReachedMessage {
+    return Intl.message(
+      'Destination reached!',
+      name: 'destinationReachedMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Current Location'
+  String get currentLocation {
+    return Intl.message(
+      'Current Location',
+      name: 'currentLocation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get currentLocationMessage {
+    return Intl.message(
+      'Current Location',
+      name: 'currentLocationMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get selectDestinationOnMapMessage {
+    return Intl.message(
+      'Select a destination on the map',
+      name: 'selectDestinationOnMapMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get invalidDestination {
+    return Intl.message(
+      'Select a destination on the map',
+      name: 'invalidDestination',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get Attachroute {
+    return Intl.message(
+      'Attach route',
+      name: 'Attachroute',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get clearRouteMessage {
+    return Intl.message(
+      'Clear Route',
+      name: 'clearRouteMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get createRoute {
     return Intl.message(
-      'Create Route',
+      'Clear Route',
       name: 'createRoute',
       desc: '',
       args: [],
     );
   }
 
-  /// `Duracion Estimada`
-  String get estimatedDuration {
+  /// 'Select a destination on the map'
+  String get selectDestinationOnMap {
     return Intl.message(
-      'Estimated Duration',
-      name: 'estimatedDuration',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Accesibilidad`
-  String get accessibility {
-    return Intl.message(
-      'Accessibility',
-      name: 'accessibility',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Crear`
-  String get create {
-    return Intl.message(
-      'Create',
-      name: 'create',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ingrese la duracion`
-  String get enterDuration {
-    return Intl.message(
-      'Enter duration',
-      name: 'enterDuration',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Indique una duracion`
-  String get specifyDuration {
-    return Intl.message(
-      'Specify duration',
-      name: 'specifyDuration',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `La descripcion debe contener mas informacion`
-  String get descriptionInfo {
-    return Intl.message(
-      'Description must contain more information',
-      name: 'descriptionInfo',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Seleccione el grado de accesibilidad`
-  String get selectAccessibilityLevel {
-    return Intl.message(
-      'Select accessibility level',
-      name: 'selectAccessibilityLevel',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Guardar Cambios`
-  String get saveChanges {
-    return Intl.message(
-      'Save Changes',
-      name: 'saveChanges',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Nueva Contraseña`
-  String get newPassword {
-    return Intl.message(
-      'New Password',
-      name: 'newPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Nueva Contraseña`
-  String get description {
-    return Intl.message(
-      'Description',
-      name: 'description',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Confirmar Nueva contraseña`
-  String get confirmNewPassword {
-    return Intl.message(
-      'Confirm New Password',
-      name: 'confirmNewPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Las contraseñas no coinciden`
-  String get passwordsDoNotMatch {
-    return Intl.message(
-      'Las contraseñas no coinciden',
-      name: 'passwordsDoNotMatch',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Por favor, ingresa la nueva contraseña`
-  String get enterNewPassword {
-    return Intl.message(
-      'Por favor, ingresa la nueva contraseña',
-      name: 'enterNewPassword',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Contraseña modificada con éxito`
-  String get passwordChangedSuccessfully {
-    return Intl.message(
-      'Contraseña modificada con éxito',
-      name: 'passwordChangedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Tu cuenta ha expirado`
-  String get accountExpired {
-    return Intl.message(
-      'Tu cuenta ha expirado',
-      name: 'accountExpired',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Ha ocurrido un error al crear la incidencia.`
-  String get errorCreatingIncident {
-    return Intl.message(
-      'Ha ocurrido un error al crear la incidencia.',
-      name: 'errorCreatingIncident',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Incidencia creada exitosamente`
-  String get incidentCreatedSuccessfully {
-    return Intl.message(
-      'Incidencia creada exitosamente',
-      name: 'incidentCreatedSuccessfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Seleccionar de la galería`
-  String get selectFromGallery {
-    return Intl.message(
-      'Seleccionar de la galería',
-      name: 'selectFromGallery',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Sacar una foto`
-  String get takeAPhoto {
-    return Intl.message(
-      'Sacar una foto',
-      name: 'takeAPhoto',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Cambiar Imagen`
-  String get changeImage {
-    return Intl.message(
-      'Cambiar Imagen',
-      name: 'changeImage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Subir Foto`
-  String get uploadPhoto {
-    return Intl.message(
-      'Subir Foto',
-      name: 'uploadPhoto',
+      'Select a destination on the map',
+      name: 'selectDestinationOnMap',
       desc: '',
       args: [],
     );

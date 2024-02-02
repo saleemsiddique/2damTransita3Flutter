@@ -53,6 +53,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
         "validatorPassword": MessageLookupByLibrary.simpleMessage(
             "Password must have at least 6 characters"),
+        "passwordsDoNotMatch":
+            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
+        "enterNewPassword": MessageLookupByLibrary.simpleMessage(
+            "Please enter the new password"),
+        "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Password changed successfully"),
+        "accountExpired":
+            MessageLookupByLibrary.simpleMessage("Your account has expired"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "errorCreatingIncident": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while creating the incident."),
+        "incidentCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
+            "Incident created successfully"),
+        "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "selectFromGallery":
+            MessageLookupByLibrary.simpleMessage("Select from Gallery"),
+        "takeAPhoto": MessageLookupByLibrary.simpleMessage("Take a Photo"),
+        "changeImage": MessageLookupByLibrary.simpleMessage("Change Image"),
+        "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "changelen": MessageLookupByLibrary.simpleMessage("Change Language"),
@@ -76,25 +95,39 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "confirmNewPassword":
             MessageLookupByLibrary.simpleMessage("Confirm New Password"),
-        "description": MessageLookupByLibrary.simpleMessage("Description"),
-        "passwordsDoNotMatch":
-            MessageLookupByLibrary.simpleMessage("Passwords do not match"),
-        "enterNewPassword": MessageLookupByLibrary.simpleMessage(
-            "Please enter the new password"),
-        "passwordChangedSuccessfully": MessageLookupByLibrary.simpleMessage(
-            "Password changed successfully"),
-        "accountExpired":
-            MessageLookupByLibrary.simpleMessage("Your account has expired"),
-        "description": MessageLookupByLibrary.simpleMessage("Description"),
-        "errorCreatingIncident": MessageLookupByLibrary.simpleMessage(
-            "An error occurred while creating the incident."),
-        "incidentCreatedSuccessfully": MessageLookupByLibrary.simpleMessage(
-            "Incident created successfully"),
-        "create": MessageLookupByLibrary.simpleMessage("Create"),
-        "selectFromGallery":
-            MessageLookupByLibrary.simpleMessage("Select from Gallery"),
-        "takeAPhoto": MessageLookupByLibrary.simpleMessage("Take a Photo"),
-        "changeImage": MessageLookupByLibrary.simpleMessage("Change Image"),
-        "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
+        "currentpassword":
+            MessageLookupByLibrary.simpleMessage("Current Password"),
+        "actualpassincorrect": MessageLookupByLibrary.simpleMessage(
+            "Current Password is incorrect"),
+        "incidenceNumber":
+            MessageLookupByLibrary.simpleMessage("Incidence No."),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
+        "status": MessageLookupByLibrary.simpleMessage("Status"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duration"),
+        "client": MessageLookupByLibrary.simpleMessage("Client"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "accept": MessageLookupByLibrary.simpleMessage("Accept"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "confirmLogout": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to log out?"),
+        "destinationReached":
+            MessageLookupByLibrary.simpleMessage("Destination reached!"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Current Location"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Select a destination on the map"),
+        "arrivalMessage": MessageLookupByLibrary.simpleMessage(
+            "You have arrived at your destination!"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Select a destination on the map"),
+        "invalidDestination": MessageLookupByLibrary.simpleMessage(
+            "You must select a valid destination point"),
+        "createRoute": MessageLookupByLibrary.simpleMessage("Create route"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Current Location"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Select a destination on the map"),
+        "clearRoute": MessageLookupByLibrary.simpleMessage("Clear Route"),
+        "Attachroute": MessageLookupByLibrary.simpleMessage("Attach route"),
       };
 }

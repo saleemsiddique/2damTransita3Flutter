@@ -56,33 +56,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Introduce un email válido"),
         "validatorPassword": MessageLookupByLibrary.simpleMessage(
             "La contraseña debe contener al menos 6 caracteres"),
-        "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
-        "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
-        "changelen": MessageLookupByLibrary.simpleMessage("Cambiar Idioma"),
-        "changepass":
-            MessageLookupByLibrary.simpleMessage("Cambiar Contraseña"),
-        "incidencedesc": MessageLookupByLibrary.simpleMessage(
-            "Descripcion de la incidencia"),
-        "noIncidences":
-            MessageLookupByLibrary.simpleMessage("No hay incidencias"),
-        "createRoute": MessageLookupByLibrary.simpleMessage("Crear Ruta"),
-        "estimatedDuration":
-            MessageLookupByLibrary.simpleMessage("Duración Estimada"),
-        "accessibility": MessageLookupByLibrary.simpleMessage("Accesibilidad"),
-        "create": MessageLookupByLibrary.simpleMessage("Crear"),
-        "enterDuration":
-            MessageLookupByLibrary.simpleMessage("Ingrese la duración"),
-        "specifyDuration":
-            MessageLookupByLibrary.simpleMessage("Indique una duración"),
-        "descriptionInfo": MessageLookupByLibrary.simpleMessage(
-            "La descripción debe contener más información"),
-        "selectAccessibilityLevel": MessageLookupByLibrary.simpleMessage(
-            "Seleccione el grado de accesibilidad"),
-        "saveChanges": MessageLookupByLibrary.simpleMessage("Guardar Cambios"),
-        "newPassword": MessageLookupByLibrary.simpleMessage("Nueva Contraseña"),
-        "confirmNewPassword":
-            MessageLookupByLibrary.simpleMessage("Confirmar Nueva Contraseña"),
-        "description": MessageLookupByLibrary.simpleMessage("Descripcion"),
         "passwordsDoNotMatch": MessageLookupByLibrary.simpleMessage(
             "Las contraseñas no coinciden"),
         "enterNewPassword": MessageLookupByLibrary.simpleMessage(
@@ -102,5 +75,65 @@ class MessageLookup extends MessageLookupByLibrary {
         "takeAPhoto": MessageLookupByLibrary.simpleMessage("Sacar una foto"),
         "changeImage": MessageLookupByLibrary.simpleMessage("Cambiar Imagen"),
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("Subir Foto"),
+        "profile": MessageLookupByLibrary.simpleMessage("Perfil"),
+        "settings": MessageLookupByLibrary.simpleMessage("Ajustes"),
+        "changelen": MessageLookupByLibrary.simpleMessage("Cambiar Idioma"),
+        "changepass":
+            MessageLookupByLibrary.simpleMessage("Cambiar Contraseña"),
+        "incidencedesc": MessageLookupByLibrary.simpleMessage(
+            "Descripción de la incidencia"),
+        "noIncidences":
+            MessageLookupByLibrary.simpleMessage("No hay incidencias"),
+        "createRoute": MessageLookupByLibrary.simpleMessage("Crear Ruta"),
+        "estimatedDuration":
+            MessageLookupByLibrary.simpleMessage("Duración Estimada"),
+        "accessibility": MessageLookupByLibrary.simpleMessage("Accesibilidad"),
+        "create": MessageLookupByLibrary.simpleMessage("Crear"),
+        "enterDuration":
+            MessageLookupByLibrary.simpleMessage("Ingrese la duración"),
+        "specifyDuration":
+            MessageLookupByLibrary.simpleMessage("Indique una duración"),
+        "descriptionInfo": MessageLookupByLibrary.simpleMessage(
+            "La descripción debe contener más información"),
+        "selectAccessibilityLevel": MessageLookupByLibrary.simpleMessage(
+            "Seleccione el grado de accesibilidad"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Guardar Cambios"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("Nueva Contraseña"),
+        "confirmNewPassword":
+            MessageLookupByLibrary.simpleMessage("Confirmar Nueva Contraseña"),
+        "currentpassword":
+            MessageLookupByLibrary.simpleMessage("Contraseña actual"),
+        "actualpassincorrect": MessageLookupByLibrary.simpleMessage(
+            "Contraseña actual Incorrecta"),
+        "incidenceNumber":
+            MessageLookupByLibrary.simpleMessage("Incidencia Nº"),
+        "date": MessageLookupByLibrary.simpleMessage("Fecha"),
+        "status": MessageLookupByLibrary.simpleMessage("Estado"),
+        "duration": MessageLookupByLibrary.simpleMessage("Duración"),
+        "client": MessageLookupByLibrary.simpleMessage("Cliente"),
+        "logout": MessageLookupByLibrary.simpleMessage("Cerrar Sesión"),
+        "accept": MessageLookupByLibrary.simpleMessage("Aceptar"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancelar"),
+        "confirmLogout": MessageLookupByLibrary.simpleMessage(
+            "¿Estás seguro de que quieres cerrar sesión?"),
+        "destinationReached":
+            MessageLookupByLibrary.simpleMessage("¡Destino alcanzado!"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Ubicación Actual"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Selecciona un destino en el mapa"),
+        "arrivalMessage":
+            MessageLookupByLibrary.simpleMessage("¡Has llegado a tu destino!"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Seleccionar un destino en el mapa"),
+        "invalidDestination": MessageLookupByLibrary.simpleMessage(
+            "Debe seleccionar un punto de destino válido"),
+        "createRoute": MessageLookupByLibrary.simpleMessage("Crear ruta"),
+        "currentLocation":
+            MessageLookupByLibrary.simpleMessage("Ubicación Actual"),
+        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
+            "Seleccionar un destino en el mapa"),
+        "clearRoute": MessageLookupByLibrary.simpleMessage("Limpiar Ruta"),
+        "Attachroute": MessageLookupByLibrary.simpleMessage("Fijar ruta")
       };
 }

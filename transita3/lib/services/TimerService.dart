@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/OpenRouteService.dart';
 
@@ -47,8 +48,8 @@ class TimerService extends ChangeNotifier {
       mapaPantallaNotifier.updateLatLngDestino(LatLng(0, 0));
       stopRuta(context, true);
 
-      Mapa_pantalla.selectedPoint1Text = 'Ubicacion Actual';
-      Mapa_pantalla.selectedPoint2Text = 'Seleccionar un destino en el mapa';
+      Mapa_pantalla.selectedPoint1Text = S.of(context).currentLocation;
+      Mapa_pantalla.selectedPoint2Text = S.of(context).selectDestinationOnMap;
     }
     notifyListeners();
   }
@@ -84,8 +85,8 @@ class TimerService extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('¡Destino alcanzado!'),
-            content: Text('¡Has llegado a tu destino!'),
+            title: Text(S.of(context).destinationReachedMessage),
+            content: Text(S.of(context).arrivalMessage),
             actions: [
               TextButton(
                 onPressed: () {

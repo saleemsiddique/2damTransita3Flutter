@@ -65,20 +65,21 @@ class _BottomNavigationBarProviderState
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Cerrar sesión'),
-              content: Text('¿Estás seguro de que quieres cerrar sesión'),
+              title: Text(S.of(context).logout),
+              content: Text(S.of(context).confirmLogout),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Cancelar'),
+                  child: Text(S.of(context).cancel),
                 ),
                 TextButton(
                   onPressed: () {
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/', (route) => false);                  },
-                  child: Text('Aceptar'),
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('/', (route) => false);
+                  },
+                  child: Text(S.of(context).accept),
                 ),
               ],
             );
