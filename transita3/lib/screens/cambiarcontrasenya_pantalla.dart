@@ -68,10 +68,11 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                           ),
                           obscureText: true,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return S.of(context).enterEmailPlease;
+                            if (value == null ||
+                                value.length < 6 ||
+                                value.isEmpty) {
+                              return S.of(context).validatorPassword;
                             }
-                            // Puedes agregar validaciones adicionales aquí
                             return null;
                           },
                         ),

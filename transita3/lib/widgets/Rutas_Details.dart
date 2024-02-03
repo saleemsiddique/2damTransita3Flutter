@@ -50,16 +50,17 @@ void rutasDetailsSheet(BuildContext context) {
                       ),
                       SizedBox(height: 16.0),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           limpiarRuta(openRouteService, mapaPantallaNotifier,
                               setState, timerService, context),
                           SizedBox(
-                            width: 20,
+                            width: 8,
                           ),
                           crearRuta(openRouteService, mapaPantallaNotifier,
                               timerService, context),
                           SizedBox(
-                            width: 20,
+                            width: 8,
                           ),
                           fijarRuta(context)
                         ],

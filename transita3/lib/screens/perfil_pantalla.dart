@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/ClienteService.dart';
 import 'package:transita3/models/cliente.dart';
 import 'package:transita3/services/IncidenciaService.dart';
@@ -15,12 +16,10 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
   TextEditingController _nombreController = TextEditingController();
   TextEditingController _apellidoController = TextEditingController();
   TextEditingController _correoController = TextEditingController();
-  LoginService loginForm = new LoginService();
 
   @override
   void initState() {
     super.initState();
-    final clienteService = Provider.of<LoginService>(context, listen: false);
     _nombreController.text = LoginService.cliente.nombre;
     _correoController.text = LoginService.cliente.nombreUsuario;
     _apellidoController.text = LoginService.cliente.apellidos;
@@ -28,6 +27,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
 
   @override
   Widget build(BuildContext context) {
+    final loginForm = Provider.of<LoginService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Perfil'),
@@ -66,6 +66,8 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                           ),
                           SizedBox(height: 60.0),
                           Form(
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
                             key: _formKey,
                             child: Column(
                               children: [
@@ -108,9 +110,15 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, ingresa tu correo';
+                                      return S.of(context).enterEmailPlease;
                                     }
-                                    return null;
+                                    String pattern =
+                                        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                                    RegExp regExp = new RegExp(pattern);
+
+                                    return regExp.hasMatch(value)
+                                        ? null
+                                        : S.of(context).validatorEmail;
                                   },
                                 ),
                                 SizedBox(
@@ -137,6 +145,15 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                           updatedFields,
                                           LoginService.cliente.id,
                                         );
+
+                                        Map<String, dynamic> credenciales = {
+                                          'nombreUsuario':  _correoController.text,
+                                          'contrasenya': loginForm.password,
+                                        };
+
+                                        await loginForm
+                                            .signInCliente(credenciales);
+                                        print("Pass: ${loginForm.password}");
 
                                         // Mostrar el SnackBar si la modificación del cliente es exitosa
                                         ScaffoldMessenger.of(context)

@@ -165,7 +165,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
       onChanged: (value) => loginForm.password = value,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        if (value == null || value.length < 6) {
+        if (value == null || value.length < 6 || value.isEmpty) {
           return S.of(context).validatorPassword;
         }
         return null;
