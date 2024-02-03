@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/services/Services.dart';
 import 'package:transita3/services/TimerService.dart';
@@ -249,7 +250,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                     return AlertDialog(
                       title: Text('Error'),
                       content: Text(
-                          'Ha ocurrido un error al obtener los puntos para el mapa.'),
+                          S.of(context).errorgetingpoints),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {

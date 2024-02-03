@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:transita3/generated/l10n.dart';
 
 class OlvidarContrasenya extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Recuperar Contraseña"),
+        title: Text(S.of(context).recoverpassword),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -19,12 +21,12 @@ class OlvidarContrasenya extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              "Correo enviado",
+              S.of(context).emailsent,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 20),
             Text(
-              "Hemos enviado un correo con tu nueva contraseña.",
+              S.of(context).emailsendtouser,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),

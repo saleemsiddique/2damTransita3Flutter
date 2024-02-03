@@ -134,6 +134,60 @@ class MessageLookup extends MessageLookupByLibrary {
         "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
             "Seleccionar un destino en el mapa"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Limpiar Ruta"),
-        "Attachroute": MessageLookupByLibrary.simpleMessage("Fijar ruta")
+        "Attachroute": MessageLookupByLibrary.simpleMessage("Fijar ruta"),
+        "confirmDelete":
+            MessageLookupByLibrary.simpleMessage("Confirmar Eliminación"),
+        "deleteIncidentError":
+            MessageLookupByLibrary.simpleMessage("Se produjo un error al eliminar la incidencia"),
+        "delete":
+            MessageLookupByLibrary.simpleMessage("Eliminar"),
+        "noIncidences":
+            MessageLookupByLibrary.simpleMessage("No hay incidencias"),
+        "retrieveIncidentsError":
+            MessageLookupByLibrary.simpleMessage("Se produjo un error al recuperar las incidencias"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("¿Olvidaste tu contraseña?"),
+        "retrievePointsError":
+            MessageLookupByLibrary.simpleMessage("Se produjo un error al recuperar los puntos para el mapa"),
+        "emailSent":
+            MessageLookupByLibrary.simpleMessage("Email enviado"),
+        "recoverPassword":
+            MessageLookupByLibrary.simpleMessage("Recuperar Contraseña"),
+        "newPasswordEmail":
+            MessageLookupByLibrary.simpleMessage("Hemos enviado un correo electrónico con tu nueva contraseña"),
+        "name":
+            MessageLookupByLibrary.simpleMessage("Nombre"),
+        "enterName":
+            MessageLookupByLibrary.simpleMessage("Por favor, introduce tu nombre"),
+        "enterSecondName":
+            MessageLookupByLibrary.simpleMessage("Por favor, introduce tu segundo nombre"),
+        "secondName":
+            MessageLookupByLibrary.simpleMessage("Segundo nombre"),
+        "changesSaved":
+            MessageLookupByLibrary.simpleMessage("Cambios guardados correctamente"),
+        "saveChanges":
+            MessageLookupByLibrary.simpleMessage("Guardar Cambios"),
+        "saveChangesError":
+            MessageLookupByLibrary.simpleMessage("Se produjo un error al guardar los cambios."),
+        "passwordLengthError":
+            MessageLookupByLibrary.simpleMessage("La contraseña debe tener al menos 6 caracteres"),
+        "signupError":
+            MessageLookupByLibrary.simpleMessage("Se produjo un error al registrarse."),
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Confirmar Contraseña"),
+        "forgotPassword":
+            MessageLookupByLibrary.simpleMessage("¿Olvidaste tu contraseña?"),
+        "sessionExpired":
+            MessageLookupByLibrary.simpleMessage("Error, esta sesión ha expirado."),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Introduce un correo electrónico válido"),
+        "validEmailError":
+            MessageLookupByLibrary.simpleMessage("Por favor, introduce una dirección de correo electrónico válida"),
+        "nameLengthError":
+            MessageLookupByLibrary.simpleMessage("El nombre debe tener al menos 2 caracteres"),
+        "longitude":
+            MessageLookupByLibrary.simpleMessage("Longitud"),
+        "latitude":
+            MessageLookupByLibrary.simpleMessage("Latitud"),
       };
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/olvidar_contrasenya.dart';
 import 'package:transita3/services/LoginService.dart';
 
@@ -20,7 +21,7 @@ class _OlvidarContrasenyaScreenState extends State<OlvidarContrasenyaScreen> {
     final loginForm = Provider.of<LoginService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Olvidar Contraseña"),
+        title: Text(S.of(context).forgotPassword),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -57,7 +58,7 @@ class _OlvidarContrasenyaScreenState extends State<OlvidarContrasenyaScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: _isLoading ? null : () => Navigator.pop(context),
-                    child: Text('Cancelar'),
+                    child: Text(S.of(context).cancel),
                   ),
                   ElevatedButton(
                     onPressed: _isLoading

@@ -30,7 +30,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
     final loginForm = Provider.of<LoginService>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'),
+        title: Text(S.of(context).profile),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -74,13 +74,13 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 TextFormField(
                                   controller: _nombreController,
                                   decoration: InputDecoration(
-                                    labelText: 'Nombre',
+                                    labelText: S.of(context).name,
                                     border: OutlineInputBorder(),
                                     icon: Icon(Icons.person),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, ingresa tu nombre';
+                                      return S.of(context).pleaseentername;
                                     }
                                     return null;
                                   },
@@ -89,13 +89,13 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 TextFormField(
                                   controller: _apellidoController,
                                   decoration: InputDecoration(
-                                    labelText: 'Apellido',
+                                    labelText: S.of(context).secondname,
                                     border: OutlineInputBorder(),
                                     icon: Icon(Icons.person),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return 'Por favor, ingresa tu apellido';
+                                      return S.of(context).pleaseentersecondname;
                                     }
                                     return null;
                                   },
@@ -104,7 +104,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 TextFormField(
                                   controller: _correoController,
                                   decoration: InputDecoration(
-                                    labelText: 'Correo',
+                                    labelText: S.of(context).email,
                                     border: OutlineInputBorder(),
                                     icon: Icon(Icons.email),
                                   ),
@@ -160,7 +160,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                                'Cambios guardados con éxito'),
+                                                S.of(context).changesSavedCorrectly),
                                           ),
                                         );
                                       } catch (error) {
@@ -170,7 +170,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                             return AlertDialog(
                                               title: Text('Error'),
                                               content: Text(
-                                                  'Ha ocurrido un error al guardar los cambios.'),
+                                                 S.of(context).errorsaveChanges),
                                               actions: <Widget>[
                                                 TextButton(
                                                   onPressed: () {
@@ -189,7 +189,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                     }
                                   },
                                   child: Text(
-                                    'Guardar cambios',
+                                    S.of(context).saveChanges,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),

@@ -103,7 +103,7 @@ class _Registro extends State<RegistroPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 3) {
-          return 'El nombre debe contener al menos 2 caracteres';
+          return S.of(context).nameMinLength;
         }
         return null;
       },
@@ -125,7 +125,7 @@ class _Registro extends State<RegistroPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 3) {
-          return 'El nombre debe contener al menos 2 caracteres';
+          return S.of(context).nameMinLength;
         }
         return null;
       },
@@ -148,13 +148,13 @@ class _Registro extends State<RegistroPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'Por favor ingresa un correo electrónico';
+          return S.of(context).enterEmailPlease;
         }
         String pattern =
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
         RegExp regExp = new RegExp(pattern);
 
-        return regExp.hasMatch(value) ? null : 'Introduce un email válido';
+        return regExp.hasMatch(value) ? null :  S.of(context).enterValidEmail;
       },
     );
   }
@@ -183,7 +183,7 @@ class _Registro extends State<RegistroPage> {
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value == null || value.length < 6) {
-          return 'La contraseña debe contener al menos 6 caracteres';
+          return S.of(context).passwordMinLength;
         }
         return null;
       },
@@ -192,8 +192,8 @@ class _Registro extends State<RegistroPage> {
   Widget _escribirConfirmarContrasenya() {
   return TextFormField(
     decoration: InputDecoration(
-      hintText: "Confirmar contraseña",
-      labelText:"Confirmar contraseña",
+      hintText: S.of(context).confirmPassword,
+      labelText: S.of(context).confirmPassword,
       suffixIcon: GestureDetector(
         onTap: () {
           setState(() {
@@ -213,9 +213,9 @@ class _Registro extends State<RegistroPage> {
     autovalidateMode: AutovalidateMode.onUserInteraction,
     validator: (value) {
       if (value == null || value.length < 6) {
-        return 'La contraseña debe contener al menos 6 caracteres';
+        return S.of(context).passwordMinLength;
       } else if (value != _contrasenya) {
-        return 'Las contraseñas no coinciden';
+        return S.of(context).passwordsDoNotMatch;
       }
       return null;
     },
@@ -241,8 +241,8 @@ class _Registro extends State<RegistroPage> {
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Error de registro'),
-                content: Text('Las contraseñas no coinciden.'),
+                title: Text(S.of(context).errorsingup),
+                content: Text(S.of(context).passwordsDoNotMatch),
                 actions: <Widget>[
                   TextButton(
                     onPressed: () {

@@ -102,7 +102,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            S.of(context).date + ' $fecha',
+                            S.of(context).date + ': $fecha',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -118,7 +118,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            S.of(context).status + ' $estado',
+                            S.of(context).status + ': $estado',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -134,7 +134,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            S.of(context).duration + ' $duracion ',
+                            S.of(context).duration + ': $duracion ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -150,7 +150,7 @@ class _detalleIincidencias extends State<detalle_incidencias> {
                       child: Row(
                         children: [
                           Text(
-                            S.of(context).client + ' ${cliente.toString()} ',
+                            S.of(context).client + ': ${cliente.toString()} ',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,

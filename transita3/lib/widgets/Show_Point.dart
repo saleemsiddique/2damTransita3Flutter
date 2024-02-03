@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
@@ -35,7 +36,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Descripción: ${punto.descripcion}',
+                                S.of(context).description + ': ${punto.descripcion}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -43,17 +44,17 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                               ),
                               SizedBox(height: 8),
                               Text(
-                                'Grado de accesibilidad: ${punto.accesibilidadPunto}',
+                               S.of(context).accessibilityDegree + ': ${punto.accesibilidadPunto}',
                                 style: TextStyle(fontSize: 14),
                               ),
                               SizedBox(height: 4),
                               Text(
-                                'Latitud: ${punto.latitud.toStringAsFixed(5)}',
+                                S.of(context).latitude + ': ${punto.latitud.toStringAsFixed(5)}',
                                 style: TextStyle(fontSize: 14),
                               ),
                               SizedBox(height: 4),
                               Text(
-                                'Longitud: ${punto.longitud.toStringAsFixed(5)}',
+                                S.of(context).longitude + ': ${punto.longitud.toStringAsFixed(5)}',
                                 style: TextStyle(fontSize: 14),
                               ),
                             ],
@@ -89,7 +90,7 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Text('Error'),
-                                      content: Text('Error, esta sesion ha expirado.'),
+                                      content: Text(S.of(context).sessionExpiredError),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {

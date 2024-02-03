@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/Services.dart';
 
 class BotonFiltro extends StatefulWidget {
@@ -71,7 +72,7 @@ class _MyButtonState extends State<BotonFiltro> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text('Error'),
-                    content: Text('Error, esta sesion ha expirado.'),
+                    content: Text(S.of(context).sessionExpiredError),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -115,7 +116,7 @@ class _MyButtonState extends State<BotonFiltro> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text('Error'),
-                    content: Text('Error, esta sesion ha expirado.'),
+                    content: Text(S.of(context).sessionExpiredError),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {
@@ -157,7 +158,7 @@ class _MyButtonState extends State<BotonFiltro> {
                 builder: (BuildContext context) {
                   return AlertDialog(
                     title: Text('Error'),
-                    content: Text('Error, esta sesion ha expirado.'),
+                    content: Text(S.of(context).sessionExpiredError),
                     actions: <Widget>[
                       TextButton(
                         onPressed: () {

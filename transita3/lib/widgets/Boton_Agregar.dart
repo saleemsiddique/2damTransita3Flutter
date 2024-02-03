@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 
 import 'package:transita3/services/PuntoService.dart';
@@ -110,7 +111,7 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Error'),
-          content: Text('Error, esta sesion ha expirado.'),
+          content: Text(S.of(context).sessionExpiredError),
           actions: <Widget>[
             TextButton(
               onPressed: () {

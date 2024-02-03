@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/provider/Utils.dart';
@@ -32,7 +33,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Error'),
-              content: Text('Ha ocurrido un error al obtener las incidencias.'),
+              content: Text(S.of(context).errorobtainingincidences),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
@@ -122,7 +123,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     if (listaIncidencias.isEmpty) {
       return Column(
         children: [
-          Text("No hay Incidencias"),
+          Text(S.of(context).noIncidences),
         ],
       );
     } else {
@@ -194,15 +195,15 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Confirmar eliminación'),
+              title: Text(S.of(context).confirmDelete),
               content: Text(
-                  '¿Estás seguro de que quieres eliminar esta incidencia?'),
+                  S.of(context).confirmDeletIncidence),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop(); // Cerrar el cuadro de diálogo
                   },
-                  child: Text('Cancelar'),
+                  child: Text(S.of(context).cancel),
                 ),
                 TextButton(
                   onPressed: () async {
@@ -223,7 +224,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
                           return AlertDialog(
                             title: Text('Error'),
                             content: Text(
-                                'Ha ocurrido un error al eliminar la incidencia.'),
+                                S.of(context).errordeletingincidence),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
@@ -238,7 +239,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
                       );
                     }
                   },
-                  child: Text('Eliminar'),
+                  child: Text(S.of(context).delete),
                 ),
               ],
             );

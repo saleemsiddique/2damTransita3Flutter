@@ -239,7 +239,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
           ),
         );
       },
-      child: Text("¿Olvidaste tu contraseña?"),
+      child: Text(S.of(context).Didyouforgetyourpassword),
     );
   }
 
