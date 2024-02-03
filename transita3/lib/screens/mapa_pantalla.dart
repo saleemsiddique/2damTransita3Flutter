@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -8,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/services/Services.dart';
-import 'package:transita3/services/TimerService.dart';
 import 'package:transita3/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
@@ -59,13 +56,14 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
 
-
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-     final timerService = Provider.of<TimerService>(context, listen: false);
-      timerService.startTimer(context);
+      final timerService = Provider.of<TimerService>(context, listen: false);
+      if (!timerService.timer.isActive) {
+        timerService.startTimer(context);
+      }
     });
   }
 
@@ -196,13 +194,14 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       ),
                     );
                   }).toList(),
+                  MarkerSelect(40, timerService.currentLocation, Colors.blue,
+                      Icons.my_location),
                   MarkerSelect(
-                      40, timerService.currentLocation, Colors.blue, Icons.my_location),
-                  MarkerSelect(40, latLngSelec, Colors.blue, Icons.location_pin),
-                  MarkerSelect(
-                      60, MapaPantallaNotifier._latLngOrigen, Colors.black, Icons.location_pin),
-                  MarkerSelect(
-                      60, MapaPantallaNotifier._latLngDestino, Colors.black, Icons.location_pin),
+                      40, latLngSelec, Colors.blue, Icons.location_pin),
+                  MarkerSelect(60, MapaPantallaNotifier._latLngOrigen,
+                      Colors.black, Icons.location_pin),
+                  MarkerSelect(60, MapaPantallaNotifier._latLngDestino,
+                      Colors.black, Icons.location_pin),
                 ],
               ),
               if (!MapaPantallaNotifier
@@ -249,8 +248,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('Error'),
-                      content: Text(
-                          S.of(context).errorgetingpoints),
+                      content: Text(S.of(context).errorgetingpoints),
                       actions: <Widget>[
                         TextButton(
                           onPressed: () {

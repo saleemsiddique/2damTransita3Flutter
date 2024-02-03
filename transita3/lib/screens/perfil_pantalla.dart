@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
-import 'package:transita3/services/ClienteService.dart';
-import 'package:transita3/models/cliente.dart';
-import 'package:transita3/services/IncidenciaService.dart';
-import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/services/Services.dart';
+
 
 class PerfilPantalla extends StatefulWidget {
   @override
@@ -102,6 +100,7 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 ),
                                 SizedBox(height: 45.0),
                                 TextFormField(
+                                  enabled: false,
                                   controller: _correoController,
                                   decoration: InputDecoration(
                                     labelText: S.of(context).email,

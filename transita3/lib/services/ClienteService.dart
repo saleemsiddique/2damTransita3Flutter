@@ -1,12 +1,7 @@
-import 'dart:async';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
-import 'package:transita3/services/LoginService.dart';
-import '../models/models.dart';
-import 'package:transita3/screens/perfil_pantalla.dart';
+import 'package:transita3/models/models.dart';
 
 class ClienteService extends ChangeNotifier {
   GlobalKey<FormState> formKey = new GlobalKey<FormState>();

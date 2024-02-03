@@ -1,15 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
-import 'package:transita3/provider/Utils.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:transita3/widgets/Boton_Agregar.dart';
-import 'package:transita3/widgets/Show_Image.dart';
-
-import '../models/models.dart';
+import 'package:transita3/widgets/widgets.dart';
+import 'package:transita3/models/models.dart';
 
 class GestionIncidenciasPage extends StatefulWidget {
   @override

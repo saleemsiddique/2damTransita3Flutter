@@ -4,14 +4,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
-import 'package:transita3/models/models.dart';
-import 'package:transita3/navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:transita3/services/IncidenciaService.dart';
+import 'package:transita3/services/Services.dart';
 import 'dart:io';
 
-import 'package:transita3/services/LoginService.dart';
-import 'package:transita3/services/PuntoService.dart';
+import 'package:transita3/services/Services.dart';
+
 
 class CreacionIncidenciasPage extends StatefulWidget {
   @override

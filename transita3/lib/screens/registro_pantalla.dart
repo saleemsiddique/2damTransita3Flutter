@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:transita3/generated/l10n.dart';
-import 'package:transita3/services/ClienteService.dart';
-import 'package:transita3/services/IncidenciaService.dart';
-import 'package:transita3/services/LoginService.dart';
+import 'package:transita3/services/Services.dart';
+
 
 class RegistroPage extends StatefulWidget {
   @override

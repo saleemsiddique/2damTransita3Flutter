@@ -16,7 +16,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "createAccountLinkText":
             MessageLookupByLibrary.simpleMessage(" per a crear-la."),
         "createAccountText":
-            MessageLookupByLibrary.simpleMessage("¿No tens compte? Preme"),
+            MessageLookupByLibrary.simpleMessage("¿No tens compte? Preme "),
         "email": MessageLookupByLibrary.simpleMessage("Correu Electrònic"),
         "enterEmailPlease": MessageLookupByLibrary.simpleMessage(
             "Si us plau, introdueix un correu electrònic"),

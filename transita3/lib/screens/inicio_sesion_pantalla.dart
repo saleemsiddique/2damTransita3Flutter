@@ -5,9 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/recupera_contrasenya_pantalla.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
-import 'package:transita3/services/IncidenciaService.dart';
-import 'package:transita3/services/LoginService.dart';
-import 'package:transita3/screens/olvidar_contrasenya.dart';
 import 'package:transita3/services/Services.dart';
 
 class IniciarSesionPage extends StatefulWidget {
@@ -17,10 +14,8 @@ class IniciarSesionPage extends StatefulWidget {
 
 class _InicioSesion extends State<IniciarSesionPage> {
   final _formKey = GlobalKey<FormState>();
-  String _email = '';
-  String _contrasenya = '';
   bool _mostrarContrasenya = false;
-  late String _selectedLanguage = 'ES';
+  late String _selectedLanguage = 'EN';
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([

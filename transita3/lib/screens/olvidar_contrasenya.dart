@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:transita3/generated/l10n.dart';
 
 class OlvidarContrasenya extends StatelessWidget {

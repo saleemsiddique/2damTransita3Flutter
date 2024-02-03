@@ -1,10 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
-import '../models/LoggedCliente.dart';
+import 'package:transita3/models/models.dart';
 
 class LoginService extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();

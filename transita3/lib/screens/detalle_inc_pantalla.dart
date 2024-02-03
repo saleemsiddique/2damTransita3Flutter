@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
-import 'package:transita3/provider/Utils.dart';
-import 'package:transita3/services/IncidenciaService.dart';
-import 'package:transita3/widgets/Show_Image.dart';
+import 'package:transita3/widgets/widgets.dart';
 
 class detalle_incidencias extends StatefulWidget {
   @override

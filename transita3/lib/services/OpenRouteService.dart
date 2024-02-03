@@ -1,16 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:transita3/helpers/debouncer.dart';
 import 'package:transita3/provider/TransitaProvider.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
-import 'package:transita3/services/LoginService.dart';
-import 'package:transita3/services/TimerService.dart';
-import '../models/models.dart';
-import 'package:transita3/screens/perfil_pantalla.dart';
+import 'package:transita3/services/Services.dart';
+
 
 class OpenRouteService extends ChangeNotifier {
   static List<List<double>> routeCoordinates = [];
@@ -23,7 +18,7 @@ class OpenRouteService extends ChangeNotifier {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
 
-    if (latlng1 == 'Ubicacion Actual') {
+    if (latlng1 == 'Ubicacion Actual' || latlng1 == 'Current Location' || latlng1 == 'EN VALENCIANO') {
       latlng1 ="${timerService.currentLocation.latitude},${timerService.currentLocation.longitude}";
     }
 
