@@ -41,14 +41,22 @@ class _BottomNavigationBarProviderState
         child: screens.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.map_outlined),
-            label: 'GPS',
+            icon: Container(
+              padding: EdgeInsets.only(
+                  bottom: 0), // Ajusta el padding según sea necesario
+              child: Icon(Icons.map_outlined),
+            ),
+            label: '', // Establece el label como una cadena vacía
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.report_problem_outlined),
-            label: 'Incidencias',
+            icon: Container(
+              padding: EdgeInsets.only(
+                  bottom: 0), // Ajusta el padding según sea necesario
+              child: Icon(Icons.report_problem_outlined),
+            ),
+            label: '', // Establece el label como una cadena vacía
           ),
         ],
         currentIndex: _selectedIndex,

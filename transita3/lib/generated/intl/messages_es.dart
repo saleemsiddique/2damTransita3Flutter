@@ -122,70 +122,68 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ubicación Actual"),
         "arrivalMessage":
             MessageLookupByLibrary.simpleMessage("¡Has llegado a tu destino!"),
-        "selectDestinationOnMapMessage": MessageLookupByLibrary.simpleMessage(
-            "Elige un destino"),
+        "selectDestinationOnMapMessage":
+            MessageLookupByLibrary.simpleMessage("Elige un destino"),
         "invalidDestination": MessageLookupByLibrary.simpleMessage(
             "Debe seleccionar un punto de destino válido"),
         "createRoute": MessageLookupByLibrary.simpleMessage("Crear ruta"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Ubicación Actual"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Elige un destino"),
+        "selectDestinationOnMap":
+            MessageLookupByLibrary.simpleMessage("Elige un destino"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Limpiar Ruta"),
         "Attachroute": MessageLookupByLibrary.simpleMessage("Fijar ruta"),
         "confirmDelete":
             MessageLookupByLibrary.simpleMessage("Confirmar Eliminación"),
-        "deleteIncidentError":
-            MessageLookupByLibrary.simpleMessage("Se produjo un error al eliminar la incidencia"),
-        "delete":
-            MessageLookupByLibrary.simpleMessage("Eliminar"),
+        "deleteIncidentError": MessageLookupByLibrary.simpleMessage(
+            "Se produjo un error al eliminar la incidencia"),
+        "delete": MessageLookupByLibrary.simpleMessage("Eliminar"),
         "noIncidences":
             MessageLookupByLibrary.simpleMessage("No hay incidencias"),
-        "retrieveIncidentsError":
-            MessageLookupByLibrary.simpleMessage("Se produjo un error al recuperar las incidencias"),
+        "retrieveIncidentsError": MessageLookupByLibrary.simpleMessage(
+            "Se produjo un error al recuperar las incidencias"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("¿Olvidaste tu contraseña?"),
-        "retrievePointsError":
-            MessageLookupByLibrary.simpleMessage("Se produjo un error al recuperar los puntos para el mapa"),
-        "emailSent":
-            MessageLookupByLibrary.simpleMessage("Email enviado"),
+        "retrievePointsError": MessageLookupByLibrary.simpleMessage(
+            "Se produjo un error al recuperar los puntos para el mapa"),
+        "emailSent": MessageLookupByLibrary.simpleMessage("Email enviado"),
         "recoverPassword":
             MessageLookupByLibrary.simpleMessage("Recuperar Contraseña"),
-        "newPasswordEmail":
-            MessageLookupByLibrary.simpleMessage("Hemos enviado un correo electrónico con tu nueva contraseña"),
-        "name":
-            MessageLookupByLibrary.simpleMessage("Nombre"),
-        "enterName":
-            MessageLookupByLibrary.simpleMessage("Por favor, introduce tu nombre"),
-        "enterSecondName":
-            MessageLookupByLibrary.simpleMessage("Por favor, introduce tu segundo nombre"),
-        "secondName":
-            MessageLookupByLibrary.simpleMessage("Segundo nombre"),
-        "changesSaved":
-            MessageLookupByLibrary.simpleMessage("Cambios guardados correctamente"),
-        "saveChanges":
-            MessageLookupByLibrary.simpleMessage("Guardar Cambios"),
-        "saveChangesError":
-            MessageLookupByLibrary.simpleMessage("Se produjo un error al guardar los cambios."),
-        "passwordLengthError":
-            MessageLookupByLibrary.simpleMessage("La contraseña debe tener al menos 6 caracteres"),
-        "signupError":
-            MessageLookupByLibrary.simpleMessage("Se produjo un error al registrarse."),
+        "newPasswordEmail": MessageLookupByLibrary.simpleMessage(
+            "Hemos enviado un correo electrónico con tu nueva contraseña"),
+        "name": MessageLookupByLibrary.simpleMessage("Nombre"),
+        "enterName": MessageLookupByLibrary.simpleMessage(
+            "Por favor, introduce tu nombre"),
+        "enterSecondName": MessageLookupByLibrary.simpleMessage(
+            "Por favor, introduce tu segundo nombre"),
+        "secondName": MessageLookupByLibrary.simpleMessage("Apellido"),
+        "changesSaved": MessageLookupByLibrary.simpleMessage(
+            "Cambios guardados correctamente"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Guardar Cambios"),
+        "saveChangesError": MessageLookupByLibrary.simpleMessage(
+            "Se produjo un error al guardar los cambios."),
+        "passwordLengthError": MessageLookupByLibrary.simpleMessage(
+            "La contraseña debe tener al menos 6 caracteres"),
+        "signupError": MessageLookupByLibrary.simpleMessage(
+            "Se produjo un error al registrarse."),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirmar Contraseña"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("¿Olvidaste tu contraseña?"),
-        "sessionExpired":
-            MessageLookupByLibrary.simpleMessage("Error, esta sesión ha expirado."),
-        "enterValidEmail":
-            MessageLookupByLibrary.simpleMessage("Introduce un correo electrónico válido"),
-        "validEmailError":
-            MessageLookupByLibrary.simpleMessage("Por favor, introduce una dirección de correo electrónico válida"),
-        "nameLengthError":
-            MessageLookupByLibrary.simpleMessage("El nombre debe tener al menos 2 caracteres"),
-        "longitude":
-            MessageLookupByLibrary.simpleMessage("Longitud"),
-        "latitude":
-            MessageLookupByLibrary.simpleMessage("Latitud"),
+        "sessionExpired": MessageLookupByLibrary.simpleMessage(
+            "Error, esta sesión ha expirado."),
+        "enterValidEmail": MessageLookupByLibrary.simpleMessage(
+            "Introduce un correo electrónico válido"),
+        "validEmailError": MessageLookupByLibrary.simpleMessage(
+            "Por favor, introduce una dirección de correo electrónico válida"),
+        "nameLengthError": MessageLookupByLibrary.simpleMessage(
+            "El nombre debe tener al menos 2 caracteres"),
+        "longitude": MessageLookupByLibrary.simpleMessage("Longitud"),
+        "latitude": MessageLookupByLibrary.simpleMessage("Latitud"),
+        "incidence": MessageLookupByLibrary.simpleMessage("Incidencia"),
+        "accessibilityDegree":
+            MessageLookupByLibrary.simpleMessage("Grado de accesibilidad"),
+        "confirmDeleteIncidence": MessageLookupByLibrary.simpleMessage(
+            "¿Estas seguro de eliminar la incidencia?"),
       };
 }

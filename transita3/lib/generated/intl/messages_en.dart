@@ -114,74 +114,70 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Destination reached!"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
-        "selectDestinationOnMapMessage": MessageLookupByLibrary.simpleMessage(
-            "Select destination"),
+        "selectDestinationOnMapMessage":
+            MessageLookupByLibrary.simpleMessage("Select destination"),
         "arrivalMessage": MessageLookupByLibrary.simpleMessage(
             "You have arrived at your destination!"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Select destination"),
+        "selectDestinationOnMap":
+            MessageLookupByLibrary.simpleMessage("Select destination"),
         "invalidDestination": MessageLookupByLibrary.simpleMessage(
             "You must select a valid destination point"),
         "createRoute": MessageLookupByLibrary.simpleMessage("Create route"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Select destination"),
+        "selectDestinationOnMap":
+            MessageLookupByLibrary.simpleMessage("Select destination"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Clear Route"),
         "Attachroute": MessageLookupByLibrary.simpleMessage("Attach route"),
-        "confirmDelete":
-            MessageLookupByLibrary.simpleMessage("Confirm Delete"),
-        "deleteIncidentError":
-            MessageLookupByLibrary.simpleMessage("An error occurred while deleting the incident"),
-        "delete":
-            MessageLookupByLibrary.simpleMessage("Delete"),
+        "deleteIncidentError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while deleting the incident"),
+        "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "noIncidences":
             MessageLookupByLibrary.simpleMessage("There is no Incidences"),
-        "retrieveIncidentsError":
-            MessageLookupByLibrary.simpleMessage("An error occurred while retrieving the incidents"),
-        "forgotPassword":
-            MessageLookupByLibrary.simpleMessage("¿Did you forget your password?"),
-        "retrievePointsError":
-            MessageLookupByLibrary.simpleMessage("An error occurred while retrieving the points for the map"),
-        "emailSent":
-            MessageLookupByLibrary.simpleMessage("Email sent"),
+        "retrieveIncidentsError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while retrieving the incidents"),
+        "forgotPassword": MessageLookupByLibrary.simpleMessage(
+            "¿Did you forget your password?"),
+        "retrievePointsError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while retrieving the points for the map"),
+        "emailSent": MessageLookupByLibrary.simpleMessage("Email sent"),
         "recoverPassword":
             MessageLookupByLibrary.simpleMessage("Recover Password"),
-        "newPasswordEmail":
-            MessageLookupByLibrary.simpleMessage("We have sent an email with your new password"),
-        "name":
-            MessageLookupByLibrary.simpleMessage("Name"),
+        "newPasswordEmail": MessageLookupByLibrary.simpleMessage(
+            "We have sent an email with your new password"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "enterName":
             MessageLookupByLibrary.simpleMessage("Please enter your name"),
-        "enterSecondName":
-            MessageLookupByLibrary.simpleMessage("Please enter your second name"),
-        "secondName":
-            MessageLookupByLibrary.simpleMessage("Second name"),
+        "enterSecondName": MessageLookupByLibrary.simpleMessage(
+            "Please enter your second name"),
+        "secondName": MessageLookupByLibrary.simpleMessage("Second name"),
         "changesSaved":
             MessageLookupByLibrary.simpleMessage("Changes saved correctly"),
-        "saveChanges":
-            MessageLookupByLibrary.simpleMessage("Save Changes"),
-        "saveChangesError":
-            MessageLookupByLibrary.simpleMessage("An error occurred while saving the changes."),
-        "passwordLengthError":
-            MessageLookupByLibrary.simpleMessage("Password must be at least 6 characters long"),
-        "signupError":
-            MessageLookupByLibrary.simpleMessage("An error occurred while signin up."),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Save Changes"),
+        "saveChangesError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while saving the changes."),
+        "passwordLengthError": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 6 characters long"),
+        "signupError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred while signin up."),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
-        "sessionExpired":
-            MessageLookupByLibrary.simpleMessage("Error, this session has expired."),
+        "sessionExpired": MessageLookupByLibrary.simpleMessage(
+            "Error, this session has expired."),
         "enterValidEmail":
             MessageLookupByLibrary.simpleMessage("Enter a valid email"),
-        "validEmailError":
-            MessageLookupByLibrary.simpleMessage("Please enter a valid email address"),
-        "nameLengthError":
-            MessageLookupByLibrary.simpleMessage("Name must be at least 2 characters long"),
-        "longitude":
-            MessageLookupByLibrary.simpleMessage("Longitude"),
-        "latitude":
-            MessageLookupByLibrary.simpleMessage("Latitude"),
+        "validEmailError": MessageLookupByLibrary.simpleMessage(
+            "Please enter a valid email address"),
+        "nameLengthError": MessageLookupByLibrary.simpleMessage(
+            "Name must be at least 2 characters long"),
+        "longitude": MessageLookupByLibrary.simpleMessage("Longitude"),
+        "latitude": MessageLookupByLibrary.simpleMessage("Latitude"),
+        "incidence": MessageLookupByLibrary.simpleMessage("Incidence"),
+        "accessibilityDegree":
+            MessageLookupByLibrary.simpleMessage("Accessibility Degree"),
+        "confirmDeleteIncidence": MessageLookupByLibrary.simpleMessage(
+            "¿Are you sure to delete the current incidence?"),
       };
 }

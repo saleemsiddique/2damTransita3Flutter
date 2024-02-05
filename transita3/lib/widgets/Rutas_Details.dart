@@ -178,7 +178,7 @@ GestureDetector limpiarRuta(
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Text(
-        S.of(context).clearRouteMessage,
+        S.of(context).clearRoute,
         style: TextStyle(color: Colors.white),
       ),
     ),

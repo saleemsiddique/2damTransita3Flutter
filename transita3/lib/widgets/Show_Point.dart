@@ -37,7 +37,8 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                S.of(context).description + ': ${punto.descripcion}',
+                                S.of(context).description +
+                                    ': ${punto.descripcion}',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -45,17 +46,20 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                               ),
                               SizedBox(height: 8),
                               Text(
-                               S.of(context).accessibilityDegree + ': ${punto.accesibilidadPunto}',
+                                S.of(context).accessibilityDegree +
+                                    ': ${punto.accesibilidadPunto}',
                                 style: TextStyle(fontSize: 14),
                               ),
                               SizedBox(height: 4),
                               Text(
-                                S.of(context).latitude + ': ${punto.latitud.toStringAsFixed(5)}',
+                                S.of(context).latitude +
+                                    ': ${punto.latitud.toStringAsFixed(5)}',
                                 style: TextStyle(fontSize: 14),
                               ),
                               SizedBox(height: 4),
                               Text(
-                                S.of(context).longitude + ': ${punto.longitud.toStringAsFixed(5)}',
+                                S.of(context).longitude +
+                                    ': ${punto.longitud.toStringAsFixed(5)}',
                                 style: TextStyle(fontSize: 14),
                               ),
                             ],
@@ -91,7 +95,8 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
                                   builder: (BuildContext context) {
                                     return AlertDialog(
                                       title: Text('Error'),
-                                      content: Text(S.of(context).sessionExpiredError),
+                                      content: Text(
+                                          S.of(context).sessionExpiredError),
                                       actions: <Widget>[
                                         TextButton(
                                           onPressed: () {

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/Services.dart';
 
-
 class PerfilPantalla extends StatefulWidget {
   @override
   State<PerfilPantalla> createState() => _PerfilPantallaState();
@@ -87,13 +86,15 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 TextFormField(
                                   controller: _apellidoController,
                                   decoration: InputDecoration(
-                                    labelText: S.of(context).secondname,
+                                    labelText: S.of(context).secondName,
                                     border: OutlineInputBorder(),
                                     icon: Icon(Icons.person),
                                   ),
                                   validator: (value) {
                                     if (value == null || value.isEmpty) {
-                                      return S.of(context).pleaseentersecondname;
+                                      return S
+                                          .of(context)
+                                          .pleaseentersecondname;
                                     }
                                     return null;
                                   },
@@ -146,7 +147,8 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                         );
 
                                         Map<String, dynamic> credenciales = {
-                                          'nombreUsuario':  _correoController.text,
+                                          'nombreUsuario':
+                                              _correoController.text,
                                           'contrasenya': loginForm.password,
                                         };
 
@@ -158,8 +160,9 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            content: Text(
-                                                S.of(context).changesSavedCorrectly),
+                                            content: Text(S
+                                                .of(context)
+                                                .changesSavedCorrectly),
                                           ),
                                         );
                                       } catch (error) {
@@ -168,8 +171,9 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               title: Text('Error'),
-                                              content: Text(
-                                                 S.of(context).errorsaveChanges),
+                                              content: Text(S
+                                                  .of(context)
+                                                  .errorsaveChanges),
                                               actions: <Widget>[
                                                 TextButton(
                                                   onPressed: () {

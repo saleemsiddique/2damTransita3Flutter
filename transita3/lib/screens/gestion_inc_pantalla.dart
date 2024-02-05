@@ -174,8 +174,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(S.of(context).confirmDelete),
-              content: Text(
-                  S.of(context).confirmDeletIncidence),
+              content: Text(S.of(context).confirmDeleteIncidence),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {

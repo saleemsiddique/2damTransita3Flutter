@@ -219,7 +219,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
           ),
         );
       },
-      child: Text(S.of(context).Didyouforgetyourpassword),
+      child: Text(S.of(context).forgotPassword),
     );
   }
 

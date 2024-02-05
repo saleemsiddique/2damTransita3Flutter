@@ -650,15 +650,6 @@ class S {
     );
   }
 
-  String get currentLocationMessage {
-    return Intl.message(
-      'Current Location',
-      name: 'currentLocationMessage',
-      desc: '',
-      args: [],
-    );
-  }
-
   String get selectDestinationOnMapMessage {
     return Intl.message(
       'Select destination',
@@ -686,10 +677,10 @@ class S {
     );
   }
 
-  String get clearRouteMessage {
+  String get clearRoute {
     return Intl.message(
       'Clear Route',
-      name: 'clearRouteMessage',
+      name: 'clearRoute',
       desc: '',
       args: [],
     );
@@ -713,16 +704,18 @@ class S {
       args: [],
     );
   }
+
   /// 'Select a destination on the map'
-  String get confirmDeletIncidence {
+  String get confirmDeleteIncidence {
     return Intl.message(
       '¿Are you sure to delete the current incidence?',
-      name: 'confirmDeletIncidence',
+      name: 'confirmDeleteIncidence',
       desc: '',
       args: [],
     );
   }
-   /// 'Select a destination on the map'
+
+  /// 'Select a destination on the map'
   String get confirmDelete {
     return Intl.message(
       'Confirm Delete',
@@ -731,7 +724,8 @@ class S {
       args: [],
     );
   }
-    /// 'Select a destination on the map'
+
+  /// 'Select a destination on the map'
   String get errordeletingincidence {
     return Intl.message(
       'An error occurred while deleting the incident',
@@ -740,7 +734,17 @@ class S {
       args: [],
     );
   }
-   /// 'Select a destination on the map'
+
+  String get incidence {
+    return Intl.message(
+      'Incidence',
+      name: 'incidence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// 'Select a destination on the map'
   String get delete {
     return Intl.message(
       'Delete',
@@ -749,7 +753,8 @@ class S {
       args: [],
     );
   }
-   /// 'Select a destination on the map'
+
+  /// 'Select a destination on the map'
   String get noIncidences {
     return Intl.message(
       'There is no Incidences',
@@ -758,7 +763,8 @@ class S {
       args: [],
     );
   }
-   String get errorobtainingincidences {
+
+  String get errorobtainingincidences {
     return Intl.message(
       'An error occurred while retrieving the incidents',
       name: 'errorobtainingincidences',
@@ -766,7 +772,8 @@ class S {
       args: [],
     );
   }
-   String get Didyouforgetyourpassword {
+
+  String get Didyouforgetyourpassword {
     return Intl.message(
       '¿Did you forget your password?',
       name: 'Didyouforgetyourpassword',
@@ -774,7 +781,8 @@ class S {
       args: [],
     );
   }
-   String get errorgetingpoints {
+
+  String get errorgetingpoints {
     return Intl.message(
       'An error occurred while retrieving the points for the map',
       name: 'errorgetingpoints',
@@ -782,7 +790,8 @@ class S {
       args: [],
     );
   }
-   String get emailsent {
+
+  String get emailsent {
     return Intl.message(
       'Email sent',
       name: 'emailsent',
@@ -790,7 +799,8 @@ class S {
       args: [],
     );
   }
-   String get recoverpassword {
+
+  String get recoverpassword {
     return Intl.message(
       'Recover Password',
       name: 'recoverpassword',
@@ -798,7 +808,8 @@ class S {
       args: [],
     );
   }
-    String get emailsendtouser {
+
+  String get emailsendtouser {
     return Intl.message(
       'We have sent an email with your new password.',
       name: 'emailsendtouser',
@@ -806,7 +817,8 @@ class S {
       args: [],
     );
   }
-    String get name {
+
+  String get name {
     return Intl.message(
       'Name',
       name: 'name',
@@ -814,7 +826,8 @@ class S {
       args: [],
     );
   }
-    String get pleaseentername {
+
+  String get pleaseentername {
     return Intl.message(
       'Please enter your name',
       name: 'pleaseentername',
@@ -822,7 +835,8 @@ class S {
       args: [],
     );
   }
-   String get pleaseentersecondname {
+
+  String get pleaseentersecondname {
     return Intl.message(
       'Please enter your second name',
       name: 'pleaseentersecondname',
@@ -830,15 +844,17 @@ class S {
       args: [],
     );
   }
-   String get secondname {
+
+  String get secondName {
     return Intl.message(
       'Second name',
-      name: 'secondname',
+      name: 'secondName',
       desc: '',
       args: [],
     );
   }
-   String get changesSavedCorrectly {
+
+  String get changesSavedCorrectly {
     return Intl.message(
       'Changes saved correctly',
       name: 'changesSavedCorrectly',
@@ -846,7 +862,8 @@ class S {
       args: [],
     );
   }
-    String get saveChanges {
+
+  String get saveChanges {
     return Intl.message(
       'Save Changes',
       name: 'saveChanges',
@@ -854,7 +871,8 @@ class S {
       args: [],
     );
   }
-   String get errorsaveChanges {
+
+  String get errorsaveChanges {
     return Intl.message(
       'An error occurred while saving the changes.',
       name: 'errorsaveChanges',
@@ -862,7 +880,8 @@ class S {
       args: [],
     );
   }
-    String get errorsingup {
+
+  String get errorsingup {
     return Intl.message(
       'An error occurred while signin up.',
       name: 'errorsingup',
@@ -871,98 +890,95 @@ class S {
     );
   }
 
-String get passwordMinLength {
-  return Intl.message(
-    'Password must be at least 6 characters long',
-    name: 'passwordMinLength',
-    desc: '',
-    args: [],
-  );
-}
+  String get passwordMinLength {
+    return Intl.message(
+      'Password must be at least 6 characters long',
+      name: 'passwordMinLength',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get confirmPassword {
-  return Intl.message(
-    'Confirm Password',
-    name: 'confirmPassword',
-    desc: '',
-    args: [],
-  );
-}
+  String get confirmPassword {
+    return Intl.message(
+      'Confirm Password',
+      name: 'confirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get forgotPassword {
-  return Intl.message(
-    'Forgot Password',
-    name: 'forgotPassword',
-    desc: '',
-    args: [],
-  );
-}
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot Password',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
 
+  String get sessionExpiredError {
+    return Intl.message(
+      'Error, this session has expired.',
+      name: 'sessionExpiredError',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get sessionExpiredError {
-  return Intl.message(
-    'Error, this session has expired.',
-    name: 'sessionExpiredError',
-    desc: '',
-    args: [],
-  );
-}
+  String get invalidEmail {
+    return Intl.message(
+      'Enter a valid email',
+      name: 'invalidEmail',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get invalidEmail {
-  return Intl.message(
-    'Enter a valid email',
-    name: 'invalidEmail',
-    desc: '',
-    args: [],
-  );
-}
+  String get enterValidEmail {
+    return Intl.message(
+      'Please enter a valid email address',
+      name: 'enterValidEmail',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get enterValidEmail {
-  return Intl.message(
-    'Please enter a valid email address',
-    name: 'enterValidEmail',
-    desc: '',
-    args: [],
-  );
-}
+  String get nameMinLength {
+    return Intl.message(
+      'Name must be at least 2 characters long',
+      name: 'nameMinLength',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get nameMinLength {
-  return Intl.message(
-    'Name must be at least 2 characters long',
-    name: 'nameMinLength',
-    desc: '',
-    args: [],
-  );
-}
+  String get longitude {
+    return Intl.message(
+      'Longitude',
+      name: 'longitude',
+      desc: '',
+      args: [],
+    );
+  }
 
+  String get latitude {
+    return Intl.message(
+      'Latitude',
+      name: 'latitude',
+      desc: '',
+      args: [],
+    );
+  }
 
-String get longitude {
-  return Intl.message(
-    'Longitude',
-    name: 'longitude',
-    desc: '',
-    args: [],
-  );
-}
-
-String get latitude {
-  return Intl.message(
-    'Latitude',
-    name: 'latitude',
-    desc: '',
-    args: [],
-  );
-}
-
-String get accessibilityDegree {
-  return Intl.message(
-    'Accessibility Degree',
-    name: 'accessibilityDegree',
-    desc: '',
-    args: [],
-  );
-}
-
+  String get accessibilityDegree {
+    return Intl.message(
+      'Accessibility Degree',
+      name: 'accessibilityDegree',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
