@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     double width, double height, double? lat, double? lon) {
@@ -105,24 +106,7 @@ Widget botonAgregar(BuildContext context, String routeName, Punto? punto,
     }
   } catch (error) {
     // Mostrar un aviso en caso de error
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content: Text(S.of(context).sessionExpiredError),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/', (route) => false);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    errorTokenExpired(context);
     // Puedes retornar un contenedor vacío o un widget alternativo en caso de error
     return Container();
   }

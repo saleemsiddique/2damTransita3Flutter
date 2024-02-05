@@ -4,6 +4,7 @@ import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 import 'package:transita3/widgets/widgets.dart';
 
 void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
@@ -129,24 +130,6 @@ void showPointDetailsBottomSheet(BuildContext context, Punto punto) async {
     });
   } catch (error) {
     // Mostrar un aviso en caso de error
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content:
-              Text('Ha ocurrido un error al buscar el punto por coordenadas.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/', (route) => false);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    errorTokenExpired(context);
   }
 }

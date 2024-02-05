@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class BotonFiltro extends StatefulWidget {
   @override
@@ -67,24 +68,7 @@ class _MyButtonState extends State<BotonFiltro> {
               }
             } catch (error) {
               // Mostrar un aviso en caso de error
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Error'),
-                    content: Text(S.of(context).sessionExpiredError),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil('/', (route) => false);
-                        },
-                        child: Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              errorTokenExpired(context);
             }
           },
         ),
@@ -111,24 +95,7 @@ class _MyButtonState extends State<BotonFiltro> {
               }
             } catch (error) {
               // Mostrar un aviso en caso de error
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Error'),
-                    content: Text(S.of(context).sessionExpiredError),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil('/', (route) => false);
-                        },
-                        child: Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              errorTokenExpired(context);
             }
           },
         ),
@@ -153,24 +120,7 @@ class _MyButtonState extends State<BotonFiltro> {
               }
             } catch (error) {
               // Mostrar un aviso en caso de error
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text('Error'),
-                    content: Text(S.of(context).sessionExpiredError),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamedAndRemoveUntil('/', (route) => false);
-                        },
-                        child: Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
+              errorTokenExpired(context);
             }
           },
         ),

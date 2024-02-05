@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 import 'package:transita3/widgets/widgets.dart';
 
 void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
@@ -75,25 +76,7 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
                             setState(() {});
                           } catch (error) {
                             // Mostrar un aviso en caso de error
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text('Error'),
-                                  content: Text('Error, esta sesion ha expirado.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context)
-                                            .pushNamedAndRemoveUntil(
-                                                '/', (route) => false);
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                         errorTokenExpired(context);
                           }
                         },
                         child: Icon(
@@ -117,24 +100,6 @@ void showLatLngBottomSheet(BuildContext context, LatLng latLng) async {
     });
   } catch (error) {
     // Mostrar un aviso en caso de error
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Error'),
-          content:
-              Text('Ha ocurrido un error al buscar el punto por coordenadas.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamedAndRemoveUntil('/', (route) => false);
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
+    errorTokenExpired(context);
   }
 }

@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/models/models.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 import 'package:transita3/widgets/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:location/location.dart';
@@ -45,7 +46,7 @@ class Mapa_pantalla extends StatefulWidget {
   static bool primerPuntoSeleccionado = false;
   static bool segundoPuntoSeleccionado = false;
   static String selectedPoint1Text = 'Ubicacion Actual';
-  static String selectedPoint2Text = 'Seleccionar un destino en el mapa';
+  static String selectedPoint2Text = 'Elige un destino';
 
   _MapaPantalla createState() => _MapaPantalla();
 }
@@ -99,11 +100,11 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                   if (Mapa_pantalla.primerPuntoSeleccionado) {
                     mapaPantallaNotifier.updateLatLngOrigen(latLng);
                     Mapa_pantalla.selectedPoint1Text =
-                        '${latLng.latitude}, ${latLng.longitude}';
+                        '${latLng.latitude.toDouble().toStringAsFixed(4)}, ${latLng.longitude.toDouble().toStringAsFixed(4)}';
                   } else if (Mapa_pantalla.segundoPuntoSeleccionado) {
                     mapaPantallaNotifier.updateLatLngDestino(latLng);
                     Mapa_pantalla.selectedPoint2Text =
-                        '${latLng.latitude}, ${latLng.longitude}';
+                        '${latLng.latitude.toDouble().toStringAsFixed(4)}, ${latLng.longitude.toDouble().toStringAsFixed(4)}';
                   } else {
                     showLatLngBottomSheet(context, latLng);
                   }
@@ -243,24 +244,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                 await puntosService.getPuntosForMap();
                 setState(() {});
               } catch (error) {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Error'),
-                      content: Text(S.of(context).errorgetingpoints),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/', (route) => false); // Cerrar el AlertDialog
-                          },
-                          child: Text('OK'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                errorTokenExpired(context);
               }
             },
             elevation: 2.0,

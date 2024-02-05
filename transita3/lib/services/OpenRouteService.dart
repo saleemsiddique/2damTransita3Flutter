@@ -18,7 +18,7 @@ class OpenRouteService extends ChangeNotifier {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
 
-    if (latlng1 == 'Ubicacion Actual' || latlng1 == 'Current Location' || latlng1 == 'EN VALENCIANO') {
+    if (latlng1 == 'Ubicacion Actual' || latlng1 == 'Current Location' || latlng1 == 'Ubicació Actual') {
       latlng1 ="${timerService.currentLocation.latitude},${timerService.currentLocation.longitude}";
     }
 

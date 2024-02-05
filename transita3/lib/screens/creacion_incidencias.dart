@@ -9,7 +9,7 @@ import 'package:transita3/services/Services.dart';
 import 'dart:io';
 
 import 'package:transita3/services/Services.dart';
-
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class CreacionIncidenciasPage extends StatefulWidget {
   @override
@@ -37,8 +37,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
     // Lista de opciones para el ComboBox
     List<String> opcionesAccesibilidad = [
-      'NO_ACCESIBLE',
-      'PARCIALMENTE_ACCESIBLE'
+      'NO ACCESIBLE',
+      'PARCIALMENTE ACCESIBLE'
     ];
 
     return Scaffold(
@@ -238,6 +238,11 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       elevation: 0,
       color: Color.fromRGBO(14, 100, 209, 1),
       onPressed: () async {
+        if (_selectedAccesibilidad == "NOT ACCESSIBLE" || _selectedAccesibilidad == "NO ACCESSIBLE" || _selectedAccesibilidad == "NO ACCESIBLE") {
+          _selectedAccesibilidad = "NO_ACCESIBLE";
+        } else if (_selectedAccesibilidad == "PARTIALLY ACCESSIBLE" ||_selectedAccesibilidad == "PARCIALMENT ACCESSIBLE" || _selectedAccesibilidad == "PARCIALMENTE ACCESIBLE") {
+          _selectedAccesibilidad = "PARCIALMENTE_ACCESIBLE";
+        }
         try {
           print("This is Descripcion: $_descripcion");
           if (_formKey.currentState?.validate() ?? false) {
@@ -277,24 +282,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
             Navigator.pop(context);
           }
         } catch (error) {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text('Error'),
-                content: Text(S.of(context).errorCreatingIncident),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil('/', (route) => false);
-                    },
-                    child: Text('OK'),
-                  ),
-                ],
-              );
-            },
-          );
+          errorTokenExpired(context);
         }
       },
       child: Text(S.of(context).create),

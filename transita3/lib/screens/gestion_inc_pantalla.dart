@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/IncidenciaService.dart';
 import 'package:provider/provider.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 import 'package:transita3/widgets/widgets.dart';
 import 'package:transita3/models/models.dart';
 
@@ -22,24 +23,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
       try {
         incidenciasService.getIncidencias();
       } catch (error) {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Error'),
-              content: Text(S.of(context).errorobtainingincidences),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil('/', (route) => false);
-                  },
-                  child: Text('OK'),
-                ),
-              ],
-            );
-          },
-        );
+        errorTokenExpired(context);
       }
     }
 
@@ -212,25 +196,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
                           .pop(); // Cerrar el cuadro de diálogo
                     } catch (error) {
                       // Mostrar un aviso en caso de error
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('Error'),
-                            content: Text(
-                                S.of(context).errordeletingincidence),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pushNamedAndRemoveUntil(
-                                      '/', (route) => false);
-                                },
-                                child: Text('OK'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      errorTokenExpired(context);
                     }
                   },
                   child: Text(S.of(context).delete),

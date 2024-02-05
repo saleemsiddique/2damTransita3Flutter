@@ -6,6 +6,7 @@ import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/recupera_contrasenya_pantalla.dart';
 import 'package:transita3/screens/registro_pantalla.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class IniciarSesionPage extends StatefulWidget {
   @override
@@ -198,23 +199,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('home', (route) => false);
             } catch (error) {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: Text(S.of(context).loginErrorTitle),
-                    content: Text(S.of(context).loginErrorMessage),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(S.of(context).acceptIncorrectLoginData),
-                      ),
-                    ],
-                  );
-                },
-              );
+              errorTokenExpired(context);
             }
           }
         },

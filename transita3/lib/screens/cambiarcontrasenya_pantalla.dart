@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class CambiarContrasenaPantalla extends StatefulWidget {
   @override
@@ -119,26 +120,7 @@ class _CambiarContrasenaPantallaState extends State<CambiarContrasenaPantalla> {
                                 Navigator.of(context).pushNamedAndRemoveUntil(
                                     'home', (route) => false);
                               } catch (error) {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Text('Error'),
-                                      content:
-                                          Text(S.of(context).accountExpired),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .pushNamedAndRemoveUntil(
-                                                    '/', (route) => false);
-                                          },
-                                          child: Text('OK'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                                errorTokenExpired(context);
                               }
                             }
                           },

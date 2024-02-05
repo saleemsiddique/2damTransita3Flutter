@@ -661,7 +661,7 @@ class S {
 
   String get selectDestinationOnMapMessage {
     return Intl.message(
-      'Select a destination on the map',
+      'Select destination',
       name: 'selectDestinationOnMapMessage',
       desc: '',
       args: [],
@@ -670,7 +670,7 @@ class S {
 
   String get invalidDestination {
     return Intl.message(
-      'Select a destination on the map',
+      'Select destination',
       name: 'invalidDestination',
       desc: '',
       args: [],
@@ -707,7 +707,7 @@ class S {
   /// 'Select a destination on the map'
   String get selectDestinationOnMap {
     return Intl.message(
-      'Select a destination on the map',
+      'Select destination',
       name: 'selectDestinationOnMap',
       desc: '',
       args: [],

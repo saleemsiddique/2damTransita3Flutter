@@ -109,19 +109,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("¡Destí assolit!"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Ubicació Actual"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Selecciona un destí en el mapa"),
         "arrivalMessage":
             MessageLookupByLibrary.simpleMessage("¡Has arribat al teu destí!"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Seleccionar un destí en el mapa"),
+        "selectDestinationOnMapMessage": MessageLookupByLibrary.simpleMessage(
+            "Tria un destí"),
         "invalidDestination": MessageLookupByLibrary.simpleMessage(
             "Has de seleccionar un punt de destí vàlid"),
         "createRoute": MessageLookupByLibrary.simpleMessage("Crear ruta"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Ubicació Actual"),
         "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Seleccionar un destí en el mapa"),
+            "Tria un destí"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Netejar Ruta"),
         "Attachroute": MessageLookupByLibrary.simpleMessage("Fixar ruta"),
         "confirmDelete":

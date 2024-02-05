@@ -114,19 +114,19 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Destination reached!"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
-        "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Select a destination on the map"),
+        "selectDestinationOnMapMessage": MessageLookupByLibrary.simpleMessage(
+            "Select destination"),
         "arrivalMessage": MessageLookupByLibrary.simpleMessage(
             "You have arrived at your destination!"),
         "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Select a destination on the map"),
+            "Select destination"),
         "invalidDestination": MessageLookupByLibrary.simpleMessage(
             "You must select a valid destination point"),
         "createRoute": MessageLookupByLibrary.simpleMessage("Create route"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
         "selectDestinationOnMap": MessageLookupByLibrary.simpleMessage(
-            "Select a destination on the map"),
+            "Select destination"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Clear Route"),
         "Attachroute": MessageLookupByLibrary.simpleMessage("Attach route"),
         "confirmDelete":
