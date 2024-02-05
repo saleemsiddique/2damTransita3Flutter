@@ -125,8 +125,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "createRoute": MessageLookupByLibrary.simpleMessage("Create route"),
         "currentLocation":
             MessageLookupByLibrary.simpleMessage("Current Location"),
-        "selectDestinationOnMap":
-            MessageLookupByLibrary.simpleMessage("Select destination"),
         "clearRoute": MessageLookupByLibrary.simpleMessage("Clear Route"),
         "Attachroute": MessageLookupByLibrary.simpleMessage("Attach route"),
         "deleteIncidentError": MessageLookupByLibrary.simpleMessage(

@@ -45,8 +45,8 @@ class Mapa_pantalla extends StatefulWidget {
   static bool isBottomSheetOpen = false;
   static bool primerPuntoSeleccionado = false;
   static bool segundoPuntoSeleccionado = false;
-  static String selectedPoint1Text = 'Ubicacion Actual';
-  static String selectedPoint2Text = 'Elige un destino';
+  static String selectedPoint1Text = '';
+  static String selectedPoint2Text = '';
 
   _MapaPantalla createState() => _MapaPantalla();
 }
@@ -72,7 +72,8 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   Widget build(BuildContext context) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
     final timerService = Provider.of<TimerService>(context, listen: true);
-
+    Mapa_pantalla.selectedPoint1Text = S.of(context).currentLocation;
+    Mapa_pantalla.selectedPoint2Text = S.of(context).selectDestinationOnMap;
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
     print(MapaPantallaNotifier.routeChange);

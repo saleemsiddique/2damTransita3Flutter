@@ -122,7 +122,7 @@ GestureDetector crearRuta(
     onTap: () {
       print(Mapa_pantalla.selectedPoint2Text);
       if (Mapa_pantalla.selectedPoint2Text ==
-          S.of(context).selectDestinationOnMapMessage) {
+          S.of(context).selectDestinationOnMap) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(S.of(context).invalidDestination),

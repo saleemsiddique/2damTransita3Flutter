@@ -45,16 +45,16 @@ class _BottomNavigationBarProviderState
           BottomNavigationBarItem(
             icon: Container(
               padding: EdgeInsets.only(
-                  bottom: 0), // Ajusta el padding según sea necesario
-              child: Icon(Icons.map_outlined),
+                  bottom: 0),
+              child: Icon(Icons.map_outlined, size: 30),
             ),
             label: '', // Establece el label como una cadena vacía
           ),
           BottomNavigationBarItem(
             icon: Container(
               padding: EdgeInsets.only(
-                  bottom: 0), // Ajusta el padding según sea necesario
-              child: Icon(Icons.report_problem_outlined),
+                  bottom: 0),
+              child: Icon(Icons.report_problem_outlined, size: 30),
             ),
             label: '', // Establece el label como una cadena vacía
           ),
