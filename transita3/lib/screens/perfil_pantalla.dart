@@ -69,6 +69,8 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                             child: Column(
                               children: [
                                 TextFormField(
+                                        maxLength: 25,
+
                                   controller: _nombreController,
                                   decoration: InputDecoration(
                                     labelText: S.of(context).name,
@@ -84,6 +86,8 @@ class _PerfilPantallaState extends State<PerfilPantalla> {
                                 ),
                                 SizedBox(height: 45.0),
                                 TextFormField(
+                                        maxLength: 25,
+
                                   controller: _apellidoController,
                                   decoration: InputDecoration(
                                     labelText: S.of(context).secondName,

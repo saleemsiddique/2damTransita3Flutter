@@ -979,6 +979,26 @@ class S {
       args: [],
     );
   }
+
+    /// `PARCIALMENTE ACCESIBLE`
+  String get parcialmenteAccesible{
+    return Intl.message(
+      'PARCIALMENTE ACCESIBLE',
+      name: 'parcialmenteAccesible',
+      desc: '',
+      args: [],
+    );
+  }
+
+/// 'NO ACCESIBLE'
+    String get noAccesible{
+    return Intl.message(
+      'NO ACCESIBLE',
+      name: 'noAccesible',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

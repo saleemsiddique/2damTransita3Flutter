@@ -7,8 +7,6 @@ import 'package:transita3/generated/l10n.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:transita3/services/Services.dart';
 import 'dart:io';
-
-import 'package:transita3/services/Services.dart';
 import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class CreacionIncidenciasPage extends StatefulWidget {
@@ -25,7 +23,6 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
   String _fecha = DateTime.now().toLocal().toString().split(' ')[0];
   String? _selectedImage;
   String? _imageDisplay;
-  String _selectedDuration = '1 hora';
   String _selectedAccesibilidad = "";
 
   @override
@@ -37,8 +34,8 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
     // Lista de opciones para el ComboBox
     List<String> opcionesAccesibilidad = [
-      'NO ACCESIBLE',
-      'PARCIALMENTE ACCESIBLE'
+      S.of(context).parcialmenteAccesible,
+      S.of(context).noAccesible
     ];
 
     return Scaffold(
@@ -158,6 +155,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
   Widget _escribeDescripcion() {
     return TextFormField(
+      maxLength: 100,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: S.of(context).description,
@@ -180,6 +178,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
 
   Widget _seleccionarDuracion() {
     return TextFormField(
+      maxLength: 30,
       decoration: InputDecoration(
         labelText: S.of(context).specifyDuration,
         hintText: S.of(context).enterDuration,
@@ -238,9 +237,13 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       elevation: 0,
       color: Color.fromRGBO(14, 100, 209, 1),
       onPressed: () async {
-        if (_selectedAccesibilidad == "NOT ACCESSIBLE" || _selectedAccesibilidad == "NO ACCESSIBLE" || _selectedAccesibilidad == "NO ACCESIBLE") {
+        if (_selectedAccesibilidad == "Not Accessible" ||
+            _selectedAccesibilidad == "No Accesible" ||
+            _selectedAccesibilidad == "No Accessible") {
           _selectedAccesibilidad = "NO_ACCESIBLE";
-        } else if (_selectedAccesibilidad == "PARTIALLY ACCESSIBLE" ||_selectedAccesibilidad == "PARCIALMENT ACCESSIBLE" || _selectedAccesibilidad == "PARCIALMENTE ACCESIBLE") {
+        } else if (_selectedAccesibilidad == "Partially Accessible" ||
+            _selectedAccesibilidad == "Parcialmente Accesible" ||
+            _selectedAccesibilidad == "Parcialment Accessible") {
           _selectedAccesibilidad = "PARCIALMENTE_ACCESIBLE";
         }
         try {
@@ -303,7 +306,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
               Navigator.pop(context);
             },
             child: Text(
-              'Cancel',
+              S.of(context).cancel,
               style: TextStyle(color: Color.fromRGBO(14, 100, 209, 1)),
             ));
       },

@@ -6,6 +6,8 @@ import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/services/Services.dart';
 
 void rutasDetailsSheet(BuildContext context) {
+  Mapa_pantalla.selectedPoint1Text = S.of(context).currentLocation;
+  Mapa_pantalla.selectedPoint2Text = S.of(context).selectDestinationOnMap;
   Mapa_pantalla.isBottomSheetOpen = true;
   final openRouteService =
       Provider.of<OpenRouteService>(context, listen: false);
@@ -23,82 +25,79 @@ void rutasDetailsSheet(BuildContext context) {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                openRouteService.clearRuta();
-                                timerService.stopRuta(context, false);
-                                mapaPantallaNotifier
-                                    .updateLatLngOrigen(LatLng(0, 0));
-
-                                setState(
-                                  () {
-                                    Mapa_pantalla.selectedPoint1Text =
-                                        S.of(context).currentLocation;
+                            Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    openRouteService.clearRuta();
+                                    timerService.stopRuta(context, false);
+                                    mapaPantallaNotifier
+                                        .updateLatLngOrigen(LatLng(0, 0));
+                                    setState(
+                                      () {
+                                        Mapa_pantalla.selectedPoint1Text =
+                                            S.of(context).currentLocation;
+                                      },
+                                    );
                                   },
-                                );
-                              },
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.blue,
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.blue,
+                                    ),
+                                    child: Icon(
+                                      Icons.my_location,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.my_location,
-                                  color: Colors.white,
+                                SizedBox(width: 22),
+                                PuntoSeleccionadoWidget(
+                                  isSelected:
+                                      Mapa_pantalla.primerPuntoSeleccionado,
+                                  onTap: () {
+                                    setState(() {
+                                      Mapa_pantalla.primerPuntoSeleccionado =
+                                          true;
+                                      Mapa_pantalla.segundoPuntoSeleccionado =
+                                          false;
+                                      Mapa_pantalla.selectedPoint1Text =
+                                          '${mapaPantallaNotifier.latLngOrigen.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngOrigen.longitude.toStringAsFixed(4)}';
+                                    });
+                                  },
+                                  selectedPointText:
+                                      Mapa_pantalla.selectedPoint1Text,
                                 ),
-                              ),
+                              ],
                             ),
-                            SizedBox(width: 20.0),
-                            PuntoSeleccionadoWidget(
-                              isSelected: Mapa_pantalla.primerPuntoSeleccionado,
-                              onTap: () {
-                                setState(() {
-                                  Mapa_pantalla.primerPuntoSeleccionado = true;
-                                  Mapa_pantalla.segundoPuntoSeleccionado =
-                                      false;
-                                  Mapa_pantalla.selectedPoint1Text =
-                                      '${mapaPantallaNotifier.latLngOrigen.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngOrigen.longitude.toStringAsFixed(4)}';
-                                });
-                              },
-                              selectedPointText:
-                                  Mapa_pantalla.selectedPoint1Text,
-                            ),
-                            SizedBox(width: 8.0),
-                            PuntoSeleccionadoWidget(
-                              isSelected:
-                                  Mapa_pantalla.segundoPuntoSeleccionado,
-                              onTap: () {
-                                setState(() {
-                                  Mapa_pantalla.primerPuntoSeleccionado = false;
-                                  Mapa_pantalla.segundoPuntoSeleccionado = true;
-                                  Mapa_pantalla.selectedPoint2Text =
-                                      '${mapaPantallaNotifier.latLngDestino.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngDestino.longitude.toStringAsFixed(4)}';
-                                });
-                              },
-                              selectedPointText:
-                                  Mapa_pantalla.selectedPoint2Text,
-                            ),
+                            limpiarRuta(openRouteService, mapaPantallaNotifier,
+                                setState, timerService, context),
                           ]),
-                      SizedBox(height: 16.0),
+                          SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          limpiarRuta(openRouteService, mapaPantallaNotifier,
-                              setState, timerService, context),
-                          SizedBox(
-                            width: 8,
+                          SizedBox(width: 8),
+                          PuntoSeleccionadoWidget(
+                            isSelected: Mapa_pantalla.segundoPuntoSeleccionado,
+                            onTap: () {
+                              setState(() {
+                                Mapa_pantalla.primerPuntoSeleccionado = false;
+                                Mapa_pantalla.segundoPuntoSeleccionado = true;
+                                Mapa_pantalla.selectedPoint2Text =
+                                    '${mapaPantallaNotifier.latLngDestino.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngDestino.longitude.toStringAsFixed(4)}';
+                              });
+                            },
+                            selectedPointText: Mapa_pantalla.selectedPoint2Text,
                           ),
                           crearRuta(openRouteService, mapaPantallaNotifier,
                               timerService, context),
-                          SizedBox(
-                            width: 8,
-                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 );
@@ -139,16 +138,12 @@ GestureDetector crearRuta(
       }
     },
     child: Container(
-      padding: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: Colors.blue, // Example color for the button
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Text(
-        S.of(context).createRoute,
-        style: TextStyle(color: Colors.white),
-      ),
-    ),
+        padding: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          color: Colors.blue, // Example color for the button
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Icon(Icons.send)),
   );
 }
 
@@ -172,16 +167,12 @@ GestureDetector limpiarRuta(
       );
     },
     child: Container(
-      padding: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: Colors.blue, // Example color for the button
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Text(
-        S.of(context).clearRoute,
-        style: TextStyle(color: Colors.white),
-      ),
-    ),
+        padding: EdgeInsets.all(15.0),
+        decoration: BoxDecoration(
+          color: Colors.red, // Example color for the button
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: Icon(Icons.clear)),
   );
 }
 
@@ -201,6 +192,7 @@ class PuntoSeleccionadoWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(),
       child: Container(
+        width: 150,
         padding: EdgeInsets.all(15.0),
         decoration: BoxDecoration(
           border: Border.all(

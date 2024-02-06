@@ -29,7 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Iniciar Sessió amb Google"),
         "password": MessageLookupByLibrary.simpleMessage("Contrasenya"),
         "registerAlreadyAccount": MessageLookupByLibrary.simpleMessage(
-            "Ja tens un compte? Iniciar Sessió"),
+            "Ja tens un compte? Iniciar Sessió "),
         "registerButton": MessageLookupByLibrary.simpleMessage("Registrar-se"),
         "registerEmail":
             MessageLookupByLibrary.simpleMessage("Correu Electrònic"),
@@ -92,7 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Contrasenya actual"),
         "actualpassincorrect": MessageLookupByLibrary.simpleMessage(
             "Contrasenya actual Incorrecta"),
-        "incidenceNumber":
+        "incidentNumber":
             MessageLookupByLibrary.simpleMessage("Incidència Nº"),
         "date": MessageLookupByLibrary.simpleMessage("Data"),
         "status": MessageLookupByLibrary.simpleMessage("Estat"),
@@ -172,5 +172,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Grau d'accesibilidad"),
         "confirmDeleteIncidence": MessageLookupByLibrary.simpleMessage(
             "¿Segur que vols eliminar la incidencia?"),
+                    "parcialmenteAccesible":
+            MessageLookupByLibrary.simpleMessage("Parcialment Accessible"),
+        "noAccesible":
+            MessageLookupByLibrary.simpleMessage("No Accessible"),
       };
 }

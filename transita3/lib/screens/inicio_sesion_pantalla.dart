@@ -116,6 +116,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
     final loginForm = Provider.of<LoginService>(context, listen: false);
 
     return TextFormField(
+      maxLength: 50,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: S.of(context).email,
@@ -142,6 +143,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
     final loginForm = Provider.of<LoginService>(context, listen: false);
 
     return TextFormField(
+      maxLength: 25,
       decoration: InputDecoration(
         hintText: S.of(context).password,
         labelText: S.of(context).password,
@@ -199,7 +201,23 @@ class _InicioSesion extends State<IniciarSesionPage> {
               Navigator.of(context)
                   .pushNamedAndRemoveUntil('home', (route) => false);
             } catch (error) {
-              errorTokenExpired(context);
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(S.of(context).loginErrorTitle),
+                    content: Text(S.of(context).loginErrorMessage),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(S.of(context).acceptIncorrectLoginData),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
           }
         },

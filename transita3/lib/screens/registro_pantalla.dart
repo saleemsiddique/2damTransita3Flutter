@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/services/Services.dart';
 
-
 class RegistroPage extends StatefulWidget {
   @override
   _Registro createState() => _Registro();
@@ -11,7 +10,11 @@ class RegistroPage extends StatefulWidget {
 
 class _Registro extends State<RegistroPage> {
   final _formKey = GlobalKey<FormState>();
-  String _nombre = '', _apellidos = '', _email = '', _contrasenya = '',_confirmarContrasenya = '';
+  String _nombre = '',
+      _apellidos = '',
+      _email = '',
+      _contrasenya = '',
+      _confirmarContrasenya = '';
   bool _mostrarContrasenya = false;
   ClienteService clienteProvider = new ClienteService();
 
@@ -52,7 +55,6 @@ class _Registro extends State<RegistroPage> {
                   _escribirContrasenya(),
                   SizedBox(height: 20),
                   _escribirConfirmarContrasenya()
-                  
                 ],
               ),
             ),
@@ -89,6 +91,7 @@ class _Registro extends State<RegistroPage> {
 
   Widget _escribeNombre() {
     return TextFormField(
+      maxLength: 25,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: S.of(context).registerName,
@@ -111,6 +114,7 @@ class _Registro extends State<RegistroPage> {
 
   Widget _escribeApellidos() {
     return TextFormField(
+      maxLength: 50,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: S.of(context).registerSecondName,
@@ -133,12 +137,12 @@ class _Registro extends State<RegistroPage> {
 
   Widget _escribirEmail() {
     return TextFormField(
+      maxLength: 50,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         hintText: S.of(context).registerEmail,
         labelText: S.of(context).registerEmail,
         suffixIcon: Icon(Icons.alternate_email),
-        //icon: Icon(Icons.email),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
       ),
       onChanged: (valor) => setState(() {
@@ -153,13 +157,14 @@ class _Registro extends State<RegistroPage> {
             r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
         RegExp regExp = new RegExp(pattern);
 
-        return regExp.hasMatch(value) ? null :  S.of(context).enterValidEmail;
+        return regExp.hasMatch(value) ? null : S.of(context).enterValidEmail;
       },
     );
   }
 
   Widget _escribirContrasenya() {
     return TextFormField(
+      maxLength: 25,
       decoration: InputDecoration(
         hintText: S.of(context).registerPassword,
         labelText: S.of(context).registerPassword,
@@ -188,39 +193,40 @@ class _Registro extends State<RegistroPage> {
       },
     );
   }
-  Widget _escribirConfirmarContrasenya() {
-  return TextFormField(
-    decoration: InputDecoration(
-      hintText: S.of(context).confirmPassword,
-      labelText: S.of(context).confirmPassword,
-      suffixIcon: GestureDetector(
-        onTap: () {
-          setState(() {
-            _mostrarContrasenya = !_mostrarContrasenya;
-          });
-        },
-        child: Icon(
-          _mostrarContrasenya ? Icons.visibility : Icons.visibility_off,
-        ),
-      ),
-      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
-    ),
-    obscureText: !_mostrarContrasenya,
-    onChanged: (valor) => setState(() {
-      _confirmarContrasenya = valor;
-    }),
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    validator: (value) {
-      if (value == null || value.length < 6) {
-        return S.of(context).passwordMinLength;
-      } else if (value != _contrasenya) {
-        return S.of(context).passwordsDoNotMatch;
-      }
-      return null;
-    },
-  );
-}
 
+  Widget _escribirConfirmarContrasenya() {
+    return TextFormField(
+      maxLength: 25,
+      decoration: InputDecoration(
+        hintText: S.of(context).confirmPassword,
+        labelText: S.of(context).confirmPassword,
+        suffixIcon: GestureDetector(
+          onTap: () {
+            setState(() {
+              _mostrarContrasenya = !_mostrarContrasenya;
+            });
+          },
+          child: Icon(
+            _mostrarContrasenya ? Icons.visibility : Icons.visibility_off,
+          ),
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(5)),
+      ),
+      obscureText: !_mostrarContrasenya,
+      onChanged: (valor) => setState(() {
+        _confirmarContrasenya = valor;
+      }),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) {
+        if (value == null || value.length < 6) {
+          return S.of(context).passwordMinLength;
+        } else if (value != _contrasenya) {
+          return S.of(context).passwordsDoNotMatch;
+        }
+        return null;
+      },
+    );
+  }
 
   Widget _botonRegistro() {
     return Container(
@@ -233,50 +239,50 @@ class _Registro extends State<RegistroPage> {
         color: Color.fromRGBO(14, 100, 209, 1),
         onPressed: () async {
           print("Empezó");
-      if (_formKey.currentState?.validate() == true) {
-        if (_contrasenya != _confirmarContrasenya) {
-          // Muestra un mensaje de error si las contraseñas no coinciden
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text(S.of(context).errorsingup),
-                content: Text(S.of(context).passwordsDoNotMatch),
-                actions: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(S.of(context).acceptIncorrectLoginData),
-                  ),
-                ],
+          if (_formKey.currentState?.validate() == true) {
+            if (_contrasenya != _confirmarContrasenya) {
+              // Muestra un mensaje de error si las contraseñas no coinciden
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text(S.of(context).errorsingup),
+                    content: Text(S.of(context).passwordsDoNotMatch),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(S.of(context).acceptIncorrectLoginData),
+                      ),
+                    ],
+                  );
+                },
               );
-            },
-          );
-        } else {
-          // Continúa con el registro si las contraseñas coinciden
-          Map<String, dynamic> credenciales = {
-            'nombre': _nombre,
-            'apellidos': _apellidos,
-            'nombreUsuario': _email,
-            'contrasenya': _contrasenya,
-            'rol': ["ROLE_USUARIO"],
-          };
+            } else {
+              // Continúa con el registro si las contraseñas coinciden
+              Map<String, dynamic> credenciales = {
+                'nombre': _nombre,
+                'apellidos': _apellidos,
+                'nombreUsuario': _email,
+                'contrasenya': _contrasenya,
+                'rol': ["ROLE_USUARIO"],
+              };
 
-          try {
-            await clienteProvider.signUpCliente(credenciales);
-            Map<String, dynamic> credencialesLogIn = {
-              'nombreUsuario': _email,
-              'contrasenya': _contrasenya,
-            };
-            await LoginService().signInCliente(credencialesLogIn);
-            Navigator.pushNamed(context, 'home');
-          } catch (error) {
-            // Manejar el error de registro aquí
+              try {
+                await clienteProvider.signUpCliente(credenciales);
+                Map<String, dynamic> credencialesLogIn = {
+                  'nombreUsuario': _email,
+                  'contrasenya': _contrasenya,
+                };
+                await LoginService().signInCliente(credencialesLogIn);
+                Navigator.pushNamed(context, 'home');
+              } catch (error) {
+                // Manejar el error de registro aquí
+              }
+            }
           }
-        }
-      }
-      print("Acabó");
+          print("Acabó");
         },
         child: Text(S.of(context).registerButton,
             style: TextStyle(color: Colors.white)),

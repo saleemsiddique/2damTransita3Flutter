@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Sign In with Google"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "registerAlreadyAccount": MessageLookupByLibrary.simpleMessage(
-            "¿Already have an account? sign In"),
+            "¿Already have an account? sign In "),
         "registerButton": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "registerEmail": MessageLookupByLibrary.simpleMessage("Email"),
         "registerName": MessageLookupByLibrary.simpleMessage("Name"),
@@ -99,8 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Current Password"),
         "actualpassincorrect": MessageLookupByLibrary.simpleMessage(
             "Current Password is incorrect"),
-        "incidenceNumber":
-            MessageLookupByLibrary.simpleMessage("Incidence No."),
+        "incidentNumber": MessageLookupByLibrary.simpleMessage("Incidence No."),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "status": MessageLookupByLibrary.simpleMessage("Status"),
         "duration": MessageLookupByLibrary.simpleMessage("Duration"),
@@ -177,5 +176,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Accessibility Degree"),
         "confirmDeleteIncidence": MessageLookupByLibrary.simpleMessage(
             "¿Are you sure to delete the current incidence?"),
+        "parcialmenteAccesible":
+            MessageLookupByLibrary.simpleMessage("Partially Accessible"),
+        "noAccesible": MessageLookupByLibrary.simpleMessage("Not Accessible"),
       };
 }

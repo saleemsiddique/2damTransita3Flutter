@@ -56,7 +56,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   Location location = Location();
   bool showMarkers = true;
   LatLng latLngSelec = LatLng(0, 0);
-
+  MapController mapController = MapController();
   @override
   void initState() {
     super.initState();
@@ -72,8 +72,6 @@ class _MapaPantalla extends State<Mapa_pantalla> {
   Widget build(BuildContext context) {
     final puntosService = Provider.of<PuntoService>(context, listen: true);
     final timerService = Provider.of<TimerService>(context, listen: true);
-    Mapa_pantalla.selectedPoint1Text = S.of(context).currentLocation;
-    Mapa_pantalla.selectedPoint2Text = S.of(context).selectDestinationOnMap;
     print("Recostruyo mapa");
     print("Recostruido: ${OpenRouteService.routeCoordinates}");
     print(MapaPantallaNotifier.routeChange);
@@ -83,6 +81,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
         return GestureDetector(
           behavior: HitTestBehavior.opaque,
           child: FlutterMap(
+            mapController: mapController,
             options: MapOptions(
               initialCenter: LatLng(38.5064, -0.2297),
               initialZoom: 15,
@@ -238,28 +237,7 @@ class _MapaPantalla extends State<Mapa_pantalla> {
       children: [
         mapa,
         Positioned(
-          top: 16.0,
-          child: RawMaterialButton(
-            onPressed: () async {
-              try {
-                await puntosService.getPuntosForMap();
-                setState(() {});
-              } catch (error) {
-                errorTokenExpired(context);
-              }
-            },
-            elevation: 2.0,
-            fillColor: Color.fromRGBO(0, 99, 209, 1),
-            padding: EdgeInsets.all(15.0),
-            shape: CircleBorder(),
-            child: Icon(
-              Icons.refresh,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 90.0,
+          bottom: 100.0,
           right: 15.0,
           child: GestureDetector(
               onTap: () {
@@ -267,6 +245,26 @@ class _MapaPantalla extends State<Mapa_pantalla> {
               },
               child: Column(children: [
                 BotonFiltro(),
+                SizedBox(height: 15),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      mapController.move(timerService.currentLocation, 20.0);
+                    });
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color.fromRGBO(0, 99, 209, 1),
+                    ),
+                    child: Icon(
+                      Icons.my_location,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                 SizedBox(height: 15),
                 Container(
                   width: 50,

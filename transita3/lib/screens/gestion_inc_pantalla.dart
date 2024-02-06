@@ -18,14 +18,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
   Widget build(BuildContext context) {
     final incidenciasService =
         Provider.of<IncidenciaService>(context, listen: true);
-
-    if (incidenciasService.incidenciasDeUsuario.isEmpty) {
-      try {
-        incidenciasService.getIncidencias();
-      } catch (error) {
-        errorTokenExpired(context);
-      }
-    }
+    
 
     return Scaffold(
       floatingActionButton:
@@ -67,7 +60,7 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
         children: [
           _columnaIzquierda(incidencia.descripcion, incidencia.descripcion,
               incidencia.id, incidencia),
-          _columnaDerecha(incidencia.id),
+          _columnaDerecha(incidencia),
         ],
       );
       incidencias.add(
@@ -141,21 +134,21 @@ class _GestionIncidencias extends State<GestionIncidenciasPage> {
     );
   }
 
-  Widget _columnaDerecha(int id) {
+  Widget _columnaDerecha(Incidencia incidencia) {
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             SizedBox(width: 25),
-            _botonEliminar(context, id),
+            _botonEliminar(context, incidencia.id),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('24-10-2023', style: _estiloLetra),
-            Text('18:10', style: _estiloLetra)
+            SizedBox(height: 20),
+            Text('${incidencia.fechaHora.toString().split(' ')[0]}', style: _estiloLetra),
           ],
         )
       ],

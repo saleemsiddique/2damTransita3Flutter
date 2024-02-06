@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:transita3/generated/l10n.dart';
 import 'package:transita3/screens/gestion_inc_pantalla.dart';
 import 'package:transita3/screens/mapa_pantalla.dart';
 import 'package:transita3/screens/perfil_pantalla.dart';
 import 'package:transita3/screens/ajustes_pantalla.dart';
+import 'package:transita3/services/Services.dart';
+import 'package:transita3/widgets/Error_TokenExpired.dart';
 
 class BottomNavigationBarProvider extends StatefulWidget {
   const BottomNavigationBarProvider({super.key});
@@ -22,6 +25,16 @@ class _BottomNavigationBarProviderState
   ];
 
   void _onItemTapped(int index) {
+    final incidenciasService =
+        Provider.of<IncidenciaService>(context, listen: false);
+    if (index == 1) {
+      try {
+        incidenciasService.getIncidencias();
+      } catch (error) {
+        errorTokenExpired(context);
+      }
+    }
+
     setState(() {
       _selectedIndex = index;
     });
@@ -44,16 +57,14 @@ class _BottomNavigationBarProviderState
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Container(
-              padding: EdgeInsets.only(
-                  bottom: 0),
+              padding: EdgeInsets.only(bottom: 0),
               child: Icon(Icons.map_outlined, size: 30),
             ),
             label: '', // Establece el label como una cadena vacía
           ),
           BottomNavigationBarItem(
             icon: Container(
-              padding: EdgeInsets.only(
-                  bottom: 0),
+              padding: EdgeInsets.only(bottom: 0),
               child: Icon(Icons.report_problem_outlined, size: 30),
             ),
             label: '', // Establece el label como una cadena vacía
@@ -72,6 +83,8 @@ class _BottomNavigationBarProviderState
         showDialog(
           context: context,
           builder: (BuildContext context) {
+            final incidenciasService =
+                Provider.of<IncidenciaService>(context, listen: false);
             return AlertDialog(
               title: Text(S.of(context).logout),
               content: Text(S.of(context).confirmLogout),
@@ -84,6 +97,7 @@ class _BottomNavigationBarProviderState
                 ),
                 TextButton(
                   onPressed: () {
+                    incidenciasService.incidenciasDeUsuario = [];
                     Navigator.of(context)
                         .pushNamedAndRemoveUntil('/', (route) => false);
                   },
