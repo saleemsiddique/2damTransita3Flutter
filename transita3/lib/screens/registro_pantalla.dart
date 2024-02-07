@@ -58,7 +58,7 @@ class _Registro extends State<RegistroPage> {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 10),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 25),
               child: Column(

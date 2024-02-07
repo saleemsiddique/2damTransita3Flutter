@@ -13,6 +13,7 @@ class _MyButtonState extends State<BotonFiltro> {
   bool isIncidentActive = true;
   bool isAccessibleActive = false;
   bool isFavoriteActive = true;
+  bool isParkingActive = false;
   bool isExpanded = false;
 
   @override
@@ -120,6 +121,28 @@ class _MyButtonState extends State<BotonFiltro> {
               }
             } catch (error) {
               // Mostrar un aviso en caso de error
+              errorTokenExpired(context);
+            }
+          },
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        buildExpandedButtonContainer(
+          Icons.local_parking,
+          isParkingActive,
+          () async {
+            try {
+              setState(() {
+                isParkingActive = !isParkingActive;
+              });
+              if (isParkingActive) {
+                await puntosService
+                    .getPuntosParkingForMapFiltered();
+              } else {
+                puntosService.clearParkingMap();
+              }
+            } catch (error) {
               errorTokenExpired(context);
             }
           },

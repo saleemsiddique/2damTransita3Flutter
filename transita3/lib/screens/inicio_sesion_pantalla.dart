@@ -61,7 +61,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
               fadeInDuration: Duration(milliseconds: 200),
             ),
             Container(
-              height: 40,
+              height: 30,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
@@ -87,7 +87,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
               ),
             ),
             Container(
-              height: 20,
+              height: 10,
             ),
             _crearCuenta()
           ],
@@ -216,7 +216,7 @@ class _InicioSesion extends State<IniciarSesionPage> {
                       ),
                     ],
                   );
-                },
+                },  
               );
             }
           }

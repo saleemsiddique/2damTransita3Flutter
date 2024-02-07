@@ -195,6 +195,24 @@ class _MapaPantalla extends State<Mapa_pantalla> {
                       ),
                     );
                   }).toList(),
+                  ...puntosService.parkingForMap.map((punto) {
+                    return Marker(
+                      width: 40.0,
+                      height: 40.0,
+                      point: LatLng(punto.latitud, punto.longitud),
+                      child: GestureDetector(
+                        onTap: () {
+                          latLngSelec = LatLng(0, 0);
+                          setState(() {});
+                          showPointDetailsBottomSheet(context, punto);
+                        },
+                        child: Icon(
+                          Icons.local_parking,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    );
+                  }).toList(),
                   MarkerSelect(40, timerService.currentLocation, Colors.blue,
                       Icons.my_location),
                   MarkerSelect(

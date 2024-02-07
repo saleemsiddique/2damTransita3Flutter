@@ -65,8 +65,6 @@ void rutasDetailsSheet(BuildContext context) {
                                           true;
                                       Mapa_pantalla.segundoPuntoSeleccionado =
                                           false;
-                                      Mapa_pantalla.selectedPoint1Text =
-                                          '${mapaPantallaNotifier.latLngOrigen.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngOrigen.longitude.toStringAsFixed(4)}';
                                     });
                                   },
                                   selectedPointText:
@@ -88,9 +86,7 @@ void rutasDetailsSheet(BuildContext context) {
                               setState(() {
                                 Mapa_pantalla.primerPuntoSeleccionado = false;
                                 Mapa_pantalla.segundoPuntoSeleccionado = true;
-                                Mapa_pantalla.selectedPoint2Text =
-                                    '${mapaPantallaNotifier.latLngDestino.latitude.toStringAsFixed(4)},${mapaPantallaNotifier.latLngDestino.longitude.toStringAsFixed(4)}';
-                              });
+                               });
                             },
                             selectedPointText: Mapa_pantalla.selectedPoint2Text,
                           ),

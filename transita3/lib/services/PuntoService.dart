@@ -9,6 +9,7 @@ class PuntoService extends ChangeNotifier {
   List<Punto> puntos = [];
   List<Punto> puntosForMap = [];
   List<Punto> favsForMap = [];
+  List<Punto> parkingForMap = [];
   Punto punto = Punto.empty();
   Punto puntoSelected = Punto.empty();
   Punto puntoNuevo = Punto.empty();
@@ -54,6 +55,11 @@ class PuntoService extends ChangeNotifier {
     notifyListeners();
   }
 
+  clearParkingMap() {
+    parkingForMap.clear();
+    notifyListeners();
+  }
+
   Future<void> getPuntosForMapFiltered() async {
     final cliente = LoginService.cliente;
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
@@ -67,6 +73,22 @@ class PuntoService extends ChangeNotifier {
 
       if (!listEquals(puntosForMap, newPuntosForMap)) {
         puntosForMap = newPuntosForMap;
+        notifyListeners();
+      }
+    }
+  }
+
+  Future<void> getPuntosParkingForMapFiltered() async {
+    final cliente = LoginService.cliente;
+    TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
+    if (cliente != null) {
+      final jsonData = await TransitaProvider.getJsonData('/puntos/tipo/2');
+      final List<dynamic> jsonList = json.decode(jsonData);
+      List<Punto> newPuntosForMap =
+          jsonList.map((json) => Punto.fromJson(json)).toList();
+
+      if (!listEquals(parkingForMap, newPuntosForMap)) {
+        parkingForMap = newPuntosForMap;
         notifyListeners();
       }
     }

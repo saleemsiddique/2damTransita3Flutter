@@ -192,7 +192,7 @@ class _creacionIncidencia extends State<CreacionIncidenciasPage> {
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
-        if (value == null || value.length < 10) {
+        if (value == null || value.length < 3) {
           return S.of(context).specifyDuration;
         }
         return null;
