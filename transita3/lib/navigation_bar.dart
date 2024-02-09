@@ -27,6 +27,15 @@ class _BottomNavigationBarProviderState
   void _onItemTapped(int index) {
     final incidenciasService =
         Provider.of<IncidenciaService>(context, listen: false);
+            final puntoService =
+        Provider.of<PuntoService>(context, listen: false);
+            if (index == 0) {
+      try {
+        puntoService.getPuntosForMap();
+      } catch (error) {
+        errorTokenExpired(context);
+      }
+    }
     if (index == 1) {
       try {
         incidenciasService.getIncidencias();
