@@ -26,7 +26,7 @@ Future<void> getIncidencias() async {
   
   if (cliente != null) {
     final jsonData = await TransitaProvider.getJsonData(
-        'incidencias/clienteid/${cliente.id}');
+        'transita3/incidencias/clienteid/${cliente.id}');
 
     final List<dynamic> jsonList = json.decode(jsonData);
 
@@ -47,7 +47,7 @@ Future<void> getIncidencias() async {
     print('id de clienteIncidencia: ${cliente.id}');
     if (cliente != null) {
       final jsonData =
-          await TransitaProvider.getJsonData('incidencia/id/${id}');
+          await TransitaProvider.getJsonData('transita3/incidencia/id/${id}');
       incidencia = Incidencia.fromRawJson(jsonData);
       print("Incidencia recibida: $incidencia");
       notifyListeners();
@@ -60,7 +60,7 @@ Future<void> getIncidencias() async {
     print('id de clienteIncidencia: ${cliente.id}');
     if (cliente != null) {
       final jsonData =
-          await TransitaProvider.getJsonData('incidencia/punto/${id}');
+          await TransitaProvider.getJsonData('transita3/incidencia/punto/${id}');
       return Incidencia.fromRawJson(jsonData);
     }
     return Incidencia.empty();
@@ -75,7 +75,7 @@ Future<void> getIncidencias() async {
   Future<void> deleteIncidencia(int id) async {
     try {
       final response =
-          await TransitaProvider.deleteJsonData('incidencia/eliminar/$id');
+          await TransitaProvider.deleteJsonData('transita3/incidencia/eliminar/$id');
 
       if (response.isNotEmpty) {
         print('Incidencia eliminada exitosamente');

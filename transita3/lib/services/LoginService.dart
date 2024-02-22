@@ -18,7 +18,7 @@ class LoginService extends ChangeNotifier {
   bool isLoadingForgotPassword = false;
 
   signInCliente(Map<String, dynamic> data) async {
-    final jsonData = await TransitaProvider.postJsonData('api/auth/signin/cliente', data);
+    final jsonData = await TransitaProvider.postJsonData('transita3/api/auth/signin/cliente', data);
     cliente = LoggedCliente.fromJson(json.decode(jsonData));
     TransitaProvider.apiKey = '${cliente.type} ${cliente.token}';
     print(TransitaProvider.apiKey);
@@ -36,7 +36,7 @@ Future<String> forgotPassword(String email) async {
   isLoadingForgotPassword = true;
   notifyListeners();
 
-  final response = await TransitaProvider.getJsonData('api/auth/forgot-password/$email');
+  final response = await TransitaProvider.getJsonData('transita3/api/auth/forgot-password/$email');
 
   isLoadingForgotPassword = false;
   notifyListeners();

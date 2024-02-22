@@ -15,7 +15,7 @@ class ClienteService extends ChangeNotifier {
   
 
   signUpCliente(Map<String, dynamic> data) async {
-    final jsonData = await TransitaProvider.postJsonData('api/auth/signup/cliente', data);
+    final jsonData = await TransitaProvider.postJsonData('transita3/api/auth/signup/cliente', data);
     cliente = Cliente.fromJson(json.decode(jsonData));
     print("Este es el usuario creado: $cliente");
     notifyListeners();
@@ -23,13 +23,13 @@ class ClienteService extends ChangeNotifier {
 
  modifyCliente(Map<String, dynamic> data, id) async {
     final jsonData =
-        await TransitaProvider.putJsonData('api/auth/cliente/modificar/${id}', data);
+        await TransitaProvider.putJsonData('transita3/api/auth/cliente/modificar/${id}', data);
     print("Este es el usuario modificado: $cliente");
     notifyListeners();
   }
 
 modifyContrasenya(Map<String, dynamic> data, int id) async {
-  final jsonData = await TransitaProvider.putJsonData('api/auth/cliente/modificarContrasenya/$id', data);
+  final jsonData = await TransitaProvider.putJsonData('transita3/api/auth/cliente/modificarContrasenya/$id', data);
   
   print("Contraseña modificada: ${data['newPassword']}");
   notifyListeners();
