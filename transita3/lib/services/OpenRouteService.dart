@@ -26,7 +26,7 @@ class OpenRouteService extends ChangeNotifier {
 
     if (cliente != null) {
       final jsonData = await TransitaProvider.getJsonData(
-          'rutas/start/$latlng1/end/$latLng2');
+          'transita3/rutas/start/$latlng1/end/$latLng2');
 
       // Check if the response is successful
       if (jsonData != null) {

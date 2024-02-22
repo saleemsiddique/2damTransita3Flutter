@@ -67,7 +67,7 @@ Future<void> getIncidencias() async {
   }
 
   Future<void> postIncidencia(Map<String, dynamic> data) async {
-    final jsonData = await TransitaProvider.postJsonData('incidencia', data);
+    final jsonData = await TransitaProvider.postJsonData('transita3/incidencia', data);
     print("INCIDENCIA CREADA");
     notifyListeners();
   }
